@@ -35,3 +35,23 @@
 - Les anciens tests restent conservés ; seules les attentes réglementaires erronées et les assertions d'interface périmées sont adaptées.
 - Aucune migration automatique des anciens indicateurs ambigus de provenance ; arbitrage MJ si un avantage indépendant ne peut pas être distingué d'une ancienne source de Terre.
 - Les coûts des autres familles ne sont pas déclarés conformes par ce chantier.
+
+## 2026-11-07 — Maintenance de structure, sans changement fonctionnel
+
+- V2.33 locale sécurisée avant toute réorganisation : archive du répertoire, bundle Git,
+  puis commit de conservation sur une branche dédiée. Référence : `backup/v233-before-maintenance`
+  (`d247193`). `AGENTS.md` récupéré depuis GitHub et synchronisé sans remplacer le travail local.
+- Application conservée dans `app/simulateur.html`, strictement identique à ce point de départ.
+  Aucun arbitrage de règles, changement d'ergonomie ou de données utilisateur pendant cette mission.
+- Tests séparés en `tests/js/` et `tests/browser/`, matrice dans `data/`, outillage dans `scripts/`.
+  Les assertions des 223 tests historiques sont conservées ; seuls leurs chemins et la localisation
+  de Chromium changent. Un nouveau test vérifie l'utilisation hors connexion et le réimport JSON.
+- Tous les rapports historiques sont conservés. L'ancien accueil V0.71 devient
+  `docs/historique/README_ORIGINAL_V071.md` et un index contextualise les archives.
+- Les deux exemplaires du rapport V2.32 restent conservés ; les fonctions sans appel statique
+  identifié ne sont pas supprimées faute de preuve suffisante d'inutilité.
+- Modularisation du HTML évaluée et reportée à une mission distincte : conserver un HTML autonome
+  généré si des sources séparées sont introduites ultérieurement. Aucune dépendance d'application
+  ni étape de compilation ajoutée.
+- Une Pull Request doit distinguer les changements V2.33 déjà présents localement et la maintenance
+  non fonctionnelle effectuée ensuite. Aucune fusion dans `main` sans accord du propriétaire.

@@ -22,7 +22,7 @@ def run_one(path, timeout):
         code, output = 124, f'Délai de {timeout} secondes dépassé.'
     except OSError as error:
         code, output = 127, str(error)
-    return {'file':str(path.relative_to(ROOT)), 'exit_code':code, 'seconds':round(time.monotonic()-start, 3), 'output':output}
+    return {'file':str(path.relative_to(ROOT)), 'exit_code':code, 'seconds':round(time.monotonic()-start, 3), 'output':output, 'limitations':[line for line in output.splitlines() if line.startswith('LIMITATION:')]}
 
 
 def main():
@@ -48,17 +48,20 @@ def main():
         for future in as_completed([pool.submit(run_one, path, args.timeout) for path in paths]):
             result = future.result()
             results.append(result)
+            for limitation in result['limitations']:
+                print(f"{result['file']} — {limitation}", flush=True)
             if result['exit_code']:
                 print(f"ÉCHEC {result['file']}\n{result['output']}", flush=True)
             elif len(results) % 25 == 0:
                 print(f'{len(results)}/{len(paths)} scripts exécutés', flush=True)
     results.sort(key=lambda item:item['file'])
     passed = sum(result['exit_code'] == 0 for result in results)
-    report = {'suite':args.suite, 'total':len(results), 'passed':passed, 'failed':len(results)-passed, 'results':results}
+    limitations = [{'file':result['file'], 'detail':line} for result in results for line in result['limitations']]
+    report = {'suite':args.suite, 'total':len(results), 'passed':passed, 'failed':len(results)-passed, 'limitations':limitations, 'results':results}
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(f"Résultat : {passed}/{len(results)} réussis ; {len(results)-passed} échec(s)")
+    print(f"Résultat : {passed}/{len(results)} réussis ; {len(results)-passed} échec(s) ; {len(limitations)} limite(s) explicite(s)")
     return 0 if passed == len(results) else 1
 
 

@@ -1,47 +1,59 @@
 # Avatar Légendes : Compagnon
 
-Application compagnon non officielle pour le jeu de rôle Avatar Légendes.
+Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2.33**.
 
-## État de référence
+## Utiliser l'application
 
-- **Version** : V2.33 (corrections après audit Terre, 7 novembre 2026).
-- **Application** : `app/simulateur.html`, fichier HTML autonome à ouvrir dans un navigateur.
-- **Tests JavaScript** : 189 scripts `.cjs` conservés dans `tests/js/`.
-- **Tests Python** : 34 scripts, dont les parcours Terre desktop/mobile avec stockage local réel.
-- **Rapports** : `docs/AUDIT_V233.md` et `docs/RAPPORT_V233.md` ; base historique V2.32 conservée.
-- **Historique** : `docs/historique/`.
+Ouvrir **`app/simulateur.html`** dans un navigateur. Elle fonctionne seule, hors connexion,
+sans installation ni serveur. Les personnages et combats sont enregistrés dans le navigateur ;
+utiliser les exports JSON pour conserver une copie de ses données.
 
-## Exécuter les tests JavaScript
+## Se repérer
 
-Installer Node.js (version 22 recommandée), puis depuis la racine :
+| Dossier | Contenu |
+|---|---|
+| `app/` | Application autonome |
+| `data/` | Matrice documentaire des techniques |
+| `tests/js/` | 189 scripts de régression JavaScript |
+| `tests/browser/` | 35 scripts navigateur, dont un contrôle hors connexion |
+| `scripts/` | Commandes communes de test, d'inventaire et de vérification |
+| `docs/` | Architecture, tests, décisions, audits et rapports |
+| `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
+
+Commencer par [AGENTS.md](AGENTS.md) pour contribuer, puis par le
+[guide d'architecture](docs/ARCHITECTURE.md) et les [procédures de test](docs/TESTS.md).
+
+## Vérifier les changements
+
+Avec Python et Node.js :
 
 ```bash
 python scripts/test.py --suite js
 ```
 
-La suite V2.33 comprend les 188 scripts historiques et `test_terre_v233.cjs` (26 scénarios supplémentaires). **189/189 scripts JavaScript et 34/34 scripts Python réussis**. Résultats et limites : `docs/AUDIT_V233.md`.
-
-## Exécuter les tests navigateur
-
-Nécessite Python, Playwright et Chromium (`/usr/bin/chromium` dans l'environnement de validation) :
+Avec Playwright et Chromium installés selon le [guide de test](docs/TESTS.md) :
 
 ```bash
 python scripts/test.py --suite browser
+# Ou les deux suites :
+python scripts/test.py --report work/tests.json
 ```
 
-Le parcours `test_terre_v233_browser.py` sert le HTML sur une origine HTTP locale et vérifie le stockage réel après rechargement. Plusieurs scripts historiques utilisent un stockage simulé ; ils ne prouvent pas la persistance disque.
+La réorganisation conserve les 223 tests existants. Le HTML et les règles n'ont pas été
+modifiés par cette maintenance ; son identité avec la V2.33 sauvegardée est vérifiable.
+Résultats et inventaire détaillé : [rapport de réorganisation](docs/maintenance/RAPPORT_REORGANISATION_V233.md).
 
-## État des règles
+## Règles et suivi
 
-Les 13 techniques de Terre ont été comparées au livre et disposent d'une assistance partielle testée. Les décisions encore ouvertes sont listées dans `docs/DECISIONS.md`. La disponibilité narrative des matériaux, les zones et les capacités de déplacement restent arbitrées par le MJ. Une sauvegarde ancienne dont les sources d'Avantagé sont ambiguës peut nécessiter une vérification manuelle.
+- [Décisions et ambiguïtés encore ouvertes](docs/DECISIONS.md).
+- [Feuille de route](ROADMAP.md).
+- [Audit fonctionnel V2.33](docs/AUDIT_V233.md) et [rapport V2.33](docs/RAPPORT_V233.md).
+- [Base historique V2.32](docs/AUDIT_V232.md).
 
-## Principes de travail
+Les 13 techniques de Terre disposent d'une assistance partielle testée. Les choix narratifs
+restent au MJ ; les tests ne certifient pas toutes les interactions ni la fidélité complète
+aux règles. Les archives restent disponibles : aucun test n'est supprimé du seul fait de
+son ancienneté. Ne pas ajouter le PDF commercial ou des données personnelles au dépôt.
 
-- Préserver le fonctionnement existant, modifier progressivement et tester après chaque changement.
-- Tenir à jour `ROADMAP.md` et `docs/DECISIONS.md`.
-- Ne pas ajouter le PDF commercial des règles ni d'autres contenus sous droits.
-- Toute nouvelle version doit inclure des tests et un compte rendu.
-
-## Avertissement
-
-Projet de fan non officiel, sans affiliation avec les ayants droit d'Avatar ni avec l'éditeur du jeu de rôle.
+Projet de fan non officiel, sans affiliation avec les ayants droit d'Avatar ni avec l'éditeur
+du jeu de rôle.
