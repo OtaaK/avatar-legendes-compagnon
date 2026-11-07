@@ -117,7 +117,7 @@ try:
         assert page.evaluate('({library:lib,combat:s})')=={'library':backup['library'],'combat':backup['combat']}
         page.reload()
         assert page.evaluate('({library:lib,combat:s})')=={'library':backup['library'],'combat':backup['combat']}
-        page.get_by_role('button',name='⚔ Combat',exact=True).click()
+        page.get_by_role('button',name='Combats',exact=True).click()
         page.get_by_role('button',name='Annuler dernière validation',exact=True).click()
         undo=backup['combat']['snapshots'][-1].copy();undo['snapshots']=backup['combat']['snapshots'][:-1]
         assert page.evaluate('s')==undo

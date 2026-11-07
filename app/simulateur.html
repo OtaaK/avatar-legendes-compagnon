@@ -68,16 +68,83 @@ dialog.combat-editor{background:#1c2a3e;color:#f2f6ff;border:1px solid #647e9d;b
 dialog.combat-editor::backdrop{background:#0009}
 .combat-editor input,.combat-editor select{box-sizing:border-box;max-width:100%}.combat-editor form,.combat-editor fieldset{min-width:0}
 .combat-editor fieldset{border:1px solid #526a86;border-radius:8px;margin:12px 0}.combat-editor fieldset label{display:inline-flex;align-items:center;gap:6px;margin-right:12px}.combat-editor input[type="checkbox"]{width:auto;margin:0}
+
+/* UI/UX lot 1 — socle commun ; aucun changement de modèle ou de règles. */
+:root{
+ color-scheme:dark;--bg:#0c1921;--panel:#132a35;--surface:#193642;--field:#0f232d;
+ --text:#eef3f2;--muted:#afc4cc;--line:#37535f;--gold:#e2c184;--focus:#8ed4e5;
+ --radius:12px;--space:16px;--sidebar:224px;
+}
+.row[hidden]{display:none!important}
+html{scroll-padding-top:16px}
+body{max-width:none;margin:0;padding:28px 32px 48px calc(var(--sidebar) + 32px);background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+.app-header,#appContent,.app-subtitle{max-width:1280px;margin-inline:auto;min-width:0}
+.app-header{padding-bottom:12px;border-bottom:1px solid var(--line);align-items:center}
+.app-header h1{font-size:clamp(20px,2.1vw,28px);font-weight:650;letter-spacing:-.035em;margin:0}
+.app-version{font-size:12px;color:var(--muted)}
+.app-subtitle{color:var(--muted);font-size:13px;margin-block:12px 24px}
+h2{font-size:23px;letter-spacing:-.025em;margin:0 0 14px}h3{font-size:17px}p,small{color:var(--muted)}
+button,input,select,textarea{font:inherit}
+button{min-height:44px;background:#245262;border:1px solid #4b7180;border-radius:8px;padding:9px 14px;transition:background-color .15s,border-color .15s}
+button:not(:disabled):hover{background:#306678;border-color:#82a6b2}button:disabled{cursor:not-allowed;opacity:.5}
+button.alt{background:transparent;border-color:var(--line);color:var(--text)}
+input,select,textarea{background:var(--field);color:var(--text);border-color:#53717e;min-width:0;max-width:100%}
+input:not([type=checkbox]):not([type=hidden]),select{min-height:44px}
+label{color:var(--muted)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.panel{background:var(--panel);border-color:var(--line);border-radius:var(--radius);padding:24px;margin:16px 0;box-shadow:0 8px 24px #0002}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid>*,.row>*{min-width:0}
+.panel,.fighter,.sheet-section{overflow-wrap:anywhere}
+.fighter,.quickbar,.character-card{background:var(--field);border-color:var(--line)}
+.sheet-section,.card-status{border-color:var(--line)}
+.main-nav{position:fixed;inset:0 auto 0 0;width:var(--sidebar);z-index:20;display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:28px 16px;background:#10242e;border:0;border-right:1px solid var(--line);overflow:auto}
+.nav-brand{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:13px;font-weight:650;letter-spacing:.08em;margin:0 8px 30px}
+.nav-mark{display:grid;place-items:center;width:32px;height:32px;border:1px solid #8d7c59;border-radius:50%;font-size:20px}
+.main-nav button{display:flex;align-items:center;gap:12px;flex:none;margin:0;padding:12px;text-align:left;background:transparent;border:1px solid transparent;white-space:normal;color:var(--muted);min-height:48px}
+.main-nav button:hover{background:var(--surface);border-color:var(--line);color:var(--text)}
+.main-nav button.active{background:#263d43;border-color:#7b6e50;color:var(--gold);box-shadow:inset 3px 0 var(--gold)}
+.nav-icon{display:inline-grid;place-items:center;width:22px;height:22px;flex:none}.nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-hint{margin:auto 10px 0;padding-top:24px;color:var(--muted);font-size:11px}
+.skip-link{position:fixed;top:8px;left:12px;z-index:100;background:var(--text);color:var(--bg);padding:10px 16px;border-radius:6px;transform:translateY(-180%)}
+.skip-link:focus{transform:none}
+.sheet-nav,.combat-nav{background:var(--bg);z-index:8;gap:6px;padding:8px 0;border-bottom:1px solid var(--line)}
+.sheet-nav button,.combat-nav button,.character-switch button{background:transparent;color:var(--muted);border-color:var(--line);min-height:44px}
+.sheet-nav button.active,.combat-nav button.active,.character-switch button.active{background:#263d43;color:var(--gold);border-color:#8d7c59}
+.quickbar{box-shadow:none}.home-intro{max-width:650px}.section-eyebrow{color:var(--gold);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px}
+.home-actions{gap:8px;margin-top:24px}.home-actions button{margin:0}
+.management-group{padding-block:20px;border-top:1px solid var(--line)}.management-group h3{margin:0 0 6px}.management-group .row{gap:8px;margin-top:14px}.management-group button{margin:0}
+.pending-section{max-width:720px}.pending-section p{max-width:62ch}
+@media(max-width:1100px){:root{--sidebar:196px}body{padding:24px 20px 40px calc(var(--sidebar) + 20px)}.panel{padding:18px}.main-nav{padding-inline:12px}}
+@media(max-width:750px){
+ body{padding:16px 14px 32px}.app-header{gap:6px}.app-version{width:100%}.app-subtitle{margin-bottom:16px}
+ .main-nav{position:static;width:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:12px 0;margin:0 0 14px;background:transparent;border:0;border-bottom:1px solid var(--line);overflow:visible}
+ .nav-brand,.nav-hint{display:none}.main-nav button{justify-content:center;gap:7px;padding:10px 4px;font-size:12px;min-height:46px}
+ .main-nav button.active{box-shadow:inset 0 -3px var(--gold)}.nav-icon{width:18px;height:18px}.nav-icon svg{width:18px;height:18px}
+ .grid{grid-template-columns:minmax(0,1fr)}.panel{padding:16px;margin-block:12px}.combat-nav,.sheet-nav{top:0}
+ .sheet-nav button,.combat-nav button{flex:0 0 auto}.home-actions button{flex:1 1 180px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
+<a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
-<nav class="main-nav" aria-label="Navigation principale">
-<button type="button" data-view="home" onclick="setView('home')">⌂ Accueil</button>
-<button type="button" data-view="characters" onclick="setView('characters')">♙ Personnages</button>
-<button type="button" data-view="combat" onclick="setView('combat')">⚔ Combat</button>
-<button type="button" data-view="catalog" onclick="setView('catalog')">▤ Techniques</button>
-</nav><p>Fiches synthétiques PJ / PNJ · hors ligne</p>
-<main id="appContent"><div id="storageWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #ef4444;border-radius:8px;background:#3a1919;color:#fff"></div><div id="recoveryWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #f59e0b;border-radius:8px;background:#382810;color:#fff"></div>
-<section class="app-view" id="view-home" aria-label="Accueil"><div class="panel"><h2>Bienvenue dans le Compagnon</h2><p>Choisis un espace dans le menu. Les fiches et les combats restent accessibles sans faire défiler toute l’application.</p><div class="home-actions"><button onclick="setView('characters')">Ouvrir les personnages</button><button onclick="setView('combat')">Reprendre le combat</button><button onclick="setView('catalog')">Consulter les techniques</button></div></div></section>
+<nav class="main-nav" aria-label="Navigation principale"><div class="nav-brand" aria-hidden="true"><span class="nav-mark">◇</span>COMPAGNON</div>
+<button type="button" data-view="home" aria-controls="view-home" aria-keyshortcuts="Alt+1" onclick="setView('home',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3Z"/><path d="M9 21v-8h6v8"/></svg></span><span>Accueil</span></button>
+<button type="button" data-view="characters" aria-controls="view-characters" aria-keyshortcuts="Alt+2" onclick="setView('characters',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6m2 11v-3a6 6 0 0 0-2-4"/></svg></span><span>Personnages</span></button>
+<button type="button" data-view="places" aria-controls="view-places" aria-keyshortcuts="Alt+3" onclick="setView('places',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span><span>Lieux</span></button>
+<button type="button" data-view="combat" aria-controls="view-combat" aria-keyshortcuts="Alt+4" onclick="setView('combat',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 3 6 5 10 12m0-17-6 5L4 20M2 17l5 5m10 0 5-5"/></svg></span><span>Combats</span></button>
+<button type="button" data-view="catalog" aria-controls="view-catalog" aria-keyshortcuts="Alt+5" onclick="setView('catalog',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5c-3-2-6-2-10-1v15c4-1 7-1 10 1 3-2 6-2 10-1V4c-4-1-7-1-10 1Zm0 0v15"/></svg></span><span>Techniques</span></button>
+<button type="button" data-view="management" aria-controls="view-management" aria-keyshortcuts="Alt+6" onclick="setView('management',true,true)"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></span><span>Gestion</span></button>
+<p class="nav-hint">Ton compagnon de partie<br>Disponible hors connexion</p></nav>
+<p class="app-subtitle">Personnages, lieux et aventures · données conservées dans ce navigateur</p>
+<main id="appContent" tabindex="-1"><div id="storageWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #ef4444;border-radius:8px;background:#3a1919;color:#fff"></div><div id="recoveryWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #f59e0b;border-radius:8px;background:#382810;color:#fff"></div>
+<section class="app-view" id="view-home" aria-label="Accueil"><div class="panel"><div class="home-intro"><p class="section-eyebrow">À la table de jeu</p><h2>Bienvenue dans le Compagnon</h2><p>Retrouve tes personnages, prépare la prochaine scène et reprends le fil du combat. Tes fiches restent disponibles hors connexion.</p></div><div class="home-actions"><button onclick="setView('characters',true,true)">Ouvrir les personnages</button><button class="alt" onclick="setView('combat',true,true)">Reprendre le combat</button><button class="alt" onclick="setView('catalog',true,true)">Consulter les techniques</button></div></div></section>
+<section class="app-view" id="view-places" aria-label="Lieux" hidden><div class="panel pending-section"><p class="section-eyebrow">Prochaine étape de la refonte</p><h2>Lieux</h2><p>L’arborescence des lieux sera intégrée après les nouvelles fiches. Les lieux déjà saisis sur tes PNJ sont conservés et restent accessibles dans Personnages.</p><button type="button" onclick="setView('characters',true,true);setCharacterKind('PNJ')">Consulter les lieux des PNJ</button></div></section>
+<section class="app-view" id="view-management" aria-label="Gestion" hidden><div class="panel"><p class="section-eyebrow">Tes données</p><h2>Gestion</h2><p>Les sauvegardes restent dans ce navigateur. Conserve un export JSON dans un dossier personnel pour pouvoir les retrouver.</p>
+<div class="management-group"><h3>Sauvegarde complète</h3><p>Fiches et combat réunis dans un fichier. Une confirmation est demandée avant de remplacer les données actuelles.</p><div class="row"><button type="button" onclick="exportCompleteBackup()">Exporter la sauvegarde complète</button><button type="button" class="alt" onclick="$('backupImportFile').click()">Restaurer une sauvegarde complète</button></div></div>
+<div class="management-group"><h3>Fiches de personnages</h3><p>Les fiches peuvent aussi être conservées séparément du combat.</p><div class="row"><button type="button" class="alt" onclick="exportRoster()">Exporter les fiches</button><button type="button" class="alt" onclick="$('rosterFile').click()">Importer les fiches</button></div></div>
+<div class="management-group"><h3>Combat</h3><p>L’export privé contient l’état complet. Le compte rendu partageable masque le pari secret.</p><div class="row"><button type="button" class="alt" onclick="download()">Exporter le combat privé</button><button type="button" class="alt" onclick="downloadPublicCombat()">Exporter le compte rendu partageable</button><button type="button" class="alt" onclick="$('importFile').click()">Importer un combat</button></div></div>
+</div></section>
 <section class="app-view" id="view-combat" aria-label="Combat"><nav class="combat-nav" aria-label="Sections du combat"><button type="button" data-combat-nav="fighters" onclick="setCombatTab('fighters')">Combattants</button><button type="button" data-combat-nav="round" onclick="setCombatTab('round')">Passe</button><button type="button" data-combat-nav="technique" onclick="setCombatTab('technique')">Actions</button><button type="button" data-combat-nav="approval" onclick="setCombatTab('approval')">Validation MJ</button></nav><div id="combatSummary" class="combat-summary" aria-live="polite"></div><div class="combat-workspace"><section class="panel combat-panel" data-combat-tab="fighters"><h2>Combattants</h2><div class="sheet-section"><label for="combatSheetSelect">Ajouter une fiche de Personnages</label><select id="combatSheetSelect"></select><button type="button" id="includeSelectedSheetButton" onclick="includeSelectedSheet()">Ajouter la fiche au combat</button><button type="button" class="alt" onclick="setView('characters')">Ouvrir Personnages</button><p class="small-note">Une copie est ajoutée au combat. La fiche permanente n’est modifiée qu’après confirmation avec « Reporter sur la fiche ».</p></div><div id="fighters"></div><button onclick="add('PJ')">+ PJ</button><button onclick="add('PNJ')">+ PNJ</button><p class="small-note">Le bouton « Modifier le combattant » permet de changer son nom et ses ressources avant la révélation des approches.</p></section>
 <section class="panel combat-panel" data-combat-tab="round"><h2>Déroulement</h2><div id="phase"></div><div id="declarations"></div><button id="step" onclick="step()">Révéler / avancer</button><button type="button" class="alt" onclick="newSceneUI()">Nouvelle scène (MJ)</button><button type="button" class="alt" onclick="endCombatUI()">Terminer le combat : libérer les entraves (MJ)</button><button type="button" class="alt" onclick="renameSceneUI()">Nommer la scène (MJ)</button><button type="button" class="alt" onclick="addSceneNoteUI()">Ajouter une note (MJ)</button><button type="button" class="alt" onclick="addTemporaryEffectUI()">Ajouter un effet temporaire (MJ)</button><label for="temporaryEffectFilter">Afficher les effets</label><select id="temporaryEffectFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les durées</option><option value="round">Fin de passe</option><option value="scene">Fin de scène</option><option value="manual">Retrait manuel</option></select><label for="temporaryOriginFilter">Origine des effets</label><select id="temporaryOriginFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les origines</option><option value="mj">Décision MJ</option><option value="technique">Technique</option><option value="personnage">Personnage</option></select><label for="temporaryEffectSearch">Rechercher un effet</label><input id="temporaryEffectSearch" type="search" placeholder="Description, technique, personnage…" oninput="renderTemporaryEffects()"><div id="temporaryEffects" aria-live="polite"></div><div id="sceneJournalFilters"><label for="journalSceneFilter">Scène du journal</label><select id="journalSceneFilter" onchange="renderSceneJournal()"></select><label for="journalSearch">Rechercher dans les notes</label><input id="journalSearch" type="search" placeholder="Rechercher une note…" oninput="renderSceneJournal()"><label for="journalLimit">Notes affichées</label><select id="journalLimit" onchange="renderSceneJournal()"><option value="20">20 dernières</option><option value="all">Toutes</option></select></div><button type="button" class="alt" onclick="exportSceneJournalUI()">Exporter le journal filtré (CSV)</button><div id="sceneJournal" aria-live="polite"></div><p id="help"></p></section>
 <section class="panel combat-panel" data-combat-tab="technique"><h2>Technique à proposer</h2><label>Combattant</label><select id="source" onchange="syncTechnique()"></select><label>Cible</label><select id="target"></select><button class="alt" type="button" onclick="targetOpponent()">Cibler un autre combattant</button><label>Technique accessible</label><select id="tech" onchange="syncOptions()"></select><div id="techHelp" class="small-note"></div><div id="combatTechniqueCount" class="small-note" aria-live="polite"></div><label><input id="combatKnownOnly" type="checkbox" style="width:auto" onchange="syncTechnique()"> Masquer les techniques de base (si autres techniques disponibles)</label><div id="postureMode" class="mode-line"></div><div id="opts"></div><button onclick="prepare()">Préparer les effets</button><p id="message"></p></section>
@@ -89,7 +156,7 @@ dialog.combat-editor::backdrop{background:#0009}
 <section class="app-view" id="view-catalog" aria-label="Techniques"><div class="panel"><h2>Bibliothèque des techniques</h2><p>111 entrées : 9 techniques de base et 102 techniques avancées (dont 13 universelles). Les effets détaillés ne sont pas tous encodés. Consulte le livre à la page indiquée.</p>
 <div class="grid"><div><label>Rechercher</label><input id="catalogSearch" oninput="renderCatalog()" placeholder="Nom d’une technique"><label>Famille</label><details id="catalogFamilyPicker" class="catalog-family-picker"><summary id="catalogFamilySummary">Toutes les familles</summary><div class="catalog-family-options"><button type="button" class="catalog-clear" onclick="clearCatalogFamilies()">Tout afficher</button><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="base" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="base"></span><span>Base</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="universelle" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="universelle"></span><span>Universelle</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="air" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="air"></span><span>Air</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="eau" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="eau"></span><span>Eau</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="terre" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="terre"></span><span>Terre</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="feu" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="feu"></span><span>Feu</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="armes" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="armes"></span><span>Armes</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="technologie" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="technologie"></span><span>Technologie</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="groupe_pnj" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="groupe_pnj"></span><span>Groupe PNJ</span></label></div></details></div><div><label>Approche</label><select id="catalogApproach" onchange="renderCatalog()"><option value="">Toutes</option><option>Défendre et prendre à revers</option><option>Avancer et attaquer</option><option>Esquiver et analyser</option></select><label>Rareté</label><select id="catalogRare" onchange="renderCatalog()"><option value="">Toutes</option><option value="rare">Rares</option><option value="common">Non rares</option></select></div></div><div id="catalogBrowser" class="catalog-browser"><div id="catalogCount"></div><div id="catalogResults" class="catalog-card-grid"></div></div><div id="catalogDetail" class="catalog-detail" hidden></div></div>
 </section>
-<section class="app-view" id="view-characters" aria-label="Personnages"><div class="panel"><h2>Personnages</h2><div class="character-switch" aria-label="Choisir PJ ou PNJ"><button type="button" data-character-kind="PJ" onclick="setCharacterKind('PJ')">PJ</button><button type="button" data-character-kind="PNJ" onclick="setCharacterKind('PNJ')">PNJ</button></div><div id="characterListView" class="character-list-view"><div class="character-toolbar"><h3 id="characterListTitle">Personnages joueurs</h3><button type="button" onclick="createCurrentCharacter()" id="characterCreate">+ Nouveau PJ</button></div><div id="pjDirectory" class="character-card-grid"></div><div class="row"><button type="button" class="alt" onclick="exportCompleteBackup()">Sauvegarder tout (fiches + combat)</button><label class="alt" style="cursor:pointer">Restaurer une sauvegarde complète <input type="file" accept="application/json,.json" onchange="importCompleteBackup(event)" style="max-width:220px"></label></div>
+<section class="app-view" id="view-characters" aria-label="Personnages"><div class="panel"><h2>Personnages</h2><div class="character-switch" aria-label="Choisir PJ ou PNJ"><button type="button" data-character-kind="PJ" onclick="setCharacterKind('PJ')">PJ</button><button type="button" data-character-kind="PNJ" onclick="setCharacterKind('PNJ')">PNJ</button></div><div id="characterListView" class="character-list-view"><div class="character-toolbar"><h3 id="characterListTitle">Personnages joueurs</h3><button type="button" onclick="createCurrentCharacter()" id="characterCreate">+ Nouveau PJ</button></div><div id="pjDirectory" class="character-card-grid"></div><div class="row"><button type="button" class="alt" onclick="exportCompleteBackup()">Sauvegarder tout (fiches + combat)</button><label class="alt" style="cursor:pointer">Restaurer une sauvegarde complète <input id="backupImportFile" type="file" accept="application/json,.json" onchange="importCompleteBackup(event)" style="max-width:220px"></label></div>
 <p>Les fiches sont indépendantes des combats. Ajouter un personnage crée une copie liée ; ses changements ne sont répercutés sur la fiche qu’après confirmation du MJ.</p>
 <div class="row" hidden><button type="button" onclick="toggleWizard()" id="wizardToggle" aria-expanded="false" aria-controls="wizard">+ Créer un PJ</button></div>
 <div class="wizard" id="wizard" aria-label="Assistant de création de PJ" hidden>
@@ -3555,21 +3622,22 @@ function initWizard(){
  wizardRender();
 }
 function newSheet(kind){try{const name=prompt('Nom du personnage');if(!name)return;const c=commitLibraryMutation(()=>Roster.createCharacter(lib,name,kind));renderSheets(c.id);openCharacterDetail(c.id)}catch(e){alert(e.message)}}
-const VIEWS=['home','characters','combat','catalog'];
+const VIEWS=['home','characters','places','combat','catalog','management'];
 let currentView='home';
 let currentSheetTab='identity';
 function quickNavigation(e){
- if(e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&['1','2','3','4'].includes(e.key)){
+ if(e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&['1','2','3','4','5','6'].includes(e.key)){
   if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;
-  e.preventDefault();setView(VIEWS[Number(e.key)-1]);
+  e.preventDefault();setView(VIEWS[Number(e.key)-1],true,true);
  }
 }
 document.addEventListener('keydown',quickNavigation);
-function setView(view,scroll=true){
+function setView(view,scroll=true,focus=false){
  if(!VIEWS.includes(view))view='home';
  currentView=view;
  document.querySelectorAll('.app-view').forEach(el=>{el.hidden=el.id!=='view-'+view && !(view==='combat'&&el.id==='view-combat-panels')});
  document.querySelectorAll('.main-nav button').forEach(b=>{const active=b.dataset.view===view;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});
+ if(focus){const heading=$('view-'+view)?.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}}
  if(scroll)window.scrollTo({top:0,behavior:'instant'});
  try{localStorage.setItem('avatar-ui-view',view)}catch(e){}
 }
