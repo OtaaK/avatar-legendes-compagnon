@@ -18,8 +18,8 @@ La validation commune restaure désormais aussi l'état complet, historique d'an
 
 ## Tests et documentation
 
-- `app/test_terre_v233.cjs` : 26 scénarios couvrant A1–A7, coûts nets, fatigue subie, passes, sources concurrentes, protections, réactions, quotas et annulation.
-- `app/test_terre_v233_browser.py` : les 13 formulaires en desktop et mobile, sauvegarde locale réelle, rechargement, annulation et commande de Boue protégée/annulée.
+- `tests/js/test_terre_v233.cjs` : 26 scénarios couvrant A1–A7, coûts nets, fatigue subie, passes, sources concurrentes, protections, réactions, quotas et annulation.
+- `tests/browser/test_terre_v233_browser.py` : les 13 formulaires en desktop et mobile, sauvegarde locale réelle, rechargement, annulation et commande de Boue protégée/annulée.
 - Attentes historiques V119/V206 corrigées : Gêné tectonique ne doit pas disparaître avant sa passe d'effet.
 - Attentes historiques V167/V178 corrigées : payer volontairement ne peut pas devenir une conversion en états à jauge pleine (règles p.100).
 - Tests navigateur historiques : titres et noms d'export calculés depuis la version courante ; chemin absolu V227 retiré ; sélecteur des engagements Glissade rendu indépendant de l'ordre des panneaux.

@@ -20,8 +20,9 @@ Pour toute modification liée aux règles : consulter d'abord les pages pertinen
 ## Architecture et repères
 
 - Application principale : `app/simulateur.html` (HTML autonome et logique associée).
-- Catalogue / matrice de techniques : `app/MATRICE_TECHNIQUES.csv`.
-- Tests JavaScript : `app/test*.cjs` ; tests Python historiques : `app/test*.py`.
+- Catalogue / matrice de techniques : `data/MATRICE_TECHNIQUES.csv`.
+- Tests JavaScript : `tests/js/test*.cjs` ; tests navigateur Python : `tests/browser/test*.py`.
+- Commande commune : `python scripts/test.py` ; chemins communs : `tests/support/paths.cjs` et `tests/browser/_paths.py`.
 - Suivi : `README.md`, `ROADMAP.md`, `docs/DECISIONS.md`, `docs/AUDIT_V232.md`, `docs/RAPPORT_V232.md` et `docs/historique/`.
 
 Prendre connaissance de ces ressources avant une intervention importante. Les tests et rapports historiques sont des indications utiles, pas une garantie de conformité fonctionnelle. Ne pas entreprendre une refonte générale du HTML sans raison concrète et approbation.
@@ -53,7 +54,7 @@ Pour chaque mission suffisamment définie :
 Depuis la racine du dépôt, le lot historique de tests JavaScript peut être lancé par :
 
 ```bash
-for test in app/test*.cjs; do node "$test" || exit 1; done
+python scripts/test.py --suite js
 ```
 
 L'audit de reprise V2.32 rapportait **188 tests JavaScript réussis**. Ce résultat est historique, **pas** une preuve que la V2.33 passe les mêmes tests. Les scripts Python incluent des contrôles historiques : rechercher leurs prérequis et évaluer leur pertinence avant de conclure qu'un échec est obsolète. En cas de modification de l'interface, exécuter si possible des tests réels dans un navigateur. Ne pas dire « entièrement validé » lorsque des contrôles nécessaires n'ont pas eu lieu.

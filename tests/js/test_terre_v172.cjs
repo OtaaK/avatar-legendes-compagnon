@@ -1,0 +1,15 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),id=C.addFighter(s,'Maître de lave'),f=C.fighter(s,id);
+f.statuses.push('avantage');s.temporaryEffects.push({id:'lava',originLabel:'Étoile de lave',targetId:id,duration:'manual',lavaMaintainedRound:0,lavaExternalAdvantage:false});
+f.roundStatuses=[{status:'avantage',expiresAfterRound:2}];
+C.resolveEarthLava(s,'lava','extinguish',true);assert(f.statuses.includes('avantage'),'A temporary external advantage must survive');
+C.undo(s);assert(s.temporaryEffects.some(e=>e.id==='lava'));
+const a=C.createCombat(),aid=C.addFighter(a,'Lave'),af=C.fighter(a,aid);af.statuses.push('avantage');
+a.temporaryEffects.push({id:'l1',originLabel:'Étoile de lave',targetId:aid,duration:'manual',lavaExternalAdvantage:false});
+a.temporaryEffects.push({id:'l2',originLabel:'Étoile de lave',targetId:aid,duration:'manual',lavaExternalAdvantage:false});
+C.resolveEarthLava(a,'l1','extinguish',true);assert(af.statuses.includes('avantage'),'Second star remains active');
+C.resolveEarthLava(a,'l2','extinguish',true);assert(!af.statuses.includes('avantage'),'Last star removes its own advantage');
+console.log('V1.72 lava overlapping sources OK');

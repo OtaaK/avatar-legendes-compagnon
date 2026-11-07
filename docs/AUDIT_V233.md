@@ -13,7 +13,7 @@ Statut retenu : **assistance partielle testée**. Les huit anomalies confirmées
 | Vérification | Résultat |
 |---|---|
 | Scripts JavaScript | 189/189 réussis, Node v24.22.1 |
-| Nouveaux scénarios moteur Terre | 26, dans `app/test_terre_v233.cjs` |
+| Nouveaux scénarios moteur Terre | 26, dans `tests/js/test_terre_v233.cjs` |
 | Scripts Python/Chromium | 34/34 réussis |
 | Nouveau parcours Terre | 28 parcours : 13 techniques × 2 tailles d'écran, Boue protégée, annulation d'un choix de débordement |
 | Persistance | Origine HTTP locale, vrai localStorage Chromium, rechargement, puis undo et nouveau rechargement pour les 13 techniques |
@@ -66,8 +66,8 @@ Les durées et règles communes proviennent du livre ; les détails narratifs re
 Depuis la racine :
 
 ```bash
-for test in app/test*.cjs; do node "$test" || exit 1; done
-for test in app/test*.py; do python "$test" || exit 1; done
+python scripts/test.py --suite js
+python scripts/test.py --suite browser
 ```
 
 Pré requis navigateur : Python, Playwright et `/usr/bin/chromium`. Les tests HTTP locaux ouvrent uniquement un serveur temporaire sur `127.0.0.1`.

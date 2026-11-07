@@ -1,0 +1,18 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');
+C.fighter(s,b).techniques=[{name:'Estocade précise',mastery:'maitrisee'}];
+s.phase='defendre';C.fighter(s,a).approach='defendre';
+const act={id:'v141',sourceId:a,targetId:b,name:'Désarmement',round:s.round,options:{weaponDisarmConfirmed:true,weaponDisarmTechnique:'Estocade précise'}};
+s.actions.push(act);C.propose(s,act);assert.strictEqual(s.proposals.length,2);
+assert.throws(()=>C.commit(s,{[s.proposals[0].id]:false}),/ensemble/);
+C.commit(s);assert.strictEqual(C.fighter(s,a).fatigue,2);
+assert(C.fighter(s,b).bonuses.some(x=>x.type==='disarmed_technique'));
+s.phase='attaquer';C.fighter(s,b).approach='attaquer';
+assert.throws(()=>C.queueTechnique(s,b,'Estocade précise','attaquer',a,{}),/Désarmement/);
+C.undo(s);assert(!C.fighter(s,b).bonuses.some(x=>x.type==='disarmed_technique'));
+const bad={...act,id:'bad',options:{weaponDisarmConfirmed:true,weaponDisarmTechnique:'Frapper'}};
+assert.throws(()=>C.propose(s,bad),/invalide/);
+console.log('V1.41 : Désarmement, coût, blocage, validation atomique et annulation');

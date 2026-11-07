@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+function setup(){const s=C.createCombat(),a=C.addFighter(s,'Lave'),b=C.addFighter(s,'Cible');s.temporaryEffects.push({id:'star',originLabel:'Étoile de lave',targetId:a,originActionId:'activate'});s.actions.push({id:'hit',sourceId:a,targetId:b,name:'Frapper',round:1});s.history.push({round:1,events:[{actionId:'activate',sourceId:a,targetId:a,kind:'fatigue',amount:1}]});return {s,a,b};}
+for(const e of [{kind:'note',reason:'Frapper'},{kind:'fatigue',amount:1},{kind:'status_add',detail:'avantage'},{kind:'fatigue',amount:0},{kind:'balance',amount:0}]){const {s,a}=setup();s.history.push({round:1,events:[{actionId:'hit',sourceId:a,targetId:a,...e}]});assert.throws(()=>C.earthLavaFracture(s,'star','hit','Mur',true),/non résolue/);}
+{const {s,a,b}=setup();s.history.push({round:1,events:[{actionId:'hit',sourceId:b,targetId:b,kind:'fatigue',amount:2}]});assert.throws(()=>C.earthLavaFracture(s,'star','hit','Mur',true),/non résolue/);}
+for(const e of [{kind:'fatigue',amount:2},{kind:'condition',detail:'Terrifié'},{kind:'status_add',detail:'gene'},{kind:'balance',amount:1}]){const {s,a,b}=setup();s.history.push({round:1,events:[{actionId:'hit',sourceId:a,targetId:b,...e}]});C.earthLavaFracture(s,'star','hit','Mur',true);assert.equal(s.lavaFractures.length,1);assert.throws(()=>C.earthLavaFracture(s,'star','hit','Mur',true),/déjà accordée/);C.undo(s);assert.equal((s.lavaFractures||[]).length,0);}
+{const {s,a,b}=setup();s.actions[0].targetId=a;s.history.push({round:1,events:[{actionId:'hit',sourceId:a,targetId:b,kind:'fatigue',amount:2}]});assert.throws(()=>C.earthLavaFracture(s,'star','hit','Mur',true),/autre cible/);}
+console.log('V2.08 : attaque offensive réelle, provenance, coûts personnels, unicité et undo OK');

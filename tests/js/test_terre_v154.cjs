@@ -1,0 +1,15 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat(),f=C.addFighter(s,'Terre');
+s.temporaryEffects.push({id:'armor1',targetId:f,originLabel:'Armure de terre',armorPoints:3,label:'Armure de terre : 3 / 3 points'});
+assert.throws(()=>C.spendEarthArmor(s,'armor1','fatigue',false),/confirmation/);
+assert.equal(C.spendEarthArmor(s,'armor1','fatigue',true),2);
+assert.equal(C.spendEarthArmor(s,'armor1','condition',true),1);
+assert.equal(C.spendEarthArmor(s,'armor1','condition',true),0);
+assert.equal(s.temporaryEffects.length,0);
+assert.throws(()=>C.spendEarthArmor(s,'armor1','fatigue',true),/aucune réserve/);
+assert(C.undo(s));assert.equal(s.temporaryEffects[0].armorPoints,1);
+assert(html.includes('spendEarthArmorUI'));
+console.log('Terre V1.54 : dépenses, validation, épuisement, annulation et interface');
