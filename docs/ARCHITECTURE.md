@@ -95,3 +95,17 @@ Une progression raisonnable serait :
 
 Il n'est pas nécessaire de choisir un framework ni d'ajouter des dépendances pour cette
 progression. Une refonte générale et une modification des règles restent hors périmètre.
+
+## Socle UI/UX progressif
+
+Le lot 1 conserve le HTML autonome. Un bloc CSS balisé « UI/UX lot 1 » définit les variables
+de thème et les composants communs, après les styles historiques : leur réécriture complète
+n’est pas mélangée à cette livraison. La palette sémantique des familles reste conservée.
+`VIEWS` ajoute `places` et `management` sans changer les quatre identifiants historiques.
+`setView` peut donner le focus au titre après une action de navigation explicite ; les appels
+existants conservent leur comportement de focus par défaut. Aucune modification du modèle.
+
+Le plan des étapes suivantes et les dépendances de données figurent dans
+[PLAN_REFONTE_UI_UX.md](PLAN_REFONTE_UI_UX.md). La première page Lieux est un état d’attente
+explicite, sans arbre ni nouvelles références. Gestion appelle les imports/exports existants
+et leurs champs de fichier uniques, ce qui conserve la validation et les transactions.

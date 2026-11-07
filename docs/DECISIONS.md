@@ -82,3 +82,22 @@
   les modèles précédents ; conserver le journal existant pour la sauvegarde complète.
 - Aucun nettoyage ni migration silencieuse de sauvegarde ; aucune fusion de cette nouvelle
   proposition sans accord du propriétaire.
+
+## 2026-11-07 — Refonte UI/UX, lots 0 et 1
+
+- Le cahier des charges poussé par le propriétaire est la référence de conception. Les choix
+  visuels validés sont appliqués progressivement, sans réinterprétation des règles.
+- Première livraison limitée au thème embarqué et à la navigation : bleu pétrole, accents
+  dorés de sélection, icônes SVG originales locales, menu latéral desktop et grille mobile.
+- Ordre : Accueil, Personnages, Lieux, Combats, Techniques, Gestion ; Alt+1…6 suit cet ordre.
+  Les identifiants historiques home/characters/combat/catalog restent inchangés.
+- Gestion réemploie les fonctions et sélecteurs d’import existants ; les anciens accès sont
+  conservés. Aucun réglage, stockage ou format parallèle.
+- Lieux est annoncé explicitement comme non encore intégré ; les textes historiques restent
+  dans les fiches PNJ. Le modèle hiérarchique viendra au lot 4, sans migration dans le lot 1.
+- Le script ne change que dans le bloc de navigation ; moteurs, modèles, catalogue et
+  persistance restent identiques à la référence `42b306f`.
+- Les lignes `.row[hidden]` respectent désormais leur masquage : le `display:flex` historique
+  les réaffichait. Les outils restent accessibles par les commandes existantes et Gestion.
+- Les prochaines PR traiteront cartes, fiches, Lieux puis Livrets, avec vérifications entre
+  lots. La programmation exhaustive des dix Livrets reste hors périmètre.

@@ -41,9 +41,10 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 37 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 38 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
-et `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes.
+`test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
+et `test_uiux_navigation.py` pour le socle de navigation.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -113,3 +114,13 @@ fichiers invalides, échecs de rendu et de stockage des trois imports, lecture i
 annulation et export/restauration avec effets et historique, puis rechargement et annulation.
 Les erreurs injectées sont artificielles ; elles ne reproduisent pas toutes les pannes
 possibles du navigateur. Aucun test existant n’est supprimé.
+
+## Socle UI/UX — lot 1
+
+`python tests/browser/test_uiux_navigation.py` vérifie sept formats de 320 à 1440 pixels,
+les six destinations, la sélection active, le clavier (Alt+1…6, saisie protégée, Entrée,
+lien d’évitement), le focus, les cibles tactiles et les débordements. Des modèles et chaînes
+localStorage sont comparés avant/après navigation et rechargement ; Gestion effectue un
+vrai export/restauration complet. Les captures desktop/mobile sont générées dans `work/`.
+Les deux tests de recette/import existants ne changent que leurs sélecteurs de libellé
+« Personnages » et « Combats » ; leurs assertions métier sont conservées.

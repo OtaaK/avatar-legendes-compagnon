@@ -71,7 +71,7 @@ try:
             page.get_by_role('button',name='Annuler dernière validation',exact=True).click()
             assert page.evaluate("s.fighters[0].name==='Garde modifié'&&s.fighters[0].fatigue===1")
             # Ajouter une autre fiche depuis le sélecteur Combat, sans utiliser de bouton caché.
-            page.get_by_role('button',name='♙ Personnages',exact=True).click()
+            page.get_by_role('button',name='Personnages',exact=True).click()
             page.locator('[data-character-kind="PJ"]').click()
             page.get_by_role('button',name='+ Nouveau PJ',exact=True).click()
             page.locator('#wizardName').fill('Héro de test')
@@ -86,7 +86,7 @@ try:
             assert page.locator('#npcDirectory .character-card').count()==1
             assert 'Héro de test' not in page.locator('#npcDirectory').inner_text()
             assert page.evaluate("lib.characters.filter(c=>c.kind==='PJ').length===1&&lib.characters.filter(c=>c.kind==='PNJ').length===1")
-            page.get_by_role('button',name='⚔ Combat',exact=True).click()
+            page.get_by_role('button',name='Combats',exact=True).click()
             page.locator('#combatSheetSelect').select_option(label='Héro de test (PJ)')
             page.get_by_role('button',name='Ajouter la fiche au combat',exact=True).click()
             assert page.evaluate("s.fighters.length===2&&s.fighters.some(f=>f.kind==='PJ'&&f.name==='Héro de test')")

@@ -20,7 +20,7 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
 | `tests/js/` | 191 scripts de régression JavaScript |
-| `tests/browser/` | 37 scripts navigateur, dont un contrôle hors connexion |
+| `tests/browser/` | 38 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -51,6 +51,13 @@ Résultats et inventaire détaillé : [rapport de réorganisation](docs/maintena
 
 Les [améliorations de fiabilité des imports](docs/RAPPORT_FIABILITE_SAUVEGARDES_V233.md)
 protègent les données existantes en cas de fichier invalide ou d’échec pendant la restauration.
+
+## Refonte UI/UX progressive
+
+La branche de refonte suit le [cahier des charges](CAHIER_DES_CHARGES_UI_UX_AVATAR_COMPAGNON_CODEX.md).
+Le [plan de livraison](docs/PLAN_REFONTE_UI_UX.md) distingue le socle visuel/navigation des
+évolutions de cartes, fiches, Lieux et Livrets. Le [bilan du premier lot](docs/RAPPORT_UI_UX_LOT1.md)
+précise ce qui est livré et propose une courte vérification dans le navigateur.
 
 ## Règles et suivi
 

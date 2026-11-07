@@ -19,7 +19,7 @@ Référence de conception : [cahier des charges](../CAHIER_DES_CHARGES_UI_UX_AVA
 | Fiches | Formulaire partagé, quatre onglets, brouillons et sauvegarde explicite | Consultation/édition distinctes, panneau permanent, PJ/PNJ différents | Tous les champs existants, confirmation et rollback |
 | Ressources | Fatigue 0…5, équilibre −3…3, centre, états/statuts | Capacités PNJ variables, jauges et modèle adaptés après vérification PDF | Valeurs personnalisées ; ne pas appliquer une migration implicite |
 | Lieux | Texte `character.location` et lieu actif de session | Arbre à IDs stables, domicile/associations/présence distincts | Texte historique et lieux orphelins ; migration explicite testée |
-| Livrets | Création, références, manœuvres et champs de progression | Patron UI, panneaux repliables, progression dans Livret | Données réelles ; automatismes détaillés des dix Livrets reportés |
+| Livrets | Création, références et liste `playbookMoves` ; pas de champ de progression dédié | Patron UI, panneaux repliables, progression dans Livret | Données réelles ; automatismes détaillés des dix Livrets reportés |
 | Persistance | Bibliothèque/combat séparés ; sauvegarde complète avec journal ; imports transactionnels | Tester chaque nouvelle donnée en aller-retour | Clés historiques, erreurs, récupération et exports privés/publics |
 
 ## Lots et retour arrière
@@ -44,8 +44,8 @@ outils déjà présents sans dupliquer leur logique. Aucun réglage fictif n’e
 
 ## Stratégie de vérification
 
-- Avant intervention : suites courantes via `python scripts/test.py --jobs 3` ; les 228 scripts
-  préexistants sont conservés. L’ajout du cahier des charges sur GitHub ne modifie pas leur code.
+- Avant intervention : **228/228 scripts réussis**, via `python scripts/test.py --jobs 3` ;
+  les 228 scripts préexistants sont conservés. L’ajout du cahier des charges sur GitHub ne modifie pas leur code.
 - Après chaque lot : tests ciblés puis suites pertinentes ; comparer moteur, catalogue et
   persistance à la référence tant que le lot n’exige pas leur évolution.
 - Responsive : grand écran, portable, tablette, téléphone portrait/paysage ; titres longs,

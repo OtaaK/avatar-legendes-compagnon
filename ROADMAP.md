@@ -43,7 +43,7 @@ Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVE
 - [x] Rendre visibles l'ajout des fiches au combat et l'édition des combattants en préparation.
 - [x] Vérifier persistance, erreurs et annulation avec des parcours desktop/mobile.
 - [x] Obtenir la validation du propriétaire pour les correctifs avant fusion.
-- [ ] Cadrer une future refonte UI/UX, séparément des correctifs et des règles.
+- [x] Cadrer la refonte UI/UX dans le cahier des charges ajouté par le propriétaire.
 
 Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.
 
@@ -55,3 +55,17 @@ Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.
 - [ ] Examiner cette nouvelle PR avant toute intégration.
 
 Voir `docs/RAPPORT_FIABILITE_SAUVEGARDES_V233.md`. La refonte UI/UX est préparée séparément par le propriétaire.
+
+## Refonte UI/UX progressive
+
+Référence : `CAHIER_DES_CHARGES_UI_UX_AVATAR_COMPAGNON_CODEX.md`.
+Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné sans accord.
+
+- [x] Lot 0 : vérifier la V2.33 réelle, les modèles et les tests de référence.
+- [x] Lot 1 sur branche dédiée : thème, navigation six rubriques, responsive, clavier et Gestion.
+- [ ] Examiner et valider visuellement le lot 1 avant intégration.
+- [ ] Lot 2 : cartes PJ/PNJ, importance et filtres.
+- [ ] Lot 3 : fiches détaillées distinctes, consultation/édition et ressources.
+- [ ] Lot 4 : Lieux hiérarchiques, liens PNJ et compatibilité des sauvegardes.
+- [ ] Lot 5 : structure des Livrets ; mécanismes détaillés des dix Livrets reportés.
+- [ ] Lot 6 : harmonisation et recette transversale finale.
