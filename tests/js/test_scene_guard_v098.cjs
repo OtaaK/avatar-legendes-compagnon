@@ -1,0 +1,10 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat(),id=C.addFighter(s,'PJ');
+C.declare(s,id,'attaquer');assert.throws(()=>C.newScene(s),/déclarations/);assert.equal(s.scene,1);assert.equal(s.snapshots.length,0);
+C.fighter(s,id).approach=null;C.fighter(s,id).roll=null;
+s.actions.push({id:'action-en-attente'});assert.throws(()=>C.newScene(s),/actions en attente/);assert.equal(s.scene,1);
+s.actions=[];assert.equal(C.newScene(s),2);assert.equal(C.undo(s),true);assert.equal(s.scene,1);
+console.log('V0.98 : protections des déclarations et actions en attente OK');

@@ -1,0 +1,8 @@
+# Métadonnées locales macOS
+.DS_Store
+
+# Résultats, caches et environnements de développement locaux
+/work/
+__pycache__/
+*.py[cod]
+.venv/

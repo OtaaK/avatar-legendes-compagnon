@@ -1,0 +1,16 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),aId=C.addFighter(s,'Archer'),bId=C.addFighter(s,'Adversaire'),a=C.fighter(s,aId),b=C.fighter(s,bId);
+C.setEngagement(s,a.id,b.id,true);s.phase='esquiver';a.approach='esquiver';b.approach='esquiver';
+const act={id:'act138',sourceId:a.id,targetId:b.id,name:'À contretemps',round:s.round,options:{countertimeConfirmed:true}};
+s.actions.push(act);C.propose(s,act);assert(s.proposals.some(e=>e.kind==='fatigue'));
+const reject=Object.fromEntries(s.proposals.map(e=>[e.id,false]));C.commit(s,reject);assert(!(s.temporaryEffects||[]).some(e=>e.originLabel==='À contretemps'));
+s.actions=[act];C.propose(s,act);const partial=Object.fromEntries(s.proposals.map((e,i)=>[e.id,i===0]));assert.throws(()=>C.commit(s,partial),/ensemble/);
+C.commit(s);const effect=s.temporaryEffects.find(e=>e.originLabel==='À contretemps');assert(effect);assert.throws(()=>C.revealCountertime(s,effect.id,true),/déclarations/);
+s.phase='fin';C.nextRound(s);assert.throws(()=>C.revealCountertime(s,effect.id,true),/déclarer/);
+C.declare(s,b.id,'attaquer');assert.strictEqual(C.revealCountertime(s,effect.id,true),'attaquer');assert.throws(()=>C.revealCountertime(s,effect.id,true),/déjà utilisé/);
+C.undo(s);assert.strictEqual(s.temporaryEffects.find(e=>e.id===effect.id).countertimeResolved,false);
+C.revealCountertime(s,effect.id,true);C.declare(s,a.id,'defendre');assert.throws(()=>C.revealCountertime(s,effect.id,true));
+console.log('V1.38 À contretemps : validation, refus, atomicité, chronologie, annulation OK');

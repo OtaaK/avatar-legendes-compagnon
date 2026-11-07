@@ -1,0 +1,17 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Défenseur'),b=C.addFighter(s,'Attaquant');s.phase='defendre';
+s.temporaryEffects.push({id:'shield',targetId:a,originLabel:'Bouclier de roche',shieldBlockedRound:0,duration:'manual',createdRound:1});
+const common={actionId:'attack',sourceId:b,targetId:a};
+s.proposals.push({id:'damage',...common,kind:'fatigue',amount:2,detail:'',reason:'attaque'});
+s.proposals.push({id:'positive',...common,kind:'status_add',amount:0,detail:'avantage',reason:'effet positif'});
+s.proposals.push({id:'note',...common,kind:'note',amount:0,detail:'',reason:'note conservée'});
+const preview=C.previewCommit(s,{});
+assert(!preview.some(e=>e.id==='damage'));assert(preview.some(e=>e.id==='positive'));assert(preview.some(e=>e.id==='note'));
+assert.equal(s.temporaryEffects[0].shieldBlockedRound,0);
+const result=C.commit(s,{});assert(!result.some(e=>e.id==='damage'));assert(result.some(e=>e.id==='positive'));assert(result.some(e=>e.id==='note'));
+assert.equal(C.fighter(s,a).fatigue,0);assert(C.fighter(s,a).statuses.includes('avantage'));assert.equal(s.temporaryEffects[0].shieldBlockedRound,1);
+assert(C.undo(s));assert.equal(s.temporaryEffects[0].shieldBlockedRound,0);assert(!C.fighter(s,a).statuses.includes('avantage'));
+console.log('V1.70 Bouclier : dégâts absorbés, statut positif et note conservés, preview et undo OK');
