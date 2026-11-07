@@ -1,3 +1,7 @@
+import re
+from pathlib import Path
+VERSION = re.search(r'<title>[^<]*(V[0-9]+\.[0-9]+)', Path(__file__).with_name('simulateur.html').read_text()).group(1)
+EXPORT_VERSION = VERSION.lower().replace('.', '-')
 """V1.31: vrai cycle de décisions MJ dans Chromium (stockage simulé)."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -9,7 +13,7 @@ with sync_playwright() as p:
  page.on('dialog',lambda d:d.accept())
  page.evaluate("""() => {const store={};Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>Object.hasOwn(store,k)?store[k]:null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k]}})}""")
  page.set_content((root/'simulateur.html').read_text(encoding='utf8'),wait_until='load')
- assert 'V1.34' in page.title()
+ assert VERSION in page.title()
  page.evaluate("setView('combat')")
  page.get_by_role('button',name='+ PNJ').click();page.get_by_role('button',name='+ PNJ').click()
  page.evaluate("s.phase='esquiver';s.fighters[0].approach='esquiver';render();setCombatTab('technique')")

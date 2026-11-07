@@ -1,3 +1,7 @@
+import re
+from pathlib import Path
+VERSION = re.search(r'<title>[^<]*(V[0-9]+\.[0-9]+)', Path(__file__).with_name('simulateur.html').read_text()).group(1)
+EXPORT_VERSION = VERSION.lower().replace('.', '-')
 """V1.28: scénario de rendu réel Chromium (chargement set_content, stockage simulé)."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -8,7 +12,7 @@ with sync_playwright() as p:
  errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.evaluate("""() => {const store={};Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>Object.hasOwn(store,k)?store[k]:null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k]}})}""")
  page.set_content((root/'simulateur.html').read_text(encoding='utf8'),wait_until='load')
- assert 'V1.34' in page.title()
+ assert VERSION in page.title()
  page.get_by_text('Ouvrir les personnages').click()
  page.get_by_role('button',name='+ Nouveau PJ').click()
  page.evaluate("setView('combat')")

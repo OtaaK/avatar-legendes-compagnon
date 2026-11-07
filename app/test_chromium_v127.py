@@ -1,3 +1,7 @@
+import re
+from pathlib import Path
+VERSION = re.search(r'<title>[^<]*(V[0-9]+\.[0-9]+)', Path(__file__).with_name('simulateur.html').read_text()).group(1)
+EXPORT_VERSION = VERSION.lower().replace('.', '-')
 """V1.27: vraie origine HTTP locale, stockage local Chromium et rechargement."""
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -20,7 +24,7 @@ try:
    real_origin=False
    page.evaluate("""() => {const store={};Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>Object.hasOwn(store,k)?store[k]:null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k]}})}""")
    page.set_content((root/'simulateur.html').read_text(encoding='utf8'),wait_until='load')
-  assert 'V1.34' in page.title(),page.title()
+  assert VERSION in page.title(),page.title()
   assert page.evaluate("typeof localStorage.setItem==='function'")
   page.evaluate("localStorage.setItem('avatar-v127-persistence','test-127')")
   if real_origin:

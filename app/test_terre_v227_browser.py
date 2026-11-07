@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 from pathlib import Path
-h=Path('/mnt/data/avatar_compagnon_v2_27/simulateur.html').read_text()
+h=Path(__file__).with_name('simulateur.html').read_text()
 with sync_playwright() as w:
  b=w.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
  page=b.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))

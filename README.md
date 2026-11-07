@@ -4,11 +4,11 @@ Application compagnon non officielle pour le jeu de rôle Avatar Légendes.
 
 ## État de référence
 
-- **Version** : V2.32 (base de reprise, 7 novembre 2026).
+- **Version** : V2.33 (corrections après audit Terre, 7 novembre 2026).
 - **Application** : `app/simulateur.html`, fichier HTML autonome à ouvrir dans un navigateur.
-- **Tests JavaScript** : 188 tests `.cjs` conservés à côté du HTML.
-- **Tests Python** : 33 scripts présents, vérification navigateur à reprendre.
-- **Rapports** : `docs/AUDIT_V232.md` et `docs/RAPPORT_V232.md`.
+- **Tests JavaScript** : 189 scripts `.cjs` conservés à côté du HTML.
+- **Tests Python** : 34 scripts, dont les parcours Terre desktop/mobile avec stockage local réel.
+- **Rapports** : `docs/AUDIT_V233.md` et `docs/RAPPORT_V233.md` ; base historique V2.32 conservée.
 - **Historique** : `docs/historique/`.
 
 ## Exécuter les tests JavaScript
@@ -19,7 +19,21 @@ Installer Node.js (version 22 recommandée), puis depuis la racine :
 for test in app/test*.cjs; do node "$test" || exit 1; done
 ```
 
-Les 188 tests JavaScript passaient lors de l'audit de reprise du 7 novembre 2026. Les tests d'interface Python n'ont pas été exécutés dans cet audit.
+La suite V2.33 comprend les 188 scripts historiques et `test_terre_v233.cjs` (26 scénarios supplémentaires). **189/189 scripts JavaScript et 34/34 scripts Python réussis**. Résultats et limites : `docs/AUDIT_V233.md`.
+
+## Exécuter les tests navigateur
+
+Nécessite Python, Playwright et Chromium (`/usr/bin/chromium` dans l'environnement de validation) :
+
+```bash
+for test in app/test*.py; do python "$test" || exit 1; done
+```
+
+Le parcours `test_terre_v233_browser.py` sert le HTML sur une origine HTTP locale et vérifie le stockage réel après rechargement. Plusieurs scripts historiques utilisent un stockage simulé ; ils ne prouvent pas la persistance disque.
+
+## État des règles
+
+Les 13 techniques de Terre ont été comparées au livre et disposent d'une assistance partielle testée. Les décisions encore ouvertes sont listées dans `docs/DECISIONS.md`. La disponibilité narrative des matériaux, les zones et les capacités de déplacement restent arbitrées par le MJ. Une sauvegarde ancienne dont les sources d'Avantagé sont ambiguës peut nécessiter une vérification manuelle.
 
 ## Principes de travail
 

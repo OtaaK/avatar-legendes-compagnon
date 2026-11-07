@@ -1,3 +1,7 @@
+import re
+from pathlib import Path
+VERSION = re.search(r'<title>[^<]*(V[0-9]+\.[0-9]+)', Path(__file__).with_name('simulateur.html').read_text()).group(1)
+EXPORT_VERSION = VERSION.lower().replace('.', '-')
 """Export public: aucun pari dans les actions, effets, instantanés, export privé intact."""
 from pathlib import Path
 import json
@@ -10,7 +14,7 @@ with sync_playwright() as p:
  page.set_content((root/'simulateur.html').read_text(),wait_until='load')
  page.evaluate("""() => {s.actions.push({name:'Souple comme un roseau',options:{airReedPrediction:'attaquer'}});s.temporaryEffects.push({reedPrediction:'defendre',label:'Pari scellé'});s.snapshots.push({actions:[{options:{airReedPrediction:'esquiver'}}]});}""")
  with page.expect_download() as ev:page.evaluate('downloadPublicCombat()')
- dl=ev.value; assert dl.suggested_filename=='avatar-compte-rendu-public-v1-34.json'
+ dl=ev.value; assert dl.suggested_filename==f'avatar-compte-rendu-public-{EXPORT_VERSION}.json'
  data=json.loads(Path(dl.path()).read_text()); encoded=json.dumps(data)
  assert data['format']=='avatar-compagnon-compte-rendu-public'
  assert 'reedPrediction' not in encoded and 'airReedPrediction' not in encoded

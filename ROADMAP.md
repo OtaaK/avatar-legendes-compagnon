@@ -1,13 +1,23 @@
 # Feuille de route
 
-## Prochaines priorités
+## V2.33 — audit et corrections de Terre
 
-- [ ] Vérifier les 33 tests Python et les parcours réels dans Chromium.
-- [ ] Vérifier individuellement les 13 techniques de Terre contre les règles, sans recopier le livre dans le dépôt.
-- [ ] Évaluer la sauvegarde / restauration des données locales.
+- [x] Comparer les 13 techniques au PDF fourni et distinguer anomalies et arbitrages.
+- [x] Corriger A1–A7 et ajouter les scénarios de régression correspondants.
+- [x] Ajouter les parcours navigateur des 13 techniques avec stockage réel, rechargement et annulation.
+- [x] Corriger la validation des effets mécaniques au rechargement (A8).
+- [x] Actualiser catalogue, matrice de couverture et aides utilisateur.
+- [x] Conserver les tests et rapports historiques ; retirer les métadonnées macOS inutiles.
+
+## À poursuivre
+
+- [ ] Trancher les décisions ouvertes dans `docs/DECISIONS.md` avant de modifier les comportements concernés.
+- [ ] Vérifier les anciennes sauvegardes présentant une provenance d'Avantagé ambiguë avec le MJ.
+- [ ] Auditer séparément les coûts volontaires des autres familles.
+- [ ] Élargir les combats combinés ; les tests actuels ne certifient pas toutes les interactions possibles.
 - [ ] Définir une stratégie de découpage progressif du HTML monolithique.
-- [ ] Mettre à jour la documentation utilisateur.
 
-## Base actuelle
+## Références
 
-V2.32 : 188/188 tests JavaScript passés à l'audit de reprise. Voir `docs/AUDIT_V232.md`.
+Base historique : `docs/AUDIT_V232.md`. Changements : `docs/RAPPORT_V233.md`.
+Validation et périmètre actuel : `docs/AUDIT_V233.md`.

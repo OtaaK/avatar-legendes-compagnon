@@ -1,3 +1,7 @@
+import re
+from pathlib import Path
+VERSION = re.search(r'<title>[^<]*(V[0-9]+\.[0-9]+)', Path(__file__).with_name('simulateur.html').read_text()).group(1)
+EXPORT_VERSION = VERSION.lower().replace('.', '-')
 """Tests réels de l'interface Chromium. Nécessite Python Playwright et Chromium.
 L'environnement peut interdire file:// et localhost ; dans ce cas, le HTML est chargé
 avec set_content et localStorage est simulé : cela ne valide PAS la persistance disque.
@@ -17,7 +21,7 @@ with sync_playwright() as p:
       setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]},
       clear:()=>{for(const k of Object.keys(store))delete store[k]}}}); }''')
     page.set_content(HTML,wait_until='load')
-    assert 'V1.34' in page.title()
+    assert VERSION in page.title()
     assert page.locator('#view-home').is_visible()
     page.get_by_text('Ouvrir les personnages').click()
     assert page.locator('#view-characters').is_visible()

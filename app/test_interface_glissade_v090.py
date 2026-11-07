@@ -19,7 +19,7 @@ with sync_playwright() as p:
     for _ in range(3):page.get_by_role('button',name='+ PNJ').click()
     page.locator('[data-combat-nav="fighters"]').click()
     # B et C sont engagés au départ.
-    page.locator('#fighters > .fighter').last.locator('input[type="checkbox"]').nth(2).check()
+    page.locator('#fighters input[onchange^="changeEngagement("]').nth(2).check()
     assert page.evaluate('CombatCore.isEngaged(s,s.fighters[1].id,s.fighters[2].id)')
     page.locator('[data-combat-nav="round"]').click()
     page.locator('#declarations select').nth(0).select_option('esquiver')
