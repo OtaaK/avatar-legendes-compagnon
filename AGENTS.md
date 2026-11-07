@@ -65,4 +65,3 @@ Répondre en français, sans jargon non expliqué. Favoriser un court résumé s
 ## Priorité de reprise
 
 La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'elle a réellement modifié depuis V2.32 avant de réutiliser les conclusions de l'ancien audit. Pour les **13 techniques de Terre**, poursuivre une vérification exhaustive, en s'appuyant sur le PDF officiel accessible, sans présumer que les tests existants prouvent la fidélité aux règles. **Auditer et présenter les écarts avant de corriger une interprétation de règle ambiguë.**
-
