@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Ennemi');
+C.setEngagement(s,a,b,true);C.fighter(s,a).fatigue=3;C.fighter(s,b).approach='attaquer';
+let act={id:'osc',round:s.round,sourceId:a,targetId:b,name:'Oscillations du vent',approach:'defendre',options:{airOscConfirmed:true}};s.actions.push(act);
+const events=C.propose(s,act);assert.equal(events.length,2);assert.throws(()=>C.commit(s,{[events[0].id]:false}),/ensemble/);
+C.commit(s);assert.equal(C.fighter(s,a).fatigue,2);assert.equal(C.fighter(s,a).windReserve.points,1);C.undo(s);assert.equal(C.fighter(s,a).fatigue,3);assert.equal(C.fighter(s,a).windReserve,undefined);
+C.commit(s);
+s.phase='fin';C.nextRound(s);assert.equal(C.fighter(s,a).windReserve.usableRound,s.round);
+s.phase='attaquer';C.fighter(s,a).approach='attaquer';
+act={id:'strike',round:s.round,sourceId:a,targetId:b,name:'Frapper',approach:'attaquer',options:{choice:'fatigue',forceStrike:true,windSpend:1}};s.actions.push(act);
+const e2=C.propose(s,act);assert.equal(e2.filter(e=>e.kind==='fatigue'&&e.targetId===a&&e.amount>0).length,0);assert.equal(e2.filter(e=>e.kind==='wind_spend').length,1);C.commit(s);assert.equal(C.fighter(s,a).fatigue,2);assert.equal(C.fighter(s,a).windReserve.points,0);
+C.undo(s);assert.equal(C.fighter(s,a).windReserve.points,1);
+s.proposals=[];s.phase='fin';C.nextRound(s);assert.equal(C.fighter(s,a).windReserve,undefined);
+console.log('OK V1.27 : Oscillations, report, dépense, expiration, refus groupé et annulation');

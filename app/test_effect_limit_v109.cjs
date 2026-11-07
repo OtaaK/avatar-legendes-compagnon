@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat(),id=C.addFighter(s,'Test');
+s.temporaryEffects=Array.from({length:10000},(_,i)=>({id:'temp-'+(i+1),targetId:id,label:'Repère',duration:'manual',createdRound:1,createdScene:1}));
+const seq=s.seq,history=s.history.length,snapshots=s.snapshots.length;
+assert.throws(()=>C.addTemporaryEffect(s,id,'En trop','round'),/10 000/);
+assert.equal(s.temporaryEffects.length,10000);assert.equal(s.seq,seq);
+assert.equal(s.history.length,history);assert.equal(s.snapshots.length,snapshots);
+console.log('OK : limite des effets sans mutation');

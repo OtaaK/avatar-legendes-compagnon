@@ -1,0 +1,13 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Technologue'),b=C.addFighter(s,'Adversaire','PNJ');
+assert.equal(s.scene,1);C.fighter(s,a).equipmentDisabled=true;C.fighter(s,a).materials=2;C.fighter(s,a).fatigue=3;
+s.traps.push({id:'trap-1',ownerId:a,zone:'Passerelle',round:1});
+const n=C.newScene(s);assert.equal(n,2);assert.equal(C.fighter(s,a).equipmentDisabled,false);assert.equal(C.fighter(s,a).materials,2);assert.equal(C.fighter(s,a).fatigue,3);assert.equal(s.traps.length,0);
+assert.equal(C.undo(s),true);assert.equal(s.scene,1);assert.equal(C.fighter(s,a).equipmentDisabled,true);assert.equal(s.traps.length,1);
+s.proposals.push({id:'test'});assert.throws(()=>C.newScene(s),/propositions/);assert.equal(s.scene,1);s.proposals=[];
+s.phase='attaquer';assert.throws(()=>C.newScene(s),/terminer/);assert.equal(s.scene,1);
+console.log('V0.97 : changement de scène, ressources conservées, pièges retirés, annulation et protections OK');

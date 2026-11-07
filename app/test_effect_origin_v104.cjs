@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat(),a=C.addFighter(s,'Aang'),b=C.addFighter(s,'Katara');
+const id=C.addTemporaryEffect(s,a,'Glace','scene',{type:'technique',label:'Gantelet de glace'});
+assert.equal(s.temporaryEffects[0].originLabel,'Gantelet de glace');
+C.addTemporaryEffect(s,a,'Aide','manual',{type:'personnage',sourceId:b});
+assert.equal(s.temporaryEffects[1].originSourceId,b);
+C.addTemporaryEffect(s,b,'Indice','round');assert.equal(s.temporaryEffects[2].originType,'mj');
+assert.throws(()=>C.addTemporaryEffect(s,a,'X','scene',{type:'personnage',sourceId:'inconnu'}),/origine/);
+assert.throws(()=>C.addTemporaryEffect(s,a,'X','scene',{type:'invalide'}),/origine/);
+C.undo(s);assert.equal(s.temporaryEffects.length,2);
+s.phase='fin';C.nextRound(s);C.newScene(s);assert.equal(s.temporaryEffects.length,1);
+assert.equal(s.temporaryEffects[0].originSourceId,b);
+console.log('OK : origines MJ, technique et personnage, validation, annulation, expiration');

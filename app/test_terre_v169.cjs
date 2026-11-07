@@ -1,0 +1,18 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Ennemi');
+s.phase='defendre';C.fighter(s,a).approach='defendre';
+const activation={id:'seismic-init',round:1,sourceId:a,targetId:b,name:'Détection du pas lourd',approach:'defendre',options:{earthSeismicConfirmed:true}};
+s.actions.push(activation);C.propose(s,activation);C.commit(s,{});
+const enemy={id:'enemy-technique',round:1,sourceId:b,targetId:a,name:'Frapper',approach:'attaquer',options:{choice:'fatigue'}};
+s.actions.push(enemy);
+const stale=JSON.parse(JSON.stringify(enemy));
+C.resolveEarthSeismicInterrupt(s,a,b,'cancel',true,[],'enemy-technique');
+assert(!stale.cancelledBySeismic);
+assert.throws(()=>C.propose(s,stale),/annulée/);
+assert.throws(()=>C.propose(s,enemy),/annulée/);
+assert(C.undo(s));
+assert(C.propose(s,stale).length>0);
+console.log('V1.69 annulation sismique impossible à contourner par copie obsolète OK');

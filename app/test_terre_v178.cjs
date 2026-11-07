@@ -1,0 +1,9 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+function setup(fatigue=5,conditions=[]){const s=C.createCombat(),id=C.addFighter(s,'Terre');s.phase='fin';s.fighters[0].fatigue=fatigue;s.fighters[0].conditions=[...conditions];s.fighters[0].statuses=['avantage'];s.temporaryEffects.push({id:'lava',originLabel:'Étoile de lave',targetId:id,lavaMaintainedRound:0,lavaExternalAdvantage:false,label:'Étoile de lave'});return {s,id};}
+{const {s,id}=setup();assert.throws(()=>C.resolveEarthLava(s,'lava','maintain',true),/état\(s\) à choisir/);assert.equal(C.fighter(s,id).fatigue,5);assert.equal(s.temporaryEffects[0].lavaMaintainedRound,0);assert.equal(s.snapshots.length,0);C.resolveEarthLava(s,'lava','maintain',true,['Confus']);assert.equal(C.fighter(s,id).fatigue,5);assert(C.fighter(s,id).conditions.includes('Confus'));assert.equal(s.temporaryEffects[0].lavaMaintainedRound,s.round);assert.throws(()=>C.resolveEarthLava(s,'lava','maintain',true,['Fragile']),/une seule fois/);C.undo(s);assert(!C.fighter(s,id).conditions.includes('Confus'));assert.equal(s.temporaryEffects[0].lavaMaintainedRound,0);}
+{const {s,id}=setup(5,['Confus']);assert.throws(()=>C.resolveEarthLava(s,'lava','maintain',true,['Confus']),/état\(s\) à choisir/);assert.equal(C.fighter(s,id).conditions.length,1);C.resolveEarthLava(s,'lava','maintain',true,['Fragile']);assert(C.fighter(s,id).conditions.includes('Fragile'));}
+{const {s,id}=setup(4);C.resolveEarthLava(s,'lava','maintain',true);assert.equal(C.fighter(s,id).fatigue,5);assert.equal(C.fighter(s,id).conditions.length,0);}
+console.log('V1.78 : entretien lave à jauge pleine, conversion, validation et annulation OK');

@@ -1,0 +1,17 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat(),f=C.addFighter(s,'Terre');
+s.temporaryEffects.push({id:'armor',targetId:f,originLabel:'Armure de terre',armorPoints:3,label:'Armure de terre : 3 / 3 points'});
+assert.throws(()=>C.resolveEarthArmorHit(s,'armor','fatigue',3,0,true),/au moins un/);
+assert.throws(()=>C.resolveEarthArmorHit(s,'armor','fatigue',3,1,false),/confirmation/);
+let r=C.resolveEarthArmorHit(s,'armor','fatigue',3,1,true);
+assert.equal(r.residual,1);assert.equal(C.fighter(s,f).fatigue,1);assert.equal(r.remaining,2);
+r=C.resolveEarthArmorHit(s,'armor','condition','Terrifié',1,true);
+assert.equal(r.remaining,1);assert.equal(C.fighter(s,f).conditions.length,0);
+r=C.resolveEarthArmorHit(s,'armor','fatigue',2,1,true);
+assert.equal(r.remaining,0);assert.equal(s.temporaryEffects.length,0);
+assert(C.undo(s));assert.equal(s.temporaryEffects[0].armorPoints,1);
+assert(html.includes('resolveEarthArmorHitUI'));
+console.log('V1.55 : impact réactif, dépenses obligatoires, fatigue résiduelle, état, épuisement, undo');

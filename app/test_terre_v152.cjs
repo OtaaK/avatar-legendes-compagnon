@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(__dirname+'/simulateur.html','utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+assert(source.includes("action.name==='Bouclier de roche'"));
+assert(source.includes("'fatigue',action.sourceId,1"));
+assert(source.includes("'status_add',protectedId,0,'gene'"));
+assert(source.includes("earthShieldConfirmed!==true"));
+assert(html.includes('id="earthShieldProtectedId"'));
+assert(html.includes('earthShieldProtectedId:'));
+assert(source.includes("'Bouclier de roche'"));
+console.log('Terre V1.52 : bouclier, cible, coût, statut, confirmation et atomicité');
