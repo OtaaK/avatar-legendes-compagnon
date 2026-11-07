@@ -34,3 +34,15 @@ Validation et périmètre actuel : `docs/AUDIT_V233.md`.
 - [ ] Examiner la Pull Request, puis décider explicitement de son intégration.
 
 Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVENTAIRE.csv`.
+
+## Retours de recette manuelle
+
+- [x] Synchroniser immédiatement le récapitulatif de la fiche avec fatigue/équilibre saisis.
+- [x] Confirmer l'enregistrement réussi sans faux succès en cas d'échec de stockage.
+- [x] Corriger l'affichage des cartes PJ dans l'onglet PNJ.
+- [x] Rendre visibles l'ajout des fiches au combat et l'édition des combattants en préparation.
+- [x] Vérifier persistance, erreurs et annulation avec des parcours desktop/mobile.
+- [ ] Faire retester les correctifs sur Chrome/macOS avant toute fusion.
+- [ ] Cadrer une future refonte UI/UX, séparément des correctifs et des règles.
+
+Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.

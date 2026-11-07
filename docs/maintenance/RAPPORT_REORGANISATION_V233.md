@@ -3,6 +3,10 @@
 Date : 7 novembre 2026. Mission : assainissement de structure, sans modification des règles.
 Branche de travail : `maintenance/organisation-v233`. Aucune fusion dans `main`.
 
+Ce rapport décrit la maintenance achevée au commit `67273e0`. Les changements d’interface
+autorisés ensuite par les retours de recette sont suivis dans le [rapport distinct](../RAPPORT_RETOURS_RECETTE_V233.md).
+Les preuves d’identité du HTML ci-dessous concernent ce point de maintenance, pas les correctifs ultérieurs.
+
 ## Sécurisation préalable
 
 La copie locale contenait une V2.33 non enregistrée, alors que `main` sur GitHub contenait

@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 189 scripts de régression JavaScript |
-| `tests/browser/` | 35 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 190 scripts de régression JavaScript |
+| `tests/browser/` | 36 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -44,8 +44,9 @@ python scripts/test.py --suite browser
 python scripts/test.py --report work/tests.json
 ```
 
-La réorganisation conserve les 223 tests existants. Le HTML et les règles n'ont pas été
-modifiés par cette maintenance ; son identité avec la V2.33 sauvegardée est vérifiable.
+La réorganisation conserve les 223 tests existants. Son contrôle d'identité du HTML porte
+sur le commit de maintenance `67273e0`. Les [correctifs après recette](docs/RAPPORT_RETOURS_RECETTE_V233.md)
+modifient ensuite l'interface à la demande du propriétaire, sans changer les règles du jeu.
 Résultats et inventaire détaillé : [rapport de réorganisation](docs/maintenance/RAPPORT_REORGANISATION_V233.md).
 
 ## Règles et suivi

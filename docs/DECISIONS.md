@@ -55,3 +55,19 @@
   ni étape de compilation ajoutée.
 - Une Pull Request doit distinguer les changements V2.33 déjà présents localement et la maintenance
   non fonctionnelle effectuée ensuite. Aucune fusion dans `main` sans accord du propriétaire.
+
+## 2026-11-07 — Retours de recette Chrome/macOS
+
+- Le propriétaire demande le rafraîchissement du récapitulatif de fatigue, une confirmation
+  d'enregistrement, la séparation visuelle PJ/PNJ et l'accès aux PNJ depuis Combat.
+- Le récapitulatif reflète le brouillon du formulaire ; le bouton Enregistrer conserve son rôle.
+  La confirmation est un message de succès après sauvegarde, sans dialogue supplémentaire pour
+  les enregistrements internes.
+- Les cartes PJ mal masquées sont un défaut d'affichage, pas un doublon à supprimer des données.
+- L'ajout d'une fiche au combat reprend une copie liée ; les ressources de la fiche ne sont pas
+  écrasées automatiquement par les modifications du combat.
+- Un éditeur ciblé permet de modifier les combattants pendant la déclaration, sans action en
+  attente ; il conserve les statuts dépendant d'un effet actif et l'annulation transactionnelle.
+- Ces correctifs fonctionnels sont distincts de la réorganisation sans changement de HTML au
+  commit `67273e0`. Les règles et les techniques ne sont pas modifiées.
+- La refonte UI/UX générale évoquée par le propriétaire est à cadrer dans une mission ultérieure.

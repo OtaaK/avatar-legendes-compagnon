@@ -63,8 +63,13 @@
 .wizard-review-training{display:inline-block;border-radius:8px;background:#263d59;padding:8px 12px;font-weight:650;}
 .wizard-review-section ul{margin:0;padding-left:20px;overflow-wrap:anywhere;}
 @media(max-width:520px){.wizard-training-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.wizard-training{padding:9px 6px;gap:6px;font-size:11px;min-height:60px}.wizard-training-icon{width:27px;height:27px;font-size:17px}.wizard-review-stats{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.character-card-grid[hidden]{display:none!important}
+dialog.combat-editor{background:#1c2a3e;color:#f2f6ff;border:1px solid #647e9d;border-radius:12px;width:min(520px,calc(100% - 32px));max-height:85vh;overflow:auto;box-sizing:border-box}
+dialog.combat-editor::backdrop{background:#0009}
+.combat-editor input,.combat-editor select{box-sizing:border-box;max-width:100%}.combat-editor form,.combat-editor fieldset{min-width:0}
+.combat-editor fieldset{border:1px solid #526a86;border-radius:8px;margin:12px 0}.combat-editor fieldset label{display:inline-flex;align-items:center;gap:6px;margin-right:12px}.combat-editor input[type="checkbox"]{width:auto;margin:0}
 </style>
-<header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · hors ligne</span></header>
+<header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
 <nav class="main-nav" aria-label="Navigation principale">
 <button type="button" data-view="home" onclick="setView('home')">⌂ Accueil</button>
 <button type="button" data-view="characters" onclick="setView('characters')">♙ Personnages</button>
@@ -73,13 +78,14 @@
 </nav><p>Fiches synthétiques PJ / PNJ · hors ligne</p>
 <main id="appContent"><div id="storageWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #ef4444;border-radius:8px;background:#3a1919;color:#fff"></div><div id="recoveryWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #f59e0b;border-radius:8px;background:#382810;color:#fff"></div>
 <section class="app-view" id="view-home" aria-label="Accueil"><div class="panel"><h2>Bienvenue dans le Compagnon</h2><p>Choisis un espace dans le menu. Les fiches et les combats restent accessibles sans faire défiler toute l’application.</p><div class="home-actions"><button onclick="setView('characters')">Ouvrir les personnages</button><button onclick="setView('combat')">Reprendre le combat</button><button onclick="setView('catalog')">Consulter les techniques</button></div></div></section>
-<section class="app-view" id="view-combat" aria-label="Combat"><nav class="combat-nav" aria-label="Sections du combat"><button type="button" data-combat-nav="fighters" onclick="setCombatTab('fighters')">Combattants</button><button type="button" data-combat-nav="round" onclick="setCombatTab('round')">Passe</button><button type="button" data-combat-nav="technique" onclick="setCombatTab('technique')">Actions</button><button type="button" data-combat-nav="approval" onclick="setCombatTab('approval')">Validation MJ</button></nav><div id="combatSummary" class="combat-summary" aria-live="polite"></div><div class="combat-workspace"><section class="panel combat-panel" data-combat-tab="fighters"><h2>Combattants</h2><div id="fighters"></div><button onclick="add('PJ')">+ PJ</button><button onclick="add('PNJ')">+ PNJ</button></section>
+<section class="app-view" id="view-combat" aria-label="Combat"><nav class="combat-nav" aria-label="Sections du combat"><button type="button" data-combat-nav="fighters" onclick="setCombatTab('fighters')">Combattants</button><button type="button" data-combat-nav="round" onclick="setCombatTab('round')">Passe</button><button type="button" data-combat-nav="technique" onclick="setCombatTab('technique')">Actions</button><button type="button" data-combat-nav="approval" onclick="setCombatTab('approval')">Validation MJ</button></nav><div id="combatSummary" class="combat-summary" aria-live="polite"></div><div class="combat-workspace"><section class="panel combat-panel" data-combat-tab="fighters"><h2>Combattants</h2><div class="sheet-section"><label for="combatSheetSelect">Ajouter une fiche de Personnages</label><select id="combatSheetSelect"></select><button type="button" id="includeSelectedSheetButton" onclick="includeSelectedSheet()">Ajouter la fiche au combat</button><button type="button" class="alt" onclick="setView('characters')">Ouvrir Personnages</button><p class="small-note">Une copie est ajoutée au combat. La fiche permanente n’est modifiée qu’après confirmation avec « Reporter sur la fiche ».</p></div><div id="fighters"></div><button onclick="add('PJ')">+ PJ</button><button onclick="add('PNJ')">+ PNJ</button><p class="small-note">Le bouton « Modifier le combattant » permet de changer son nom et ses ressources avant la révélation des approches.</p></section>
 <section class="panel combat-panel" data-combat-tab="round"><h2>Déroulement</h2><div id="phase"></div><div id="declarations"></div><button id="step" onclick="step()">Révéler / avancer</button><button type="button" class="alt" onclick="newSceneUI()">Nouvelle scène (MJ)</button><button type="button" class="alt" onclick="endCombatUI()">Terminer le combat : libérer les entraves (MJ)</button><button type="button" class="alt" onclick="renameSceneUI()">Nommer la scène (MJ)</button><button type="button" class="alt" onclick="addSceneNoteUI()">Ajouter une note (MJ)</button><button type="button" class="alt" onclick="addTemporaryEffectUI()">Ajouter un effet temporaire (MJ)</button><label for="temporaryEffectFilter">Afficher les effets</label><select id="temporaryEffectFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les durées</option><option value="round">Fin de passe</option><option value="scene">Fin de scène</option><option value="manual">Retrait manuel</option></select><label for="temporaryOriginFilter">Origine des effets</label><select id="temporaryOriginFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les origines</option><option value="mj">Décision MJ</option><option value="technique">Technique</option><option value="personnage">Personnage</option></select><label for="temporaryEffectSearch">Rechercher un effet</label><input id="temporaryEffectSearch" type="search" placeholder="Description, technique, personnage…" oninput="renderTemporaryEffects()"><div id="temporaryEffects" aria-live="polite"></div><div id="sceneJournalFilters"><label for="journalSceneFilter">Scène du journal</label><select id="journalSceneFilter" onchange="renderSceneJournal()"></select><label for="journalSearch">Rechercher dans les notes</label><input id="journalSearch" type="search" placeholder="Rechercher une note…" oninput="renderSceneJournal()"><label for="journalLimit">Notes affichées</label><select id="journalLimit" onchange="renderSceneJournal()"><option value="20">20 dernières</option><option value="all">Toutes</option></select></div><button type="button" class="alt" onclick="exportSceneJournalUI()">Exporter le journal filtré (CSV)</button><div id="sceneJournal" aria-live="polite"></div><p id="help"></p></section>
 <section class="panel combat-panel" data-combat-tab="technique"><h2>Technique à proposer</h2><label>Combattant</label><select id="source" onchange="syncTechnique()"></select><label>Cible</label><select id="target"></select><button class="alt" type="button" onclick="targetOpponent()">Cibler un autre combattant</button><label>Technique accessible</label><select id="tech" onchange="syncOptions()"></select><div id="techHelp" class="small-note"></div><div id="combatTechniqueCount" class="small-note" aria-live="polite"></div><label><input id="combatKnownOnly" type="checkbox" style="width:auto" onchange="syncTechnique()"> Masquer les techniques de base (si autres techniques disponibles)</label><div id="postureMode" class="mode-line"></div><div id="opts"></div><button onclick="prepare()">Préparer les effets</button><p id="message"></p></section>
 <section class="panel combat-panel" data-combat-tab="approval"><h2>Validation MJ</h2><div id="proposals"></div><button onclick="approve()">Valider les effets cochés</button><button class="alt" onclick="reject()">Rejeter le lot</button><h3>Journal</h3><div id="history"></div></section></div>
 <div class="notice">Version de démonstration : assiste certaines techniques de base et universelles ; les réactions complexes restent soumises au MJ. Les autres techniques et les effets narratifs exigent encore l’arbitrage du MJ. Le calcul de posture est saisi, non lancé. Les techniques non automatisées sont envoyées à l’arbitrage du MJ.</div>
 <div class="row"><button onclick="demo()">Réinitialiser la démonstration</button><button class="alt" onclick="back()">Annuler dernière validation</button><button class="alt" onclick="download()">Exporter JSON privé</button><button class="alt" onclick="downloadPublicCombat()">Exporter un compte rendu partageable (sans pari secret)</button><button class="alt" onclick="document.getElementById('importFile').click()">Importer JSON</button><input id="importFile" type="file" accept=".json" style="display:none" onchange="importCombat(event)"></div>
 </section>
+<dialog id="combatFighterDialog" class="combat-editor" aria-labelledby="combatFighterEditorTitle"></dialog>
 <section class="app-view" id="view-catalog" aria-label="Techniques"><div class="panel"><h2>Bibliothèque des techniques</h2><p>111 entrées : 9 techniques de base et 102 techniques avancées (dont 13 universelles). Les effets détaillés ne sont pas tous encodés. Consulte le livre à la page indiquée.</p>
 <div class="grid"><div><label>Rechercher</label><input id="catalogSearch" oninput="renderCatalog()" placeholder="Nom d’une technique"><label>Famille</label><details id="catalogFamilyPicker" class="catalog-family-picker"><summary id="catalogFamilySummary">Toutes les familles</summary><div class="catalog-family-options"><button type="button" class="catalog-clear" onclick="clearCatalogFamilies()">Tout afficher</button><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="base" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="base"></span><span>Base</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="universelle" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="universelle"></span><span>Universelle</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="air" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="air"></span><span>Air</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="eau" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="eau"></span><span>Eau</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="terre" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="terre"></span><span>Terre</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="feu" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="feu"></span><span>Feu</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="armes" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="armes"></span><span>Armes</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="technologie" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="technologie"></span><span>Technologie</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="groupe_pnj" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="groupe_pnj"></span><span>Groupe PNJ</span></label></div></details></div><div><label>Approche</label><select id="catalogApproach" onchange="renderCatalog()"><option value="">Toutes</option><option>Défendre et prendre à revers</option><option>Avancer et attaquer</option><option>Esquiver et analyser</option></select><label>Rareté</label><select id="catalogRare" onchange="renderCatalog()"><option value="">Toutes</option><option value="rare">Rares</option><option value="common">Non rares</option></select></div></div><div id="catalogBrowser" class="catalog-browser"><div id="catalogCount"></div><div id="catalogResults" class="catalog-card-grid"></div></div><div id="catalogDetail" class="catalog-detail" hidden></div></div>
 </section>
@@ -337,6 +343,43 @@ function changeReedApproach(s,casterId,approach){
  caster.approach=approach;caster.reedMayChangeApproach=false;
  s.snapshots.push(before);
  s.history.push({round:s.round,phase:s.phase,events:[{kind:'note',targetId:casterId,detail:approach,reason:'Souple comme un roseau : changement d’approche MJ'}]});
+}
+function requiredFighterStatuses(s,id){
+ const effects=s.temporaryEffects||[],required=[];
+ if(effects.some(e=>e.targetId===id&&['Entraves de métal','Bouclier de roche'].includes(e.originLabel)))required.push('gene');
+ if(earthPersistentAdvantage(s,id))required.push('avantage');
+ return required;
+}
+function updateFighter(s,id,patch){
+ const rollback=clone(s);
+ try{
+  if(s.phase!=='declaration'||s.actions.length||s.proposals.length)throw Error('Modifier le combattant avant la révélation des approches, sans action en attente.');
+  const f=fighter(s,id),allowed=['name','fatigue','balance','materials','conditions','statuses'];
+  if(!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(k=>!allowed.includes(k)))throw Error('Champ de combattant non modifiable.');
+  const next={...f,...clone(patch)};
+  if(typeof next.name!=='string'||!next.name.trim()||next.name.trim().length>100)throw Error('Nom requis (100 caractères maximum).');
+  next.name=next.name.trim();
+  if(!Number.isInteger(next.fatigue)||next.fatigue<0||next.fatigue>5)throw Error('Fatigue invalide (0 à 5).');
+  if(!Number.isInteger(next.balance)||next.balance< -3||next.balance>3)throw Error('Équilibre invalide (−3 à +3).');
+  const materials=next.materials??0;
+  if(!Number.isInteger(materials)||materials<0)throw Error('Matériels invalides.');
+  if(f.equipmentDisabled&&materials>(f.materials||0))throw Error('Équipement hors service : aucun matériel gagné.');
+  const conditions=['Terrifié','En colère','Coupable','Fragile','Confus'];
+  if(!Array.isArray(next.conditions)||new Set(next.conditions).size!==next.conditions.length||next.conditions.some(x=>!conditions.includes(x)))throw Error('États invalides.');
+  if(!Array.isArray(next.statuses)||new Set(next.statuses).size!==next.statuses.length||next.statuses.some(x=>!STATUS.includes(x)))throw Error('Statuts invalides.');
+  if(requiredFighterStatuses(s,id).some(status=>!next.statuses.includes(status)))throw Error('Ce statut est maintenu par un effet actif : utiliser la commande de cet effet.');
+  if(allowed.every(k=>JSON.stringify(next[k])===JSON.stringify(f[k])))return false;
+  const before=clone({...s,snapshots:[]}),statusesChanged=JSON.stringify(f.statuses)!==JSON.stringify(next.statuses);
+  for(const key of Object.keys(patch))f[key]=clone(next[key]);
+  if(statusesChanged){f.approach=null;f.roll=null;f.activeStatuses=[];}
+  f.roundStatuses=(f.roundStatuses||[]).filter(e=>f.statuses.includes(e.status));
+  f.statusAppliedRound=f.statusAppliedRound||{};
+  for(const status of Object.keys(f.statusAppliedRound))if(!f.statuses.includes(status))delete f.statusAppliedRound[status];
+  for(const status of f.statuses)if(!rollback.fighters.find(x=>x.id===id).statuses.includes(status))f.statusAppliedRound[status]=s.round;
+  syncEarthMetalAdvantage(s);
+  s.snapshots.push(before);s.history.push({round:s.round,phase:s.phase,events:[{kind:'fighter_edit',targetId:id,detail:f.name,reason:'Modification manuelle du combattant avant la passe'}]});
+  return true;
+ }catch(error){for(const key of Object.keys(s))if(!Object.prototype.hasOwnProperty.call(rollback,key))delete s[key];Object.assign(s,rollback);throw error;}
 }
 function queueTechnique(s,sourceId,name,approach,targetId,options={}){
  const f=fighter(s,sourceId);fighter(s,targetId);
@@ -2546,7 +2589,7 @@ function triggerTrap(s,trapId,targetId,condition,direction){
  return events;
 }
 function previewCommit(s,decisions={}){return commit(clone(s),decisions,true)}
-window.CombatCore={APPROACHES,STATUS,previewCommit,createCombat,addFighter,fighter,isEngaged,setEngagement,clearEngagements,disengageFighter,declare,reveal,allowance,setGeneChoice,escapeTrap,queueTechnique,resolveReedBet,changeReedApproach,revealCountertime,waiveCountertime,propose,manual,commit,spendEarthArmor,resolveEarthArmorHit,resolveEarthMudStrike,resolveEarthSeismicInterrupt,resolveEarthLava,earthLavaFracture,undo,advance,endRound,nextRound,triggerTrap,newScene,endCombat,renameScene,addSceneNote,editSceneNote,removeSceneNote,exportSceneJournalCSV,addTemporaryEffect,editTemporaryEffect,removeTemporaryEffect,releaseEarthMetal,mutateEarthShield};
+window.CombatCore={APPROACHES,STATUS,requiredFighterStatuses,updateFighter,previewCommit,createCombat,addFighter,fighter,isEngaged,setEngagement,clearEngagements,disengageFighter,declare,reveal,allowance,setGeneChoice,escapeTrap,queueTechnique,resolveReedBet,changeReedApproach,revealCountertime,waiveCountertime,propose,manual,commit,spendEarthArmor,resolveEarthArmorHit,resolveEarthMudStrike,resolveEarthSeismicInterrupt,resolveEarthLava,earthLavaFracture,undo,advance,endRound,nextRound,triggerTrap,newScene,endCombat,renameScene,addSceneNote,editSceneNote,removeSceneNote,exportSceneJournalCSV,addTemporaryEffect,editTemporaryEffect,removeTemporaryEffect,releaseEarthMetal,mutateEarthShield};
 
 
 'use strict';
@@ -2758,10 +2801,14 @@ function quickSheetResource(kind,delta){
 function quickSheetCondition(name){
  try{const id=$('sheetSelect').value;saveSheet(true);commitLibraryMutation(()=>Roster.toggleCondition(lib,id,name));renderSheets(id)}catch(e){alert(e.message)}
 }
+function refreshSheetQuick(){
+ const c=lib.characters.find(x=>x.id===$('sheetSelect').value);if(!c)return;
+ renderSheetQuick({...c,name:$('sheetName')?.value??c.name,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance)});
+}
 function renderSheetQuick(c){
  const bar=$('sheetQuick');if(!bar)return;
  if(!c){bar.innerHTML='';return}
- bar.innerHTML=`<strong>${safe(c.name)}</strong><div class="resource"><span>Fatigue</span><button class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)">−</button><output>${c.fatigue}/5</output><button aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)">+</button></div>
+ bar.innerHTML=`<strong>${safe(c.name)}</strong><button type="button" onclick="includeSheet('${safe(c.id)}')" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button><div class="resource"><span>Fatigue</span><button class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)">−</button><output>${c.fatigue}/5</output><button aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)">+</button></div>
  <div class="resource"><span>Équilibre</span><button class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)">−</button><output>${c.balance>0?'+':''}${c.balance}</output><button aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)">+</button></div>
  <div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" onclick="quickSheetCondition('${safe(n)}')">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div>`;
 }
@@ -2996,8 +3043,30 @@ function renderSceneJournal(){
  const visible=matches.slice(-limit).reverse();
  $('sceneJournal').innerHTML='<h4>Journal narratif ('+matches.length+' note(s))</h4>'+(visible.map(n=>'<p><b>Scène '+Number(n.scene)+(n.title?' — '+safe(n.title):'')+' · Passe '+Number(n.round)+'</b> — '+safe(n.text)+' <button type="button" class="alt" onclick="editSceneNoteUI(\''+n.id+'\')">Modifier</button> <button type="button" class="alt" onclick="removeSceneNoteUI(\''+n.id+'\')">Supprimer</button></p>').join('')||'<p class="small-note">Aucune note correspondante.</p>')+(visible.length<matches.length?'<p class="small-note">'+(matches.length-visible.length)+' note(s) masquée(s) : choisir « Toutes » pour les afficher.</p>':'');
 }
+function editCombatFighter(id){try{
+ const f=CombatCore.fighter(s,id);
+ if(s.phase!=='declaration'||s.actions.length||s.proposals.length)throw Error('Modifier le combattant avant la révélation des approches, sans action en attente.');
+ const dialog=$('combatFighterDialog'),required=CombatCore.requiredFighterStatuses(s,id);dialog.dataset.fighterId=id;
+ dialog.innerHTML=`<form onsubmit="event.preventDefault();saveCombatFighter()"><h3 id="combatFighterEditorTitle">Modifier le combattant</h3><p>${safe(f.kind)} · Modifications pour ce combat uniquement${f.characterId?' ; la fiche permanente reste indépendante':''}.</p>
+ <label for="combatEditName">Nom dans ce combat</label><input id="combatEditName" required maxlength="100" value="${safe(f.name)}">
+ <label for="combatEditFatigue">Fatigue</label><input id="combatEditFatigue" type="number" min="0" max="5" step="1" required value="${f.fatigue}">
+ <label for="combatEditBalance">Équilibre</label><input id="combatEditBalance" type="number" min="-3" max="3" step="1" required value="${f.balance}">
+ <label for="combatEditMaterials">Matériels</label><input id="combatEditMaterials" type="number" min="0" step="1" required value="${f.materials||0}">
+ <fieldset><legend>États</legend>${Roster.CONDITIONS.map(c=>`<label><input class="combat-edit-condition" type="checkbox" value="${safe(c)}" ${f.conditions.includes(c)?'checked':''}>${safe(c)}</label>`).join('')}</fieldset>
+ <fieldset><legend>Statuts</legend>${CombatCore.STATUS.map(status=>`<label><input class="combat-edit-status" type="checkbox" value="${status}" ${f.statuses.includes(status)||required.includes(status)?'checked':''} ${required.includes(status)?'disabled':''}>${safe(Roster.FROM_ENGINE[status])}${required.includes(status)?' (effet actif)':''}</label>`).join('')}</fieldset>
+ <p class="small-note">Les statuts maintenus par une technique se retirent depuis cet effet. La modification peut être annulée avec l’historique du combat.</p>
+ <div class="row"><button type="submit">Enregistrer le combattant</button><button type="button" class="alt" onclick="$('combatFighterDialog').close()">Annuler</button></div></form>`;
+ dialog.showModal();$('combatEditName').focus();
+}catch(error){alert(error.message)}}
+function saveCombatFighter(){try{
+ const dialog=$('combatFighterDialog');
+ commitCombatMutation(()=>CombatCore.updateFighter(s,dialog.dataset.fighterId,{name:$('combatEditName').value,fatigue:Number($('combatEditFatigue').value),balance:Number($('combatEditBalance').value),materials:Number($('combatEditMaterials').value),conditions:Array.from(dialog.querySelectorAll('.combat-edit-condition:checked')).map(el=>el.value),statuses:Array.from(dialog.querySelectorAll('.combat-edit-status:checked')).map(el=>el.value)}));
+ dialog.close();render();
+}catch(error){alert(error.message)}}
+function openCombatSheet(id){const f=CombatCore.fighter(s,id);if(f.characterId){setView('characters');openCharacterDetail(f.characterId);}}
 function render(){
- $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${f.kind}</span>${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select onchange="setGeneCombatChoice('${f.id}',this.value)"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" onclick="releaseTrapped('${f.id}')" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" onclick="syncSheet('${f.id}')">Reporter sur la fiche</button>`:''}<p>Fatigue : ${f.fatigue}/5 · Matériels : ${f.materials||0}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${f.balance} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>approachLabels[x]).join(', ')||'—'}</p></div>`).join('');
+ renderCombatLibrary();
+ $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${f.kind}</span><button type="button" class="alt" title="Disponible avant la révélation des approches" onclick="editCombatFighter('${f.id}')" ${s.phase!=='declaration'||s.actions.length||s.proposals.length?'disabled':''}>Modifier le combattant</button>${f.characterId?`<button type="button" class="alt" onclick="openCombatSheet('${f.id}')">Ouvrir la fiche</button>`:''}${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select onchange="setGeneCombatChoice('${f.id}',this.value)"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" onclick="releaseTrapped('${f.id}')" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" onclick="syncSheet('${f.id}')">Reporter sur la fiche</button>`:''}<p>Fatigue : ${f.fatigue}/5 · Matériels : ${f.materials||0}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${f.balance} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>approachLabels[x]).join(', ')||'—'}</p></div>`).join('');
  $('fighters').innerHTML+='<div class="fighter"><b>Engagements (confirmés par le MJ)</b><p class="small-note">Cocher les paires engagées. Glissade permet de rompre et de créer des engagements avec validation MJ. La remise à zéro est une transaction unique, annulable.</p><button type="button" class="alt" onclick="clearAllEngagements()" '+(!(s.engagements||[]).length?'disabled':'')+'>Rompre tous les engagements</button>'+s.fighters.map(f=>'<button type="button" class="alt" onclick="disengageOne(\''+f.id+'\')" '+(!(s.engagements||[]).some(pair=>pair.includes(f.id))?'disabled':'')+'>Désengager '+safe(f.name)+'</button>').join('')+s.fighters.flatMap((f,i)=>s.fighters.slice(i+1).map(g=>'<label><input type="checkbox" style="width:auto" '+(CombatCore.isEngaged(s,f.id,g.id)?'checked':'')+' onchange="changeEngagement(\''+f.id+'\',\''+g.id+'\',this.checked)"> '+safe(f.name)+' ↔ '+safe(g.name)+'</label>')).join('')+'</div>';
  $('fighters').innerHTML+='<div class="fighter"><b>Pièges armés (MJ)</b>' + ((s.traps||[]).length?(s.traps||[]).map(t=>'<p>'+safe(t.zone)+' — '+safe(CombatCore.fighter(s,t.ownerId).name)+' <button type="button" class="alt" onclick="triggerTrapUI(\''+safe(t.id)+'\')" '+(s.proposals.length?'disabled':'')+'>Déclencher (prochain adversaire)</button></p>').join(''):'<p>Aucun piège armé.</p>')+'</div>';
  $('phase').innerHTML=`<h3>Scène ${s.scene||1}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${s.round} — ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin de passe':approachLabels[s.phase]}</h3>`;
@@ -3599,14 +3668,14 @@ function renderSheets(selected){
  const el=$('sheetSelect'),prev=selected||el.value;
  el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${c.kind})</option>`).join('');
  showSheet();
- renderNpcDirectory();renderCharacterCards();
+ renderNpcDirectory();renderCharacterCards();renderCombatLibrary();
  $('sheetList').innerHTML=lib.characters.map(c=>`<div class="fighter"><b>${safe(c.name)}</b> · ${c.kind} · ${safe(c.livret||'Livret non précisé')}<br><small>${c.techniques.length} technique(s)</small><br><button onclick="includeSheet('${c.id}')">Ajouter au combat</button></div>`).join('')||'<p>Crée une fiche pour commencer.</p>';
 }
 function showSheet(){
  const c=lib.characters.find(x=>x.id===$('sheetSelect').value);
  if(!c){$('sheetForm').innerHTML='<p>Aucune fiche sélectionnée.</p>';renderSheetQuick(null);return}
  renderSheetQuick(c);
- $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" value="${safe(c.name)}">
+ $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" oninput="refreshSheetQuick()" value="${safe(c.name)}">
  <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
  ${c.kind==='PNJ'?`<label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
@@ -3665,14 +3734,23 @@ function stepField(id,delta,min,max){
  const field=$(id);if(!field)return;
  const next=Math.min(max,Math.max(min,Number(field.value)+delta));
  field.value=String(next);const view=$('view-'+id);if(view)view.textContent=String(next);
+ if(id==='sheetFatigue'||id==='sheetBalance')refreshSheetQuick();
 }
 function saveSheet(quiet=false){
  try{const id=$('sheetSelect').value;const stats=Object.fromEntries(Roster.STATS.map(k=>[k,Number($('stat-'+k).value)]));
  commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{name:$('sheetName').value,livret:$('sheetLivret').value,stats,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),center:Number($('sheetCenter').value),principles:[$('principleLeft').value,$('principleRight').value],training:$('sheetTraining').value,history:$('sheetHistory').value,relationships:$('sheetRelations').value.split('\n').map(x=>x.trim()).filter(Boolean),playbookMoves:$('sheetMoves').value.split('\n').map(x=>x.trim()).filter(Boolean),notes:$('sheetNotes').value,...($('sheetLocation')?{location:$('sheetLocation').value.trim()}:{})}));
- if(!quiet){renderSheets(id);render()}else {renderNpcDirectory();renderCharacterCards()}}catch(e){alert(e.message);if(quiet)throw e}
+ if(!quiet){renderSheets(id);render();alert('Fiche enregistrée.')}else {renderNpcDirectory();renderCharacterCards()}}catch(e){alert(e.message);if(quiet)throw e}
 }
 function addSheetTechnique(){try{saveSheet(true);const id=$('sheetSelect').value;const t=TECH_CATALOG.find(t=>t.id===$('sheetTechnique').value);if(!t)throw Error('Technique inconnue');const c=lib.characters.find(c=>c.id===id);if(t.famille==='groupe_pnj'&&c.kind!=='PNJ')throw Error('Technique réservée aux groupes de PNJ');commitLibraryMutation(()=>Roster.assignTechnique(lib,id,t.nom,$('sheetMastery').value));renderSheets(id)}catch(e){alert(e.message)}}
-function includeSheet(id){try{if($('sheetSelect').value===id)saveSheet(true);Roster.addToCombat(lib,s,id);render();setView('combat')}catch(e){alert(e.message)}}
+function renderCombatLibrary(){
+ const select=$('combatSheetSelect');if(!select)return;
+ const previous=select.value,available=lib.characters.filter(c=>!s.fighters.some(f=>f.characterId===c.id));
+ select.innerHTML=available.length?available.map(c=>`<option value="${safe(c.id)}">${safe(c.name)} (${c.kind})</option>`).join(''):'<option value="">Aucune fiche disponible à ajouter</option>';
+ if(available.some(c=>c.id===previous))select.value=previous;
+ select.disabled=!available.length;$('includeSelectedSheetButton').disabled=!available.length;
+}
+function includeSelectedSheet(){const id=$('combatSheetSelect').value;if(id)includeSheet(id);}
+function includeSheet(id){try{if($('sheetSelect').value===id)saveSheet(true);Roster.addToCombat(lib,s,id);render();setView('combat');setCombatTab('fighters')}catch(e){alert(e.message)}}
 function syncSheet(fighterId){
  if(!confirm('Reporter les ressources du combattant vers sa fiche permanente ?'))return;
  try{commitLibraryMutation(()=>Roster.syncCombatToLibrary(lib,s,fighterId));restoreNpcSessionLocation();renderSheets();render()}catch(e){alert(e.message)}

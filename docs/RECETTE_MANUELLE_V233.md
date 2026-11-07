@@ -5,14 +5,15 @@ Elle prend environ 10 à 15 minutes. Aucune installation, console ou commande n'
 
 ## Ouvrir le fichier exact de la PR
 
-1. Ouvrir [le fichier de la version testée](https://github.com/OtaaK/avatar-legendes-compagnon/blob/67273e0bdad651ab00cf039000a5e031be1f0ca7/app/simulateur.html), en étant connecté à GitHub.
+1. Ouvrir [le fichier de la version testée](https://github.com/OtaaK/avatar-legendes-compagnon/blob/maintenance/organisation-v233/app/simulateur.html), en étant connecté à GitHub.
 2. En haut à droite du fichier, cliquer sur la flèche **Download raw file** / **Télécharger le fichier brut**. La page de code GitHub n'est pas l'application.
 3. Enregistrer `simulateur.html` dans un nouveau dossier, par exemple `Test Avatar V2.33`, sans remplacer l'ancienne version.
 4. Double-cliquer sur le fichier téléchargé. Si nécessaire, choisir « Ouvrir avec » puis Chrome, Firefox ou Edge.
-5. Vérifier que l'application affiche **V2.33**.
+5. Vérifier que l'application affiche **V2.33 · correctifs de recette**.
 
 Le fichier est autonome : il n'y a rien d'autre à télécharger pour le lancer. Il correspond à
-l'application de la PR nº 1 ; les ajouts de documentation ultérieurs ne modifient pas ce HTML.
+l'application courante de la PR nº 1, avec les correctifs issus des retours de recette.
+Télécharger de nouveau le fichier pour retester ces correctifs ; l’ancienne copie locale ne se met pas à jour automatiquement.
 
 Utiliser des personnages fictifs. Si de vraies données apparaissent, les conserver d'abord avec
 **Personnages → Sauvegarder tout (fiches + combat)** et faire les essais dans un autre profil du
@@ -33,13 +34,19 @@ l'approche et la référence p.289. Aucun écran vide ni message d'erreur.
 - Dans **Ressources**, augmenter la fatigue de 1 avec le bouton **+**, puis **Enregistrer la fiche**.
 - Revenir à la liste, puis rouvrir la fiche.
 
-**Attendu :** nom et fatigue sont conservés. Un PNJ suffit pour cet essai rapide ; on peut aussi
-créer un PJ avec l'assistant si c'est une fonction utilisée habituellement.
+**Attendu :** le récapitulatif supérieur reflète immédiatement le point de fatigue.
+Après **Enregistrer la fiche**, une fenêtre confirme « Fiche enregistrée. » et les données sont conservées. Un PNJ suffit pour cet essai rapide ; on peut aussi
+créer un PJ avec l'assistant puis vérifier que sa carte est visible uniquement dans l’onglet PJ.
 
 ## 3. Armure de terre dans un petit combat
 
-Ces deux combattants sont indépendants de la fiche précédente : aucun apprentissage de technique
-sur une fiche n'est nécessaire pour ce scénario avec des PNJ.
+Pour vérifier le passage depuis les fiches, utiliser **Ajouter au combat** sur la fiche PNJ
+ou le sélecteur **Ajouter une fiche de Personnages** dans Combat. Une seule copie liée est autorisée.
+Le bouton **Modifier le combattant** permet de modifier le nom et les ressources de cette copie
+avant la révélation des approches ; **Ouvrir la fiche** revient à la fiche permanente.
+
+Le scénario rapide ci-dessous utilise deux PNJ indépendants ; aucun apprentissage sur une fiche
+n’est nécessaire. Le réaliser dans un combat fictif vide après avoir sauvegardé les essais précédents.
 
 - Dans **Combat → Combattants**, créer deux combattants avec **+ PNJ**. On les appellera ici
   « premier PNJ » et « second PNJ ».

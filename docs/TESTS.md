@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 189 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 190 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,8 +41,9 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 35 scripts : 34 conservés et un nouveau contrôle `test_offline.py` vérifiant
-l'ouverture en `file://`, sans réseau, un cycle de combat et un export/réimport fidèle.
+La suite compte 36 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+hors réseau et `test_retours_recette_v233.py` pour les corrections de fiches et de combat.
+Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
 Cette alternative ne certifie pas le double-clic ; le runner conserve cette limite dans
@@ -70,6 +71,10 @@ Le workflow `.github/workflows/tests.yml` propose les deux suites pour chaque Pu
 avec uniquement un droit de lecture du dépôt. Il ne fusionne et ne déploie rien.
 
 ## Vérifier cette réorganisation
+
+Le contrôle d’identité ci-dessous s’applique à l’état `67273e0`, avant les correctifs
+de recette autorisés. Il échoue légitimement sur le HTML courant, qui intègre ces correctifs
+d’interface. Ne pas supprimer ce contrôle pour masquer les différences.
 
 La référence de conservation est `backup/v233-before-maintenance`, commit `d247193`.
 

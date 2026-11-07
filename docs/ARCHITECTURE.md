@@ -49,13 +49,14 @@ source vide, gestionnaire de paquets JavaScript ou système de compilation n'est
 | Tests navigateur | Python, Playwright, Chromium, HTML | Contrôles réels, téléchargements et stockage ; certains utilisent un stockage simulé |
 | Scripts de maintenance | Python standard ; Git pour l'inventaire et la comparaison | Découverte des tests, bilans, inventaire et invariants |
 
-Les clés de stockage, formats de sauvegarde, noms des exports, règles, interfaces et
-catalogues embarqués sont inchangés par cette mission. Le HTML est identique octet pour
-octet à la V2.33 sécurisée avant réorganisation.
+La phase de réorganisation (`67273e0`) conserve le HTML octet pour octet. Les correctifs
+d’interface demandés après recette sont décrits dans `RAPPORT_RETOURS_RECETTE_V233.md`.
+Ils conservent les clés de stockage, les formats de sauvegarde, les noms des exports,
+les règles et les catalogues embarqués.
 
 ## Difficultés de maintenance constatées
 
-- Le fichier applicatif de 429 500 octets contient un seul script et 197 déclarations
+- Au point de réorganisation, le fichier de 429 500 octets contenait un seul script et 197 déclarations
   de fonctions nommées. Le CSS, l'état, les règles, les données, le rendu et la persistance
   restent fortement liés dans le même fichier.
 - Le catalogue et les synthèses d'audit sont stockés dans de longues lignes JSON : une
