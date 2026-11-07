@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 191 scripts de régression JavaScript |
-| `tests/browser/` | 38 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 192 scripts de régression JavaScript |
+| `tests/browser/` | 39 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -58,6 +58,8 @@ La branche de refonte suit le [cahier des charges](CAHIER_DES_CHARGES_UI_UX_AVAT
 Le [plan de livraison](docs/PLAN_REFONTE_UI_UX.md) distingue le socle visuel/navigation des
 évolutions de cartes, fiches, Lieux et Livrets. Le [bilan du premier lot](docs/RAPPORT_UI_UX_LOT1.md)
 précise ce qui est livré et propose une courte vérification dans le navigateur.
+Le [lot 2, galerie et cartes Personnages](docs/RAPPORT_UI_UX_LOT2.md), dépend du lot 1
+et ajoute filtres, tri et classification PNJ sans modifier leurs ressources.
 
 ## Règles et suivi
 

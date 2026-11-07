@@ -1,0 +1,48 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const script=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+const context={window:{},console};vm.createContext(context);
+const end=script.indexOf('window.Roster=');vm.runInContext(script.slice(0,end)+script.slice(end,script.indexOf(';',end)+1),context);
+const R=context.window.Roster;let count=0;
+function test(name,run){try{run();count++;}catch(e){e.message=name+' : '+e.message;throw e;}}
+function names(options){return Array.from(R.listNpcs(lib,options),c=>c.name);}
+const lib=R.createLibrary();
+function add(name,patch={}){const c=R.createCharacter(lib,name,'PNJ');R.updateCharacter(lib,c.id,patch);return c;}
+const a=add('Aube',{importance:'Mineur',location:'Port',livret:'Guide',training:'Maîtrise de l’Eau'});
+add('Brume',{importance:'Majeur',location:'Port',livret:'Guide',training:'Maîtrise de l’Eau'});
+add('Cendre',{importance:'Champion',location:'Mont',livret:'Garde',training:'Armes'});
+add('Dune',{importance:'Légendaire',location:'Mont',livret:'Guide',training:'Maîtrise de l’Eau'});
+const old=add('Ancien'),custom=add('Écho');custom.importance='Catégorie historique';
+const malformed=add('Vestige');malformed.importance={legacy:true};
+R.createCharacter(lib,'PJ exclu','PJ');
+const before=JSON.stringify(lib);
+test('quatre catégories dans l’ordre',()=>assert.deepEqual(Array.from(R.NPC_IMPORTANCE),['Mineur','Majeur','Champion','Légendaire']));
+test('tri nominal sans PJ',()=>assert.deepEqual(names({}),['Ancien','Aube','Brume','Cendre','Dune','Écho','Vestige']));
+test('importance croissante, non classés en dernier',()=>assert.deepEqual(names({sort:'importance-asc'}),['Aube','Brume','Cendre','Dune','Ancien','Écho','Vestige']));
+test('importance décroissante, non classés en dernier',()=>assert.deepEqual(names({sort:'importance-desc'}),['Dune','Cendre','Brume','Aube','Ancien','Écho','Vestige']));
+test('tri par lieu',()=>assert.deepEqual(names({sort:'location'}),['Ancien','Écho','Vestige','Cendre','Dune','Aube','Brume']));
+test('tri inconnu retombe sur le nom',()=>assert.deepEqual(names({sort:'inconnu'}),names({})));
+test('recherche insensible à la casse',()=>assert.deepEqual(names({search:' AUBE '}),['Aube']));
+test('recherche historique par rôle conservée',()=>assert.deepEqual(names({search:'garde'}),['Cendre']));
+test('filtre lieu',()=>assert.deepEqual(names({location:'Port'}),['Aube','Brume']));
+test('filtre entraînement',()=>assert.deepEqual(names({training:'Armes'}),['Cendre']));
+test('filtre rôle',()=>assert.deepEqual(names({role:'Garde'}),['Cendre']));
+for(const importance of R.NPC_IMPORTANCE)test('filtre '+importance,()=>assert.equal(R.listNpcs(lib,{importance}).length,1));
+test('non précisés inclut les anciennes valeurs sans les effacer',()=>assert.deepEqual(names({importance:'__unspecified__'}),['Ancien','Écho','Vestige']));
+test('cinq critères cumulables',()=>assert.deepEqual(names({search:'brume',location:'Port',training:'Maîtrise de l’Eau',role:'Guide',importance:'Majeur',sort:'importance-desc'}),['Brume']));
+test('intersection vide',()=>assert.deepEqual(names({location:'Port',importance:'Champion'}),[]));
+test('requêtes sans mutation des données',()=>assert.equal(JSON.stringify(lib),before));
+test('ancienne fiche sans classification',()=>assert.equal(R.npcImportance(old),''));
+test('aucune catégorie inventée',()=>assert.equal(Object.hasOwn(old,'importance'),false));
+test('classification ne modifie pas les ressources',()=>{const previous=JSON.parse(JSON.stringify(a));R.updateCharacter(lib,a.id,{importance:'Champion'});previous.importance='Champion';assert.equal(JSON.stringify(a),JSON.stringify(previous));});
+test('classification vide autorisée',()=>{R.updateCharacter(lib,a.id,{importance:''});assert.equal(R.npcImportance(a),'');});
+test('nouvelle catégorie inconnue refusée sans mutation',()=>{const s=JSON.stringify(a);assert.throws(()=>R.updateCharacter(lib,a.id,{importance:'Inventée'}),/Importance/);assert.equal(JSON.stringify(a),s);});
+test('nouvelle catégorie non textuelle refusée',()=>assert.throws(()=>R.updateCharacter(lib,a.id,{importance:{x:1}}),/Importance/));
+test('pas de classification PNJ ajoutée à un PJ',()=>assert.throws(()=>R.updateCharacter(lib,lib.characters.at(-1).id,{importance:'Mineur'}),/Importance/));
+test('édition d’un autre champ conserve une ancienne catégorie',()=>{R.updateCharacter(lib,custom.id,{notes:'Conservé'});assert.equal(custom.importance,'Catégorie historique');});
+test('édition conserve un ancien champ atypique',()=>{R.updateCharacter(lib,malformed.id,{notes:'Conservé'});assert.equal(malformed.importance.legacy,true);});
+test('export/import fidèle des métadonnées et des anciennes données',()=>{lib.customMetadata={preserved:true};const raw=JSON.stringify(lib);assert.equal(JSON.stringify(R.importLibrary(raw)),raw);});
+test('import sans ajout implicite d’importance',()=>{const restored=R.importLibrary(lib);assert.equal(Object.hasOwn(restored.characters.find(c=>c.id===old.id),'importance'),false);});
+test('noms égaux départagés par identifiant sans modifier la bibliothèque',()=>{const l=R.createLibrary();R.createCharacter(l,'Même','PNJ');R.createCharacter(l,'Même','PNJ');l.characters.reverse();const raw=JSON.stringify(l);assert.equal(R.listNpcs(l)[0].id,'char-1');assert.equal(JSON.stringify(l),raw);});
+test('aucune limite de PNJ dans le répertoire',()=>{const l=R.createLibrary();for(let i=0;i<500;i++)R.createCharacter(l,'Test '+i,'PNJ');assert.equal(R.listNpcs(l).length,500);});
+console.log('Galerie Personnages : '+count+' scénarios, filtres/tri, importance non destructive, compatibilité et 500 PNJ OK');

@@ -57,3 +57,10 @@ outils déjà présents sans dupliquer leur logique. Aucun réglage fictif n’e
 - Les lots 2–5 impliquant des ressources/modèles exigent un examen des pages du PDF avant de
   modifier une limite métier. Le PDF commercial reste hors Git ; aucun contenu à reconstruire
   depuis une maquette. Tout arbitrage de règle reste à soumettre au propriétaire.
+
+## Livraison suivante : lot 2
+
+Le lot 2 est isolé sur `refonte/ui-ux-personnages`, depuis `a323655`, avec une PR ciblant la
+branche du lot 1 tant que la PR nº 3 reste ouverte. Voir [le bilan](RAPPORT_UI_UX_LOT2.md).
+La galerie et la classification sont livrées sans anticiper les nouvelles limites métier
+des fiches ; les champs inconnus et ressources des sauvegardes sont conservés.

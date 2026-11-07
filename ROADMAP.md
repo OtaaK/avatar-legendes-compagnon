@@ -64,7 +64,8 @@ Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné 
 - [x] Lot 0 : vérifier la V2.33 réelle, les modèles et les tests de référence.
 - [x] Lot 1 sur branche dédiée : thème, navigation six rubriques, responsive, clavier et Gestion.
 - [ ] Examiner et valider visuellement le lot 1 avant intégration.
-- [ ] Lot 2 : cartes PJ/PNJ, importance et filtres.
+- [x] Lot 2 sur branche dépendante : cartes PJ/PNJ, importance et filtres.
+- [ ] Examiner le lot 2 séparément ; il dépend de la PR nº 3 non fusionnée.
 - [ ] Lot 3 : fiches détaillées distinctes, consultation/édition et ressources.
 - [ ] Lot 4 : Lieux hiérarchiques, liens PNJ et compatibilité des sauvegardes.
 - [ ] Lot 5 : structure des Livrets ; mécanismes détaillés des dix Livrets reportés.

@@ -109,3 +109,16 @@ Le plan des étapes suivantes et les dépendances de données figurent dans
 [PLAN_REFONTE_UI_UX.md](PLAN_REFONTE_UI_UX.md). La première page Lieux est un état d’attente
 explicite, sans arbre ni nouvelles références. Gestion appelle les imports/exports existants
 et leurs champs de fichier uniques, ce qui conserve la validation et les transactions.
+
+## Galerie Personnages — lot 2
+
+`Roster.listNpcs` accepte désormais entraînement, rôle (champ PNJ `livret` existant), importance
+et tri, en conservant ses paramètres et sa recherche historiques. La requête filtre une
+nouvelle liste et ne trie pas la bibliothèque en place. `NPC_IMPORTANCE` définit l’ordre,
+`npcImportance` lit seulement les catégories reconnues. L’import reste tolérant envers
+les anciennes valeurs inconnues ; `updateCharacter` contrôle les nouvelles classifications.
+
+Le rendu des cartes utilise des boutons natifs indépendants, des avatars/icônes SVG locaux et
+un transport des identifiants via `data-character-id`. Le formulaire existant n’ajoute
+`importance` que si sa valeur a été modifiée. Les critères de filtre restent dans le DOM,
+sans écrire dans les modèles ni créer une préférence de stockage parallèle.
