@@ -3326,6 +3326,20 @@ function validateCombat(raw){
   if(f.materials!==undefined&&(!Number.isInteger(f.materials)||f.materials<0))throw Error('Réserve de matériels invalide');
   if(f.characterId!==undefined&&(typeof f.characterId!=='string'||!f.characterId))throw Error('Lien de fiche invalide');
  }
+ // Les références utilisées dès le premier affichage doivent être valides avant import.
+ // Absence et null restent compatibles avec les anciens champs optionnels.
+ if(raw.engagements!==undefined&&raw.engagements!==null){
+  if(!Array.isArray(raw.engagements))throw Error('Engagements invalides : liste attendue');
+  for(const pair of raw.engagements)if(!Array.isArray(pair)||pair.length!==2||pair[0]===pair[1]||!ids.has(pair[0])||!ids.has(pair[1]))throw Error('Engagement invalide : deux combattants distincts existants sont requis');
+ }
+ if(raw.traps!==undefined&&raw.traps!==null){
+  if(!Array.isArray(raw.traps))throw Error('Pièges invalides : liste attendue');
+  const trapIds=new Set();
+  for(const trap of raw.traps){
+   if(!trap||typeof trap!=='object'||typeof trap.id!=='string'||!trap.id.trim()||trapIds.has(trap.id)||!ids.has(trap.ownerId)||typeof trap.zone!=='string'||!trap.zone.trim()||trap.zone.length>120||(trap.round!==undefined&&(!Number.isInteger(trap.round)||trap.round<1||trap.round>raw.round)))throw Error('Piège invalide : identifiant, propriétaire, zone ou passe incohérents');
+   trapIds.add(trap.id);
+  }
+ }
  for(const a of raw.actions){if(!a||typeof a!=='object'||!ids.has(a.sourceId)||!Number.isInteger(a.round))throw Error('Action invalide');if(a.targetId!==undefined&&a.targetId!==null&&!ids.has(a.targetId))throw Error('Cible d’action inconnue')}
  for(const e of raw.proposals){if(!e||typeof e!=='object'||!ids.has(e.targetId)||typeof e.id!=='string')throw Error('Proposition invalide')}
  for(const h of raw.history){if(!h||!Number.isInteger(h.round)||!Array.isArray(h.events))throw Error('Historique invalide')}
@@ -3413,7 +3427,7 @@ function loadSaved(keys,validate,fallback){
 }
 const ROSTER_KEYS=['avatar-roster-v020','avatar-roster-v019','avatar-roster-v018','avatar-roster-v017','avatar-roster-v016','avatar-roster-v015','avatar-roster-v013','avatar-roster-v012','avatar-roster-v011','avatar-roster-v010','avatar-roster-v09','avatar-roster-v08'];
 const COMBAT_KEYS=['avatar-v020','avatar-v019','avatar-v018','avatar-v017','avatar-v016','avatar-v015','avatar-v013','avatar-v012','avatar-v011','avatar-v010','avatar-v09','avatar-v08'];
-function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.text().then(txt=>{try{const x=JSON.parse(txt);validateCombat(x);validateBackupLinks(lib,x);const previous=s;s=x;if(!persist('avatar-v020',s)){s=previous;throw Error('Combat importé mais non enregistré : import annulé')}render()}catch(err){alert(err.message)}}).catch(err=>alert('Lecture impossible : '+err.message)).finally(()=>{ev.target.value=''})}
+function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.text().then(txt=>{try{const x=JSON.parse(txt);validateCombat(x);validateBackupLinks(lib,x);commitCombatMutation(()=>{s=x;render()})}catch(err){alert(err.message)}}).catch(err=>alert('Lecture impossible : '+err.message)).finally(()=>{ev.target.value=''})}
 
 function clearCatalogFamilies(){document.querySelectorAll('.catalog-family-check').forEach(el=>el.checked=false);renderCatalog()}
 function renderCatalog(){
@@ -3770,12 +3784,16 @@ function importCompleteBackup(event){
    const combat=data.combat;
    validateCombat(combat);validateBackupLinks(restored,combat);
    if(!confirm('Remplacer les fiches et le combat actuels par cette sauvegarde ?'))return;
-   const oldLib=lib,oldCombat=s;
+   const oldLib=lib,oldCombat=s,oldSheet=$('sheetSelect').value;
    lib=restored;s=combat;
-   if(!persistCompleteBackup(restored,combat)){lib=oldLib;s=oldCombat;throw Error('Import non enregistré : stockage indisponible. Restauration des données précédentes tentée. Conserve tes exports JSON.')}
-   renderSheets();render();setView('characters');
+   try{
+    // Le rendu est en lecture seule : une erreur ne doit pas écraser les sauvegardes.
+    renderSheets();render();
+    if(!persistCompleteBackup(restored,combat))throw Error('Import non enregistré : stockage indisponible. Restauration des données précédentes tentée. Conserve tes exports JSON.');
+   }catch(error){lib=oldLib;s=oldCombat;renderSheets(oldSheet);originalRender();throw error;}
+   setView('characters');
   }catch(e){alert('Import impossible : '+e.message)}
- }).finally(()=>{event.target.value=''});
+ }).catch(e=>alert('Lecture de la sauvegarde impossible : '+e.message)).finally(()=>{event.target.value=''});
 }
 function commitLibraryMutation(change){
  // A failed write must not leave a sheet modified only in memory.
@@ -3811,13 +3829,13 @@ function exportRoster(){const blob=new Blob([JSON.stringify(lib,null,2)],{type:'
 function importRoster(e){
  const f=e.target.files?.[0];if(!f)return;
  f.text().then(text=>{
+  let rendering=false;const oldSheet=$('sheetSelect').value;
   try{
    const restored=Roster.importLibrary(text);
    // An isolated roster import must never silently orphan the active combat.
    validateBackupLinks(restored,s);
-   commitLibraryMutation(()=>{lib=restored});
-   renderSheets();render();
-  }catch(err){alert('Import des fiches impossible : '+err.message)}
+   commitLibraryMutation(()=>{lib=restored;rendering=true;renderSheets();render();});
+  }catch(err){if(rendering){renderSheets(oldSheet);originalRender();}alert('Import des fiches impossible : '+err.message)}
  }).catch(err=>alert('Lecture des fiches impossible : '+err.message))
  .finally(()=>{e.target.value=''});
 }
