@@ -8,6 +8,11 @@ Ouvrir **`app/simulateur.html`** dans un navigateur. Elle fonctionne seule, hors
 sans installation ni serveur. Les personnages et combats sont enregistrés dans le navigateur ;
 utiliser les exports JSON pour conserver une copie de ses données.
 
+## Tester la version avant intégration
+
+Le [parcours manuel V2.33](docs/RECETTE_MANUELLE_V233.md) explique comment télécharger
+le fichier de la PR et vérifier les fonctions essentielles dans son navigateur, sans commande.
+
 ## Se repérer
 
 | Dossier | Contenu |
