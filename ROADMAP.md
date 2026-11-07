@@ -31,7 +31,7 @@ Validation et périmètre actuel : `docs/AUDIT_V233.md`.
 - [x] Conserver les tests et archives ; ajouter un index historique.
 - [x] Vérifier les suites avant et après les déplacements, sans changer les règles.
 - [x] Ajouter une procédure commune de test et un contrôle de fonctionnement hors connexion.
-- [ ] Examiner la Pull Request, puis décider explicitement de son intégration.
+- [x] Examiner et intégrer la PR nº 1 après validation explicite du propriétaire.
 
 Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVENTAIRE.csv`.
 
@@ -42,7 +42,16 @@ Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVE
 - [x] Corriger l'affichage des cartes PJ dans l'onglet PNJ.
 - [x] Rendre visibles l'ajout des fiches au combat et l'édition des combattants en préparation.
 - [x] Vérifier persistance, erreurs et annulation avec des parcours desktop/mobile.
-- [ ] Faire retester les correctifs sur Chrome/macOS avant toute fusion.
+- [x] Obtenir la validation du propriétaire pour les correctifs avant fusion.
 - [ ] Cadrer une future refonte UI/UX, séparément des correctifs et des règles.
 
 Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.
+
+## Fiabilité des sauvegardes — proposition suivante
+
+- [x] Refuser les engagements et pièges mal formés avant import.
+- [x] Vérifier le rendu avant écriture des données importées et tester les échecs.
+- [x] Tester export, restauration, rechargement et annulation d’un combat avec effets.
+- [ ] Examiner cette nouvelle PR avant toute intégration.
+
+Voir `docs/RAPPORT_FIABILITE_SAUVEGARDES_V233.md`. La refonte UI/UX est préparée séparément par le propriétaire.

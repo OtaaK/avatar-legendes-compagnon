@@ -71,3 +71,14 @@
 - Ces correctifs fonctionnels sont distincts de la réorganisation sans changement de HTML au
   commit `67273e0`. Les règles et les techniques ne sont pas modifiées.
 - La refonte UI/UX générale évoquée par le propriétaire est à cadrer dans une mission ultérieure.
+
+## 2026-11-07 — Fiabilité des imports, avant la refonte UI/UX
+
+- Poursuivre le développement par une correction ciblée de fiabilité ; conserver les écrans,
+  les règles, les clés de stockage et les formats d’export existants.
+- Refuser les références d’engagement/piège incohérentes ; accepter encore les champs
+  optionnels absents ou nuls et les identifiants de piège anciens non vides.
+- Effectuer le rendu avant la persistance des données importées. En cas d’échec, rétablir
+  les modèles précédents ; conserver le journal existant pour la sauvegarde complète.
+- Aucun nettoyage ni migration silencieuse de sauvegarde ; aucune fusion de cette nouvelle
+  proposition sans accord du propriétaire.

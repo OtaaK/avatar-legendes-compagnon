@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 190 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 191 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,8 +41,9 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 36 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
-hors réseau et `test_retours_recette_v233.py` pour les corrections de fiches et de combat.
+La suite compte 37 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
+et `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -102,3 +103,13 @@ pas une campagne sur tous les navigateurs et tous les profils utilisateur.
 
 Les résultats V2.32/V2.33 dans les rapports historiques correspondent à leur date. Ils ne
 suffisent pas à certifier une évolution future ni à démontrer la conformité aux règles.
+
+## Fiabilité des imports
+
+`tests/js/test_validite_sauvegardes.cjs` ajoute 30 scénarios de validation des engagements
+et pièges, dont la compatibilité des champs optionnels anciens.
+`tests/browser/test_imports_fiabilite.py` couvre 11 parcours avec stockage réel :
+fichiers invalides, échecs de rendu et de stockage des trois imports, lecture impossible,
+annulation et export/restauration avec effets et historique, puis rechargement et annulation.
+Les erreurs injectées sont artificielles ; elles ne reproduisent pas toutes les pannes
+possibles du navigateur. Aucun test existant n’est supprimé.
