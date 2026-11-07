@@ -1,0 +1,17 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat();
+const a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Allié');
+s.temporaryEffects.push({id:'shield-test',targetId:b,originSourceId:a,originLabel:'Bouclier de roche',shieldBlockedRound:0,shieldGrantedGene:true});
+C.fighter(s,b).statuses.push('gene');
+assert.throws(()=>C.mutateEarthShield(s,'shield-test','block',false),/confirmation/);
+C.mutateEarthShield(s,'shield-test','block',true);
+assert.throws(()=>C.mutateEarthShield(s,'shield-test','block',true),/déjà bloquée/);
+assert.equal(C.undo(s),true);assert.equal(s.temporaryEffects[0].shieldBlockedRound,0);
+assert.throws(()=>C.mutateEarthShield(s,'shield-test','consume',true,0),/invalide/);
+assert.equal(C.mutateEarthShield(s,'shield-test','consume',true,2).netCost,1);
+assert.equal(s.temporaryEffects.length,0);assert.equal(C.fighter(s,b).statuses.includes('gene'),false);
+assert.equal(C.undo(s),true);assert.equal(s.temporaryEffects.length,1);
+console.log('V157 bouclier : OK');

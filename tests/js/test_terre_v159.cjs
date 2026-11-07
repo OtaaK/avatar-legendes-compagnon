@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Cible');
+const sh={id:'shield-test',targetId:a,originSourceId:a,originLabel:'Bouclier de roche',shieldGrantedGene:true,shieldBlockedRound:0};
+s.temporaryEffects.push(sh);C.fighter(s,a).statuses.push('gene');
+s.actions.push({id:'action-test',name:'Enfouissement',sourceId:a,targetId:b,options:{earthShieldDiscountId:'shield-test'}});
+s.proposals.push({id:'cost-test',actionId:'action-test',sourceId:a,targetId:a,kind:'fatigue',amount:2,detail:'',reason:'Enfouissement : coût',round:1},{id:'status-test',actionId:'action-test',sourceId:a,targetId:b,kind:'status_add',amount:0,detail:'piege',reason:'Enfouissement : cible piégée',round:1});
+const before=JSON.stringify(s.temporaryEffects);C.commit(s,{},true);assert.strictEqual(JSON.stringify(s.temporaryEffects),before);
+C.commit(s,{});assert.strictEqual(C.fighter(s,a).fatigue,1);assert(C.fighter(s,b).statuses.includes('piege'));assert(!s.temporaryEffects.length);assert(!C.fighter(s,a).statuses.includes('gene'));
+assert(C.undo(s));assert.strictEqual(C.fighter(s,a).fatigue,0);assert.strictEqual(s.temporaryEffects.length,1);
+const reject={};for(const e of s.proposals)reject[e.id]=false;C.commit(s,reject);assert.strictEqual(s.temporaryEffects.length,1);assert.strictEqual(C.fighter(s,a).fatigue,0);
+console.log('V159 : remise atomique, aperçu, refus, annulation OK');

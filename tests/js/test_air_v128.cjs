@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Adversaire');
+const act={id:'armor128',round:s.round,sourceId:a,targetId:b,name:'Amortir le poing rageur',approach:'esquiver',options:{airCushionArmorConfirmed:true}};
+s.actions.push(act);
+let e=C.propose(s,act);assert.equal(e.length,3);assert.equal(e.find(x=>x.kind==='fatigue').amount,2);
+assert(e.some(x=>x.kind==='status_add'&&x.detail==='avantage'));
+assert.throws(()=>C.commit(s,{[e[0].id]:false}),/ensemble/);
+C.commit(s);assert.equal(C.fighter(s,a).fatigue,2);assert(C.fighter(s,a).statuses.includes('avantage'));
+C.undo(s);assert.equal(C.fighter(s,a).fatigue,0);assert(!C.fighter(s,a).statuses.includes('avantage'));
+const s2=C.createCombat(),a2=C.addFighter(s2,'Air');
+const bad={id:'bad128',round:s2.round,sourceId:a2,targetId:a2,name:'Amortir le poing rageur',approach:'esquiver',options:{}};
+assert.throws(()=>C.propose(s2,bad),/confirmer/);
+console.log('OK V1.28 : Amortir le poing rageur, validation MJ, groupement et annulation');

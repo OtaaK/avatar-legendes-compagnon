@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+assert.match(html,/function renderSceneJournal\(/);
+assert.match(html,/journalSceneFilter/);assert.match(html,/journalSearch/);assert.match(html,/journalLimit/);
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=ctx.window.CombatCore,s=C.createCombat();
+C.addSceneNote(s,'Première note');C.newScene(s);C.addSceneNote(s,'Deuxième note');
+assert.equal(s.sceneJournal.length,2);assert.equal(s.sceneJournal[0].scene,1);assert.equal(s.sceneJournal[1].scene,2);
+console.log('OK : sélecteurs du journal présents, compatibilité du moteur et notes multi-scènes');

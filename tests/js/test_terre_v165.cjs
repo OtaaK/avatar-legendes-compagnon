@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Terre','PNJ'),b=C.addFighter(s,'Ennemi','PNJ'),c=C.addFighter(s,'Volant','PNJ');
+s.engagements=[[a,b],[a,c]];s.phase='defendre';C.fighter(s,a).approach='defendre';
+const action=C.queueTechnique(s,a,'Projection tellurique','defendre',b,{earthAirUnableTargets:[b]});
+const events=C.propose(s,action);
+assert.strictEqual(events.filter(e=>e.kind==='disengage').length,1);
+assert.strictEqual(events.find(e=>e.kind==='disengage').targetId,b);
+assert.throws(()=>C.propose(s,{...action,options:{earthAirUnableTargets:[c,c]}}),/sélectionner explicitement/);
+assert.throws(()=>C.propose(s,{...action,options:{earthAirUnableTargets:['invalid']}}),/non engagé ou invalide/);
+assert(html.includes('earth-air-unable'));
+console.log('V165 : sélection MJ explicite des désengagements aériens OK');

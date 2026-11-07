@@ -1,0 +1,2 @@
+# Uniquement pour les tests navigateur ; l'application n'a aucune dépendance.
+playwright==1.62.0

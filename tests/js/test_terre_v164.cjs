@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Allié');
+s.temporaryEffects.push({id:'shield1',originLabel:'Bouclier de roche',originSourceId:a,targetId:b,shieldBlockedRound:0,shieldGrantedGene:true});
+C.fighter(s,b).statuses.push('gene');
+assert.strictEqual(C.mutateEarthShield(s,'shield1','block',true,0).discount,0);
+assert.strictEqual(s.temporaryEffects[0].shieldBlockedRound,1);
+assert.throws(()=>C.mutateEarthShield(s,'shield1','block',true,0),/déjà bloquée/);
+assert(C.undo(s));assert.strictEqual(s.temporaryEffects[0].shieldBlockedRound,0);
+assert(html.includes('Protection déjà utilisée pour cette passe'));
+assert(html.includes('Protection disponible'));
+console.log('V164 : affichage et moteur du blocage de bouclier OK');

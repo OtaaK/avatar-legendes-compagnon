@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+function setup(){const s=C.createCombat(),a=C.addFighter(s,'Bénéficiaire'),b=C.addFighter(s,'Adversaire');s.round=2;s.phase='declaration';s.temporaryEffects.push({id:'ct',originLabel:'À contretemps',targetId:a,countertimeOpponentId:b,countertimeResolved:false,createdRound:1,expiresAfterRound:2,duration:'round'});return {s,a,b};}
+{const {s,a,b}=setup();assert.throws(()=>C.waiveCountertime(s,'ct',true),/réservé/);assert.throws(()=>C.reveal(s),/contretemps/);}
+{const {s,a,b}=setup();C.fighter(s,b).statuses.push('etourdi');assert.throws(()=>C.waiveCountertime(s,'ct',false),/confirmation/);assert.throws(()=>C.reveal(s),/contretemps/);const snapshot=JSON.stringify(s);assert.throws(()=>C.revealCountertime(s,'ct',true),/déclarer/);assert.strictEqual(JSON.stringify(s),snapshot);assert.strictEqual(C.waiveCountertime(s,'ct',true),true);assert.strictEqual(s.temporaryEffects[0].countertimeWaived,true);C.declare(s,a,'defendre');C.reveal(s);assert.strictEqual(s.phase!=='declaration',true);C.undo(s);assert.strictEqual(s.phase,'declaration');}
+{const {s,a,b}=setup();C.fighter(s,b).statuses.push('piege');C.waiveCountertime(s,'ct',true);assert.throws(()=>C.waiveCountertime(s,'ct',true),/résolu/);C.undo(s);assert.strictEqual(s.temporaryEffects[0].countertimeResolved,false);}
+{const {s,a,b}=setup();C.declare(s,b,'attaquer');assert.throws(()=>C.waiveCountertime(s,'ct',true),/approche est déclarée/);assert.strictEqual(C.revealCountertime(s,'ct',true),'attaquer');assert.throws(()=>C.declare(s,b,'defendre'),/déjà révélée/);}
+console.log('V1.46 : arbitrage explicite À contretemps, verrouillage, annulation et absence de mutation');
