@@ -64,3 +64,14 @@ Le lot 2 est isolé sur `refonte/ui-ux-personnages`, depuis `a323655`, avec une 
 branche du lot 1 tant que la PR nº 3 reste ouverte. Voir [le bilan](RAPPORT_UI_UX_LOT2.md).
 La galerie et la classification sont livrées sans anticiper les nouvelles limites métier
 des fiches ; les champs inconnus et ressources des sauvegardes sont conservés.
+
+## Lot 3 : séparer socle UI et capacités PNJ
+
+Le [lot 3A](RAPPORT_UI_UX_LOT3.md), sur `refonte/ui-ux-fiches` depuis `c6e1e0b`, livre
+les deux structures de fiches, consultation/édition et brouillons, commandes de ressources
+existantes et portraits. Il dépend de la PR nº 4. L’architecture reste HTML autonome.
+
+La lecture réelle du PDF p. 239–242 confirme que les ressources PNJ exigent une adaptation
+du modèle et du combat, pas seulement du rendu. Le lot 3B reste à traiter séparément avec
+compatibilité non destructive et tests de domaine ; le lot 3 n’est donc pas déclaré terminé.
+Lieux hiérarchiques et Livrets détaillés restent les étapes 4 et 5.

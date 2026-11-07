@@ -122,3 +122,18 @@ Le rendu des cartes utilise des boutons natifs indépendants, des avatars/icône
 un transport des identifiants via `data-character-id`. Le formulaire existant n’ajoute
 `importance` que si sa valeur a été modifiée. Les critères de filtre restent dans le DOM,
 sans écrire dans les modèles ni créer une préférence de stockage parallèle.
+
+## Consultation et brouillons de fiche — lot 3A
+
+`lib` reste la seule bibliothèque persistée. `renderLegacySheetEditor` réemploie les champs
+existants ; `showSheet` construit le rendu de consultation et initialise le brouillon DOM.
+`sheetPatchFromFields` compare les champs à leur état initial et ne réécrit que les valeurs
+modifiées. Les états, statuts et techniques en édition restent dans des tableaux de brouillon.
+La navigation interne et beforeunload détectent les modifications non sauvegardées.
+
+En consultation, les ajustements rapides passent par `commitLibraryMutation`. Leur dernière
+annulation vérifie la référence de bibliothèque et les ressources avant de restaurer un patch ;
+elle n’annule pas le combat. Les portraits utilisent des données raster locales, limitées et
+vérifiées ; une révision d’édition empêche les lectures tardives de toucher une autre fiche.
+Les formats/clés de sauvegarde et le moteur sont conservés. Le [rapport](RAPPORT_UI_UX_LOT3.md)
+distingue ce socle de la future adaptation des capacités PNJ dans le modèle et le combat.

@@ -96,10 +96,12 @@ try:
             assert page.locator('#npcDirectory .card-open').all_text_contents()==['Ancien']
             # Ancien sans importance reste sans propriété après simple sauvegarde.
             page.get_by_role('button',name='Ouvrir la fiche de Ancien',exact=True).click()
+            page.get_by_role('button',name='Modifier',exact=True).click()
             page.get_by_role('button',name='Enregistrer la fiche',exact=True).click()
             assert page.evaluate("!Object.hasOwn(lib.characters.find(c=>c.name==='Ancien'),'importance')")
             resources=page.evaluate("JSON.stringify(lib.characters.find(c=>c.name==='Ancien'))")
             # Erreur de stockage : classification non retenue, pas de faux succès.
+            page.get_by_role('button',name='Modifier',exact=True).click()
             page.locator('#sheetImportance').select_option('Champion')
             page.evaluate('window.originalSave=saveLibrary;saveLibrary=()=>false')
             page.get_by_role('button',name='Enregistrer la fiche',exact=True).click()
@@ -116,13 +118,14 @@ try:
             # Métadonnée inconnue : préserver à la lecture et après édition non liée.
             page.evaluate("lib.characters.find(c=>c.name==='Ancien').importance='Catégorie historique';saveLibrary();renderSheets()")
             page.get_by_role('button',name='Ouvrir la fiche de Ancien',exact=True).click()
+            page.get_by_role('button',name='Modifier',exact=True).click()
             assert page.locator('#sheetImportance').input_value()=='Catégorie historique'
             page.get_by_role('button',name='Enregistrer la fiche',exact=True).click()
             assert page.evaluate("lib.characters.find(c=>c.name==='Ancien').importance")== 'Catégorie historique'
             page.get_by_role('button',name='← Retour aux cartes',exact=True).click()
             assert page.evaluate("localStorage.getItem('avatar-v020')")==before['combatRaw']
             # Nom et identifiant importés ne sont jamais interpolés comme du code exécutable dans une carte.
-            page.evaluate("""() => {const c=Roster.createCharacter(lib,'Nom <img src=x onerror=window.injected=1>','PNJ');c.id="char-evil');window.injected=1;//";renderSheets()}""")
+            page.evaluate("""() => {const c=Roster.createCharacter(lib,'Nom <img src=x onerror=window.injected=1>','PNJ');c.id=`char-evil'"><img src=x onerror=window.injected=1>`;renderSheets()}""")
             assert page.locator('#npcDirectory img').count()==0
             assert page.evaluate('window.injected===undefined')
             page.get_by_role('button',name='Ouvrir la fiche de Nom <img src=x onerror=window.injected=1>',exact=True).click()

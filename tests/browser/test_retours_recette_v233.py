@@ -28,12 +28,12 @@ try:
             page.get_by_role('button',name='Ouvrir les personnages',exact=True).click()
             page.locator('[data-character-kind="PNJ"]').click()
             page.get_by_role('button',name='+ Nouveau PNJ',exact=True).click()
-            page.locator('[data-sheet-tab="resources"]').click()
-            page.locator('#sheetFatigue').locator('..').get_by_role('button',name='+',exact=True).click()
-            assert page.locator('#view-sheetFatigue').inner_text()=='1'
+            page.get_by_role('button',name='Modifier',exact=True).click()
+            page.get_by_role('button',name='Ajouter une fatigue',exact=True).click()
+            assert page.locator('#sheetFatigue').input_value()=='1'
             assert page.locator('#sheetQuick .resource output').nth(0).inner_text()=='1/5'
             assert page.evaluate('lib.characters[0].fatigue')==0, 'Le brouillon ne doit pas être enregistré silencieusement'
-            page.locator('#sheetBalance').locator('..').get_by_role('button',name='+',exact=True).click()
+            page.get_by_role('button',name='Augmenter l’équilibre',exact=True).click()
             assert page.locator('#sheetQuick .resource output').nth(1).inner_text()=='+1'
             page.locator('[data-sheet-tab="identity"]').click()
             page.locator('#sheetName').fill('Garde modifié')
@@ -43,8 +43,8 @@ try:
             assert page.evaluate('lib.characters[0].fatigue')==1
             assert page.evaluate('lib.characters[0].balance')==1
             # Échec d'écriture : pas de faux message de succès, ni d'altération de la bibliothèque.
-            page.locator('[data-sheet-tab="resources"]').click()
-            page.locator('#sheetFatigue').locator('..').get_by_role('button',name='+',exact=True).click()
+            page.get_by_role('button',name='Modifier',exact=True).click()
+            page.get_by_role('button',name='Ajouter une fatigue',exact=True).click()
             page.evaluate('saveLibrary=()=>false')
             page.get_by_role('button',name='Enregistrer la fiche',exact=True).click()
             assert 'annulée' in alerts[-1],alerts

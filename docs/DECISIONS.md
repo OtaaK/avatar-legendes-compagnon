@@ -117,3 +117,20 @@
   jauge PJ sur PNJ, ni de déduction de bornes PNJ à partir de la catégorie dans ce lot.
 - Les fiches, ressources variables PNJ et consultation/édition distinctes restent le lot 3 ;
   aucune règle du jeu n’est modifiée par le lot 2.
+
+## 2026-11-07 — UI/UX, lot 3A : consultation et édition des fiches
+
+- Fiche consultée par défaut ; Modifier ouvre un brouillon, Enregistrer ou Annuler le termine.
+  Les sorties, changements de fiche/type, imports et rechargements protègent les modifications.
+- PJ : Aperçu, Livret, Techniques, Histoire et relations. PNJ : Aperçu, Techniques, Lieux.
+  Les champs historiques non retenus dans la présentation minimale restent accessibles.
+- Ressources courantes enregistrées en consultation et ajustables dans le brouillon en édition,
+  sans sauvegarde implicite des changements structurels. Centre PJ confirmé séparément.
+- Annulation du dernier ajustement en mémoire, protégée contre un état ou une bibliothèque
+  remplacés. Les statuts et la copie de combat ne sont pas effacés automatiquement.
+- Portraits raster embarqués (PNG/JPEG/WebP, fichiers jusqu’à 256 Ko), affichés fiche et galerie.
+  Métadonnées optionnelles `desire`, `description`, `portrait`, sans migration de schéma.
+- PDF effectivement consulté : équilibre p. 103 ; PNJ p. 239–242. Les capacités PNJ différentes
+  sont confirmées ; le moteur et Roster restent à limites communes. Le lot 3B doit traiter
+  ensemble modèle, validation, combat et compatibilité avant les jauges 3/5/10/15 et états PNJ
+  personnalisés. Aucun changement de règle ou recalcul silencieux dans ce lot UI.

@@ -154,6 +154,22 @@ label{color:var(--muted)}
 .npc-result-line{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-block:12px}.npc-result-line button{margin:0}.npc-empty{grid-column:1/-1;padding:24px 0;color:var(--muted)}
 @media(max-width:1100px){.npc-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.npc-filter-grid{grid-template-columns:minmax(0,1fr)}.character-card-grid{grid-template-columns:minmax(0,1fr)}.character-card{padding:14px}}
+
+/* UI/UX lot 3 — consultation, édition et panneau de ressources. */
+.sheet-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.sheet-toolbar button{margin:0}.sheet-toolbar>div{display:flex;flex-wrap:wrap;gap:8px}.sheet-toolbar [hidden],#sheetForm[hidden],#sheetRead[hidden],#sheetRead [hidden],#sheetForm [hidden]{display:none!important}
+.sheet-layout{display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,2fr);gap:28px;align-items:start;margin-top:16px}.sheet-content{min-width:0}.sheet-content .sheet-nav{margin-top:0;flex-wrap:wrap;overflow:visible;position:static}.sheet-nav button{flex:1 1 auto}
+.sheet-side.quickbar{position:sticky;top:16px;display:block;max-height:calc(100dvh - 32px);overflow:auto;margin:0;padding:0 16px 16px;border:0;border-right:1px solid var(--line);border-radius:0;background:transparent}
+.sheet-side .sheet-portrait{height:180px;display:grid;place-items:center;background:#1e3b46;border-radius:10px;overflow:hidden;margin-bottom:14px}.sheet-portrait img{width:100%;height:100%;object-fit:cover}.sheet-portrait>*{grid-area:1/1}.card-avatar>*{grid-area:1/1}.card-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}.sheet-portrait svg{height:130px;max-width:100%;fill:none;stroke:#9fbfc8;stroke-width:2}
+.sheet-side-name{position:relative;padding-right:40px;overflow-wrap:anywhere}.sheet-side-name strong{display:block;font-size:21px;font-weight:650}.sheet-side-name>.training-icon{position:absolute;right:0;top:0}.sheet-side-name p{font-size:12px;margin:4px 0 12px}.sheet-side>button{margin-bottom:10px;width:100%}
+.sheet-side .resource{display:block;background:transparent;border-top:1px solid var(--line);border-radius:0;padding:14px 0;margin:0}.resource-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.resource-heading>span{font-size:13px;color:var(--muted)}
+.resource-cells{display:flex;gap:5px;margin:12px 0 8px}.sheet-side .resource-cell{flex:1;min-width:0;min-height:36px;margin:0;padding:0;background:#233f4b;border:1px solid #506d79;border-radius:4px}.sheet-side .resource-cell.used{background:var(--gold);border-color:var(--gold)}
+.resource-adjust{display:flex;gap:8px;justify-content:flex-end}.sheet-side .resource-adjust button{min-width:44px;min-height:40px;padding:6px;margin:0}.resource-balance-cells{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}.sheet-side .resource-balance-cells button{padding:4px 0;margin:0;min-width:0;min-height:36px;font-size:11px}.resource-balance-cells [aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.sheet-side .balance-principles{font-size:11px;margin-top:8px}.sheet-side .card-balance{margin:0}.sheet-center-action{margin-block:8px!important;font-size:11px}.sheet-effects{border-top:1px solid var(--line);padding:14px 0}.sheet-effects summary{font-size:13px}.sheet-effects .quick-conditions{margin-bottom:12px}.sheet-effects .pill{min-height:36px;font-size:11px}.sheet-effects .card-chip{min-height:36px}
+#sheetFeedback{color:var(--muted);font-size:12px;min-height:1.5em;margin:8px 0}.sheet-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}.sheet-stat-grid>div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 0;border-bottom:1px solid var(--line)}.sheet-stat-grid span{color:var(--muted);font-size:13px}.sheet-stat-grid strong{font-size:24px;color:var(--text)}
+.sheet-technique{border-bottom:1px solid var(--line);padding:14px 0}.sheet-technique summary{font-size:14px;cursor:pointer;overflow-wrap:anywhere}.sheet-technique summary span{display:block;color:var(--muted);font-size:11px;padding-left:17px}.sheet-technique p{font-size:13px}.sheet-historic,.sheet-legacy-read{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.sheet-historic summary,.sheet-legacy-read summary{font-size:12px;color:var(--muted);cursor:pointer}#sheetRead p{overflow-wrap:anywhere}.sheet-content input,.sheet-content textarea,.sheet-content select{box-sizing:border-box}
+@media(max-width:1000px){.sheet-layout{grid-template-columns:minmax(220px,1fr) minmax(0,1.6fr);gap:18px}}
+@media(max-width:900px){.sheet-layout{grid-template-columns:minmax(0,1fr)}.sheet-side.quickbar{position:static;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px;display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px 14px}.sheet-side .sheet-portrait{width:84px;height:90px;margin:0;grid-row:span 2}.sheet-portrait svg{height:68px}.sheet-side-name{align-self:center}.sheet-side-name strong{font-size:18px}.sheet-side-name p{margin-bottom:0}.sheet-side>button{grid-column:2;margin:0}.sheet-side .resource,.sheet-side .sheet-effects{grid-column:1/-1}.sheet-side .resource{padding-block:10px}.sheet-side .resource{position:relative}.sheet-side .resource-heading{min-height:40px;padding-right:102px}.sheet-side .resource-adjust{position:absolute;right:0;top:8px;margin:0}.sheet-stat-grid{gap:0 12px}.sheet-stat-grid span{font-size:12px}}
+@media(max-height:600px){.sheet-side.quickbar{position:static;max-height:none;overflow:visible}}
 </style>
 <a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
@@ -220,8 +236,7 @@ label{color:var(--muted)}
 <details><summary>Lieu de la session</summary><div class="row"><button type="button" class="alt" onclick="selectNpcLocationForSession()">Utiliser ce lieu pour la session</button><button type="button" class="alt" onclick="clearNpcSessionLocation()">Effacer le lieu actif</button></div></details><p id="npcSessionBanner" class="small-note" aria-live="polite"></p><div id="npcDirectory" class="character-card-grid"></div></section>
 <div class="gallery-backup-tools"><div class="row"><button type="button" class="alt" onclick="exportCompleteBackup()">Sauvegarder tout (fiches + combat)</button><label class="alt" style="cursor:pointer">Restaurer une sauvegarde complète <input id="backupImportFile" type="file" accept="application/json,.json" onchange="importCompleteBackup(event)" style="max-width:220px"></label></div>
 <p>Les fiches sont indépendantes des combats. Ajouter un personnage crée une copie liée ; ses changements ne sont répercutés sur la fiche qu’après confirmation du MJ.</p></div>
-</div><div id="characterDetailView" class="character-detail-view" hidden><button type="button" class="alt character-detail-back" onclick="closeCharacterDetail()">← Retour aux cartes</button><div class="grid"><div><label id="sheetSelectLabel">Personnage</label><select id="sheetSelect" onchange="showSheet()"></select><nav class="sheet-nav" id="sheetNav" aria-label="Sections de la fiche"><button type="button" data-sheet-tab="identity" onclick="setSheetTab('identity')">Fiche</button><button type="button" data-sheet-tab="resources" onclick="setSheetTab('resources')">Ressources</button><button type="button" data-sheet-tab="story" onclick="setSheetTab('story')">Histoire</button><button type="button" data-sheet-tab="techniques" onclick="setSheetTab('techniques')">Techniques</button></nav><div id="sheetQuick" class="quickbar" aria-label="Actions rapides de la fiche"></div><div id="sheetForm"></div></div>
-<div><h3>Fiches disponibles</h3><div id="sheetList"></div></div></div></div></div>
+</div><div id="characterDetailView" class="character-detail-view" hidden><div class="sheet-toolbar"><button type="button" class="alt character-detail-back" onclick="closeCharacterDetail()">← Retour aux cartes</button><div><button type="button" id="sheetEditButton" onclick="beginSheetEdit()">Modifier</button><button type="button" class="alt" id="sheetCancelButton" onclick="cancelSheetEdit()" hidden>Annuler les modifications</button><button type="button" id="sheetSaveButton" onclick="saveSheet()" hidden>Enregistrer la fiche</button></div></div><p id="sheetFeedback" role="status" aria-live="polite"></p><div class="sheet-layout"><aside id="sheetQuick" class="quickbar sheet-side" aria-label="Identité et ressources"></aside><div class="sheet-content"><label id="sheetSelectLabel" hidden>Personnage</label><select id="sheetSelect" onchange="showSheet()" hidden></select><nav class="sheet-nav" id="sheetNav" aria-label="Sections de la fiche"></nav><div id="sheetRead"></div><div id="sheetForm" hidden></div></div></div><div id="sheetList" hidden></div></div></div>
 </section>
 
 </main><div id="cardTooltip" class="card-tooltip" role="tooltip" hidden></div>
@@ -2912,30 +2927,29 @@ function setCombatTab(tab){
  try{localStorage.setItem('avatar-combat-tab',tab)}catch(e){}
 }
 function quickSheetResource(kind,delta){
- try{
-  const id=$('sheetSelect').value;if(!id)throw Error('Sélectionne un personnage');
-  saveSheet(true);
-  const c=lib.characters.find(x=>x.id===id);
-  const limits=kind==='fatigue'?[0,5]:[-3,3];
-  const value=Math.min(limits[1],Math.max(limits[0],c[kind]+delta));
-  if(value===c[kind])return;
-  commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{[kind]:value}));renderSheets(id);
- }catch(e){alert(e.message)}
+ const c=selectedSheet();if(!c)return;
+ const value=sheetEditing?Number($(kind==='fatigue'?'sheetFatigue':'sheetBalance').value):c[kind];
+ const limits=kind==='fatigue'?[0,5]:[-3,3];quickSheetSetResource(kind,Math.min(limits[1],Math.max(limits[0],value+delta)));
 }
-function quickSheetCondition(name){
- try{const id=$('sheetSelect').value;saveSheet(true);commitLibraryMutation(()=>Roster.toggleCondition(lib,id,name));renderSheets(id)}catch(e){alert(e.message)}
-}
+
+function quickSheetCondition(name){toggleSheetCondition(name);}
+
 function refreshSheetQuick(){
- const c=lib.characters.find(x=>x.id===$('sheetSelect').value);if(!c)return;
- renderSheetQuick({...c,name:$('sheetName')?.value??c.name,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance)});
+ const c=selectedSheet();if(!c)return;
+ renderSheetQuick(sheetEditing?{...c,name:$('sheetName')?.value??c.name,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance),center:Number($('sheetCenter')?.value??c.center),principles:[$('principleLeft')?.value||'', $('principleRight')?.value||''],portrait:$('sheetPortrait')?.value,conditions:sheetDraftConditions,statuses:sheetDraftStatuses,importance:$('sheetImportance')?.value??c.importance}:c);
+ if(sheetEditing){for(const [fn,names,values] of [['toggleSheetCondition',Roster.CONDITIONS,sheetDraftConditions],['toggleSheetStatus',Roster.STATUSES,sheetDraftStatuses]])$('sheetForm').querySelectorAll('button[onclick^="'+fn+'"]').forEach((button,i)=>{const active=values.includes(names[i]);button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));button.textContent=(active?'✓ ':'')+names[i];});}
 }
+
 function renderSheetQuick(c){
- const bar=$('sheetQuick');if(!bar)return;
- if(!c){bar.innerHTML='';return}
- bar.innerHTML=`<strong>${safe(c.name)}</strong><button type="button" onclick="includeSheet('${safe(c.id)}')" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button><div class="resource"><span>Fatigue</span><button class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)">−</button><output>${c.fatigue}/5</output><button aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)">+</button></div>
- <div class="resource"><span>Équilibre</span><button class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)">−</button><output>${c.balance>0?'+':''}${c.balance}</output><button aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)">+</button></div>
- <div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" onclick="quickSheetCondition('${safe(n)}')">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div>`;
+ const bar=$('sheetQuick');if(!bar)return;if(!c){bar.innerHTML='';return;}
+ const portrait=safeSheetPortrait(c.portrait),undo=sheetResourceUndo;
+ const cells=Array.from({length:5},(_,i)=>`<button type="button" class="resource-cell ${i<c.fatigue?'used':''}" aria-label="Fatigue : ${i+1} sur 5" aria-pressed="${i<c.fatigue}" onclick="quickSheetSetResource('fatigue',${i<c.fatigue?i:i+1})"></button>`).join('');
+ bar.innerHTML=`<div class="sheet-portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="34" r="17"/><path d="M18 92v-9a32 32 0 0 1 64 0v9"/></svg>${portrait?`<img src="${safe(portrait)}" alt="Portrait de ${safe(c.name)}" onerror="this.hidden=true">`:''}</div><div class="sheet-side-name"><strong>${safe(c.name)}</strong>${trainingIcon(c.training)}<p>${c.kind==='PJ'?safe(c.livret||'Livret non renseigné'):`<span class="sheet-importance"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</span>`}</p></div><button type="button" class="alt" onclick="includeSheet($('sheetSelect').value)" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button>
+ <div class="resource"><div class="resource-heading"><span>Fatigue</span><output>${c.fatigue}/5</output></div><div class="resource-cells">${cells}</div><div class="resource-adjust"><button type="button" class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)" ${c.fatigue<=0?'disabled':''}>−</button><button type="button" class="alt" aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)" ${c.fatigue>=5?'disabled':''}>+</button></div></div>
+ <div class="resource"><div class="resource-heading"><span>Équilibre</span><output>${c.balance>0?'+':''}${c.balance}</output></div>${c.kind==='PJ'?`<div class="balance-principles"><span>${safe(c.principles?.[0]||'Premier principe')} ${-c.balance}</span><span>${safe(c.principles?.[1]||'Second principe')} ${c.balance}</span></div>${balanceGraphic(c)}<div class="resource-balance-cells">${Array.from({length:7},(_,i)=>`<button type="button" class="alt" aria-label="Régler l’équilibre à ${i-3}" aria-pressed="${c.balance===i-3}" onclick="quickSheetSetResource('balance',${i-3})">${i-3>0?'+':''}${i-3}</button>`).join('')}</div>${sheetEditing?'<button type="button" class="alt sheet-center-action" onclick="requestSheetCenter()">Modifier le centre…</button>':''}`:`<p class="small-note">${safe(c.principles?.[0]||c.principles?.[1]||'Principe non renseigné')}</p>`}<div class="resource-adjust"><button type="button" class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)" ${c.balance<=-3?'disabled':''}>−</button><button type="button" class="alt" aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)" ${c.balance>=3?'disabled':''}>+</button></div></div>
+ <details class="sheet-effects"><summary>États et statuts${c.conditions.length+c.statuses.length?' · '+(c.conditions.length+c.statuses.length):''}</summary><p class="small-note">États</p><div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button type="button" class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" data-condition="${safe(n)}" onclick="quickSheetCondition(this.dataset.condition)">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div><p class="small-note">Statuts de combat</p><div class="card-chips">${c.statuses.map(n=>chipHtml(n,'status')).join('')||'<span class="card-muted">Aucun statut actif.</span>'}</div></details>${!sheetEditing&&undo?.library===lib&&undo.id===c.id?'<button type="button" class="alt" onclick="undoSheetResource()">Annuler le dernier ajustement</button>':''}`;
 }
+
 function disengageOne(id){try{const f=CombatCore.fighter(s,id);if(confirm('Rompre tous les engagements de '+f.name+' ? Cette opération peut être annulée.'))CombatCore.disengageFighter(s,id);render()}catch(e){alert(e.message);render()}}
 function clearAllEngagements(){try{if(!(s.engagements||[]).length)return;if(confirm('Rompre tous les engagements actuels ? Cette opération peut être annulée.'))CombatCore.clearEngagements(s);render()}catch(e){alert(e.message);render()}}
 function changeEngagement(a,b,checked){try{CombatCore.setEngagement(s,a,b,checked);render()}catch(e){alert(e.message);render()}}
@@ -3678,7 +3692,7 @@ function initWizard(){
  renderWizardTraining();
  wizardRender();
 }
-function newSheet(kind){try{const name=prompt('Nom du personnage');if(!name)return;const c=commitLibraryMutation(()=>Roster.createCharacter(lib,name,kind));renderSheets(c.id);openCharacterDetail(c.id)}catch(e){alert(e.message)}}
+function newSheet(kind){try{if(!confirmSheetNavigation())return;const name=prompt('Nom du personnage');if(!name)return;const c=commitLibraryMutation(()=>Roster.createCharacter(lib,name,kind));renderSheets(c.id);openCharacterDetail(c.id)}catch(e){alert(e.message)}}
 const VIEWS=['home','characters','places','combat','catalog','management'];
 let currentView='home';
 let currentSheetTab='identity';
@@ -3690,6 +3704,7 @@ function quickNavigation(e){
 }
 document.addEventListener('keydown',quickNavigation);
 function setView(view,scroll=true,focus=false){
+ if(currentView==='characters'&&view!=='characters'&&!confirmSheetNavigation())return;
  if(!VIEWS.includes(view))view='home';
  currentView=view;
  document.querySelectorAll('.app-view').forEach(el=>{el.hidden=el.id!=='view-'+view && !(view==='combat'&&el.id==='view-combat-panels')});
@@ -3699,19 +3714,129 @@ function setView(view,scroll=true,focus=false){
  try{localStorage.setItem('avatar-ui-view',view)}catch(e){}
 }
 function setSheetTab(tab){
- if(!['identity','resources','story','techniques'].includes(tab))return;
+ const c=selectedSheet();if(!c)return;
+ if(tab==='resources')tab='identity';
+ if(!(c.kind==='PJ'?['identity','playbook','techniques','story']:['identity','techniques','places']).includes(tab))return;
  currentSheetTab=tab;applySheetTab();
 }
+
 function applySheetTab(){
  const form=$('sheetForm');if(!form)return;
- form.querySelectorAll('[data-sheet-group]').forEach(el=>{el.hidden=el.dataset.sheetGroup!==currentSheetTab});
- // Identity fields are ungrouped; hide only their visual wrappers on other tabs, not the inputs needed by saveSheet.
- form.querySelectorAll('.sheet-identity').forEach(el=>{el.hidden=currentSheetTab!=='identity'});
- form.querySelectorAll('.sheet-save').forEach(el=>{el.hidden=currentSheetTab==='techniques'});
- document.querySelectorAll('.sheet-nav button').forEach(b=>{const active=b.dataset.sheetTab===currentSheetTab;b.classList.toggle('active',active);b.setAttribute('aria-selected',active?'true':'false')});
+ form.hidden=!sheetEditing;$('sheetRead').hidden=sheetEditing;
+ form.querySelectorAll('[data-sheet-group]').forEach(el=>el.hidden=el.dataset.sheetGroup!==currentSheetTab);
+ form.querySelectorAll('.sheet-identity').forEach(el=>el.hidden=currentSheetTab!=='identity');
+ $('sheetRead').querySelectorAll('[data-read-tab]').forEach(el=>el.hidden=el.dataset.readTab!==currentSheetTab);
+ $('sheetEditButton').hidden=sheetEditing;$('sheetCancelButton').hidden=!sheetEditing;$('sheetSaveButton').hidden=!sheetEditing;
+ document.querySelectorAll('.sheet-nav button').forEach(b=>{const active=b.dataset.sheetTab===currentSheetTab;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});
 }
+
 let characterKind='PJ';
 let characterDetailOpen=false;
+// UI/UX lot 3 — états d'édition et helpers ; aucune règle de combat modifiée.
+let sheetEditing=false,sheetPortraitPending=false,sheetRevision=0,sheetInitialFields={},sheetInitialFingerprint='';
+let sheetDraftConditions=[],sheetDraftStatuses=[],sheetDraftTechniques=[],sheetResourceUndo=null;
+const SHEET_FIELD_IDS=['sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
+function sheetFields(){return Object.fromEntries(SHEET_FIELD_IDS.filter(id=>$(id)).map(id=>[id,$(id).value]));}
+function sheetFingerprint(){return JSON.stringify([sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques]);}
+function sheetIsDirty(){return sheetEditing&&(sheetPortraitPending||sheetFingerprint()!==sheetInitialFingerprint);}
+function sheetText(value){return typeof value==='string'?value:'';}
+function safeSheetPortrait(value){
+ if(typeof value!=='string'||value.length>360000)return '';
+ const m=value.match(/^data:image\/(png|jpeg|webp);base64,([A-Za-z0-9+/]+={0,2})$/);if(!m)return '';
+ try{const bytes=atob(m[2]);return (m[1]==='png'&&bytes.slice(0,8)==='\x89PNG\r\n\x1a\n'||m[1]==='jpeg'&&bytes.slice(0,3)==='\xff\xd8\xff'||m[1]==='webp'&&bytes.slice(0,4)==='RIFF'&&bytes.slice(8,12)==='WEBP')?value:''}catch(e){return ''}
+}
+function sheetPatchFromFields(c,initial,fields,conditions,statuses,techniques){
+ const patch={},changed=id=>Object.hasOwn(fields,id)&&fields[id]!==initial[id];
+ const strings={sheetName:'name',sheetLivret:'livret',sheetLocation:'location',sheetImportance:'importance',sheetTraining:'training',sheetHistory:'history',sheetNotes:'notes',sheetDesire:'desire',sheetDescription:'description',sheetPortrait:'portrait'};
+ for(const [id,key] of Object.entries(strings))if(changed(id))patch[key]=fields[id];
+ for(const [id,key] of [['sheetFatigue','fatigue'],['sheetBalance','balance'],['sheetCenter','center']])if(changed(id))patch[key]=Number(fields[id]);
+ for(const key of Roster.STATS)if(changed('stat-'+key)){patch.stats={...(patch.stats||c.stats),[key]:Number(fields['stat-'+key])};}
+ if(changed('principleLeft')||changed('principleRight'))patch.principles=[fields.principleLeft,fields.principleRight];
+ for(const [id,key] of [['sheetRelations','relationships'],['sheetMoves','playbookMoves']])if(changed(id))patch[key]=fields[id].split('\n').map(x=>x.trim()).filter(Boolean);
+ for(const [key,value] of [['conditions',conditions],['statuses',statuses],['techniques',techniques]])if(JSON.stringify(c[key])!==JSON.stringify(value))patch[key]=JSON.parse(JSON.stringify(value));
+ if(patch.desire!==undefined&&patch.desire.length>240)throw Error('Désir trop long (240 caractères maximum).');
+ if(patch.description!==undefined&&patch.description.length>2000)throw Error('Description trop longue (2 000 caractères maximum).');
+ if(patch.portrait&&safeSheetPortrait(patch.portrait)!==patch.portrait)throw Error('Portrait invalide : image PNG, JPEG ou WebP locale attendue.');
+ return patch;
+}
+function selectedSheet(){return lib.characters.find(c=>c.id===$('sheetSelect').value);}
+function sheetFeedback(text){$('sheetFeedback').textContent=text;}
+function confirmSheetNavigation(){
+ if(sheetIsDirty()&&!confirm('Abandonner les modifications non enregistrées de cette fiche ?'))return false;
+ if(sheetEditing){sheetEditing=false;showSheet();}
+ return true;
+}
+window.addEventListener('beforeunload',event=>{if(sheetIsDirty()){event.preventDefault();event.returnValue=''}});
+function beginSheetEdit(){if(!selectedSheet())return;sheetEditing=true;showSheet();sheetFeedback('Modifications en cours — enregistre ou annule pour terminer.');$('sheetName').focus();}
+function cancelSheetEdit(){if(!confirmSheetNavigation())return;sheetFeedback('Modifications annulées.');$('sheetEditButton').focus();}
+function readSheetPortrait(event){
+ const file=event.target.files?.[0];if(!file)return;const id=$('sheetSelect').value,revision=++sheetRevision;sheetPortraitPending=false;
+ if(file.size>262144){alert('Portrait trop volumineux : 256 Ko maximum.');event.target.value='';return;}
+ sheetPortraitPending=true;const reader=new FileReader();
+ reader.onload=()=>{if(!sheetEditing||revision!==sheetRevision||id!==$('sheetSelect').value)return;const value=safeSheetPortrait(reader.result);if(!value){sheetPortraitPending=false;alert('Image non reconnue. Choisis un PNG, JPEG ou WebP.');return}const image=new Image();image.onload=()=>{if(!sheetEditing||revision!==sheetRevision||id!==$('sheetSelect').value)return;sheetPortraitPending=false;$('sheetPortrait').value=value;refreshSheetQuick();sheetFeedback('Portrait prêt à être enregistré.');};image.onerror=()=>{if(revision===sheetRevision){sheetPortraitPending=false;alert('Image illisible. Choisis un autre portrait.');}};image.src=value;};
+ reader.onerror=()=>{if(revision===sheetRevision){sheetPortraitPending=false;alert('Lecture du portrait impossible.');}};reader.readAsDataURL(file);event.target.value='';
+}
+function clearSheetPortrait(){if(!confirm('Retirer le portrait de cette fiche ?'))return;sheetRevision++;sheetPortraitPending=false;$('sheetPortrait').value='';refreshSheetQuick();}
+function sheetResources(c){return {fatigue:c.fatigue,balance:c.balance,conditions:[...c.conditions]};}
+function finishSheetResourceChange(before){
+ const active=document.activeElement,label=active?.getAttribute('aria-label'),condition=active?.dataset.condition,expanded=$('sheetQuick').querySelector('.sheet-effects')?.open;
+ const c=selectedSheet();sheetResourceUndo={library:lib,id:c.id,before,after:sheetResources(c)};renderSheets(c.id);
+ $('sheetQuick').querySelector('.sheet-effects').open=Boolean(expanded);
+ const button=[...$('sheetQuick').querySelectorAll('button')].find(el=>condition?el.dataset.condition===condition:label&&el.getAttribute('aria-label')===label);
+ (button&&!button.disabled?button:$('sheetEditButton')).focus({preventScroll:true});
+ sheetFeedback('Ressources enregistrées. Annulation disponible.');
+}
+function undoSheetResource(){
+ try{const c=selectedSheet(),entry=sheetResourceUndo;if(sheetEditing||!entry||entry.library!==lib||entry.id!==c?.id)return;
+ if(JSON.stringify(sheetResources(c))!==JSON.stringify(entry.after))throw Error('Les ressources ont changé depuis. Cette annulation n’est plus disponible.');
+ commitLibraryMutation(()=>Roster.updateCharacter(lib,c.id,entry.before));sheetResourceUndo=null;renderSheets(c.id);sheetFeedback('Dernier ajustement annulé.');$('sheetEditButton').focus({preventScroll:true});
+ }catch(e){alert(e.message)}
+}
+function quickSheetSetResource(kind,value){
+ try{const c=selectedSheet();if(!c)return;if(!['fatigue','balance'].includes(kind))throw Error('Ressource inconnue');
+ const [min,max]=kind==='fatigue'?[0,5]:[-3,3];if(!Number.isInteger(value)||value<min||value>max)throw Error('Valeur hors des limites de la fiche.');
+ if(sheetEditing){const input=$(kind==='fatigue'?'sheetFatigue':'sheetBalance');input.value=String(value);const output=$('view-'+input.id);if(output)output.textContent=String(value);refreshSheetQuick();return;}
+ if(value===c[kind])return;const id=c.id,before=sheetResources(c);commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{[kind]:value}));finishSheetResourceChange(before);
+ }catch(e){alert(e.message)}
+}
+function requestSheetCenter(){const c=selectedSheet();if(!sheetEditing||c?.kind!=='PJ')return;const value=prompt('Nouveau centre (entier de −3 à +3). Il sera appliqué à l’enregistrement.',$('sheetCenter').value);if(value===null)return;const n=Number(value);if(!value.trim()||!Number.isInteger(n)||n< -3||n>3){alert('Centre invalide.');return}$('sheetCenter').value=String(n);refreshSheetQuick();}
+function renderSheetTabs(c){
+ const tabs=c.kind==='PJ'?[['identity','Aperçu'],['playbook','Livret'],['techniques','Techniques'],['story','Histoire et relations']]:[['identity','Aperçu'],['techniques','Techniques'],['places','Lieux']];
+ if(!tabs.some(([id])=>id===currentSheetTab))currentSheetTab='identity';
+ $('sheetNav').innerHTML=tabs.map(([id,label])=>`<button type="button" data-sheet-tab="${id}" onclick="setSheetTab('${id}')" aria-controls="sheetRead">${label}</button>`).join('');
+}
+function sheetTechniqueCards(techniques){return techniques.map(t=>{const ref=TECH_CATALOG.find(x=>x.nom===t.name);return `<details class="sheet-technique"><summary>${safe(t.name)} <span>${safe({acquise:'Acquise',pratiquee:'Pratiquée',maitrisee:'Maîtrisée'}[t.mastery]||t.mastery)}</span></summary><p>${ref?'Référence : livre p. '+safe(ref.page)+'.':'Technique saisie sur la fiche.'} Les effets restent soumis aux validations du combat.</p></details>`}).join('')||'<p class="card-muted">Aucune technique renseignée.</p>';}
+function renderSheetRead(c){
+ const narrative=value=>safe(sheetText(value)).replaceAll('\n','<br>');
+ let overview=c.kind==='PJ'?`<div class="sheet-stat-grid">${Roster.STATS.map((key,i)=>`<div><span>${['Créativité','Concentration','Harmonie','Enthousiasme'][i]}</span><strong>${c.stats[key]>0?'+':''}${c.stats[key]}</strong></div>`).join('')}</div><h3>Entraînement</h3><p>${safe(c.training||'Non renseigné')}</p>`:`<h3>Désir</h3><p>${narrative(c.desire)||'Non renseigné'}</p>${sheetText(c.description)?'<h3>Description</h3><p>'+narrative(c.description)+'</p>':''}<h3>Lieu actuel</h3><p>${safe(c.location||'Non renseigné')}</p><h3>Principe</h3><p>${safe(c.principles?.[0]||c.principles?.[1]||'Non renseigné')}</p>${c.principles?.[0]&&c.principles?.[1]?'<details><summary>Ancien second principe conservé</summary><p>'+safe(c.principles[1])+'</p></details>':''}`;
+ $('sheetRead').innerHTML=`<section data-read-tab="identity">${overview}</section><section data-read-tab="techniques">${sheetTechniqueCards(c.techniques)}</section>${c.kind==='PJ'?`<section data-read-tab="playbook"><h3>${safe(c.livret||'Livret non renseigné')}</h3>${Playbooks.byName(c.livret)?'<p class="small-note">Référence : livre p. '+Playbooks.byName(c.livret).page+'.</p>':''}<h3>Manœuvres enregistrées</h3>${c.playbookMoves.map(name=>`<details class="sheet-technique"><summary>${safe(name)}</summary><p>Consulte le livret pour le déclenchement et les choix de cette manœuvre.</p></details>`).join('')||'<p>Aucune manœuvre renseignée.</p>'}</section><section data-read-tab="story"><h3>Histoire</h3><p>${narrative(c.history)||'Non renseignée'}</p><h3>Relations</h3>${c.relationships.length?'<ul>'+c.relationships.map(r=>'<li>'+safe(r)+'</li>').join('')+'</ul>':'<p>Aucune relation renseignée.</p>'}<h3>Notes</h3><p>${narrative(c.notes)||'Aucune note.'}</p></section>`:`<section data-read-tab="places"><h3>Position actuelle</h3><p>${safe(c.location||'Non renseignée')}</p><p class="small-note">La position est modifiable avec « Modifier ». Les lieux liés seront accessibles depuis cet espace.</p></section>${sheetText(c.notes)||c.relationships.length||c.playbookMoves.length||sheetText(c.history)||sheetText(c.livret)?`<details class="sheet-legacy-read" data-read-tab="identity"><summary>Données historiques conservées</summary><p>${narrative(c.livret)}</p><p>${narrative(c.notes)}</p><p>${narrative(c.history)}</p>${[...c.relationships,...c.playbookMoves].map(value=>'<p>'+safe(value)+'</p>').join('')}</details>`:''}`}`;
+}
+function enhanceSheetEditor(c){
+ const form=$('sheetForm'),identity=form.querySelector('.sheet-identity');
+ form.querySelector('.sheet-save')?.remove();
+ const move=(id,target)=>{const el=$(id);if(!el)return;const label=el.previousElementSibling;if(label?.tagName==='LABEL')target.append(label);target.append(el);};
+ const makeGroup=(tab,tag='div')=>{const el=document.createElement(tag);el.dataset.sheetGroup=tab;el.className='sheet-section';form.append(el);return el;};
+ const historic=document.createElement('details');historic.className='sheet-historic';historic.dataset.sheetGroup='identity';historic.innerHTML='<summary>Données historiques et classification</summary>';
+ if(c.kind==='PNJ'){form.append(historic);move('sheetLivret',historic);for(const section of [...form.querySelectorAll('[data-sheet-group="identity"]')])if(section!==historic)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
+ const metadata=document.createElement('div');metadata.innerHTML=`${c.kind==='PNJ'?`<label for="sheetDesire">Désir</label><input id="sheetDesire" maxlength="240" value="${safe(sheetText(c.desire))}"><label for="sheetDescription">Description (facultative)</label><textarea id="sheetDescription" maxlength="2000">${safe(sheetText(c.description))}</textarea>`:''}<label for="sheetPortraitFile">Portrait (PNG, JPEG ou WebP · 256 Ko maximum)</label><input id="sheetPortraitFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="readSheetPortrait(event)"><input id="sheetPortrait" type="hidden" value="${safe(sheetText(c.portrait))}"><button type="button" class="alt" onclick="clearSheetPortrait()">Retirer le portrait</button>`;identity.append(metadata);
+ const resourceSections=[...form.querySelectorAll('[data-sheet-group="resources"]')];
+ if(c.kind==='PJ'){move('principleLeft',identity);move('principleRight',identity);move('sheetTraining',identity);}
+ else{for(const section of resourceSections)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
+ const history=$('sheetHistory'),historyArea=document.createElement('textarea');historyArea.id='sheetHistory';historyArea.value=history.value;history.replaceWith(historyArea);const historyLabel=document.createElement('label');historyLabel.htmlFor='sheetHistory';historyLabel.textContent='Histoire';historyArea.before(historyLabel);
+ if(c.kind==='PJ'){const book=makeGroup('playbook');move('sheetMoves',book);}
+ else{for(const section of [...form.querySelectorAll('[data-sheet-group="story"]')]){section.removeAttribute('data-sheet-group');historic.append(section);}}
+ const known=form.querySelector('[data-sheet-group="techniques"]');if(known){const list=document.createElement('div');list.id='sheetKnownTechniques';list.innerHTML=sheetTechniqueCards(sheetDraftTechniques);while(known.firstChild&&known.firstChild.tagName!=='LABEL')known.firstChild.remove();known.prepend(list);}
+ if(c.kind==='PNJ'){const places=makeGroup('places');move('sheetLocation',places);$('knownNpcLocations')&&places.append($('knownNpcLocations'));}
+ form.oninput=()=>{refreshSheetQuick();};
+}
+function showSheet(){
+ const c=selectedSheet();sheetRevision++;sheetPortraitPending=false;sheetFeedback('');
+ if(!c){$('sheetForm').innerHTML='';$('sheetRead').innerHTML='<p>Aucune fiche sélectionnée.</p>';renderSheetQuick(null);return;}
+ sheetDraftConditions=[...c.conditions];sheetDraftStatuses=[...c.statuses];sheetDraftTechniques=JSON.parse(JSON.stringify(c.techniques));
+ renderLegacySheetEditor();enhanceSheetEditor(c);renderSheetTabs(c);renderSheetRead(c);
+ sheetInitialFields=sheetFields();sheetInitialFingerprint=sheetFingerprint();renderSheetQuick(c);applySheetTab();
+}
+
 const POSITIVE_STATUSES=new Set(['Renforcé','Avantagé','Confiant','Prêt']);
 const STATUS_EXPLANATIONS={
  'Renforcé':'Statut positif. Consulter les règles de combat pour son application et sa durée.',
@@ -3757,11 +3882,11 @@ function importanceControl(c){
  return `<button type="button" class="importance-control" aria-label="${safe(label)}" title="${safe(label)}" data-chip="${safe(label)}" data-chip-type="importance" onclick="showCardTooltip(event,this)" onmouseenter="showCardTooltip(event,this)" onmouseleave="hideCardTooltip()" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip()"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span></button>`;
 }
 function characterCard(c){
- const fatigue=c.fatigue;
+ const fatigue=c.fatigue,portrait=safeSheetPortrait(c.portrait);
  const cells=Array.from({length:5},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
  const effects=(c.conditions.length?`<div class="card-effect-group" aria-label="États actifs"><span class="card-effect-label">États</span>${c.conditions.map(x=>chipHtml(x,'condition')).join('')}</div>`:'')+
   (c.statuses.length?`<div class="card-effect-group" aria-label="Statuts de combat"><span class="card-effect-label">Statuts</span>${c.statuses.map(x=>chipHtml(x,'status')).join('')}</div>`:'');
- return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg></span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5" title="Fatigue ${fatigue} sur 5">${cells}</div>${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div><div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
+ return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg>${portrait?`<img src="${safe(portrait)}" alt="" onerror="this.hidden=true">`:''}</span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5" title="Fatigue ${fatigue} sur 5">${cells}</div>${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div><div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
 }
 function showCardTooltip(event,button){
  event.stopPropagation();const name=button.dataset.chip,type=button.dataset.chipType;
@@ -3784,23 +3909,23 @@ function renderCharacterCards(){
  $('pjDirectory').hidden=characterKind!=='PJ';$('npcDirectorySection').hidden=characterKind!=='PNJ';
  $('characterListView').hidden=characterDetailOpen;$('characterDetailView').hidden=!characterDetailOpen;
 }
-function setCharacterKind(kind){if(!['PJ','PNJ'].includes(kind))return;characterKind=kind;characterDetailOpen=false;toggleWizard(false);hideCardTooltip();renderCharacterCards()}
+function setCharacterKind(kind){if(!['PJ','PNJ'].includes(kind)||!confirmSheetNavigation())return;characterKind=kind;characterDetailOpen=false;toggleWizard(false);hideCardTooltip();renderCharacterCards()}
 function openCharacterDetail(id){
  const c=lib.characters.find(x=>x.id===id);if(!c)return;
- if(characterDetailOpen&&$('sheetSelect').value!==id)try{saveSheet(true)}catch(e){return}
+ if(characterDetailOpen&&!confirmSheetNavigation())return;
  characterKind=c.kind;characterDetailOpen=true;$('sheetSelect').value=id;showSheet();setSheetTab('identity');renderCharacterCards();hideCardTooltip();
  $('characterDetailView').scrollIntoView({block:'start',behavior:'instant'});
  $('characterDetailView').querySelector('.character-detail-back')?.focus({preventScroll:true});
 }
 function closeCharacterDetail(){
  const selected=$('sheetSelect').value;
- if(characterDetailOpen)try{saveSheet(true)}catch(e){return}
+ if(characterDetailOpen&&!confirmSheetNavigation())return;
  characterDetailOpen=false;hideCardTooltip();renderCharacterCards();
  $('characterListView').scrollIntoView({block:'start',behavior:'instant'});
  const card=[...document.querySelectorAll('.character-card')].find(el=>el.dataset.characterId===selected);
  (card?.querySelector('.card-open')||$('characterCreate')).focus({preventScroll:true});
 }
-function createCurrentCharacter(){if(characterKind==='PJ'){toggleWizard(true);$('wizard').scrollIntoView({block:'start'})}else newSheet('PNJ')}
+function createCurrentCharacter(){if(!confirmSheetNavigation())return;if(characterKind==='PJ'){toggleWizard(true);$('wizard').scrollIntoView({block:'start'})}else newSheet('PNJ')}
 
 let npcSessionLocation='';
 function selectNpcLocationForSession(){
@@ -3845,15 +3970,15 @@ function renderSheets(selected){
  el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${c.kind})</option>`).join('');
  showSheet();
  renderNpcDirectory();renderCharacterCards();renderCombatLibrary();
- $('sheetList').innerHTML=lib.characters.map(c=>`<div class="fighter"><b>${safe(c.name)}</b> · ${c.kind} · ${safe(c.livret||'Livret non précisé')}<br><small>${c.techniques.length} technique(s)</small><br><button onclick="includeSheet('${c.id}')">Ajouter au combat</button></div>`).join('')||'<p>Crée une fiche pour commencer.</p>';
+ $('sheetList').innerHTML=lib.characters.map(c=>`<div class="fighter"><b>${safe(c.name)}</b> · ${c.kind} · ${safe(c.livret||'Livret non précisé')}<br><small>${c.techniques.length} technique(s)</small><br><button data-character-id="${safe(c.id)}" onclick="includeSheet(this.dataset.characterId)">Ajouter au combat</button></div>`).join('')||'<p>Crée une fiche pour commencer.</p>';
 }
-function showSheet(){
+function renderLegacySheetEditor(){
  const c=lib.characters.find(x=>x.id===$('sheetSelect').value);
  if(!c){$('sheetForm').innerHTML='<p>Aucune fiche sélectionnée.</p>';renderSheetQuick(null);return}
  renderSheetQuick(c);
  $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" oninput="refreshSheetQuick()" value="${safe(c.name)}">
  <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
- ${c.kind==='PNJ'?`<p class="sheet-importance"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
+ ${c.kind==='PNJ'?`<p class="sheet-importance-editor"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
  ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('stat-${k}',-1,-3,2)">−</button><output id="view-stat-${k}">${c.stats[k]}</output><button type="button" class="stepper" onclick="stepField('stat-${k}',1,-3,2)">+</button><input type="hidden" id="stat-${k}" value="${c.stats[k]}"></div>`).join('')}</div>
@@ -3896,16 +4021,26 @@ function applySelectedBook(){
  const bonus=prompt('Bonus +1 : creativite, concentration, harmonie ou enthousiasme','creativite');
  if(bonus===null)return;
  const patch=Playbooks.applyPreset(lib,id,livret,bonus.trim().toLowerCase());
+ if(sheetEditing){if(!confirm('Remplacer les valeurs de création dans le brouillon ?'))return;for(const key of Roster.STATS){$('stat-'+key).value=String(patch.stats[key]);$('view-stat-'+key).textContent=String(patch.stats[key]);}$('principleLeft').value=patch.principles[0];$('principleRight').value=patch.principles[1];$('sheetBalance').value=String(patch.balance);$('sheetCenter').value=String(patch.center);refreshSheetQuick();sheetFeedback('Valeurs de création préparées dans le brouillon.');return;}
  if(!confirm('Remplacer les caractéristiques, principes, équilibre et centre par les valeurs de création ?'))return;
  commitLibraryMutation(()=>Roster.updateCharacter(lib,id,patch));renderSheets(id);
  }catch(e){alert(e.message)}
 }
 function toggleSheetCondition(name){
- try{saveSheet(true);const id=$('sheetSelect').value;commitLibraryMutation(()=>Roster.toggleCondition(lib,id,name));renderSheets(id)}catch(e){alert(e.message)}
+ try{if(!Roster.CONDITIONS.includes(name))throw Error('État inconnu');
+ if(sheetEditing){sheetDraftConditions=sheetDraftConditions.includes(name)?sheetDraftConditions.filter(x=>x!==name):[...sheetDraftConditions,name];refreshSheetQuick();return;}
+ const c=selectedSheet(),before=sheetResources(c);commitLibraryMutation(()=>Roster.toggleCondition(lib,c.id,name));finishSheetResourceChange(before);
+ }catch(e){alert(e.message)}
 }
+
 function toggleSheetStatus(name){
- try{saveSheet(true);const id=$('sheetSelect').value;commitLibraryMutation(()=>Roster.toggleStatus(lib,id,name));renderSheets(id)}catch(e){alert(e.message)}
+ try{if(!Roster.STATUSES.includes(name))throw Error('Statut inconnu');
+ if(sheetEditing){sheetDraftStatuses=sheetDraftStatuses.includes(name)?sheetDraftStatuses.filter(x=>x!==name):[...sheetDraftStatuses,name];refreshSheetQuick();return;}
+ const c=selectedSheet();if(!confirm('Modifier ce statut sur la fiche permanente ? Le combat lié reste inchangé.'))return;
+ commitLibraryMutation(()=>Roster.toggleStatus(lib,c.id,name));renderSheets(c.id);
+ }catch(e){alert(e.message)}
 }
+
 function stepField(id,delta,min,max){
  const field=$(id);if(!field)return;
  const next=Math.min(max,Math.max(min,Number(field.value)+delta));
@@ -3913,13 +4048,21 @@ function stepField(id,delta,min,max){
  if(id==='sheetFatigue'||id==='sheetBalance')refreshSheetQuick();
 }
 function saveSheet(quiet=false){
- try{const id=$('sheetSelect').value;const stats=Object.fromEntries(Roster.STATS.map(k=>[k,Number($('stat-'+k).value)]));
- const character=lib.characters.find(c=>c.id===id),importanceField=$('sheetImportance');
- const importancePatch=importanceField&&importanceField.value!==(typeof character?.importance==='string'?character.importance:'')?{importance:importanceField.value}:{};
- commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{name:$('sheetName').value,livret:$('sheetLivret').value,stats,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),center:Number($('sheetCenter').value),principles:[$('principleLeft').value,$('principleRight').value],training:$('sheetTraining').value,history:$('sheetHistory').value,relationships:$('sheetRelations').value.split('\n').map(x=>x.trim()).filter(Boolean),playbookMoves:$('sheetMoves').value.split('\n').map(x=>x.trim()).filter(Boolean),notes:$('sheetNotes').value,...($('sheetLocation')?{location:$('sheetLocation').value.trim()}:{}),...importancePatch}));
- if(!quiet){renderSheets(id);render();alert('Fiche enregistrée.')}else {renderNpcDirectory();renderCharacterCards()}}catch(e){alert(e.message);if(quiet)throw e}
+ if(!sheetEditing)return;
+ try{if(sheetPortraitPending)throw Error('Lecture du portrait en cours. Patiente avant d’enregistrer.');const c=selectedSheet();if(!c)throw Error('Fiche absente');
+ const patch=sheetPatchFromFields(c,sheetInitialFields,sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques);
+ if(patch.center!==undefined&&patch.center!==c.center&&!confirm('Modifier le centre d’équilibre de la fiche ?'))return;
+ commitLibraryMutation(()=>Roster.updateCharacter(lib,c.id,patch));
+ sheetEditing=false;sheetResourceUndo=null;renderSheets(c.id);render();sheetFeedback('Fiche enregistrée.');if(!quiet)alert('Fiche enregistrée.');$('sheetEditButton').focus({preventScroll:true});
+ }catch(e){alert(e.message);if(quiet)throw e}
 }
-function addSheetTechnique(){try{saveSheet(true);const id=$('sheetSelect').value;const t=TECH_CATALOG.find(t=>t.id===$('sheetTechnique').value);if(!t)throw Error('Technique inconnue');const c=lib.characters.find(c=>c.id===id);if(t.famille==='groupe_pnj'&&c.kind!=='PNJ')throw Error('Technique réservée aux groupes de PNJ');commitLibraryMutation(()=>Roster.assignTechnique(lib,id,t.nom,$('sheetMastery').value));renderSheets(id)}catch(e){alert(e.message)}}
+
+function addSheetTechnique(){try{
+ const c=selectedSheet(),t=TECH_CATALOG.find(t=>t.id===$('sheetTechnique').value);if(!t)throw Error('Technique inconnue');if(t.famille==='groupe_pnj'&&c.kind!=='PNJ')throw Error('Technique réservée aux groupes de PNJ');
+ if(sheetEditing){const mastery=$('sheetMastery').value;if(!Roster.MASTERY.includes(mastery))throw Error('Degré inconnu');const known=sheetDraftTechniques.find(x=>x.name===t.nom);if(known)known.mastery=mastery;else sheetDraftTechniques.push({name:t.nom,mastery});$('sheetKnownTechniques').innerHTML=sheetTechniqueCards(sheetDraftTechniques);sheetFeedback('Technique ajoutée au brouillon. Enregistre la fiche pour la conserver.');return;}
+ commitLibraryMutation(()=>Roster.assignTechnique(lib,c.id,t.nom,$('sheetMastery').value));renderSheets(c.id);
+ }catch(e){alert(e.message)}}
+
 function renderCombatLibrary(){
  const select=$('combatSheetSelect');if(!select)return;
  const previous=select.value,available=lib.characters.filter(c=>!s.fighters.some(f=>f.characterId===c.id));
@@ -3928,7 +4071,7 @@ function renderCombatLibrary(){
  select.disabled=!available.length;$('includeSelectedSheetButton').disabled=!available.length;
 }
 function includeSelectedSheet(){const id=$('combatSheetSelect').value;if(id)includeSheet(id);}
-function includeSheet(id){try{if($('sheetSelect').value===id)saveSheet(true);Roster.addToCombat(lib,s,id);render();setView('combat');setCombatTab('fighters')}catch(e){alert(e.message)}}
+function includeSheet(id){try{if(sheetIsDirty())throw Error('Enregistre ou annule les modifications de la fiche avant de l’ajouter au combat.');Roster.addToCombat(lib,s,id);render();setView('combat');setCombatTab('fighters')}catch(e){alert(e.message)}}
 function syncSheet(fighterId){
  if(!confirm('Reporter les ressources du combattant vers sa fiche permanente ?'))return;
  try{commitLibraryMutation(()=>Roster.syncCombatToLibrary(lib,s,fighterId));restoreNpcSessionLocation();renderSheets();render()}catch(e){alert(e.message)}
@@ -3940,6 +4083,7 @@ function exportCompleteBackup(){
 }
 function importCompleteBackup(event){
  const file=event.target.files?.[0];if(!file)return;
+ if(typeof confirmSheetNavigation==='function'&&!confirmSheetNavigation()){event.target.value='';return;}
  file.text().then(text=>{
   try{
    const data=JSON.parse(text);
@@ -3992,6 +4136,7 @@ function saveLibrary(){return persist('avatar-roster-v020',lib)}
 function exportRoster(){const blob=new Blob([JSON.stringify(lib,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='avatar-fiches-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function importRoster(e){
  const f=e.target.files?.[0];if(!f)return;
+ if(typeof confirmSheetNavigation==='function'&&!confirmSheetNavigation()){e.target.value='';return;}
  f.text().then(text=>{
   let rendering=false;const oldSheet=$('sheetSelect').value;
   try{
