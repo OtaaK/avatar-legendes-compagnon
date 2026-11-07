@@ -101,3 +101,19 @@
   les réaffichait. Les outils restent accessibles par les commandes existantes et Gestion.
 - Les prochaines PR traiteront cartes, fiches, Lieux puis Livrets, avec vérifications entre
   lots. La programmation exhaustive des dix Livrets reste hors périmètre.
+
+## 2026-11-07 — UI/UX, lot 2 : galerie Personnages
+
+- Branche dépendant du lot 1, sans fusion de la PR nº 3. Cartes compactes, avatars neutres
+  et icônes originales embarquées ; portraits personnalisés reportés à l’édition des fiches.
+- Importance optionnelle : ne pas classer automatiquement les anciennes fiches. Conserver
+  les anciennes valeurs inconnues, sans changement implicite des ressources. Les quatre
+  choix du cahier des charges sont une classification, pas une automatisation réglementaire.
+- Les outils de sauvegarde passent après les cartes pour dégager la galerie, sans supprimer
+  leurs commandes ; Gestion reste accessible.
+- Le filtre de rôle réutilise `livret` sur les PNJ. Pas de second modèle concurrent. Recherche
+  historique conservée ; filtres cumulables et tri explicite, non classés en fin dans les deux sens.
+- Le centre et la position sont deux repères d’affichage d’un même modèle PJ existant. Pas de
+  jauge PJ sur PNJ, ni de déduction de bornes PNJ à partir de la catégorie dans ce lot.
+- Les fiches, ressources variables PNJ et consultation/édition distinctes restent le lot 3 ;
+  aucune règle du jeu n’est modifiée par le lot 2.

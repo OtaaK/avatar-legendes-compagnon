@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 191 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 192 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,10 +41,11 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 38 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 39 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
-et `test_uiux_navigation.py` pour le socle de navigation.
+`test_uiux_navigation.py` pour le socle de navigation,
+et `test_galerie_personnages.py` pour les cartes et filtres.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -124,3 +125,18 @@ localStorage sont comparés avant/après navigation et rechargement ; Gestion ef
 vrai export/restauration complet. Les captures desktop/mobile sont générées dans `work/`.
 Les deux tests de recette/import existants ne changent que leurs sélecteurs de libellé
 « Personnages » et « Combats » ; leurs assertions métier sont conservées.
+
+## Galerie et cartes — lot 2
+
+`node tests/js/test_galerie_personnages.cjs` vérifie 32 scénarios de requête, classification,
+compatibilité et absence de mutation, dont 500 PNJ sans limite artificielle.
+`python tests/browser/test_galerie_personnages.py` couvre cinq formats, cartes natives au
+clavier, informations sans ouverture accidentelle, filtres conservés, ordre d’importance,
+panne de stockage, données anciennes, identifiants/textes piégés et sauvegarde complète
+après rechargement. Le grand format vérifie aussi le rendu et la recherche de 500 PNJ
+supplémentaires. Captures dans `work/`, hors Git. Les bornes métier PNJ ne changent pas.
+
+Pour les campagnes navigateur lourdes, éviter de lancer un second parcours Chromium à côté
+de la suite ; le lot 2 a observé deux délais dépassés dans cette situation, puis des reprises
+isolées réussies avec le même délai de 120 secondes. Utiliser `--jobs 2` pour le bilan final
+et consigner les dépassements plutôt que d’augmenter silencieusement le délai.

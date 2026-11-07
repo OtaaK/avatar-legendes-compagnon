@@ -125,6 +125,35 @@ label{color:var(--muted)}
  .sheet-nav button,.combat-nav button{flex:0 0 auto}.home-actions button{flex:1 1 180px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* UI/UX lot 2 — galerie, métadonnée d'importance et filtres PNJ. */
+.character-toolbar{margin-block:12px}.character-create-icon{width:44px;height:44px;min-width:44px;padding:0;font-size:26px;line-height:1;background:transparent;color:var(--gold);border-color:var(--line)}
+.character-card-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px}
+.character-card{position:relative;padding:16px;cursor:pointer;border:1px solid var(--line);border-radius:var(--radius);background:var(--field)}
+.character-card:hover,.character-card:focus-within{border-color:#79949e}
+.character-card .card-head{gap:10px;align-items:center;margin:0 0 12px;justify-content:initial}
+.card-avatar{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;background:#25434c;color:#aac5cd;border:1px solid #42616c}
+.card-avatar svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.card-identity{min-width:0;flex:1}.card-title-line{display:flex;align-items:center;gap:3px}.card-title-line h3{min-width:0;flex:0 1 auto}
+.character-card .card-open{display:block;min-height:44px;width:100%;margin:0;padding:2px 0;border:0;border-radius:3px;background:transparent;text-align:left;white-space:normal;overflow-wrap:anywhere;font-weight:650;font-size:16px;line-height:1.35;color:var(--text)}
+.character-card .card-open:hover{background:transparent;color:var(--gold)}
+.training-icon,.importance-control{display:inline-grid;place-items:center;flex:none;width:36px;height:36px;min-height:36px;margin:0;padding:0;border:0;border-radius:50%;background:transparent}
+.training-icon{color:var(--training-color)}.training-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.importance-dot{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:#91a7b5;box-shadow:0 0 0 1px #ffffff24}
+.importance-dot[data-importance="Majeur"]{background:#6bb4b6}.importance-dot[data-importance="Champion"]{background:#e2c184}.importance-dot[data-importance="Légendaire"]{background:#d9a2ab}
+.importance-dot[data-importance=""]{background:transparent;border:1px dashed #b7cbd1;box-shadow:none}
+.importance-control:hover,.training-icon:hover{background:var(--surface)}
+.importance-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:12px 0 16px;color:var(--muted);font-size:12px}
+.importance-legend span{display:inline-flex;align-items:center;gap:7px}.sheet-importance{display:flex;align-items:center;gap:8px;font-size:13px;margin:0 0 12px}
+.character-card .fatigue-cells{margin:4px 0 10px;gap:3px}.character-card .fatigue-cells span{height:5px;border-radius:2px;background:#35515b}.character-card .fatigue-cells .used{background:var(--gold)}
+.character-card .card-balance{margin:10px 0 0}.character-card .balance-svg{height:36px}.card-effect-group{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:7px}.card-effect-label{font-size:10px;letter-spacing:.04em;color:var(--muted);margin-right:3px}
+.character-card .card-chip{min-height:32px;line-height:1.2;padding:4px 8px;font-size:11px;margin:0}.character-card .card-chip.condition{background:#443a29;color:#f2d298}.character-card .card-chip.positive{background:#193f37;color:#b2e1cd}.character-card .card-chip.negative{background:#472e35;color:#f3b6bf}
+.card-location{display:flex;align-items:baseline;gap:6px;margin-top:10px;color:var(--muted);font-size:12px}.card-npc-balance{font-size:12px;color:var(--muted);margin-top:8px}.card-muted{color:#b0c5cd;font-size:12px}
+.gallery-backup-tools{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}.gallery-backup-tools>p{font-size:12px}
+.npc-directory{padding:0;border:0;margin-block:16px}.npc-filter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px;margin:16px 0 8px}.npc-filter-grid input,.npc-filter-grid select{margin-bottom:0}
+.npc-result-line{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-block:12px}.npc-result-line button{margin:0}.npc-empty{grid-column:1/-1;padding:24px 0;color:var(--muted)}
+@media(max-width:1100px){.npc-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.npc-filter-grid{grid-template-columns:minmax(0,1fr)}.character-card-grid{grid-template-columns:minmax(0,1fr)}.character-card{padding:14px}}
 </style>
 <a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
@@ -156,8 +185,7 @@ label{color:var(--muted)}
 <section class="app-view" id="view-catalog" aria-label="Techniques"><div class="panel"><h2>Bibliothèque des techniques</h2><p>111 entrées : 9 techniques de base et 102 techniques avancées (dont 13 universelles). Les effets détaillés ne sont pas tous encodés. Consulte le livre à la page indiquée.</p>
 <div class="grid"><div><label>Rechercher</label><input id="catalogSearch" oninput="renderCatalog()" placeholder="Nom d’une technique"><label>Famille</label><details id="catalogFamilyPicker" class="catalog-family-picker"><summary id="catalogFamilySummary">Toutes les familles</summary><div class="catalog-family-options"><button type="button" class="catalog-clear" onclick="clearCatalogFamilies()">Tout afficher</button><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="base" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="base"></span><span>Base</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="universelle" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="universelle"></span><span>Universelle</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="air" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="air"></span><span>Air</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="eau" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="eau"></span><span>Eau</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="terre" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="terre"></span><span>Terre</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="feu" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="feu"></span><span>Feu</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="armes" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="armes"></span><span>Armes</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="technologie" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="technologie"></span><span>Technologie</span></label><label class="catalog-family-choice"><input type="checkbox" class="catalog-family-check" value="groupe_pnj" onchange="renderCatalog()"><span class="catalog-family-dot" data-family="groupe_pnj"></span><span>Groupe PNJ</span></label></div></details></div><div><label>Approche</label><select id="catalogApproach" onchange="renderCatalog()"><option value="">Toutes</option><option>Défendre et prendre à revers</option><option>Avancer et attaquer</option><option>Esquiver et analyser</option></select><label>Rareté</label><select id="catalogRare" onchange="renderCatalog()"><option value="">Toutes</option><option value="rare">Rares</option><option value="common">Non rares</option></select></div></div><div id="catalogBrowser" class="catalog-browser"><div id="catalogCount"></div><div id="catalogResults" class="catalog-card-grid"></div></div><div id="catalogDetail" class="catalog-detail" hidden></div></div>
 </section>
-<section class="app-view" id="view-characters" aria-label="Personnages"><div class="panel"><h2>Personnages</h2><div class="character-switch" aria-label="Choisir PJ ou PNJ"><button type="button" data-character-kind="PJ" onclick="setCharacterKind('PJ')">PJ</button><button type="button" data-character-kind="PNJ" onclick="setCharacterKind('PNJ')">PNJ</button></div><div id="characterListView" class="character-list-view"><div class="character-toolbar"><h3 id="characterListTitle">Personnages joueurs</h3><button type="button" onclick="createCurrentCharacter()" id="characterCreate">+ Nouveau PJ</button></div><div id="pjDirectory" class="character-card-grid"></div><div class="row"><button type="button" class="alt" onclick="exportCompleteBackup()">Sauvegarder tout (fiches + combat)</button><label class="alt" style="cursor:pointer">Restaurer une sauvegarde complète <input id="backupImportFile" type="file" accept="application/json,.json" onchange="importCompleteBackup(event)" style="max-width:220px"></label></div>
-<p>Les fiches sont indépendantes des combats. Ajouter un personnage crée une copie liée ; ses changements ne sont répercutés sur la fiche qu’après confirmation du MJ.</p>
+<section class="app-view" id="view-characters" aria-label="Personnages"><div class="panel"><h2>Personnages</h2><div class="character-switch" aria-label="Choisir PJ ou PNJ"><button type="button" data-character-kind="PJ" onclick="setCharacterKind('PJ')">PJ</button><button type="button" data-character-kind="PNJ" onclick="setCharacterKind('PNJ')">PNJ</button></div><div id="characterListView" class="character-list-view"><div class="character-toolbar"><h3 id="characterListTitle">Personnages joueurs</h3><button type="button" onclick="createCurrentCharacter()" id="characterCreate">+ Nouveau PJ</button></div><div id="pjDirectory" class="character-card-grid"></div>
 <div class="row" hidden><button type="button" onclick="toggleWizard()" id="wizardToggle" aria-expanded="false" aria-controls="wizard">+ Créer un PJ</button></div>
 <div class="wizard" id="wizard" aria-label="Assistant de création de PJ" hidden>
 <div class="row" style="justify-content:space-between"><h3>Assistant de création · PJ</h3><button class="alt" type="button" onclick="resetWizard()">Recommencer</button></div>
@@ -180,7 +208,18 @@ label{color:var(--muted)}
 <div id="wizardError" class="small-help" role="alert" aria-live="assertive"></div>
 </div>
 <div class="row" hidden><button onclick="newSheet('PNJ')">+ Fiche PNJ</button><button class="alt" onclick="exportRoster()">Exporter les fiches</button><button class="alt" onclick="document.getElementById('rosterFile').click()">Importer les fiches</button><input id="rosterFile" type="file" accept=".json" style="display:none" onchange="importRoster(event)"></div>
-<section class="npc-directory" id="npcDirectorySection" aria-label="Répertoire des PNJ"><div class="row" style="justify-content:space-between;align-items:center"><h3>Répertoire des PNJ</h3><span id="npcCount" aria-live="polite"></span></div><div class="grid"><div><label for="npcSearch">Rechercher un PNJ</label><input id="npcSearch" placeholder="Nom, rôle, lieu…" oninput="renderNpcDirectory()"></div><div><label for="npcLocationFilter">Lieu</label><select id="npcLocationFilter" onchange="renderNpcDirectory()"><option value="">Tous les lieux</option></select></div></div><div class="row"><button type="button" class="alt" onclick="selectNpcLocationForSession()">Utiliser ce lieu pour la session</button><button type="button" class="alt" onclick="clearNpcSessionLocation()">Effacer le lieu actif</button></div><div id="npcSessionBanner" class="small-note" aria-live="polite"></div><div id="npcDirectory" class="character-card-grid"></div></section>
+<section class="npc-directory" id="npcDirectorySection" aria-label="Répertoire des PNJ"><h3 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Répertoire des PNJ</h3>
+<div class="importance-legend" aria-label="Légende des importances"><span><i class="importance-dot" data-importance="Mineur" aria-hidden="true"></i>Mineur</span><span><i class="importance-dot" data-importance="Majeur" aria-hidden="true"></i>Majeur</span><span><i class="importance-dot" data-importance="Champion" aria-hidden="true"></i>Champion</span><span><i class="importance-dot" data-importance="Légendaire" aria-hidden="true"></i>Légendaire</span><span><i class="importance-dot" data-importance="" aria-hidden="true"></i>Non précisée</span></div>
+<div class="npc-search"><label for="npcSearch">Rechercher un PNJ</label><input id="npcSearch" type="search" placeholder="Nom, rôle, lieu…" oninput="renderNpcDirectory()"></div>
+<details id="npcFilterPanel"><summary id="npcFilterSummary">Filtres et tri</summary><div class="npc-filter-grid"><div><label for="npcLocationFilter">Lieu</label><select id="npcLocationFilter" onchange="renderNpcDirectory()"><option value="">Tous les lieux</option></select></div>
+<div><label for="npcTrainingFilter">Entraînement</label><select id="npcTrainingFilter" onchange="renderNpcDirectory()"><option value="">Tous les entraînements</option></select></div>
+<div><label for="npcRoleFilter">Rôle</label><select id="npcRoleFilter" onchange="renderNpcDirectory()"><option value="">Tous les rôles</option></select></div>
+<div><label for="npcImportanceFilter">Importance</label><select id="npcImportanceFilter" onchange="renderNpcDirectory()"><option value="">Toutes les importances</option><option>Mineur</option><option>Majeur</option><option>Champion</option><option>Légendaire</option><option value="__unspecified__">Non précisée</option></select></div>
+<div><label for="npcSort">Trier par</label><select id="npcSort" onchange="renderNpcDirectory()"><option value="name">Nom</option><option value="location">Lieu</option><option value="importance-asc">Importance croissante</option><option value="importance-desc">Importance décroissante</option></select></div></div></details>
+<div class="npc-result-line"><span id="npcCount" aria-live="polite"></span><button type="button" class="alt" onclick="resetNpcFilters()">Réinitialiser les filtres</button></div>
+<details><summary>Lieu de la session</summary><div class="row"><button type="button" class="alt" onclick="selectNpcLocationForSession()">Utiliser ce lieu pour la session</button><button type="button" class="alt" onclick="clearNpcSessionLocation()">Effacer le lieu actif</button></div></details><p id="npcSessionBanner" class="small-note" aria-live="polite"></p><div id="npcDirectory" class="character-card-grid"></div></section>
+<div class="gallery-backup-tools"><div class="row"><button type="button" class="alt" onclick="exportCompleteBackup()">Sauvegarder tout (fiches + combat)</button><label class="alt" style="cursor:pointer">Restaurer une sauvegarde complète <input id="backupImportFile" type="file" accept="application/json,.json" onchange="importCompleteBackup(event)" style="max-width:220px"></label></div>
+<p>Les fiches sont indépendantes des combats. Ajouter un personnage crée une copie liée ; ses changements ne sont répercutés sur la fiche qu’après confirmation du MJ.</p></div>
 </div><div id="characterDetailView" class="character-detail-view" hidden><button type="button" class="alt character-detail-back" onclick="closeCharacterDetail()">← Retour aux cartes</button><div class="grid"><div><label id="sheetSelectLabel">Personnage</label><select id="sheetSelect" onchange="showSheet()"></select><nav class="sheet-nav" id="sheetNav" aria-label="Sections de la fiche"><button type="button" data-sheet-tab="identity" onclick="setSheetTab('identity')">Fiche</button><button type="button" data-sheet-tab="resources" onclick="setSheetTab('resources')">Ressources</button><button type="button" data-sheet-tab="story" onclick="setSheetTab('story')">Histoire</button><button type="button" data-sheet-tab="techniques" onclick="setSheetTab('techniques')">Techniques</button></nav><div id="sheetQuick" class="quickbar" aria-label="Actions rapides de la fiche"></div><div id="sheetForm"></div></div>
 <div><h3>Fiches disponibles</h3><div id="sheetList"></div></div></div></div></div>
 </section>
@@ -2706,6 +2745,8 @@ const TO_ENGINE={'En danger':'en_danger','Renforcé':'renforce','Avantagé':'ava
 const FROM_ENGINE=Object.fromEntries(Object.entries(TO_ENGINE).map(([k,v])=>[v,k]));
 const TRAININGS=['','Maîtrise de l’Air','Maîtrise de l’Eau','Maîtrise de la Terre','Maîtrise du Feu','Armes','Technologie'];
 const MASTERY=['acquise','pratiquee','maitrisee'];
+const NPC_IMPORTANCE=['Mineur','Majeur','Champion','Légendaire'];
+function npcImportance(c){return NPC_IMPORTANCE.includes(c.importance)?c.importance:'';}
 function createLibrary(){return {version:1,seq:1,characters:[]}}
 function validateCharacter(c){
  if(!c||typeof c!=='object'||!['PJ','PNJ'].includes(c.kind))throw Error('Type PJ/PNJ requis');
@@ -2735,6 +2776,8 @@ function createCharacter(lib,name,kind='PJ'){
 function updateCharacter(lib,id,patch){
  const c=lib.characters.find(x=>x.id===id);if(!c)throw Error('Fiche inconnue');
  if(patch.id!==undefined||patch.kind!==undefined&&patch.kind!==c.kind)throw Error('Identité protégée');
+ // Les anciennes valeurs importées restent lisibles ; toute nouvelle classification est contrôlée.
+ if(Object.hasOwn(patch,'importance')&&patch.importance!==c.importance&&(c.kind!=='PNJ'||!['',...NPC_IMPORTANCE].includes(patch.importance)))throw Error('Importance PNJ invalide');
  const next={...rosterClone(c),...rosterClone(patch),stats:{...c.stats,...(patch.stats||{})}};
  validateCharacter(next);Object.assign(c,next);return c;
 }
@@ -2786,9 +2829,23 @@ function toggleStatus(lib,id,name){
  const next=c.statuses.includes(name)?c.statuses.filter(x=>x!==name):[...c.statuses,name];
  updateCharacter(lib,id,{statuses:next});return c;
 }
-function listNpcs(lib,{location='',search=''}={}){
+function listNpcs(lib,{location='',search='',training='',role='',importance='',sort='name'}={}){
  const q=search.trim().toLocaleLowerCase('fr');
- return lib.characters.filter(c=>c.kind==='PNJ'&&(!location||((c.location||'')===location))&&(!q||[c.name,c.livret,c.location,c.notes].join(' ').toLocaleLowerCase('fr').includes(q))).sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+ const npcs=lib.characters.filter(c=>c.kind==='PNJ'&&(!location||((c.location||'')===location))&&
+  (!q||[c.name,c.livret,c.location,c.notes].join(' ').toLocaleLowerCase('fr').includes(q))&&
+  (!training||c.training===training)&&(!role||c.livret===role)&&
+  (!importance||(importance==='__unspecified__'?!npcImportance(c):npcImportance(c)===importance)));
+ const byName=(a,b)=>a.name.localeCompare(b.name,'fr')||String(a.id).localeCompare(String(b.id));
+ return npcs.sort((a,b)=>{
+  if(sort==='location')return (a.location||'').localeCompare(b.location||'','fr')||byName(a,b);
+  if(sort==='importance-asc'||sort==='importance-desc'){
+   const ai=NPC_IMPORTANCE.indexOf(npcImportance(a)),bi=NPC_IMPORTANCE.indexOf(npcImportance(b));
+   // Les fiches non classées restent en fin de liste dans les deux sens.
+   if(ai<0||bi<0)return (ai<0)-(bi<0)||byName(a,b);
+   return (sort==='importance-desc'?bi-ai:ai-bi)||byName(a,b);
+  }
+  return byName(a,b);
+ });
 }
 function npcLocations(lib){return [...new Set(lib.characters.filter(c=>c.kind==='PNJ').map(c=>c.location||'').filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
 function importLibrary(raw){
@@ -2798,7 +2855,7 @@ function importLibrary(raw){
  for(const c of lib.characters){normalizeCharacter(c);validateCharacter(c);if(ids.has(c.id))throw Error('Identifiant dupliqué');ids.add(c.id)}
  return lib;
 }
-window.Roster={listNpcs,npcLocations,TRAININGS,TO_ENGINE,FROM_ENGINE,STATS,MASTERY,CONDITIONS,STATUSES,normalizeCharacter,toggleCondition,toggleStatus,createLibrary,makeCharacter,validateCharacter,createCharacter,updateCharacter,assignTechnique,addToCombat,syncCombatToLibrary,importLibrary};
+window.Roster={NPC_IMPORTANCE,npcImportance,listNpcs,npcLocations,TRAININGS,TO_ENGINE,FROM_ENGINE,STATS,MASTERY,CONDITIONS,STATUSES,normalizeCharacter,toggleCondition,toggleStatus,createLibrary,makeCharacter,validateCharacter,createCharacter,updateCharacter,assignTechnique,addToCombat,syncCombatToLibrary,importLibrary};
 
 
 'use strict';
@@ -3675,35 +3732,55 @@ const CONDITION_EXPLANATIONS={
 };
 function chipHtml(name,type){
  const color=type==='condition'?'condition':POSITIVE_STATUSES.has(name)?'positive':'negative';
- return `<button type="button" class="card-chip ${color}" data-chip="${safe(name)}" data-chip-type="${type}" onclick="showCardTooltip(event,this)" onmouseenter="showCardTooltip(event,this)" onmouseleave="hideCardTooltip()" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip(false)" aria-label="Effet de ${safe(name)}">${safe(name)}</button>`;
+ return `<button type="button" class="card-chip ${color}" data-chip="${safe(name)}" data-chip-type="${type}" onclick="showCardTooltip(event,this)" onmouseenter="showCardTooltip(event,this)" onmouseleave="hideCardTooltip()" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip()" aria-label="Effet de ${safe(name)}">${safe(name)}</button>`;
 }
 function balanceGraphic(c){
- const val=Math.max(-3,Math.min(3,Number(c.balance)||0)),cx=12+(val+3)*296/6;
- const ticks=Array.from({length:7},(_,i)=>`<circle cx="${12+i*296/6}" cy="10.5" r="2.5" fill="#91a7be" opacity=".65"/><text x="${12+i*296/6}" y="29" text-anchor="middle" font-size="10" fill="#b7c7d8">${i-3>0?'+':''}${i-3}</text>`).join('');
- return `<div class="card-balance"><div class="card-label">Équilibre</div><div class="balance-principles"><span>${safe(c.principles?.[0]||'Principe −')}</span><span>${safe(c.principles?.[1]||'Principe +')}</span></div><svg class="balance-svg" viewBox="0 0 320 36" role="img" aria-label="Équilibre ${val}"><rect x="12" y="8" width="296" height="5" rx="2.5" fill="#435873"/>${ticks}<circle cx="${cx}" cy="10.5" r="7" fill="#4294d1" stroke="#e7f4ff" stroke-width="1"/><circle cx="${cx}" cy="10.5" r="2" fill="white"/></svg></div>`;
+ const val=Number(c.balance)||0,center=Number(c.center)||0;
+ const x=v=>12+(v+3)*296/6;
+ const ticks=Array.from({length:7},(_,i)=>`<circle cx="${x(i-3)}" cy="16" r="2" fill="#91a7be"/>`).join('');
+ return `<div class="card-balance"><svg class="balance-svg" viewBox="0 0 320 36" role="img" aria-label="Équilibre : ${safe(c.principles?.[0]||'Premier principe')} ${-val}, ${safe(c.principles?.[1]||'Second principe')} ${val} ; centre ${center}"><title>Losange : position ${val} ; cercle : centre ${center}</title><path d="M12 16H308" stroke="#435f69" stroke-width="3"/>${ticks}<g data-balance-center="${center}"><path d="M${x(center)} 9v7" stroke="#8ed4e5"/><circle cx="${x(center)}" cy="8" r="5" fill="#0f232d" stroke="#8ed4e5" stroke-width="2"/></g><g data-balance-current="${val}"><path d="M${x(val)} 16v7" stroke="#e2c184"/><path d="m${x(val)} 20 5 6-5 6-5-6Z" fill="#e2c184"/></g></svg></div>`;
+}
+function trainingIcon(training){
+ const icons={
+  'Maîtrise de l’Air':['#a4b6c5','<path d="M3 8h12c5 0 5-5 1-5M3 12h16M3 16h10c5 0 5 5 1 5"/>'],
+  'Maîtrise de l’Eau':['#70bfe9','<path d="M12 2s-7 8-7 13a7 7 0 0 0 14 0c0-5-7-13-7-13Z"/>'],
+  'Maîtrise de la Terre':['#8bbd91','<path d="m3 18 6-12 4 7 3-4 5 9Z"/>'],
+  'Maîtrise du Feu':['#ed9b83','<path d="M12 2c3 6 8 8 8 13a8 8 0 0 1-16 0c0-4 3-6 4-9 0 5 2 6 4 7 2-4 1-7 0-11Z"/>'],
+  'Armes':['#cbb6da','<path d="m5 3 5 4 8 11m-15-2 5 5M19 3l-5 4-8 11m10 3 5-5"/>'],
+  'Technologie':['#b4c7d3','<circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M5 19l3-3m8-8 3-3"/>']
+ };
+ const icon=icons[training];if(!icon)return '';
+ return `<button type="button" class="training-icon" style="--training-color:${icon[0]}" aria-label="${safe(training)}" title="${safe(training)}" data-chip="${safe(training)}" data-chip-type="training" onclick="showCardTooltip(event,this)" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip()"><svg viewBox="0 0 24 24" aria-hidden="true">${icon[1]}</svg></button>`;
+}
+function importanceControl(c){
+ const label=Roster.npcImportance(c)||'Importance non précisée';
+ return `<button type="button" class="importance-control" aria-label="${safe(label)}" title="${safe(label)}" data-chip="${safe(label)}" data-chip-type="importance" onclick="showCardTooltip(event,this)" onmouseenter="showCardTooltip(event,this)" onmouseleave="hideCardTooltip()" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip()"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span></button>`;
 }
 function characterCard(c){
- const fatigue=Math.max(0,Math.min(5,Number(c.fatigue)||0));
+ const fatigue=c.fatigue;
  const cells=Array.from({length:5},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
- const conditions=(c.conditions||[]).map(x=>chipHtml(x,'condition')).join('')||'<span class="card-muted">Aucun état</span>';
- const statuses=(c.statuses||[]).map(x=>chipHtml(x,'status')).join('')||'<span class="card-muted">Aucun statut</span>';
- return `<article class="character-card" role="button" tabindex="0" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="openCharacterDetail('${safe(c.id)}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openCharacterDetail('${safe(c.id)}')}"><div class="card-head"><div><h3>${safe(c.name)}</h3><p class="sub">${safe(c.livret|| (c.kind==='PJ'?'Livret non précisé':'Rôle non précisé'))}</p></div><span aria-hidden="true">›</span></div><div class="card-risk"><div class="card-label">Fatigue et états</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5">${cells}</div><div class="card-chips">${conditions}</div></div>${balanceGraphic(c)}<div class="card-status"><div class="card-label">Statuts de combat</div><div class="card-chips">${statuses}</div></div>${c.kind==='PNJ'?`<div class="card-location">⌖ ${safe(c.location||'Sans lieu')}</div>`:''}</article>`;
+ const effects=(c.conditions.length?`<div class="card-effect-group" aria-label="États actifs"><span class="card-effect-label">États</span>${c.conditions.map(x=>chipHtml(x,'condition')).join('')}</div>`:'')+
+  (c.statuses.length?`<div class="card-effect-group" aria-label="Statuts de combat"><span class="card-effect-label">Statuts</span>${c.statuses.map(x=>chipHtml(x,'status')).join('')}</div>`:'');
+ return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg></span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5" title="Fatigue ${fatigue} sur 5">${cells}</div>${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div><div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
 }
 function showCardTooltip(event,button){
  event.stopPropagation();const name=button.dataset.chip,type=button.dataset.chipType;
- const tip=$('cardTooltip');tip.innerHTML=`<strong>${safe(name)}</strong>${safe((type==='condition'?CONDITION_EXPLANATIONS:STATUS_EXPLANATIONS)[name]||'Consulter le livre de règles pour les effets détaillés.')}`;
+ const tip=$('cardTooltip');tip.innerHTML=`<strong>${safe(name)}</strong>${safe(type==='importance'?'Classification du PNJ. Les ressources enregistrées sont conservées.':type==='training'?'Entraînement enregistré sur la fiche.':(type==='condition'?CONDITION_EXPLANATIONS:STATUS_EXPLANATIONS)[name]||'Consulter le livre de règles pour les effets détaillés.')}`;
  tip.hidden=false;const rect=button.getBoundingClientRect(),width=tip.offsetWidth,height=tip.offsetHeight;
  tip.style.left=Math.max(12,Math.min(window.innerWidth-width-12,rect.left))+'px';
  tip.style.top=(rect.bottom+height+10<window.innerHeight?rect.bottom+7:Math.max(8,rect.top-height-7))+'px';
 }
 function hideCardTooltip(force=true){if(force)$('cardTooltip').hidden=true}
-document.addEventListener('click',e=>{if(!e.target.closest?.('.card-chip'))hideCardTooltip()});
+document.addEventListener('click',e=>{if(!e.target.closest?.('.card-chip,.importance-control,.training-icon'))hideCardTooltip()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')hideCardTooltip()});
 function renderCharacterCards(){
  $('pjDirectory').innerHTML=lib.characters.filter(c=>c.kind==='PJ').sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(characterCard).join('')||'<p>Aucun PJ. Utilise « Nouveau PJ » pour commencer.</p>';
  document.querySelectorAll('[data-character-kind]').forEach(b=>{b.classList.toggle('active',b.dataset.characterKind===characterKind);b.setAttribute('aria-pressed',String(b.dataset.characterKind===characterKind))});
  $('characterListTitle').textContent=characterKind==='PJ'?'Personnages joueurs':'Personnages non joueurs';
- $('characterCreate').textContent=characterKind==='PJ'?'+ Nouveau PJ':'+ Nouveau PNJ';
+ $('characterCreate').textContent='+';
+ $('characterCreate').classList.add('character-create-icon');
+ const createLabel=characterKind==='PJ'?'+ Nouveau PJ':'+ Nouveau PNJ';
+ $('characterCreate').setAttribute('aria-label',createLabel);$('characterCreate').title=createLabel;
  $('pjDirectory').hidden=characterKind!=='PJ';$('npcDirectorySection').hidden=characterKind!=='PNJ';
  $('characterListView').hidden=characterDetailOpen;$('characterDetailView').hidden=!characterDetailOpen;
 }
@@ -3713,11 +3790,15 @@ function openCharacterDetail(id){
  if(characterDetailOpen&&$('sheetSelect').value!==id)try{saveSheet(true)}catch(e){return}
  characterKind=c.kind;characterDetailOpen=true;$('sheetSelect').value=id;showSheet();setSheetTab('identity');renderCharacterCards();hideCardTooltip();
  $('characterDetailView').scrollIntoView({block:'start',behavior:'instant'});
+ $('characterDetailView').querySelector('.character-detail-back')?.focus({preventScroll:true});
 }
 function closeCharacterDetail(){
+ const selected=$('sheetSelect').value;
  if(characterDetailOpen)try{saveSheet(true)}catch(e){return}
  characterDetailOpen=false;hideCardTooltip();renderCharacterCards();
  $('characterListView').scrollIntoView({block:'start',behavior:'instant'});
+ const card=[...document.querySelectorAll('.character-card')].find(el=>el.dataset.characterId===selected);
+ (card?.querySelector('.card-open')||$('characterCreate')).focus({preventScroll:true});
 }
 function createCurrentCharacter(){if(characterKind==='PJ'){toggleWizard(true);$('wizard').scrollIntoView({block:'start'})}else newSheet('PNJ')}
 
@@ -3729,16 +3810,29 @@ function selectNpcLocationForSession(){
  renderNpcDirectory();
 }
 function clearNpcSessionLocation(){npcSessionLocation='';try{localStorage.removeItem('avatar-session-location')}catch(e){}renderNpcDirectory()}
+function resetNpcFilters(){
+ $('npcSearch').value='';
+ for(const id of ['npcLocationFilter','npcTrainingFilter','npcRoleFilter','npcImportanceFilter'])$(id).value='';
+ $('npcSort').value='name';renderNpcDirectory();
+}
 function renderNpcDirectory(){
- const filter=$('npcLocationFilter'),current=filter.value;
- const locations=Roster.npcLocations(lib);
- filter.innerHTML='<option value="">Tous les lieux</option><option value="__none__">Sans lieu</option>'+locations.map(loc=>`<option value="${safe(loc)}">${safe(loc)}</option>`).join('');
- filter.value=[...filter.options].some(o=>o.value===current)?current:([...filter.options].some(o=>o.value===npcSessionLocation)?npcSessionLocation:'');
- const query=$('npcSearch').value.trim();
- const npcs=Roster.listNpcs(lib,{search:query,location:filter.value==='__none__'?'':filter.value}).filter(c=>filter.value!=='__none__'||!c.location);
- $('npcCount').textContent=npcs.length+' PNJ';
+ const fill=(id,values,placeholder,extra='')=>{
+  const el=$(id),current=el.value,options=[...new Set(values)].filter(value=>typeof value==='string'&&value).sort((a,b)=>a.localeCompare(b,'fr'));
+  // Conserver un filtre lors d'un aller-retour ou si la dernière fiche correspondante change.
+  if(current&&!options.includes(current)&&!(id==='npcLocationFilter'&&current==='__none__'))options.push(current);
+  el.innerHTML=`<option value="">${placeholder}</option>`+extra+options.map(value=>`<option value="${safe(value)}">${safe(value)}</option>`).join('');el.value=current;
+ };
+ fill('npcLocationFilter',Roster.npcLocations(lib),'Tous les lieux','<option value="__none__">Sans lieu</option>');
+ fill('npcTrainingFilter',Roster.TRAININGS,'Tous les entraînements');
+ fill('npcRoleFilter',lib.characters.filter(c=>c.kind==='PNJ').map(c=>c.livret||''),'Tous les rôles');
+ const location=$('npcLocationFilter').value;
+ const npcs=Roster.listNpcs(lib,{search:$('npcSearch').value,location:location==='__none__'?'':location,training:$('npcTrainingFilter').value,role:$('npcRoleFilter').value,importance:$('npcImportanceFilter').value,sort:$('npcSort').value}).filter(c=>location!=='__none__'||!c.location);
+ const activeFilters=['npcLocationFilter','npcTrainingFilter','npcRoleFilter','npcImportanceFilter'].filter(id=>$(id).value).length+($('npcSort').value!=='name'?1:0);
+ $('npcFilterSummary').textContent='Filtres et tri'+(activeFilters?' · '+activeFilters+' actif'+(activeFilters>1?'s':''):'');
+ const total=lib.characters.filter(c=>c.kind==='PNJ').length;
+ $('npcCount').textContent=npcs.length+' / '+total+' PNJ';
  $('npcSessionBanner').textContent=npcSessionLocation?'Lieu de session : '+(npcSessionLocation==='__none__'?'Sans lieu':npcSessionLocation):'Aucun lieu de session sélectionné';
- $('npcDirectory').innerHTML=npcs.map(characterCard).join('')||'<p>Aucun PNJ ne correspond à cette recherche.</p>';
+ $('npcDirectory').innerHTML=npcs.map(characterCard).join('')||'<p class="npc-empty">Aucun PNJ ne correspond à ces filtres. Modifie la recherche ou utilise « Réinitialiser les filtres ».</p>';
 }
 function restoreNpcSessionLocation(){try{npcSessionLocation=localStorage.getItem('avatar-session-location')||''}catch(e){npcSessionLocation=''}}
 function openNpc(id){
@@ -3759,7 +3853,7 @@ function showSheet(){
  renderSheetQuick(c);
  $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" oninput="refreshSheetQuick()" value="${safe(c.name)}">
  <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
- ${c.kind==='PNJ'?`<label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
+ ${c.kind==='PNJ'?`<p class="sheet-importance"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
  ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('stat-${k}',-1,-3,2)">−</button><output id="view-stat-${k}">${c.stats[k]}</output><button type="button" class="stepper" onclick="stepField('stat-${k}',1,-3,2)">+</button><input type="hidden" id="stat-${k}" value="${c.stats[k]}"></div>`).join('')}</div>
@@ -3820,7 +3914,9 @@ function stepField(id,delta,min,max){
 }
 function saveSheet(quiet=false){
  try{const id=$('sheetSelect').value;const stats=Object.fromEntries(Roster.STATS.map(k=>[k,Number($('stat-'+k).value)]));
- commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{name:$('sheetName').value,livret:$('sheetLivret').value,stats,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),center:Number($('sheetCenter').value),principles:[$('principleLeft').value,$('principleRight').value],training:$('sheetTraining').value,history:$('sheetHistory').value,relationships:$('sheetRelations').value.split('\n').map(x=>x.trim()).filter(Boolean),playbookMoves:$('sheetMoves').value.split('\n').map(x=>x.trim()).filter(Boolean),notes:$('sheetNotes').value,...($('sheetLocation')?{location:$('sheetLocation').value.trim()}:{})}));
+ const character=lib.characters.find(c=>c.id===id),importanceField=$('sheetImportance');
+ const importancePatch=importanceField&&importanceField.value!==(typeof character?.importance==='string'?character.importance:'')?{importance:importanceField.value}:{};
+ commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{name:$('sheetName').value,livret:$('sheetLivret').value,stats,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),center:Number($('sheetCenter').value),principles:[$('principleLeft').value,$('principleRight').value],training:$('sheetTraining').value,history:$('sheetHistory').value,relationships:$('sheetRelations').value.split('\n').map(x=>x.trim()).filter(Boolean),playbookMoves:$('sheetMoves').value.split('\n').map(x=>x.trim()).filter(Boolean),notes:$('sheetNotes').value,...($('sheetLocation')?{location:$('sheetLocation').value.trim()}:{}),...importancePatch}));
  if(!quiet){renderSheets(id);render();alert('Fiche enregistrée.')}else {renderNpcDirectory();renderCharacterCards()}}catch(e){alert(e.message);if(quiet)throw e}
 }
 function addSheetTechnique(){try{saveSheet(true);const id=$('sheetSelect').value;const t=TECH_CATALOG.find(t=>t.id===$('sheetTechnique').value);if(!t)throw Error('Technique inconnue');const c=lib.characters.find(c=>c.id===id);if(t.famille==='groupe_pnj'&&c.kind!=='PNJ')throw Error('Technique réservée aux groupes de PNJ');commitLibraryMutation(()=>Roster.assignTechnique(lib,id,t.nom,$('sheetMastery').value));renderSheets(id)}catch(e){alert(e.message)}}
