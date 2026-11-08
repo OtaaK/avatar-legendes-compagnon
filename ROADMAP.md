@@ -1,5 +1,27 @@
 # Feuille de route
 
+## Orientation active — convergence vers l’interface v0
+
+La référence visuelle devient `OtaaK/avatar-legendes-ui`. Le métier et la compatibilité
+viennent de la version Codex complète, PR nº 3 à 10 incluses. Les lots HTML ci-dessous
+restent l’historique et les acquis fonctionnels, pas le design cible de la nouvelle application.
+
+- [x] Examiner les deux dépôts et relever leurs SHA ; vérifier la chaîne des PR récentes.
+- [x] Identifier les fonctions métier, couplages DOM, écarts des modèles et contraintes hors ligne.
+- [x] Préparer un rapport et des contrats proposés sur une branche isolée, sans code migré.
+- [ ] Valider le plan et recevoir la version v0 corrigée à figer pour l’intégration.
+- [ ] Lot 1 : architecture, contrats et extraction fidèle ; socle de compatibilité dès ce lot.
+- [ ] Lot 2 : Personnages, ressources et portraits dans v0.
+- [ ] Lot 3 : Lieux et liens PNJ.
+- [ ] Lot 4 : Livrets et techniques.
+- [ ] Lot 5 : intégralité des capacités de combat existantes dans v0.
+- [ ] Lot 6 : Gestion, annulations, compatibilité et distribution hors ligne qualifiée.
+- [ ] Lot 7 : recette visuelle/fonctionnelle/responsive et validation avant toute fusion.
+
+Critères d’acceptation, risques et retours arrière :
+`docs/migration/FAISABILITE_CONVERGENCE_V0.md`. Aucun déploiement ni fusion automatique.
+
+
 ## V2.33 — audit et corrections de Terre
 
 - [x] Comparer les 13 techniques au PDF fourni et distinguer anomalies et arbitrages.

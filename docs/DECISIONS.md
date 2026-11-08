@@ -229,3 +229,23 @@
 - Les parcours historiques de classification seule refusent la nouvelle proposition de profil ;
   leurs assertions de conservation des données restent présentes. Aucun test supprimé.
 - Correctifs sur branche dépendante de la PR nº 9, sans fusion dans main.
+
+
+## 2026-11-08 — Nouvelle orientation : interface v0 comme base
+
+**Décision du propriétaire :** reprendre l’interface React v0 pour le rendu, la navigation
+et l’organisation des écrans ; adapter les fonctionnalités Codex derrière elle. Les modèles,
+règles implémentées, sauvegardes et acquis des PR nº 3 à 10 restent la référence métier.
+L’ancienne refonte HTML est conservée dans l’historique et comme application de référence.
+Les anciennes décisions visuelles ne doivent pas être imposées à v0.
+
+**Préparation effectuée :** audit des deux snapshots, chaîne GitHub vérifiée, 243 tests Codex
+réussis, prototype v0 compilé avec TypeScript. Branches d’étude isolées ; documentation seule,
+aucun moteur extrait et aucun composant remplacé. La version v0 corrigée doit être fournie
+avant intégration effective. Ni fusion des PR ni déploiement dans cette mission.
+
+**Recommandations à valider :** projet unifié dans le dépôt fonctionnel, UI v0 en amont,
+React/Vite local, modules métier JavaScript extraits à comportement identique, service de
+commandes transactionnelles, espace React isolé avec codecs historiques. Ce sont des
+propositions du [plan](migration/FAISABILITE_CONVERGENCE_V0.md), pas des modifications déjà
+appliquées aux sauvegardes ou une autorisation d’intégration.

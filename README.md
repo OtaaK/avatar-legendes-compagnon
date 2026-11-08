@@ -2,6 +2,16 @@
 
 Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2.33**.
 
+## Orientation : interface v0 et métier Codex
+
+La nouvelle interface de référence est [avatar-legendes-ui](https://github.com/OtaaK/avatar-legendes-ui).
+Le [rapport de faisabilité et les sept lots](docs/migration/FAISABILITE_CONVERGENCE_V0.md)
+préparent son raccordement au moteur et aux sauvegardes de ce dépôt. Les
+[contrats proposés](docs/migration/CONTRATS_CIBLES.md) précisent les frontières.
+Le plan et la version v0 corrigée attendent validation avant intégration effective.
+L’application HTML ci-dessous reste disponible ; aucune PR précédente n’est fusionnée
+ou supprimée par ce changement d’orientation.
+
 ## Utiliser l'application
 
 Ouvrir **`app/simulateur.html`** dans un navigateur. Elle fonctionne seule, hors connexion,

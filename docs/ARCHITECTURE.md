@@ -243,3 +243,17 @@ mécaniques en cours. `removeFighter` prépare un nouvel état, retire la copie 
 conserve l’historique et ajoute un instantané compatible avec l’undo existant. Le rendu expose
 les motifs de refus ; la commande UI utilise `commitCombatMutation` pour les erreurs de stockage.
 La bibliothèque reste indépendante. Ni migration ni effacement de mécanique implicite.
+
+
+## Nouvelle cible proposée : interface React v0
+
+La décision du 8 novembre 2026 change la cible de rendu : les composants, la navigation et
+le design viennent désormais de `avatar-legendes-ui`. Les sections précédentes décrivent
+l’application HTML et ses acquis conservés ; elles n’imposent pas de reproduire ce HTML
+pour la suite. La convergence attend le plan validé et le v0 corrigé.
+
+Le [rapport](migration/FAISABILITE_CONVERGENCE_V0.md) recommande React/Vite, modules métier
+sans DOM, service de commandes et repository local isolé. Les
+[contrats](migration/CONTRATS_CIBLES.md) préservent les formats, copies de combat, décisions
+MJ et historique. Le [relevé des sources](migration/SOURCES.json) fixe les références
+provisoires inspectées. Aucun changement de code applicatif n’est effectué par cette étude.
