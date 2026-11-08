@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 195 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 196 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,12 +41,14 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 41 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 42 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
 `test_uiux_navigation.py` pour le socle de navigation,
 `test_galerie_personnages.py` pour les cartes et filtres,
-et `test_fiches_uiux.py` pour les fiches et brouillons.
+`test_fiches_uiux.py` pour les fiches et brouillons,
+`test_ressources_pnj.py` pour les profils et leur stockage,
+et `test_lieux.py` pour la hiérarchie et les relations PNJ.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -170,3 +172,21 @@ Deux régressions intermédiaires de changement de cible ont été détectées p
 parcours fatigue/piège : correction du code sans retrait de leurs assertions.
 La limite `file://` demeure ; le double-clic sur Chrome macOS reste à vérifier manuellement.
 Voir [le rapport et la recette](RAPPORT_UI_UX_LOT3B.md).
+
+
+## Lieux — lot 4
+
+`node tests/js/test_lieux.cjs` vérifie 30 scénarios purs : identité stable, indépendance
+des relations, profondeur 12 000, cycles, orphelins, suppression explicite et conservation des
+données anciennes. `python tests/browser/test_lieux.py` couvre quatre formats, activation,
+quota et rollback, brouillons, illustrations locales et lecture retardée, relations de PNJ,
+filtre récursif, suppression annulée/confirmée, textes piégés, exports et rechargement.
+Un fichier complet contenant un cycle est refusé avant mutation. Les captures restent dans
+`work/`, hors Git. La référence 236/236 est exécutée depuis une copie isolée du commit parent,
+pour éviter qu’une modification en cours ne contamine le bilan avant intervention.
+
+Le bilan du lot 4 distingue la campagne complète (237/238, seule attente obsolète sur
+l’écran Lieux) des reprises réussies du test de navigation actualisé et du parcours Lieux.
+Les 238 scripts ont chacun passé ; ce résultat consolidé n’est pas présenté comme une
+campagne locale unique à 238/238 après le dernier changement de libellé. GitHub Actions
+relance la suite complète sur le commit final. Voir le détail dans le rapport du lot.

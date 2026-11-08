@@ -161,3 +161,28 @@ utilise alors l’enveloppe `avatar-compagnon-combat`, version 2. Les formats hi
 restent lisibles. Gestion peut exporter le point v020 précédant l’activation. Revenir au code
 ancien retrouve ce point, sans fusion automatique avec les modifications récentes.
 Voir [les garanties, limites et tests](RAPPORT_UI_UX_LOT3B.md).
+
+
+## Lieux — lot 4
+
+`PlaceRules` est un module pur dans le HTML autonome, exporté pour les tests. La bibliothèque
+porte `places` et un compteur `placeSeq` seulement après utilisation ; les nouvelles données
+activent la version 2 et le canal v021 existant, sans nouvelles clés concurrentes.
+Un lieu possède un identifiant stable, un nom, une description, `parentId` et une illustration
+raster locale facultative. Le parcours des parents et descendants est itératif ; les cycles
+et doublons sont refusés, les références manquantes sont conservées et signalées.
+
+Les PNJ référencent les mêmes identifiants via `placeLinks` : domicile `homeId`, position
+`currentId`, associations `associatedIds`. Les anciens textes `location` restent conservés. `currentId` absent conserve la position
+textuelle ; `currentId: null` représente une position explicitement vide. Un domicile ou
+une association seuls ne modifient pas la position.
+Les listes Personnages résolvent la position pour filtrer et afficher le lieu actualisé.
+Le lieu de session historique demeure une indication textuelle, sans déplacement de PNJ.
+Les copies de combat ne portent aucun modèle de lieux parallèle.
+
+Les formulaires de lieux ont leur propre brouillon protégé ; ceux des PNJ réutilisent le
+brouillon de fiche. La position rapide ne modifie que la position. Les mutations passent par
+`commitLibraryMutation`, y compris la première activation journalisée dans v021. Suppression :
+promotion des enfants au parent et retrait des seuls liens concernés, après présentation des
+dépendances et confirmation ; aucune suppression en cascade de fiches ni de sous-lieux.
+Voir [la recette et les limites](RAPPORT_UI_UX_LOT4.md).

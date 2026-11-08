@@ -87,7 +87,8 @@ try:
             assert page.locator('.main-nav [data-view="places"]').evaluate("el=>getComputedStyle(el).outlineStyle==='solid'")
             page.keyboard.press('Enter')
             assert page.locator('#view-places').is_visible()
-            assert 'sera intégrée' in page.locator('#view-places').inner_text()
+            assert page.locator('#placesContent').get_by_role('button',name='Créer un lieu',exact=True).is_visible()
+            assert 'Domicile, associations et position actuelle sont indépendants' in page.locator('#view-places').inner_text()
             assert all(r.startswith(url.rsplit('/',1)[0]) for r in requests),requests
             assert not errors,errors
             if width in [1440,390]:

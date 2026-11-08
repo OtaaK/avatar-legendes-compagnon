@@ -173,6 +173,9 @@ label{color:var(--muted)}
 
 /* Profils PNJ : quinze cases restent visibles, y compris sur petit écran. */
 .resource-cells{gap:3px}.sheet-side .resource-cell{min-height:36px;border-width:1px;min-width:0}.npc-resource-editor{margin:14px 0;padding-block:12px;border-block:1px solid var(--line)}.npc-resource-editor summary{cursor:pointer;color:var(--gold)}.npc-resource-editor .row button{font-size:12px}.npc-resource-editor .notice{font-size:12px;margin-top:10px}.npc-resource-editor input,.npc-resource-editor textarea{box-sizing:border-box}
+
+/* Lot 4 : lieux */
+.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px;margin:12px 0}.place-card{border:1px solid var(--line,#405671);border-radius:12px;padding:12px;min-width:0}.place-card p{font-size:12px;color:var(--muted)}.place-breadcrumb{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.place-tree{padding-left:0;list-style:none;max-height:420px;overflow:auto}.place-tree li{margin:6px 0}.place-check{display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}.place-check input{width:auto;flex:none}.place-portrait{max-width:100%;width:420px;max-height:260px;object-fit:contain}.place-thumbnail{display:block;width:100%;height:100px;object-fit:cover;margin-bottom:8px}.place-description{white-space:pre-wrap;overflow-wrap:anywhere}.place-warning{border:1px solid var(--gold,#e2c184);padding:12px;margin:12px 0}#placesContent button{max-width:100%;overflow-wrap:anywhere}#placeForm{max-width:720px}#placesContent h3{overflow-wrap:anywhere}
 </style>
 <a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
@@ -187,10 +190,10 @@ label{color:var(--muted)}
 <p class="app-subtitle">Personnages, lieux et aventures · données conservées dans ce navigateur</p>
 <main id="appContent" tabindex="-1"><div id="storageWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #ef4444;border-radius:8px;background:#3a1919;color:#fff"></div><div id="recoveryWarning" role="alert" hidden style="padding:12px;margin:10px 0;border:2px solid #f59e0b;border-radius:8px;background:#382810;color:#fff"></div>
 <section class="app-view" id="view-home" aria-label="Accueil"><div class="panel"><div class="home-intro"><p class="section-eyebrow">À la table de jeu</p><h2>Bienvenue dans le Compagnon</h2><p>Retrouve tes personnages, prépare la prochaine scène et reprends le fil du combat. Tes fiches restent disponibles hors connexion.</p></div><div class="home-actions"><button onclick="setView('characters',true,true)">Ouvrir les personnages</button><button class="alt" onclick="setView('combat',true,true)">Reprendre le combat</button><button class="alt" onclick="setView('catalog',true,true)">Consulter les techniques</button></div></div></section>
-<section class="app-view" id="view-places" aria-label="Lieux" hidden><div class="panel pending-section"><p class="section-eyebrow">Prochaine étape de la refonte</p><h2>Lieux</h2><p>L’arborescence des lieux sera intégrée après les nouvelles fiches. Les lieux déjà saisis sur tes PNJ sont conservés et restent accessibles dans Personnages.</p><button type="button" onclick="setView('characters',true,true);setCharacterKind('PNJ')">Consulter les lieux des PNJ</button></div></section>
+<section class="app-view" id="view-places" aria-label="Lieux" hidden><div class="panel"><h2>Lieux</h2><p class="small-note">Domicile, associations et position actuelle sont indépendants. Les anciens textes sont conservés.</p><div id="placesContent"></div></div></section>
 <section class="app-view" id="view-management" aria-label="Gestion" hidden><div class="panel"><p class="section-eyebrow">Tes données</p><h2>Gestion</h2><p>Les sauvegardes restent dans ce navigateur. Conserve un export JSON dans un dossier personnel pour pouvoir les retrouver.</p>
 <div class="management-group"><h3>Sauvegarde complète</h3><p>Fiches et combat réunis dans un fichier. Une confirmation est demandée avant de remplacer les données actuelles.</p><div class="row"><button type="button" onclick="exportCompleteBackup()">Exporter la sauvegarde complète</button><button type="button" class="alt" onclick="$('backupImportFile').click()">Restaurer une sauvegarde complète</button></div></div>
-<div class="management-group"><h3>Retour à la version précédente</h3><p>L’activation des profils PNJ conserve l’état local antérieur. Cette copie permet de retrouver ses données avec l’ancienne application ; les changements suivants restent dans la nouvelle version.</p><button type="button" class="alt" id="exportPreProfileBackup" onclick="exportPreProfileBackup()">Exporter l’état avant les profils PNJ</button></div>
+<div class="management-group"><h3>Retour à la version précédente</h3><p>L’activation des profils PNJ ou des Lieux conserve l’état local antérieur. Le bouton ci-dessous exporte le point précédant la première de ces activations. Cette copie permet de retrouver ses données avec l’ancienne application ; les changements suivants restent dans la nouvelle version.</p><button type="button" class="alt" id="exportPreProfileBackup" onclick="exportPreProfileBackup()">Exporter l’état avant les profils PNJ</button></div>
 <div class="management-group"><h3>Fiches de personnages</h3><p>Les fiches peuvent aussi être conservées séparément du combat.</p><div class="row"><button type="button" class="alt" onclick="exportRoster()">Exporter les fiches</button><button type="button" class="alt" onclick="$('rosterFile').click()">Importer les fiches</button></div></div>
 <div class="management-group"><h3>Combat</h3><p>L’export privé contient l’état complet. Le compte rendu partageable masque le pari secret.</p><div class="row"><button type="button" class="alt" onclick="download()">Exporter le combat privé</button><button type="button" class="alt" onclick="downloadPublicCombat()">Exporter le compte rendu partageable</button><button type="button" class="alt" onclick="$('importFile').click()">Importer un combat</button></div></div>
 </div></section>
@@ -2772,6 +2775,49 @@ const approachLabels={defendre:'Défendre et prendre à revers',attaquer:'Avance
 'use strict';
 'use strict';
 'use strict';
+// UI/UX lot 4 : lieux et relations narratives, indépendants des règles de combat.
+const PlaceRules=(()=>{
+ const clone=x=>JSON.parse(JSON.stringify(x)),idOk=x=>typeof x==='string'&&x.length>0&&x.length<=120;
+ const all=lib=>lib.places||[],find=(lib,id)=>all(lib).find(p=>p.id===id);
+ function links(c){return {homeId:null,currentId:null,associatedIds:[],...(c.placeLinks||{})};}
+ function validate(lib){
+  if(lib.placeSeq!==undefined&&(!Number.isSafeInteger(lib.placeSeq)||lib.placeSeq<1))throw Error('Compteur de lieux invalide');
+  if(lib.places!==undefined&&!Array.isArray(lib.places))throw Error('Liste de lieux invalide');
+  const map=new Map();
+  for(const p of all(lib)){
+   if(!p||!idOk(p.id)||map.has(p.id))throw Error('Identifiant de lieu invalide ou dupliqué');
+   if(typeof p.name!=='string'||!p.name.trim()||p.name.length>120)throw Error('Nom de lieu requis (120 caractères maximum)');
+   if(p.description!==undefined&&(typeof p.description!=='string'||p.description.length>2000))throw Error('Description de lieu invalide');
+   if(p.parentId!==null&&!idOk(p.parentId))throw Error('Parent de lieu invalide');
+   if(p.portrait!==undefined&&p.portrait!==null&&(typeof p.portrait!=='string'||p.portrait.length>360000))throw Error('Illustration de lieu invalide');
+   map.set(p.id,p);
+  }
+  // Parcours itératif : aucune limite de profondeur ni récursion de pile.
+  const done=new Set();
+  for(const p of all(lib)){const path=new Set();let node=p;while(node&&!done.has(node.id)){if(path.has(node.id))throw Error('Cycle dans les lieux');path.add(node.id);node=map.get(node.parentId);}for(const id of path)done.add(id);}
+  for(const c of lib.characters||[]){if(c.placeLinks===undefined)continue;const l=c.placeLinks;
+   if(c.kind!=='PNJ'||!l||typeof l!=='object'||Array.isArray(l)||!(l.homeId===null||idOk(l.homeId))||!(l.currentId===undefined||l.currentId===null||idOk(l.currentId))||!Array.isArray(l.associatedIds)||l.associatedIds.some(x=>!idOk(x))||new Set(l.associatedIds).size!==l.associatedIds.length)throw Error('Liens PNJ–lieux invalides');
+  }
+  return lib;
+ }
+ function issues(lib){const known=new Set(all(lib).map(p=>p.id)),out=[];
+  for(const p of all(lib))if(p.parentId&&!known.has(p.parentId))out.push({type:'parent',id:p.id,missing:p.parentId});
+  for(const c of lib.characters||[])if(c.placeLinks)for(const id of new Set([c.placeLinks.homeId,c.placeLinks.currentId,...c.placeLinks.associatedIds].filter(Boolean)))if(!known.has(id))out.push({type:'character',id:c.id,missing:id});return out;
+ }
+ function transact(lib,change){const next=clone(lib),result=change(next);validate(next);next.version=2;Object.assign(lib,next);return result;}
+ function create(lib,name,parentId=null){return transact(lib,next=>{if(parentId&&!find(next,parentId))throw Error('Parent absent');const reserved=new Set([...all(next).map(p=>p.id),...issues(next).map(x=>x.missing)]);let seq=Number.isSafeInteger(next.placeSeq)?next.placeSeq:1;while(reserved.has('place-'+seq))seq++;next.placeSeq=seq+1;const p={id:'place-'+seq,name:name.trim(),description:'',parentId};next.places=[...all(next),p];return p.id;});}
+ function update(lib,id,patch){return transact(lib,next=>{const p=find(next,id);if(!p)throw Error('Lieu absent');if(Object.keys(patch).some(k=>!['name','description','parentId','portrait'].includes(k)))throw Error('Champ de lieu protégé');if(patch.parentId&&!find(next,patch.parentId))throw Error('Parent absent');Object.assign(p,clone(patch));});}
+ function setLinks(lib,id,patch){return transact(lib,next=>{const c=next.characters.find(c=>c.id===id&&c.kind==='PNJ');if(!c)throw Error('PNJ absent');if(Object.keys(patch).some(k=>!['homeId','currentId','associatedIds'].includes(k)&&(!Object.hasOwn(c.placeLinks||{},k)||JSON.stringify(patch[k])!==JSON.stringify(c.placeLinks[k]))))throw Error('Lien inconnu');const before=links(c),l={...before,...clone(patch)};if(!Object.hasOwn(patch,'currentId')&&!Object.hasOwn(c.placeLinks||{},'currentId'))delete l.currentId;for(const key of Object.keys(patch).filter(k=>['homeId','currentId','associatedIds'].includes(k))){const ids=key==='associatedIds'?l[key]:[l[key]];if(!Array.isArray(ids))throw Error('Liens invalides');for(const value of ids)if(value&&!find(next,value)&&!(key==='associatedIds'?before.associatedIds.includes(value):before[key]===value))throw Error('Lieu absent : '+value);}c.placeLinks=l;});}
+ function descendants(lib,id){const children=new Map();for(const p of all(lib)){if(!children.has(p.parentId))children.set(p.parentId,[]);children.get(p.parentId).push(p.id);}const result=new Set(),queue=[id];while(queue.length){const current=queue.pop();if(result.has(current))continue;result.add(current);for(const child of children.get(current)||[])queue.push(child);}return result;}
+ function path(lib,id){const map=new Map(all(lib).map(p=>[p.id,p])),out=[],seen=new Set();let p=map.get(id);while(p&&!seen.has(p.id)){seen.add(p.id);out.push(p);p=map.get(p.parentId);}return out.reverse();}
+ function people(lib,id,recursive=false){const ids=recursive?descendants(lib,id):new Set([id]),npcs=(lib.characters||[]).filter(c=>c.kind==='PNJ');return {present:npcs.filter(c=>ids.has(links(c).currentId)),associated:npcs.filter(c=>links(c).associatedIds.some(x=>ids.has(x))),domiciled:npcs.filter(c=>ids.has(links(c).homeId))};}
+ function dependencies(lib,id){return {children:all(lib).filter(p=>p.parentId===id),characters:(lib.characters||[]).filter(c=>{const l=links(c);return l.homeId===id||l.currentId===id||l.associatedIds.includes(id);})};}
+ function remove(lib,id,strategy){return transact(lib,next=>{const p=find(next,id);if(!p)throw Error('Lieu absent');const dep=dependencies(next,id);if(strategy!=='promote-unlink'&&(dep.children.length||dep.characters.length))throw Error('Choisis explicitement le traitement des dépendances');if(strategy!==undefined&&strategy!=='promote-unlink')throw Error('Stratégie inconnue');for(const child of dep.children)child.parentId=p.parentId;for(const c of dep.characters){const l=c.placeLinks;c.placeLinks={...l,homeId:l.homeId===id?null:l.homeId,associatedIds:l.associatedIds.filter(x=>x!==id)};if(l.currentId===id)c.placeLinks.currentId=null;}next.places=all(next).filter(x=>x.id!==id);});}
+ function currentName(lib,c){if(c.placeLinks&&Object.hasOwn(c.placeLinks,'currentId'))return c.placeLinks.currentId?(find(lib,c.placeLinks.currentId)?.name||'Lieu absent : '+c.placeLinks.currentId):'';return c.location||'';}
+ return {all,find,links,validate,issues,create,update,setLinks,descendants,path,people,dependencies,remove,currentName};
+})();
+window.PlaceRules=PlaceRules;
+
 const rosterClone=x=>JSON.parse(JSON.stringify(x));
 const STATS=['creativite','concentration','harmonie','enthousiasme'];
 const CONDITIONS=['Terrifié','En colère','Coupable','Fragile','Confus'];
@@ -2813,7 +2859,7 @@ function updateCharacter(lib,id,patch){
  // Les anciennes valeurs importées restent lisibles ; toute nouvelle classification est contrôlée.
  if(Object.hasOwn(patch,'importance')&&patch.importance!==c.importance&&(c.kind!=='PNJ'||!['',...NPC_IMPORTANCE].includes(patch.importance)))throw Error('Importance PNJ invalide');
  const next={...rosterClone(c),...rosterClone(patch),stats:{...c.stats,...(patch.stats||{})}};
- validateCharacter(next);Object.assign(c,next);if(npcResourceProfile(c))lib.version=2;return c;
+ validateCharacter(next);if(Object.hasOwn(patch,'placeLinks'))PlaceRules.setLinks(rosterClone(lib),id,patch.placeLinks);PlaceRules.validate({...lib,characters:lib.characters.map(x=>x.id===id?next:x)});Object.assign(c,next);if(npcResourceProfile(c)||c.placeLinks)lib.version=2;return c;
 }
 function assignTechnique(lib,id,name,mastery='acquise'){
  if(!MASTERY.includes(mastery)||!name||name.length>120)throw Error('Technique invalide');
@@ -2866,13 +2912,13 @@ function toggleStatus(lib,id,name){
 }
 function listNpcs(lib,{location='',search='',training='',role='',importance='',sort='name'}={}){
  const q=search.trim().toLocaleLowerCase('fr');
- const npcs=lib.characters.filter(c=>c.kind==='PNJ'&&(!location||((c.location||'')===location))&&
-  (!q||[c.name,c.livret,c.location,c.notes].join(' ').toLocaleLowerCase('fr').includes(q))&&
+ const npcs=lib.characters.filter(c=>c.kind==='PNJ'&&(!location||(PlaceRules.currentName(lib,c)===location))&&
+  (!q||[c.name,c.livret,PlaceRules.currentName(lib,c),c.notes].join(' ').toLocaleLowerCase('fr').includes(q))&&
   (!training||c.training===training)&&(!role||c.livret===role)&&
   (!importance||(importance==='__unspecified__'?!npcImportance(c):npcImportance(c)===importance)));
  const byName=(a,b)=>a.name.localeCompare(b.name,'fr')||String(a.id).localeCompare(String(b.id));
  return npcs.sort((a,b)=>{
-  if(sort==='location')return (a.location||'').localeCompare(b.location||'','fr')||byName(a,b);
+  if(sort==='location')return PlaceRules.currentName(lib,a).localeCompare(PlaceRules.currentName(lib,b),'fr')||byName(a,b);
   if(sort==='importance-asc'||sort==='importance-desc'){
    const ai=NPC_IMPORTANCE.indexOf(npcImportance(a)),bi=NPC_IMPORTANCE.indexOf(npcImportance(b));
    // Les fiches non classées restent en fin de liste dans les deux sens.
@@ -2882,13 +2928,13 @@ function listNpcs(lib,{location='',search='',training='',role='',importance='',s
   return byName(a,b);
  });
 }
-function npcLocations(lib){return [...new Set(lib.characters.filter(c=>c.kind==='PNJ').map(c=>c.location||'').filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
+function npcLocations(lib){return [...new Set(lib.characters.filter(c=>c.kind==='PNJ').map(c=>PlaceRules.currentName(lib,c)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
 function importLibrary(raw){
  const lib=typeof raw==='string'?JSON.parse(raw):rosterClone(raw);
  if(![1,2].includes(lib?.version)||!Array.isArray(lib.characters)||!Number.isInteger(lib.seq))throw Error('Format bibliothèque incompatible');
  const ids=new Set();
  for(const c of lib.characters){normalizeCharacter(c);validateCharacter(c);if(ids.has(c.id))throw Error('Identifiant dupliqué');ids.add(c.id)}
- if(lib.characters.some(c=>c.npcResources))lib.version=2;
+ PlaceRules.validate(lib);if(lib.places!==undefined||lib.characters.some(c=>c.npcResources||c.placeLinks))lib.version=2;
  return lib;
 }
 window.Roster={NPC_IMPORTANCE,npcImportance,listNpcs,npcLocations,TRAININGS,TO_ENGINE,FROM_ENGINE,STATS,MASTERY,CONDITIONS,STATUSES,normalizeCharacter,toggleCondition,toggleStatus,createLibrary,makeCharacter,validateCharacter,createCharacter,updateCharacter,assignTechnique,addToCombat,syncCombatToLibrary,importLibrary};
@@ -3611,7 +3657,7 @@ function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.t
 
 function exportPreProfileBackup(){
  try{
-  if(!profileStorageActive())throw Error('Aucun profil PNJ n’a encore été activé. Utilise la sauvegarde complète habituelle.');
+  if(!profileStorageActive())throw Error('Aucune donnée étendue (profil PNJ ou Lieux) n’a encore été activée. Utilise la sauvegarde complète habituelle.');
   const library=loadSaved(ROSTER_KEYS.slice(1),x=>Roster.importLibrary(x),()=>Roster.createLibrary()),combat=loadSaved(COMBAT_KEYS.slice(1),x=>validateCombat(x),()=>CombatCore.createCombat());
   validateBackupLinks(library,combat);
   const data={format:'avatar-compagnon-backup',version:1,createdAt:new Date().toISOString(),library,combat};
@@ -3755,8 +3801,10 @@ function quickNavigation(e){
 }
 document.addEventListener('keydown',quickNavigation);
 function setView(view,scroll=true,focus=false){
+ if(currentView==='places'&&view!=='places'&&!confirmPlaceNavigation())return;
  if(currentView==='characters'&&view!=='characters'&&!confirmSheetNavigation())return;
  if(!VIEWS.includes(view))view='home';
+ if(view==='places'&&!(currentView==='places'&&placeEditing))renderPlaces();
  if(view==='management'){try{$('exportPreProfileBackup').disabled=!profileStorageActive()}catch(e){$('exportPreProfileBackup').disabled=true}}
  currentView=view;
  document.querySelectorAll('.app-view').forEach(el=>{el.hidden=el.id!=='view-'+view && !(view==='combat'&&el.id==='view-combat-panels')});
@@ -3784,10 +3832,66 @@ function applySheetTab(){
 
 let characterKind='PJ';
 let characterDetailOpen=false;
+// Lieux : rendu sans récursion et formulaires locaux, aucune dépendance réseau.
+let selectedPlaceId=null,placeEditing=false,placeInitial='',placeImagePending=false,placeEditRevision=0;
+function placeFields(){return ['placeName','placeDescription','placeParent','placePortrait'].map(id=>$(id)?.value||'');}
+function placeDirty(){return placeEditing&&(placeImagePending||JSON.stringify(placeFields())!==placeInitial);}
+function confirmPlaceNavigation(){if(placeDirty()&&!confirm('Abandonner les modifications non enregistrées de ce lieu ?'))return false;placeEditing=false;placeImagePending=false;placeEditRevision++;return true;}
+function placeOptionList(value='',excluded=new Set()){
+ const rows=PlaceRules.all(lib).filter(p=>!excluded.has(p.id)).sort((a,b)=>a.name.localeCompare(b.name,'fr')),counts=new Map();for(const p of rows)counts.set(p.name,(counts.get(p.name)||0)+1);
+ const label=p=>counts.get(p.name)>1?PlaceRules.path(lib,p.id).map(x=>x.name).join(' › ')+' ['+p.id+']':p.name;
+ return '<option value="">Aucun lieu</option>'+rows.map(p=>`<option value="${safe(p.id)}" ${p.id===value?'selected':''}>${safe(label(p))}</option>`).join('')+(value&&!PlaceRules.find(lib,value)?`<option value="${safe(value)}" selected>Lieu absent : ${safe(value)}</option>`:'');
+}
+function placeLink(id){const p=PlaceRules.find(lib,id);return id?(p?`<button type="button" class="alt" data-place-open="${safe(id)}" onclick="openPlace(this.dataset.placeOpen)">${safe(p.name)}</button>`:`<span>Lieu absent : ${safe(id)}</span>`):'<span>Non renseigné</span>';}
+function npcPlacesRead(c){const l=PlaceRules.links(c),position=Object.hasOwn(c.placeLinks||{},'currentId')?placeLink(l.currentId):'<p>'+safe(c.location||'Non renseignée')+'</p><p class="small-note">Position en texte historique, pas encore reliée à l’arborescence.</p>';return `<h3>Domicile</h3>${placeLink(l.homeId)}<h3>Lieux associés</h3>${l.associatedIds.length?l.associatedIds.map(placeLink).join(' '):'<p>Aucun</p>'}<h3>Position actuelle</h3>${position}<label for="quickNpcPlace">Changer de position</label><select id="quickNpcPlace">${placeOptionList(l.currentId)}</select><button type="button" onclick="moveNpcToPlace()">Appliquer la position</button><p class="small-note">Le domicile, les associations et le combat restent inchangés. Les relations structurelles se modifient avec Modifier.</p>${c.location?`<details><summary>Ancien lieu en texte conservé</summary><p>${safe(c.location)}</p><button type="button" onclick="linkLegacyNpcPlace()">Relier ce texte à un lieu</button></details>`:''}`;}
+function npcPlacesEditor(c){const l=PlaceRules.links(c),known=new Set(PlaceRules.all(lib).map(p=>p.id));return `<h3>Liens de lieux</h3><label for="sheetHomePlace">Domicile</label><select id="sheetHomePlace">${placeOptionList(l.homeId)}</select><label for="sheetCurrentPlace">Position actuelle</label><select id="sheetCurrentPlace">${placeOptionList(l.currentId)}</select><fieldset><legend>Lieux associés (plusieurs choix)</legend><input id="sheetAssociatedPlaces" type="hidden" value="${safe(JSON.stringify(l.associatedIds))}">${[...PlaceRules.all(lib).map(p=>({id:p.id,name:p.name})),...l.associatedIds.filter(id=>!known.has(id)).map(id=>({id,name:'Lieu absent : '+id}))].map(p=>`<label class="place-check"><input type="checkbox" data-place-association="${safe(p.id)}" ${l.associatedIds.includes(p.id)?'checked':''} onchange="updatePlaceAssociations()"> ${safe(p.name)}</label>`).join('')||'<p>Créer les lieux dans Lieux, puis revenir modifier cette fiche.</p>'}</fieldset><p class="small-note">Aucun lien n’est déduit du texte historique. Une position vide est distincte de ce texte conservé.</p>`;}
+function updatePlaceAssociations(){ $('sheetAssociatedPlaces').value=JSON.stringify([...$('sheetForm').querySelectorAll('[data-place-association]:checked')].map(el=>el.dataset.placeAssociation));}
+function ensurePlacesActivation(){return profileStorageActive()||confirm('Activer les Lieux ? Les sauvegardes étendues nécessitent cette nouvelle version. L’état antérieur est conservé dans ce navigateur.');}
+function moveNpcToPlace(){try{const c=selectedSheet(),id=$('quickNpcPlace').value||null;if(PlaceRules.links(c).currentId===id&&Object.hasOwn(c.placeLinks||{},'currentId'))return;if(!ensurePlacesActivation())return;commitLibraryMutation(()=>PlaceRules.setLinks(lib,c.id,{currentId:id}));renderSheets(c.id);sheetFeedback('Position enregistrée. Domicile et associations conservés.');}catch(e){alert(e.message);}}
+function linkLegacyNpcPlace(){try{const c=selectedSheet();if(!c?.location)return;const matches=PlaceRules.all(lib).filter(p=>p.name===c.location);if(matches.length>1)throw Error('Plusieurs lieux portent ce nom. Choisis la position dans le sélecteur.');if(!confirm('Relier le texte « '+c.location+' » à la position actuelle'+(matches.length?' ?':' en créant un lieu à la racine ?')+' Le domicile et les associations ne changent pas. Le texte est conservé.'))return;if(!ensurePlacesActivation())return;commitLibraryMutation(()=>{const id=matches[0]?.id||PlaceRules.create(lib,c.location);PlaceRules.setLinks(lib,c.id,{currentId:id});});renderSheets(c.id);}catch(e){alert(e.message);}}
+function openPlace(id){if(!confirmSheetNavigation()||!confirmPlaceNavigation())return;selectedPlaceId=id;setView('places',true,true);}
+function openPlacePerson(id){if(!confirmPlaceNavigation())return;setView('characters');setCharacterKind('PNJ');openCharacterDetail(id);}
+function placesAction(action,id){
+ if(action==='open'){openPlace(id||null);return;}
+ if(action==='person'){openPlacePerson(id);return;}
+ if(action==='new'){if(!confirmPlaceNavigation())return;selectedPlaceId=id||null;placeEditing=true;renderPlaces(true);return;}
+ if(action==='edit'){placeEditing=true;renderPlaces();return;}
+ if(action==='cancel'){if(confirmPlaceNavigation())renderPlaces();return;}
+ if(action==='delete'){deletePlace();return;}
+}
+function renderPlaces(isNew=false){
+ const host=$('placesContent');if(!host)return;
+ const p=PlaceRules.find(lib,selectedPlaceId),all=PlaceRules.all(lib),issues=PlaceRules.issues(lib);
+ const button=(action,id,label)=>`<button type="button" class="alt" data-place-action="${action}" data-id="${safe(id||'')}">${safe(label)}</button>`;
+ let html=issues.length?'<details class="place-warning"><summary>'+issues.length+' référence(s) de lieu absente(s) conservée(s)</summary><ul>'+issues.map(x=>'<li>'+safe((x.type==='parent'?'Parent de '+(PlaceRules.find(lib,x.id)?.name||x.id):'PNJ '+(lib.characters.find(c=>c.id===x.id)?.name||x.id))+' : '+x.missing)+'</li>').join('')+'</ul><p>Modifier le parent ou les liens du PNJ pour réparer volontairement.</p></details>':'';
+ html+='<nav class="place-breadcrumb" aria-label="Fil d’Ariane">'+button('open',null,'Tous les lieux')+(p?PlaceRules.path(lib,p.id).map(x=>button('open',x.id,x.name)).join(''):'')+'</nav>';
+ if(placeEditing){const item=isNew?null:p,excluded=item?PlaceRules.descendants(lib,item.id):new Set();html+=`<form id="placeForm"><h3>${item?'Modifier le lieu':'Nouveau lieu'}</h3><label for="placeName">Nom</label><input id="placeName" maxlength="120" required value="${safe(item?.name||'')}"><label for="placeDescription">Description (facultative)</label><textarea id="placeDescription" maxlength="2000">${safe(item?.description||'')}</textarea><label for="placeParent">Parent</label><select id="placeParent">${placeOptionList(item?.parentId||(isNew?selectedPlaceId:null),excluded)}</select><label for="placeImage">Illustration locale (PNG, JPEG, WebP · 256 Ko maximum)</label><input id="placeImage" type="file" accept="image/png,image/jpeg,image/webp"><input id="placePortrait" type="hidden" value="${safe(item?.portrait||'')}"><button type="button" class="alt" id="placeClearImage">Retirer l’illustration</button><div class="row"><button type="submit">Enregistrer le lieu</button>${button('cancel',null,'Annuler')}</div><p id="placeFeedback" role="status"></p></form>`;host.innerHTML=html;$('placeForm').dataset.editId=item?.id||'';$('placeForm').onsubmit=savePlace;$('placeImage').onchange=readPlaceImage;$('placeClearImage').onclick=()=>{$('placePortrait').value='';placeEditRevision++;placeImagePending=false;};placeInitial=JSON.stringify(placeFields());
+ }else{
+  if(selectedPlaceId&&!p)html+='<p role="status">Ce lieu est absent. Ses références éventuelles sont conservées.</p>';
+  if(p){const image=safeSheetPortrait(p.portrait);html+=`<h3>${safe(p.name)}</h3>${image?`<img class="place-portrait" src="${safe(image)}" alt="">`:''}<p class="place-description">${safe(p.description||'Aucune description.')}</p><div class="row">${button('edit',p.id,'Modifier le lieu')}${button('new',p.id,'Créer un sous-lieu')}${button('delete',p.id,'Supprimer le lieu')}</div>`;}
+  else html+='<div class="row">'+button('new',null,'Créer un lieu')+'</div>';
+  const placeIds=new Set(all.map(x=>x.id)),childCounts=new Map(),presentCounts=new Map(),associatedCounts=new Map();for(const x of all)childCounts.set(x.parentId,(childCounts.get(x.parentId)||0)+1);for(const c of lib.characters){if(c.kind!=='PNJ')continue;const l=PlaceRules.links(c);presentCounts.set(l.currentId,(presentCounts.get(l.currentId)||0)+1);for(const id of l.associatedIds)associatedCounts.set(id,(associatedCounts.get(id)||0)+1);}
+  const children=all.filter(x=>p?x.parentId===p.id:!x.parentId||!placeIds.has(x.parentId));
+  html+='<h3>'+(p?'Sous-lieux':'Lieux à la racine')+'</h3><div class="place-grid">'+children.map(x=>{const counts={present:presentCounts.get(x.id)||0,associated:associatedCounts.get(x.id)||0};return '<article class="place-card">'+(safeSheetPortrait(x.portrait)?'<img class="place-thumbnail" src="'+safe(safeSheetPortrait(x.portrait))+'" alt="">':'')+button('open',x.id,x.name)+'<p>'+(childCounts.get(x.id)||0)+' sous-lieu(x) · '+counts.present+' présent(s) · '+counts.associated+' associé(s)</p></article>';}).join('')+'</div>'+(children.length?'':'<p>Aucun sous-lieu.</p>');
+  if(p)html+='<label for="placeRecursive">Périmètre des PNJ</label><select id="placeRecursive"><option value="no">Ici uniquement</option><option value="yes">Inclure les sous-lieux</option></select><div id="placePeople"></div>';
+  html+='<details><summary>Arborescence complète ('+all.length+')</summary><ul class="place-tree">';
+  const byParent=new Map(),known=new Set(all.map(x=>x.id));for(const x of all){const key=known.has(x.parentId)?x.parentId:null;if(!byParent.has(key))byParent.set(key,[]);byParent.get(key).push(x);}
+  const stack=[...(byParent.get(null)||[])].reverse().map(x=>[x,0]);while(stack.length){const [x,depth]=stack.pop();html+='<li>'+button('open',x.id,(depth?'↳ ':'')+x.name)+'<span class="small-note"> niveau '+(depth+1)+'</span></li>';for(const child of [...(byParent.get(x.id)||[])].reverse())stack.push([child,depth+1]);}
+  html+='</ul></details>';host.innerHTML=html;if(p){$('placeRecursive').onchange=renderPlacePeople;renderPlacePeople();}
+ }
+ host.onclick=event=>{const b=event.target.closest('[data-place-action]');if(b)placesAction(b.dataset.placeAction,b.dataset.id);};
+}
+function renderPlacePeople(){const groups=PlaceRules.people(lib,selectedPlaceId,$('placeRecursive').value==='yes');$('placePeople').innerHTML=[['present','Présents actuellement'],['associated','Associés au lieu'],['domiciled','Domiciliés']].map(([key,label])=>'<section><h3>'+label+' ('+groups[key].length+')</h3>'+groups[key].map(c=>`<button type="button" class="alt" data-place-action="person" data-id="${safe(c.id)}">${safe(c.name)}</button>`).join(' ')+(groups[key].length?'':'<p>Aucun PNJ.</p>')+'</section>').join('');}
+function savePlace(event){event.preventDefault();try{if(placeImagePending)throw Error('Lecture de l’illustration en cours.');const [name,description,parent,portrait]=placeFields(),id=$('placeForm').dataset.editId;if(portrait&&safeSheetPortrait(portrait)!==portrait)throw Error('Illustration locale invalide.');if(!profileStorageActive()&&!confirm('Activer les Lieux ? Les sauvegardes étendues nécessitent cette nouvelle version. L’état antérieur est conservé dans ce navigateur.'))return;let saved=id;commitLibraryMutation(()=>{if(!saved)saved=PlaceRules.create(lib,name,parent||null);PlaceRules.update(lib,saved,{name:name.trim(),description,parentId:parent||null,portrait});});placeEditing=false;placeEditRevision++;selectedPlaceId=saved;renderPlaces();}catch(e){$('placeFeedback').textContent=e.message;}}
+function readPlaceImage(event){const file=event.target.files?.[0];if(!file)return;const revision=++placeEditRevision;try{if(file.size>262144||!['image/png','image/jpeg','image/webp'].includes(file.type))throw Error('Image PNG, JPEG ou WebP de 256 Ko maximum requise.');placeImagePending=true;const reader=new FileReader();reader.onload=()=>{if(revision!==placeEditRevision)return;placeImagePending=false;const value=reader.result;if(!safeSheetPortrait(value)){$('placeFeedback').textContent='Illustration invalide.';return;}$('placePortrait').value=value;$('placeFeedback').textContent='Illustration prête à enregistrer.';};reader.onerror=()=>{if(revision===placeEditRevision){placeImagePending=false;$('placeFeedback').textContent='Lecture impossible.';}};reader.readAsDataURL(file);}catch(e){placeImagePending=false;$('placeFeedback').textContent=e.message;}}
+function deletePlace(){try{const p=PlaceRules.find(lib,selectedPlaceId);if(!p)return;const d=PlaceRules.dependencies(lib,p.id);const message='Supprimer « '+p.name+' » ?\n'+d.children.length+' sous-lieu(x) seront rattachés au parent (ou à la racine).\n'+d.characters.length+' PNJ verront uniquement leurs liens à ce lieu retirés.\nAucun PNJ ni sous-lieu ne sera supprimé.\nAnnuler pour déplacer ou réaffecter ces dépendances soi-même avant suppression.';if(!confirm(message))return;commitLibraryMutation(()=>PlaceRules.remove(lib,p.id,'promote-unlink'));selectedPlaceId=p.parentId;renderPlaces();}catch(e){alert(e.message);}}
+window.addEventListener('beforeunload',event=>{if(placeDirty()){event.preventDefault();event.returnValue='';}});
+
+
 // UI/UX lot 3 — états d'édition et helpers ; aucune règle de combat modifiée.
 let sheetEditing=false,sheetPortraitPending=false,sheetRevision=0,sheetInitialFields={},sheetInitialFingerprint='';
 let sheetDraftConditions=[],sheetDraftStatuses=[],sheetDraftTechniques=[],sheetResourceUndo=null;
-const SHEET_FIELD_IDS=['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames','sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
+const SHEET_FIELD_IDS=['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames','sheetHomePlace','sheetCurrentPlace','sheetAssociatedPlaces','sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
 function sheetFields(){return Object.fromEntries(SHEET_FIELD_IDS.filter(id=>$(id)).map(id=>[id,$(id).value]));}
 function sheetFingerprint(){return JSON.stringify([sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques]);}
 function sheetIsDirty(){return sheetEditing&&(sheetPortraitPending||sheetFingerprint()!==sheetInitialFingerprint);}
@@ -3807,6 +3911,7 @@ function sheetPatchFromFields(c,initial,fields,conditions,statuses,techniques){
  for(const [id,key] of [['sheetRelations','relationships'],['sheetMoves','playbookMoves']])if(changed(id))patch[key]=fields[id].split('\n').map(x=>x.trim()).filter(Boolean);
  for(const [key,value] of [['conditions',conditions],['statuses',statuses],['techniques',techniques]])if(JSON.stringify(c[key])!==JSON.stringify(value))patch[key]=JSON.parse(JSON.stringify(value));
  if(Object.hasOwn(fields,'npcProfileMode')&&['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames'].some(changed)){const rawProfile=npcProfileFromFields(fields),profile=rawProfile?{...(c.npcResources||{}),...rawProfile}:null;if(JSON.stringify(profile)!==JSON.stringify(c.npcResources??null))patch.npcResources=profile;}
+ if(['sheetHomePlace','sheetCurrentPlace','sheetAssociatedPlaces'].some(changed)){patch.placeLinks={homeId:null,associatedIds:[],...(c.placeLinks||{})};if(changed('sheetHomePlace'))patch.placeLinks.homeId=fields.sheetHomePlace||null;if(changed('sheetCurrentPlace'))patch.placeLinks.currentId=fields.sheetCurrentPlace||null;if(changed('sheetAssociatedPlaces'))patch.placeLinks.associatedIds=JSON.parse(fields.sheetAssociatedPlaces||'[]');}
  if(patch.desire!==undefined&&patch.desire.length>240)throw Error('Désir trop long (240 caractères maximum).');
  if(patch.description!==undefined&&patch.description.length>2000)throw Error('Description trop longue (2 000 caractères maximum).');
  if(patch.portrait&&safeSheetPortrait(patch.portrait)!==patch.portrait)throw Error('Portrait invalide : image PNG, JPEG ou WebP locale attendue.');
@@ -3847,6 +3952,7 @@ function updateNpcProfileNotice(){
 function selectedSheet(){return lib.characters.find(c=>c.id===$('sheetSelect').value);}
 function sheetFeedback(text){$('sheetFeedback').textContent=text;}
 function confirmSheetNavigation(){
+ if(!confirmPlaceNavigation())return false;
  if(sheetIsDirty()&&!confirm('Abandonner les modifications non enregistrées de cette fiche ?'))return false;
  if(sheetEditing){sheetEditing=false;showSheet();}
  return true;
@@ -3893,14 +3999,15 @@ function renderSheetTabs(c){
 function sheetTechniqueCards(techniques){return techniques.map(t=>{const ref=TECH_CATALOG.find(x=>x.nom===t.name);return `<details class="sheet-technique"><summary>${safe(t.name)} <span>${safe({acquise:'Acquise',pratiquee:'Pratiquée',maitrisee:'Maîtrisée'}[t.mastery]||t.mastery)}</span></summary><p>${ref?'Référence : livre p. '+safe(ref.page)+'.':'Technique saisie sur la fiche.'} Les effets restent soumis aux validations du combat.</p></details>`}).join('')||'<p class="card-muted">Aucune technique renseignée.</p>';}
 function renderSheetRead(c){
  const narrative=value=>safe(sheetText(value)).replaceAll('\n','<br>');
- let overview=c.kind==='PJ'?`<div class="sheet-stat-grid">${Roster.STATS.map((key,i)=>`<div><span>${['Créativité','Concentration','Harmonie','Enthousiasme'][i]}</span><strong>${c.stats[key]>0?'+':''}${c.stats[key]}</strong></div>`).join('')}</div><h3>Entraînement</h3><p>${safe(c.training||'Non renseigné')}</p>`:`<h3>Désir</h3><p>${narrative(c.desire)||'Non renseigné'}</p>${sheetText(c.description)?'<h3>Description</h3><p>'+narrative(c.description)+'</p>':''}<h3>Lieu actuel</h3><p>${safe(c.location||'Non renseigné')}</p><h3>Principe</h3><p>${safe(c.principles?.[0]||c.principles?.[1]||'Non renseigné')}</p>${c.principles?.[0]&&c.principles?.[1]?'<details><summary>Ancien second principe conservé</summary><p>'+safe(c.principles[1])+'</p></details>':''}`;
- $('sheetRead').innerHTML=`<section data-read-tab="identity">${overview}</section><section data-read-tab="techniques">${sheetTechniqueCards(c.techniques)}</section>${c.kind==='PJ'?`<section data-read-tab="playbook"><h3>${safe(c.livret||'Livret non renseigné')}</h3>${Playbooks.byName(c.livret)?'<p class="small-note">Référence : livre p. '+Playbooks.byName(c.livret).page+'.</p>':''}<h3>Manœuvres enregistrées</h3>${c.playbookMoves.map(name=>`<details class="sheet-technique"><summary>${safe(name)}</summary><p>Consulte le livret pour le déclenchement et les choix de cette manœuvre.</p></details>`).join('')||'<p>Aucune manœuvre renseignée.</p>'}</section><section data-read-tab="story"><h3>Histoire</h3><p>${narrative(c.history)||'Non renseignée'}</p><h3>Relations</h3>${c.relationships.length?'<ul>'+c.relationships.map(r=>'<li>'+safe(r)+'</li>').join('')+'</ul>':'<p>Aucune relation renseignée.</p>'}<h3>Notes</h3><p>${narrative(c.notes)||'Aucune note.'}</p></section>`:`<section data-read-tab="places"><h3>Position actuelle</h3><p>${safe(c.location||'Non renseignée')}</p><p class="small-note">La position est modifiable avec « Modifier ». Les lieux liés seront accessibles depuis cet espace.</p></section>${sheetText(c.notes)||c.relationships.length||c.playbookMoves.length||sheetText(c.history)||sheetText(c.livret)?`<details class="sheet-legacy-read" data-read-tab="identity"><summary>Données historiques conservées</summary><p>${narrative(c.livret)}</p><p>${narrative(c.notes)}</p><p>${narrative(c.history)}</p>${[...c.relationships,...c.playbookMoves].map(value=>'<p>'+safe(value)+'</p>').join('')}</details>`:''}`}`;
+ let overview=c.kind==='PJ'?`<div class="sheet-stat-grid">${Roster.STATS.map((key,i)=>`<div><span>${['Créativité','Concentration','Harmonie','Enthousiasme'][i]}</span><strong>${c.stats[key]>0?'+':''}${c.stats[key]}</strong></div>`).join('')}</div><h3>Entraînement</h3><p>${safe(c.training||'Non renseigné')}</p>`:`<h3>Désir</h3><p>${narrative(c.desire)||'Non renseigné'}</p>${sheetText(c.description)?'<h3>Description</h3><p>'+narrative(c.description)+'</p>':''}<h3>Lieu actuel</h3><p>${safe(PlaceRules.currentName(lib,c)||'Non renseigné')}</p><h3>Principe</h3><p>${safe(c.principles?.[0]||c.principles?.[1]||'Non renseigné')}</p>${c.principles?.[0]&&c.principles?.[1]?'<details><summary>Ancien second principe conservé</summary><p>'+safe(c.principles[1])+'</p></details>':''}`;
+ $('sheetRead').innerHTML=`<section data-read-tab="identity">${overview}</section><section data-read-tab="techniques">${sheetTechniqueCards(c.techniques)}</section>${c.kind==='PJ'?`<section data-read-tab="playbook"><h3>${safe(c.livret||'Livret non renseigné')}</h3>${Playbooks.byName(c.livret)?'<p class="small-note">Référence : livre p. '+Playbooks.byName(c.livret).page+'.</p>':''}<h3>Manœuvres enregistrées</h3>${c.playbookMoves.map(name=>`<details class="sheet-technique"><summary>${safe(name)}</summary><p>Consulte le livret pour le déclenchement et les choix de cette manœuvre.</p></details>`).join('')||'<p>Aucune manœuvre renseignée.</p>'}</section><section data-read-tab="story"><h3>Histoire</h3><p>${narrative(c.history)||'Non renseignée'}</p><h3>Relations</h3>${c.relationships.length?'<ul>'+c.relationships.map(r=>'<li>'+safe(r)+'</li>').join('')+'</ul>':'<p>Aucune relation renseignée.</p>'}<h3>Notes</h3><p>${narrative(c.notes)||'Aucune note.'}</p></section>`:`<section data-read-tab="places">${npcPlacesRead(c)}</section>${sheetText(c.notes)||c.relationships.length||c.playbookMoves.length||sheetText(c.history)||sheetText(c.livret)?`<details class="sheet-legacy-read" data-read-tab="identity"><summary>Données historiques conservées</summary><p>${narrative(c.livret)}</p><p>${narrative(c.notes)}</p><p>${narrative(c.history)}</p>${[...c.relationships,...c.playbookMoves].map(value=>'<p>'+safe(value)+'</p>').join('')}</details>`:''}`}`;
 }
 function enhanceSheetEditor(c){
  const form=$('sheetForm'),identity=form.querySelector('.sheet-identity');
  form.querySelector('.sheet-save')?.remove();
  const move=(id,target)=>{const el=$(id);if(!el)return;const label=el.previousElementSibling;if(label?.tagName==='LABEL')target.append(label);target.append(el);};
  const makeGroup=(tab,tag='div')=>{const el=document.createElement(tag);el.dataset.sheetGroup=tab;el.className='sheet-section';form.append(el);return el;};
+ if(c.kind==='PNJ'){const placeEditor=makeGroup('places');placeEditor.innerHTML=npcPlacesEditor(c);}
  const historic=document.createElement('details');historic.className='sheet-historic';historic.dataset.sheetGroup='identity';historic.innerHTML='<summary>Données historiques et classification</summary>';
  if(c.kind==='PNJ'){form.append(historic);move('sheetLivret',historic);for(const section of [...form.querySelectorAll('[data-sheet-group="identity"]')])if(section!==historic)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
  appendNpcResourceEditor(c,identity);const metadata=document.createElement('div');metadata.innerHTML=`${c.kind==='PNJ'?`<label for="sheetDesire">Désir</label><input id="sheetDesire" maxlength="240" value="${safe(sheetText(c.desire))}"><label for="sheetDescription">Description (facultative)</label><textarea id="sheetDescription" maxlength="2000">${safe(sheetText(c.description))}</textarea>`:''}<label for="sheetPortraitFile">Portrait (PNG, JPEG ou WebP · 256 Ko maximum)</label><input id="sheetPortraitFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="readSheetPortrait(event)"><input id="sheetPortrait" type="hidden" value="${safe(sheetText(c.portrait))}"><button type="button" class="alt" onclick="clearSheetPortrait()">Retirer le portrait</button>`;identity.append(metadata);
@@ -3972,7 +4079,7 @@ function characterCard(c){
  const cells=Array.from({length:rules.fatigueMax},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
  const effects=(c.conditions.length?`<div class="card-effect-group" aria-label="États actifs"><span class="card-effect-label">États</span>${c.conditions.map(x=>chipHtml(x,'condition')).join('')}</div>`:'')+
   (c.statuses.length?`<div class="card-effect-group" aria-label="Statuts de combat"><span class="card-effect-label">Statuts</span>${c.statuses.map(x=>chipHtml(x,'status')).join('')}</div>`:'');
- return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg>${portrait?`<img src="${safe(portrait)}" alt="" onerror="this.hidden=true">`:''}</span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div>${rules.fatigueMax?`<div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur ${rules.fatigueMax}" title="Fatigue ${fatigue} sur ${rules.fatigueMax}">${cells}</div>`:''}${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`${rules.balanceMax?`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div>`:''}<div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
+ return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg>${portrait?`<img src="${safe(portrait)}" alt="" onerror="this.hidden=true">`:''}</span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div>${rules.fatigueMax?`<div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur ${rules.fatigueMax}" title="Fatigue ${fatigue} sur ${rules.fatigueMax}">${cells}</div>`:''}${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`${rules.balanceMax?`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div>`:''}<div class="card-location"><span aria-hidden="true">⌖</span>${safe(PlaceRules.currentName(lib,c)||'Sans lieu')}</div>`}</article>`;
 }
 function showCardTooltip(event,button){
  event.stopPropagation();const name=button.dataset.chip,type=button.dataset.chipType;
@@ -4037,7 +4144,7 @@ function renderNpcDirectory(){
  fill('npcTrainingFilter',Roster.TRAININGS,'Tous les entraînements');
  fill('npcRoleFilter',lib.characters.filter(c=>c.kind==='PNJ').map(c=>c.livret||''),'Tous les rôles');
  const location=$('npcLocationFilter').value;
- const npcs=Roster.listNpcs(lib,{search:$('npcSearch').value,location:location==='__none__'?'':location,training:$('npcTrainingFilter').value,role:$('npcRoleFilter').value,importance:$('npcImportanceFilter').value,sort:$('npcSort').value}).filter(c=>location!=='__none__'||!c.location);
+ const npcs=Roster.listNpcs(lib,{search:$('npcSearch').value,location:location==='__none__'?'':location,training:$('npcTrainingFilter').value,role:$('npcRoleFilter').value,importance:$('npcImportanceFilter').value,sort:$('npcSort').value}).filter(c=>location!=='__none__'||!PlaceRules.currentName(lib,c));
  const activeFilters=['npcLocationFilter','npcTrainingFilter','npcRoleFilter','npcImportanceFilter'].filter(id=>$(id).value).length+($('npcSort').value!=='name'?1:0);
  $('npcFilterSummary').textContent='Filtres et tri'+(activeFilters?' · '+activeFilters+' actif'+(activeFilters>1?'s':''):'');
  const total=lib.characters.filter(c=>c.kind==='PNJ').length;
@@ -4064,7 +4171,7 @@ function renderLegacySheetEditor(){
  renderSheetQuick(c);
  $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" oninput="refreshSheetQuick()" value="${safe(c.name)}">
  <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
- ${c.kind==='PNJ'?`<p class="sheet-importance-editor"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
+ ${c.kind==='PNJ'?`<p class="sheet-importance-editor"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu en texte historique (conservé)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
  ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('stat-${k}',-1,-3,2)">−</button><output id="view-stat-${k}">${c.stats[k]}</output><button type="button" class="stepper" onclick="stepField('stat-${k}',1,-3,2)">+</button><input type="hidden" id="stat-${k}" value="${c.stats[k]}"></div>`).join('')}</div>
@@ -4139,6 +4246,7 @@ function saveSheet(quiet=false){
  const patch=sheetPatchFromFields(c,sheetInitialFields,sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques);
  validateResourceValues({...c,...patch});
  if(patch.npcResources!==undefined&&JSON.stringify(patch.npcResources)!==JSON.stringify(c.npcResources)&&!confirm('Appliquer ce profil PNJ ? Les ressources cochées ne seront pas effacées automatiquement. Les nouveaux exports nécessitent la version avec profils PNJ ; l’état précédent restera accessible dans Gestion.'))return;
+ if(patch.placeLinks!==undefined&&!ensurePlacesActivation())return;
  if(patch.center!==undefined&&patch.center!==c.center&&!confirm('Modifier le centre d’équilibre de la fiche ?'))return;
  commitLibraryMutation(()=>Roster.updateCharacter(lib,c.id,patch));
  sheetEditing=false;sheetResourceUndo=null;renderSheets(c.id);render();sheetFeedback('Fiche enregistrée.');if(!quiet)alert('Fiche enregistrée.');$('sheetEditButton').focus({preventScroll:true});
