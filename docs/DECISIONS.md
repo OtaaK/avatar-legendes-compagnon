@@ -134,3 +134,26 @@
   sont confirmées ; le moteur et Roster restent à limites communes. Le lot 3B doit traiter
   ensemble modèle, validation, combat et compatibilité avant les jauges 3/5/10/15 et états PNJ
   personnalisés. Aucun changement de règle ou recalcul silencieux dans ce lot UI.
+
+
+## 2026-11-08 — UI/UX, lot 3B : ressources PNJ
+
+- Application progressive du cahier des charges : aucune migration par simple changement
+  d’importance, aucune suppression automatique de fatigue, d’état ou de principe existant.
+- PDF consulté, pagination imprimée : fatigue p. 100, PNJ p. 239–242. Propositions
+  mineur 3/1/1, majeur 5/3/2, maître 10/5/3, légendaire 15/8/4
+  (fatigue/nombre d’états/équilibre maximal). Les noms manquants sont saisis par le MJ.
+- Profil optionnel explicite, principe requis si jauge positive ; les données historiques
+  restent à leurs limites V2.33 tant que l’utilisateur ne confirme pas un profil compatible.
+- Les coûts/effets gardent leurs quantités ; bornes et listes d’états sont propres au PNJ.
+  Dépassement d’équilibre nécessitant une conséquence : arrêt explicite pour le MJ, sans
+  inventer d’automatisme de perte d’équilibre ou de défaite. Ce n’est pas un audit réglementaire exhaustif.
+- Non-combattant sans fatigue ni états : ajout au combat refusé. Pas de création automatique
+  de groupes. Les profils de combat existants ne changent pas avec une fiche permanente ;
+  une synchronisation incompatible est refusée sans mutation partielle.
+- Après confirmation d’activation : canal local v021 séparé, v020 conservé, journal atomique
+  et export du point antérieur depuis Gestion. Les exports étendus portent une version 2 ;
+  l’ancien code ne doit pas interpréter ces nouvelles ressources comme un modèle historique.
+- Écritures bloquées si récupération impossible ou données v021 illisibles ; restauration
+  complète volontaire pour réparer. Aucune fusion automatique entre ancien et nouveau canal.
+- Aucun PDF, extrait substantiel, test ancien supprimé ou fusion dans main dans cette livraison.

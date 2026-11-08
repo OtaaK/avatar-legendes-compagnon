@@ -170,6 +170,9 @@ label{color:var(--muted)}
 @media(max-width:1000px){.sheet-layout{grid-template-columns:minmax(220px,1fr) minmax(0,1.6fr);gap:18px}}
 @media(max-width:900px){.sheet-layout{grid-template-columns:minmax(0,1fr)}.sheet-side.quickbar{position:static;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px;display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px 14px}.sheet-side .sheet-portrait{width:84px;height:90px;margin:0;grid-row:span 2}.sheet-portrait svg{height:68px}.sheet-side-name{align-self:center}.sheet-side-name strong{font-size:18px}.sheet-side-name p{margin-bottom:0}.sheet-side>button{grid-column:2;margin:0}.sheet-side .resource,.sheet-side .sheet-effects{grid-column:1/-1}.sheet-side .resource{padding-block:10px}.sheet-side .resource{position:relative}.sheet-side .resource-heading{min-height:40px;padding-right:102px}.sheet-side .resource-adjust{position:absolute;right:0;top:8px;margin:0}.sheet-stat-grid{gap:0 12px}.sheet-stat-grid span{font-size:12px}}
 @media(max-height:600px){.sheet-side.quickbar{position:static;max-height:none;overflow:visible}}
+
+/* Profils PNJ : quinze cases restent visibles, y compris sur petit écran. */
+.resource-cells{gap:3px}.sheet-side .resource-cell{min-height:36px;border-width:1px;min-width:0}.npc-resource-editor{margin:14px 0;padding-block:12px;border-block:1px solid var(--line)}.npc-resource-editor summary{cursor:pointer;color:var(--gold)}.npc-resource-editor .row button{font-size:12px}.npc-resource-editor .notice{font-size:12px;margin-top:10px}.npc-resource-editor input,.npc-resource-editor textarea{box-sizing:border-box}
 </style>
 <a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
@@ -187,12 +190,13 @@ label{color:var(--muted)}
 <section class="app-view" id="view-places" aria-label="Lieux" hidden><div class="panel pending-section"><p class="section-eyebrow">Prochaine étape de la refonte</p><h2>Lieux</h2><p>L’arborescence des lieux sera intégrée après les nouvelles fiches. Les lieux déjà saisis sur tes PNJ sont conservés et restent accessibles dans Personnages.</p><button type="button" onclick="setView('characters',true,true);setCharacterKind('PNJ')">Consulter les lieux des PNJ</button></div></section>
 <section class="app-view" id="view-management" aria-label="Gestion" hidden><div class="panel"><p class="section-eyebrow">Tes données</p><h2>Gestion</h2><p>Les sauvegardes restent dans ce navigateur. Conserve un export JSON dans un dossier personnel pour pouvoir les retrouver.</p>
 <div class="management-group"><h3>Sauvegarde complète</h3><p>Fiches et combat réunis dans un fichier. Une confirmation est demandée avant de remplacer les données actuelles.</p><div class="row"><button type="button" onclick="exportCompleteBackup()">Exporter la sauvegarde complète</button><button type="button" class="alt" onclick="$('backupImportFile').click()">Restaurer une sauvegarde complète</button></div></div>
+<div class="management-group"><h3>Retour à la version précédente</h3><p>L’activation des profils PNJ conserve l’état local antérieur. Cette copie permet de retrouver ses données avec l’ancienne application ; les changements suivants restent dans la nouvelle version.</p><button type="button" class="alt" id="exportPreProfileBackup" onclick="exportPreProfileBackup()">Exporter l’état avant les profils PNJ</button></div>
 <div class="management-group"><h3>Fiches de personnages</h3><p>Les fiches peuvent aussi être conservées séparément du combat.</p><div class="row"><button type="button" class="alt" onclick="exportRoster()">Exporter les fiches</button><button type="button" class="alt" onclick="$('rosterFile').click()">Importer les fiches</button></div></div>
 <div class="management-group"><h3>Combat</h3><p>L’export privé contient l’état complet. Le compte rendu partageable masque le pari secret.</p><div class="row"><button type="button" class="alt" onclick="download()">Exporter le combat privé</button><button type="button" class="alt" onclick="downloadPublicCombat()">Exporter le compte rendu partageable</button><button type="button" class="alt" onclick="$('importFile').click()">Importer un combat</button></div></div>
 </div></section>
 <section class="app-view" id="view-combat" aria-label="Combat"><nav class="combat-nav" aria-label="Sections du combat"><button type="button" data-combat-nav="fighters" onclick="setCombatTab('fighters')">Combattants</button><button type="button" data-combat-nav="round" onclick="setCombatTab('round')">Passe</button><button type="button" data-combat-nav="technique" onclick="setCombatTab('technique')">Actions</button><button type="button" data-combat-nav="approval" onclick="setCombatTab('approval')">Validation MJ</button></nav><div id="combatSummary" class="combat-summary" aria-live="polite"></div><div class="combat-workspace"><section class="panel combat-panel" data-combat-tab="fighters"><h2>Combattants</h2><div class="sheet-section"><label for="combatSheetSelect">Ajouter une fiche de Personnages</label><select id="combatSheetSelect"></select><button type="button" id="includeSelectedSheetButton" onclick="includeSelectedSheet()">Ajouter la fiche au combat</button><button type="button" class="alt" onclick="setView('characters')">Ouvrir Personnages</button><p class="small-note">Une copie est ajoutée au combat. La fiche permanente n’est modifiée qu’après confirmation avec « Reporter sur la fiche ».</p></div><div id="fighters"></div><button onclick="add('PJ')">+ PJ</button><button onclick="add('PNJ')">+ PNJ</button><p class="small-note">Le bouton « Modifier le combattant » permet de changer son nom et ses ressources avant la révélation des approches.</p></section>
 <section class="panel combat-panel" data-combat-tab="round"><h2>Déroulement</h2><div id="phase"></div><div id="declarations"></div><button id="step" onclick="step()">Révéler / avancer</button><button type="button" class="alt" onclick="newSceneUI()">Nouvelle scène (MJ)</button><button type="button" class="alt" onclick="endCombatUI()">Terminer le combat : libérer les entraves (MJ)</button><button type="button" class="alt" onclick="renameSceneUI()">Nommer la scène (MJ)</button><button type="button" class="alt" onclick="addSceneNoteUI()">Ajouter une note (MJ)</button><button type="button" class="alt" onclick="addTemporaryEffectUI()">Ajouter un effet temporaire (MJ)</button><label for="temporaryEffectFilter">Afficher les effets</label><select id="temporaryEffectFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les durées</option><option value="round">Fin de passe</option><option value="scene">Fin de scène</option><option value="manual">Retrait manuel</option></select><label for="temporaryOriginFilter">Origine des effets</label><select id="temporaryOriginFilter" onchange="renderTemporaryEffects()"><option value="all">Toutes les origines</option><option value="mj">Décision MJ</option><option value="technique">Technique</option><option value="personnage">Personnage</option></select><label for="temporaryEffectSearch">Rechercher un effet</label><input id="temporaryEffectSearch" type="search" placeholder="Description, technique, personnage…" oninput="renderTemporaryEffects()"><div id="temporaryEffects" aria-live="polite"></div><div id="sceneJournalFilters"><label for="journalSceneFilter">Scène du journal</label><select id="journalSceneFilter" onchange="renderSceneJournal()"></select><label for="journalSearch">Rechercher dans les notes</label><input id="journalSearch" type="search" placeholder="Rechercher une note…" oninput="renderSceneJournal()"><label for="journalLimit">Notes affichées</label><select id="journalLimit" onchange="renderSceneJournal()"><option value="20">20 dernières</option><option value="all">Toutes</option></select></div><button type="button" class="alt" onclick="exportSceneJournalUI()">Exporter le journal filtré (CSV)</button><div id="sceneJournal" aria-live="polite"></div><p id="help"></p></section>
-<section class="panel combat-panel" data-combat-tab="technique"><h2>Technique à proposer</h2><label>Combattant</label><select id="source" onchange="syncTechnique()"></select><label>Cible</label><select id="target"></select><button class="alt" type="button" onclick="targetOpponent()">Cibler un autre combattant</button><label>Technique accessible</label><select id="tech" onchange="syncOptions()"></select><div id="techHelp" class="small-note"></div><div id="combatTechniqueCount" class="small-note" aria-live="polite"></div><label><input id="combatKnownOnly" type="checkbox" style="width:auto" onchange="syncTechnique()"> Masquer les techniques de base (si autres techniques disponibles)</label><div id="postureMode" class="mode-line"></div><div id="opts"></div><button onclick="prepare()">Préparer les effets</button><p id="message"></p></section>
+<section class="panel combat-panel" data-combat-tab="technique"><h2>Technique à proposer</h2><label>Combattant</label><select id="source" onchange="syncTechnique()"></select><label>Cible</label><select id="target" onchange="syncTargetOptions()"></select><button class="alt" type="button" onclick="targetOpponent()">Cibler un autre combattant</button><label>Technique accessible</label><select id="tech" onchange="syncOptions()"></select><div id="techHelp" class="small-note"></div><div id="combatTechniqueCount" class="small-note" aria-live="polite"></div><label><input id="combatKnownOnly" type="checkbox" style="width:auto" onchange="syncTechnique()"> Masquer les techniques de base (si autres techniques disponibles)</label><div id="postureMode" class="mode-line"></div><div id="opts"></div><button onclick="prepare()">Préparer les effets</button><p id="message"></p></section>
 <section class="panel combat-panel" data-combat-tab="approval"><h2>Validation MJ</h2><div id="proposals"></div><button onclick="approve()">Valider les effets cochés</button><button class="alt" onclick="reject()">Rejeter le lot</button><h3>Journal</h3><div id="history"></div></section></div>
 <div class="notice">Version de démonstration : assiste certaines techniques de base et universelles ; les réactions complexes restent soumises au MJ. Les autres techniques et les effets narratifs exigent encore l’arbitrage du MJ. Le calcul de posture est saisi, non lancé. Les techniques non automatisées sont envoyées à l’arbitrage du MJ.</div>
 <div class="row"><button onclick="demo()">Réinitialiser la démonstration</button><button class="alt" onclick="back()">Annuler dernière validation</button><button class="alt" onclick="download()">Exporter JSON privé</button><button class="alt" onclick="downloadPublicCombat()">Exporter un compte rendu partageable (sans pari secret)</button><button class="alt" onclick="document.getElementById('importFile').click()">Importer JSON</button><input id="importFile" type="file" accept=".json" style="display:none" onchange="importCombat(event)"></div>
@@ -246,6 +250,22 @@ label{color:var(--muted)}
 
 
 'use strict';
+// Profils PNJ explicites. L'absence de profil conserve strictement la V2.33 historique.
+function npcResourceProfile(entity){
+ const p=entity.npcResources;if(p===undefined||p===null)return null;
+ if(entity.kind!=='PNJ'||!p||typeof p!=='object'||Array.isArray(p)||p.version!==1||p.format!=='avatar-npc-resources'||typeof p.combatant!=='boolean')throw Error('Profil de ressources PNJ invalide ou non pris en charge');
+ if(!Number.isInteger(p.fatigueMax)||p.fatigueMax<0||p.fatigueMax>15||!Number.isInteger(p.balanceMax)||p.balanceMax<0||p.balanceMax>4||!Array.isArray(p.conditions)||p.conditions.length>8||p.conditions.some(x=>typeof x!=='string'||!x.trim()||x!==x.trim()||x.length>80)||new Set(p.conditions).size!==p.conditions.length)throw Error('Capacités ou états du profil PNJ invalides');
+ if(p.combatant?(p.fatigueMax<1||p.conditions.length<1):(p.fatigueMax!==0||p.conditions.length!==0))throw Error('Profil de PNJ combattant/non combattant incohérent');
+ return p;
+}
+function resourceLimits(entity){const p=npcResourceProfile(entity);return p?{fatigueMax:p.fatigueMax,balanceMin:0,balanceMax:p.balanceMax,conditions:p.conditions,combatant:p.combatant,explicit:true}:{fatigueMax:5,balanceMin:-3,balanceMax:3,conditions:['Terrifié','En colère','Coupable','Fragile','Confus'],combatant:true,explicit:false};}
+function fatigueLimit(entity){return resourceLimits(entity).fatigueMax;}
+function resourceConditionNames(entity){return resourceLimits(entity).conditions;}
+function balanceValue(entity,value,strict=false){const r=resourceLimits(entity);if(strict&&r.explicit&&(value>r.balanceMax||r.balanceMax===0&&value!==entity.balance))throw Error('Dépassement ou absence d’équilibre PNJ : arbitrage du MJ requis avant de poursuivre.');if(r.explicit&&!strict&&value>r.balanceMax)return value;return Math.max(r.balanceMin,Math.min(r.balanceMax,value));}
+function validateResourceValues(entity){const r=resourceLimits(entity);if(!Number.isInteger(entity.fatigue)||entity.fatigue<0||entity.fatigue>r.fatigueMax||!Number.isInteger(entity.balance)||entity.balance<r.balanceMin||entity.balance>r.balanceMax)throw Error('Ressources incompatibles avec le profil : ajuste explicitement les valeurs avant d’enregistrer.');if(r.explicit&&r.balanceMax>0&&(!Array.isArray(entity.principles)||entity.principles.length!==2||typeof entity.principles[0]!=='string'||!entity.principles[0].trim()||entity.principles[0].length>80))throw Error('Renseigne le principe du PNJ avant d’activer sa jauge d’équilibre.');if(r.explicit&&(!Array.isArray(entity.conditions)||entity.conditions.some(x=>!r.conditions.includes(x))||new Set(entity.conditions).size!==entity.conditions.length))throw Error('États cochés incompatibles avec le profil : aucune suppression automatique.');return r;}
+function hasNpcResourceProfiles(library,combat){return !!library?.characters?.some(c=>c.npcResources)||!!combat?.fighters?.some(f=>f.npcResources)||!!combat?.snapshots?.some(s=>hasNpcResourceProfiles(null,s));}
+window.ResourceRules={profile:npcResourceProfile,limits:resourceLimits,validate:validateResourceValues,fatigueMax:fatigueLimit,conditions:resourceConditionNames,balance:balanceValue,hasProfiles:hasNpcResourceProfiles};
+
 const APPROACHES=['defendre','attaquer','esquiver'];
 const STATUS=['en_danger','gene','piege','etourdi','renforce','avantage','pret','confiant'];
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -382,7 +402,7 @@ function reveal(s){
  // Sinon une fatigue maximale rencontrée en fin de liste laissait les précédents
  // payer et leurs statuts actifs se révéler malgré l'échec de la déclaration.
  for(const f of s.fighters){
-  if(f.statuses.includes('gene')&&f.geneChoice==='fatigue'&&f.fatigue>=5)
+  if(f.statuses.includes('gene')&&f.geneChoice==='fatigue'&&f.fatigue>=fatigueLimit(f))
    throw Error(f.name+' : impossible de payer Gêné avec la fatigue au maximum ; choisir le malus.');
  }
  for(const f of s.fighters){
@@ -414,8 +434,8 @@ function escapeTrap(s,id,fatigue,conditions,fictionApproved=false){
  if(!f.statuses.includes('piege'))throw Error('Ce combattant n’est pas Piégé');
  if(!fictionApproved)throw Error('Le MJ doit confirmer la méthode de libération');
  if(!Number.isInteger(fatigue)||fatigue<0||!Array.isArray(conditions)||fatigue+conditions.length!==3)throw Error('Coût de libération : exactement 3 cases de fatigue et/ou états');
- if(f.fatigue+fatigue>5)throw Error('Fatigue insuffisante : choisir une autre combinaison');
- if(conditions.some(c=>!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(c)||f.conditions.includes(c))||new Set(conditions).size!==conditions.length)throw Error('États de libération invalides ou déjà cochés');
+ if(f.fatigue+fatigue>fatigueLimit(f))throw Error('Fatigue insuffisante : choisir une autre combinaison');
+ if(conditions.some(c=>!resourceConditionNames(f).includes(c)||f.conditions.includes(c))||new Set(conditions).size!==conditions.length)throw Error('États de libération invalides ou déjà cochés');
  // Aucune libération ne doit effacer une proposition MJ encore en attente.
  if(s.proposals.length)throw Error('Libération de Piégé : résoudre les propositions en attente');
  // Une erreur tardive (journal, snapshot, état corrompu) restaure TOUT le combat,
@@ -480,12 +500,12 @@ function updateFighter(s,id,patch){
   const next={...f,...clone(patch)};
   if(typeof next.name!=='string'||!next.name.trim()||next.name.trim().length>100)throw Error('Nom requis (100 caractères maximum).');
   next.name=next.name.trim();
-  if(!Number.isInteger(next.fatigue)||next.fatigue<0||next.fatigue>5)throw Error('Fatigue invalide (0 à 5).');
-  if(!Number.isInteger(next.balance)||next.balance< -3||next.balance>3)throw Error('Équilibre invalide (−3 à +3).');
+  if(!Number.isInteger(next.fatigue)||next.fatigue<0||next.fatigue>fatigueLimit(next))throw Error('Fatigue invalide (0 à 5).');
+  if(!Number.isInteger(next.balance)||next.balance<resourceLimits(next).balanceMin||next.balance>resourceLimits(next).balanceMax)throw Error('Équilibre invalide (−3 à +3).');
   const materials=next.materials??0;
   if(!Number.isInteger(materials)||materials<0)throw Error('Matériels invalides.');
   if(f.equipmentDisabled&&materials>(f.materials||0))throw Error('Équipement hors service : aucun matériel gagné.');
-  const conditions=['Terrifié','En colère','Coupable','Fragile','Confus'];
+  const conditions=resourceConditionNames(next);
   if(!Array.isArray(next.conditions)||new Set(next.conditions).size!==next.conditions.length||next.conditions.some(x=>!conditions.includes(x)))throw Error('États invalides.');
   if(!Array.isArray(next.statuses)||new Set(next.statuses).size!==next.statuses.length||next.statuses.some(x=>!STATUS.includes(x)))throw Error('Statuts invalides.');
   if(requiredFighterStatuses(s,id).some(status=>!next.statuses.includes(status)))throw Error('Ce statut est maintenu par un effet actif : utiliser la commande de cet effet.');
@@ -638,7 +658,7 @@ function propose(s,action){
  }else if(action.name==='Fouet d’eau'){
    if(action.sourceId===t)throw Error('Fouet d’eau : adversaire distinct requis');
    if(o.choice!=='fatigue'&&o.choice!=='condition')throw Error('Fouet d’eau : la cible choisit 2 fatigues ou un état');
-   if(o.choice==='condition'&&!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.condition))throw Error('Fouet d’eau : état invalide');
+   if(o.choice==='condition'&&!resourceConditionNames(fighter(s,t)).includes(o.condition))throw Error('Fouet d’eau : état invalide');
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Coût Fouet d’eau (p. 288)'));
    if(o.choice==='fatigue')events.push(event(s,action,'fatigue',t,2,'','Choix de la cible'));
    else events.push(event(s,action,'condition',t,0,o.condition,'Choix de la cible'));
@@ -680,7 +700,7 @@ function propose(s,action){
    events.push(event(s,action,'equipment_disable',action.sourceId,0,'','Puissance maximale : plus de gain de matériel avant la fin de la scène'));
  }else if(action.name==='Maintenance'){
    // Technologie p. 293 : payer 1 fatigue, effacer un état coché, réserver 3 matériels.
-   if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.maintenanceCondition))throw Error('Maintenance : choisir un état valide');
+   if(!resourceConditionNames(fighter(s,action.sourceId)).includes(o.maintenanceCondition))throw Error('Maintenance : choisir un état valide');
    if(!fighter(s,action.sourceId).conditions.includes(o.maintenanceCondition))throw Error('Maintenance : cet état n’est pas coché');
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Maintenance : coût de réparation'));
    events.push(event(s,action,'condition_remove',action.sourceId,0,o.maintenanceCondition,'Maintenance : état effacé'));
@@ -832,7 +852,7 @@ function propose(s,action){
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Gantelet de terre : coût'));
    if(o.choice==='fatigue')events.push(event(s,action,'fatigue',t,2,'','Gantelet de terre : cible'));
    else {
-    if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.condition))throw Error('Gantelet de terre : état invalide');
+    if(!resourceConditionNames(fighter(s,t)).includes(o.condition))throw Error('Gantelet de terre : état invalide');
     events.push(event(s,action,'condition',t,0,o.condition,'Gantelet de terre : cible'));
    }
    // V1.81 : option de projection avec choix explicite de résistance par la cible.
@@ -859,7 +879,7 @@ function propose(s,action){
     events.push(event(s,action,'note',t,0,'','Disque de feu : incendie environnant et statuts éventuels à arbitrer par le MJ'));
    }else{
     const selected=o.fireConditions;
-    if(!Array.isArray(selected)||selected.length!==2||new Set(selected).size!==2||selected.some(c=>!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(c)))throw Error('Disque de feu : choisir deux états distincts');
+    if(!Array.isArray(selected)||selected.length!==2||new Set(selected).size!==2||selected.some(c=>!resourceConditionNames(fighter(s,t)).includes(c)))throw Error('Disque de feu : choisir deux états distincts');
     for(const c of selected)events.push(event(s,action,'condition',t,0,c,'Disque de feu : deux états'));
    }
  }else if(action.name==='Cône d’air'){
@@ -907,7 +927,7 @@ function propose(s,action){
    if([...(actor.activeStatuses||[]),...(actor.statuses||[])].some(x=>['en_danger','gene','piege','etourdi'].includes(x))||actor.conditions.length)throw Error('Contre-attaque : impossible avec un statut négatif ou un état coché');
    if(o.weaponCounterConfirmed!==true)throw Error('Contre-attaque : confirmation MJ de l’approche et de l’engagement requise');
    if(o.choice==='fatigue')events.push(event(s,action,'fatigue',t,2,'','Contre-attaque : Frapper renforcé, 2 fatigues imposées'));
-   else if(o.choice==='condition'&&['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.condition))events.push(event(s,action,'condition',t,0,o.condition,'Contre-attaque : Frapper renforcé, état imposé'));
+   else if(o.choice==='condition'&&resourceConditionNames(fighter(s,t)).includes(o.condition))events.push(event(s,action,'condition',t,0,o.condition,'Contre-attaque : Frapper renforcé, état imposé'));
    else throw Error('Contre-attaque : imposer 2 fatigues ou un état, jamais un décalage');
  }else if(action.name==='Désarmement'){
    if(t===action.sourceId)throw Error('Désarmement : adversaire distinct requis');
@@ -928,7 +948,7 @@ function propose(s,action){
    for(const id of unique){
     if(id===action.sourceId)throw Error('Feinte : le lanceur ne peut pas être son propre assaillant');
     fighter(s,id);
-    if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.weaponFeintConditions[id]))throw Error('Feinte : état invalide pour un assaillant');
+    if(!resourceConditionNames(fighter(s,id)).includes(o.weaponFeintConditions[id]))throw Error('Feinte : état invalide pour un assaillant');
    }
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Feinte : coût'));
    for(const id of unique)events.push(event(s,action,'condition',id,0,o.weaponFeintConditions[id],'Feinte : état infligé à un assaillant'));
@@ -1020,7 +1040,7 @@ function propose(s,action){
    if(t===action.sourceId)throw Error('Boulet de canon : adversaire distinct requis');
    fighter(s,t);
    if(isEngaged(s,action.sourceId,t))throw Error('Boulet de canon : cible déjà engagée avec le lanceur');
-   if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.condition))throw Error('Boulet de canon : choisir un état valide');
+   if(!resourceConditionNames(fighter(s,t)).includes(o.condition))throw Error('Boulet de canon : choisir un état valide');
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Boulet de canon : coût'));
    for(const pair of (s.engagements||[]).filter(pair=>pair.includes(action.sourceId))){
     const other=pair[0]===action.sourceId?pair[1]:pair[0];
@@ -1086,7 +1106,7 @@ function propose(s,action){
    if(t===action.sourceId||!isEngaged(s,action.sourceId,t))throw Error('Arc de foudre : adversaire engagé distinct requis');
    if(!s.actions.some(a=>a.sourceId===t&&a.round===s.round&&a.approach==='attaquer'))throw Error('Arc de foudre : la cible doit avoir utilisé une technique Avancer et attaquer durant cette passe');
    const victim=fighter(s,t);
-   if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(o.condition)||victim.conditions.includes(o.condition))throw Error('Arc de foudre : choisir un état libre pour la cible');
+   if(!resourceConditionNames(fighter(s,t)).includes(o.condition)||victim.conditions.includes(o.condition))throw Error('Arc de foudre : choisir un état libre pour la cible');
    events.push(event(s,action,'fatigue',action.sourceId,1,'','Arc de foudre : coût'));
    events.push(event(s,action,'condition',t,0,o.condition,'Arc de foudre : état'));
    if(victim.conditions.length>=2)events.push(event(s,action,'status_add',t,0,'etourdi','Arc de foudre : déjà deux états'));
@@ -1166,15 +1186,15 @@ function apply(s,e){
  const t=fighter(s,e.targetId);
  if(e.kind==='fatigue'){
   const next=t.fatigue+e.amount;
-  if(e.fatigueType==='cost'&&next>5)throw Error(t.name+' : fatigue insuffisante pour ce coût volontaire (p. 100)');
-  if(next>5){
-   const overflow=next-5;
-   const available=['Terrifié','En colère','Coupable','Fragile','Confus'].filter(c=>!t.conditions.includes(c));
+  if(e.fatigueType==='cost'&&next>fatigueLimit(t))throw Error(t.name+' : fatigue insuffisante pour ce coût volontaire (p. 100)');
+  if(next>fatigueLimit(t)){
+   const overflow=next-fatigueLimit(t);
+   const available=resourceConditionNames(t).filter(c=>!t.conditions.includes(c));
    if(available.length<overflow)throw Error(t.name+' : fatigue excessive, mise hors de combat à arbitrer par le MJ.');
    if(!Array.isArray(e.overflowConditions)||e.overflowConditions.length!==overflow||new Set(e.overflowConditions).size!==overflow||e.overflowConditions.some(c=>!available.includes(c)))throw Error(t.name+' : '+overflow+' état(s) à choisir pour reporter la fatigue excédentaire (règle p. 100).');
    t.conditions.push(...e.overflowConditions);
   }
-  t.fatigue=Math.max(0,Math.min(5,next));
+  t.fatigue=Math.max(0,Math.min(fatigueLimit(t),next));
  }
  else if(e.kind==='wind_credit'){
   t.windReserve={points:e.amount,usableRound:s.round+1};
@@ -1195,8 +1215,8 @@ function apply(s,e){
   if(t.equipmentDisabled)throw Error('Puissance maximale : équipement hors service, aucun matériel gagné pendant cette scène');
   t.materials=(Number.isInteger(t.materials)?t.materials:0)+e.amount;
  }
- else if(e.kind==='balance')t.balance=Math.max(-3,Math.min(3,t.balance+e.amount));
- else if(e.kind==='condition'){if(!t.conditions.includes(e.detail))t.conditions.push(e.detail);}
+ else if(e.kind==='balance')t.balance=balanceValue(t,t.balance+e.amount,true);
+ else if(e.kind==='condition'){if(npcResourceProfile(t)&&!resourceConditionNames(t).includes(e.detail))throw Error('État absent du profil PNJ : choix du MJ requis.');if(!t.conditions.includes(e.detail))t.conditions.push(e.detail);}
  else if(e.kind==='condition_remove')t.conditions=t.conditions.filter(x=>x!==e.detail);
  else if(e.kind==='status_add'){
   // Une application indépendante pendant un statut temporaire doit survivre à son expiration.
@@ -1535,7 +1555,7 @@ function commitEffects(s,decisions={},preview=false){
    if(e.kind==='condition'&&e.detail&&!conditions.has(e.detail))return true;
    if(e.kind==='status_add'&&protectableStatuses.has(e.detail)&&!statuses.has(e.detail))return true;
    if(e.kind==='balance'){
-    const next=Math.max(-3,Math.min(3,balance+Number(e.amount)));
+    const next=balanceValue(victim,balance+Number(e.amount));
     if(next!==balance)return true;
     balance=next;
    }
@@ -1593,21 +1613,21 @@ function commitEffects(s,decisions={},preview=false){
  // réellement applicable de la passe, en groupant tous les effets de l'attaque.
  // Les protections déjà interceptées ne consomment pas le bouclier.
  const shieldAbsorbed=new Set(),shieldSpent=new Set();
- const shieldShadow=new Map(s.fighters.map(f=>[f.id,{fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions),statuses:new Set(f.statuses)}]));
+ const shieldShadow=new Map(s.fighters.map(f=>[f.id,{kind:f.kind,npcResources:f.npcResources,fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions),statuses:new Set(f.statuses)}]));
  const shieldGroups=new Map();
  for(const e of approved){const key=e.actionId+'|'+e.targetId;if(!shieldGroups.has(key))shieldGroups.set(key,[]);shieldGroups.get(key).push(e);}
  for(const [key,events] of shieldGroups){
   const targetId=events[0].targetId,shadow=shieldShadow.get(targetId);if(!shadow)continue;
   const available=(s.temporaryEffects||[]).find(x=>x.originLabel==='Bouclier de roche'&&x.targetId===targetId&&x.shieldBlockedRound!==s.round&&!shieldSpent.has(x.id));
   let hostile=false;
-  const trial={fatigue:shadow.fatigue,balance:shadow.balance,conditions:new Set(shadow.conditions),statuses:new Set(shadow.statuses)};
+  const trial={kind:shadow.kind,npcResources:shadow.npcResources,fatigue:shadow.fatigue,balance:shadow.balance,conditions:new Set(shadow.conditions),statuses:new Set(shadow.statuses)};
   for(const e of events){
    if(intercepted.has(e.id)||interceptedAttacks.has(key))continue;
    if(e.kind==='status_add'&&negativeStatuses.has(e.detail)&&hostileEvent(e)&&guarded.has(e.targetId))continue;
    if(!hostileEvent(e))continue;
-   if(e.kind==='fatigue'&&Number(e.amount)>0){hostile=true;trial.fatigue=Math.min(5,trial.fatigue+Number(e.amount));}
+   if(e.kind==='fatigue'&&Number(e.amount)>0){hostile=true;trial.fatigue=Math.min(fatigueLimit(trial),trial.fatigue+Number(e.amount));}
    else if(e.kind==='condition'&&e.detail&&!trial.conditions.has(e.detail)){hostile=true;trial.conditions.add(e.detail);}
-   else if(e.kind==='balance'){const next=Math.max(-3,Math.min(3,trial.balance+Number(e.amount)));if(next!==trial.balance)hostile=true;trial.balance=next;}
+   else if(e.kind==='balance'){const next=balanceValue(trial,trial.balance+Number(e.amount));if(next!==trial.balance)hostile=true;trial.balance=next;}
    else if(e.kind==='status_add'&&negativeStatuses.has(e.detail)&&!trial.statuses.has(e.detail)){hostile=true;trial.statuses.add(e.detail);}
   }
   if(hostile&&available){shieldAbsorbed.add(key);shieldSpent.add(available.id);}
@@ -1615,7 +1635,7 @@ function commitEffects(s,decisions={},preview=false){
  }
  const absorbedActions=new Set(),coveredTargets=new Set();
  const coverShadow=new Map(s.fighters.map(f=>[f.id,{
-  fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions),statuses:new Set(f.statuses)
+  kind:f.kind,npcResources:f.npcResources,fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions),statuses:new Set(f.statuses)
  }]));
  // V0.61 : traiter les attaques par groupes (actionId, cible) dans l'ordre
  // de leur première apparition. Une attaque absorbée ne doit JAMAIS
@@ -1629,10 +1649,10 @@ function commitEffects(s,decisions={},preview=false){
  const shadowEffect=(e,v)=>{
   let changed=false;
   if(e.kind==='fatigue'){
-   const next=Math.max(0,Math.min(5,v.fatigue+Number(e.amount)));
+   const next=Math.max(0,Math.min(fatigueLimit(v),v.fatigue+Number(e.amount)));
    changed=Number(e.amount)>0;v.fatigue=next;
   }else if(e.kind==='balance'){
-   const next=Math.max(-3,Math.min(3,v.balance+Number(e.amount)));
+   const next=balanceValue(v,v.balance+Number(e.amount));
    changed=next!==v.balance;v.balance=next;
   }else if(e.kind==='condition'){
    changed=!!e.detail&&!v.conditions.has(e.detail);if(e.detail)v.conditions.add(e.detail);
@@ -1748,19 +1768,19 @@ function commitEffects(s,decisions={},preview=false){
  // déjà reçu dans cette validation ne provoque pas une nouvelle riposte.
  // La simulation de déclenchement ne modifie jamais l’état réel.
  const riposteShadow=new Map(s.fighters.map(f=>[f.id,{
-  fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)
+  kind:f.kind,npcResources:f.npcResources,fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)
  }]));
  const riposteEligible=(e,victim)=>{
   if(e.kind==='fatigue')return Number(e.amount)>0;
   if(e.kind==='condition')return !!e.detail&&!victim.conditions.has(e.detail);
-  if(e.kind==='balance')return Number(e.amount)!==0&&Math.max(-3,Math.min(3,victim.balance+Number(e.amount)))!==victim.balance;
+  if(e.kind==='balance')return Number(e.amount)!==0&&balanceValue(victim,victim.balance+Number(e.amount))!==victim.balance;
   return false;
  };
  const updateRiposteShadow=(e,victim)=>{
-  if(e.kind==='fatigue')victim.fatigue=Math.max(0,Math.min(5,victim.fatigue+Number(e.amount)));
+  if(e.kind==='fatigue')victim.fatigue=Math.max(0,Math.min(fatigueLimit(victim),victim.fatigue+Number(e.amount)));
   else if(e.kind==='condition')victim.conditions.add(e.detail);
   else if(e.kind==='condition_remove')victim.conditions.delete(e.detail);
-  else if(e.kind==='balance')victim.balance=Math.max(-3,Math.min(3,victim.balance+Number(e.amount)));
+  else if(e.kind==='balance')victim.balance=balanceValue(victim,victim.balance+Number(e.amount));
  };
  for(const e of effective){
   const victim=riposteShadow.get(e.targetId);
@@ -1781,7 +1801,7 @@ function commitEffects(s,decisions={},preview=false){
  // fatigue ou d'état infligé à la cible désignée. Un marquage est consommé
  // une fois, même pour une attaque à plusieurs effets. Les attaques
  // interceptées/absorbées ne figurent pas dans effective.
- const weaknessShadow=new Map(s.fighters.map(f=>[f.id,{fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)}]));
+ const weaknessShadow=new Map(s.fighters.map(f=>[f.id,{kind:f.kind,npcResources:f.npcResources,fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)}]));
  const weaknessMarks=new Map(s.fighters.map(f=>[f.id,f.bonuses.filter(b=>b.type==='weakness').map(b=>({...b}))]));
  for(const e of effective){
   if(e.kind==='arm_weakness'){
@@ -1810,7 +1830,7 @@ function commitEffects(s,decisions={},preview=false){
  // L'état intermédiaire évite de compter un état déjà coché ou une jauge
  // d'équilibre bloquée. Le bonus s'applique à la prochaine passe.
  const endured=new Map(),endureSeen=new Set();
- const endureShadow=new Map(s.fighters.map(f=>[f.id,{fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)}]));
+ const endureShadow=new Map(s.fighters.map(f=>[f.id,{kind:f.kind,npcResources:f.npcResources,fatigue:f.fatigue,balance:f.balance,conditions:new Set(f.conditions)}]));
  for(const e of effective){
   const v=endureShadow.get(e.targetId);if(!v)continue;
   const hostile=attackEffects.has(e.kind)&&hostileEvent(e);
@@ -2079,7 +2099,7 @@ function resolveEarthMudStrike(s,sourceId,targetId,choice,detail='',confirmed=fa
  const bonus=(caster.bonuses||[]).find(b=>b.type==='earth_mud_strike'&&b.targetId===targetId&&b.round===s.round);
  if(!bonus)throw Error('Boue gluante : aucune Frappe supplémentaire disponible pour cette cible');
  if(!['fatigue','condition','balance'].includes(choice))throw Error('Boue gluante : choisir la conséquence de Frapper');
- if(choice==='condition'&&(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(detail)||victim.conditions.includes(detail)))throw Error('Boue gluante : choisir un état libre');
+ if(choice==='condition'&&(!resourceConditionNames(victim).includes(detail)||victim.conditions.includes(detail)))throw Error('Boue gluante : choisir un état libre');
  if(choice==='balance'&&![-1,1].includes(Number(detail)))throw Error('Boue gluante : direction d’équilibre +1 ou −1 requise');
  const rollback=clone(s);
  const before=clone({...s,snapshots:[]});
@@ -2140,7 +2160,7 @@ function resolveEarthArmorHit(s,id,kind,amount,points,confirmed,overflowConditio
  if(kind==='fatigue'){
   if(!Number.isInteger(amount)||amount<1||amount>20)throw Error('Armure de terre : fatigue entrante invalide (1 à 20)');
  }else if(kind==='condition'){
-  if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(amount))throw Error('Armure de terre : état invalide');
+  if(!resourceConditionNames(fighter(s,armor.targetId)).includes(amount))throw Error('Armure de terre : état invalide');
   if(points!==1)throw Error('Armure de terre : un seul point annule un état');
  }else throw Error('Armure de terre : type d’impact invalide');
  const target=fighter(s,armor.targetId);
@@ -2480,9 +2500,9 @@ function nextRound(s,overflowChoices={}){
  // En danger : ne jamais perdre silencieusement la fatigue lorsque la jauge est pleine.
  // Prévalider tous les choix avant de modifier la passe.
  for(const f of s.fighters){
-  if(!f.statuses.includes('en_danger')||f.fatigue<5)continue;
+  if(!f.statuses.includes('en_danger')||f.fatigue<fatigueLimit(f))continue;
   const choice=overflowChoices[f.id];
-  if(!['Terrifié','En colère','Coupable','Fragile','Confus'].includes(choice)||f.conditions.includes(choice))
+  if(!resourceConditionNames(f).includes(choice)||f.conditions.includes(choice))
    throw Error(f.name+' : choisir un état libre pour la fatigue En danger (jauge pleine).');
  }
  const rollback=clone(s);
@@ -2536,7 +2556,7 @@ function nextRound(s,overflowChoices={}){
   f.reactions=[];f.reedMayChangeApproach=false;
   f.approach=null;f.roll=null;f.activeStatuses=[];f.geneChoice='malus';
   if(f.statuses.includes('en_danger')){
-   if(f.fatigue>=5)f.conditions.push(overflowChoices[f.id]);
+   if(f.fatigue>=fatigueLimit(f))f.conditions.push(overflowChoices[f.id]);
    else f.fatigue++;
   }
  }
@@ -2695,7 +2715,7 @@ function triggerTrap(s,trapId,targetId,condition,direction){
  const target=fighter(s,targetId),owner=fighter(s,trap.ownerId);
  if(target.id===owner.id)throw Error('Piège : le propriétaire ne peut pas être la cible');
  // Les camps ne sont pas déductibles de PJ/PNJ : le MJ confirme l'adversaire.
- const allowed=['Terrifié','En colère','Coupable','Fragile','Confus'];
+ const allowed=resourceConditionNames(target);
  if(!allowed.includes(condition)||target.conditions.includes(condition))throw Error('Piège : choisir un état non coché');
  if(![-1,1].includes(direction))throw Error('Piège : direction du décentrage requise');
  const before=clone({...s,snapshots:[]});
@@ -2767,7 +2787,7 @@ function validateCharacter(c){
  if(!c||typeof c!=='object'||!['PJ','PNJ'].includes(c.kind))throw Error('Type PJ/PNJ requis');
  if(typeof c.name!=='string'||!c.name.trim()||c.name.length>100)throw Error('Nom invalide');
  if(!c.stats||STATS.some(k=>!Number.isInteger(c.stats[k])||c.stats[k]<-3||c.stats[k]>3))throw Error('Caractéristiques invalides');
- if(!Array.isArray(c.conditions)||c.conditions.some(x=>!CONDITIONS.includes(x))||new Set(c.conditions).size!==c.conditions.length)throw Error('États invalides');
+ if(!Array.isArray(c.conditions)||c.conditions.some(x=>!resourceConditionNames(c).includes(x))||new Set(c.conditions).size!==c.conditions.length)throw Error('États invalides');
  if(!Array.isArray(c.statuses)||c.statuses.some(x=>!STATUSES.includes(x))||new Set(c.statuses).size!==c.statuses.length)throw Error('Statuts invalides');
  if(c.principles!==undefined&&( !Array.isArray(c.principles)||c.principles.length!==2||c.principles.some(x=>typeof x!=='string'||x.length>80)))throw Error('Principes invalides');
  if(c.center!==undefined&&(!Number.isInteger(c.center)||c.center< -3||c.center>3))throw Error('Centre invalide');
@@ -2777,8 +2797,7 @@ function validateCharacter(c){
  if(c.history!==undefined&&(typeof c.history!=='string'||c.history.length>4000))throw Error('Histoire invalide');
  if(c.playbookMoves!==undefined&&(!Array.isArray(c.playbookMoves)||c.playbookMoves.some(x=>typeof x!=='string'||x.length>120)))throw Error('Manœuvres de livret invalides');
  if(!Array.isArray(c.techniques)||c.techniques.some(t=>!t||typeof t.name!=='string'||!MASTERY.includes(t.mastery)))throw Error('Techniques invalides');
- if(!Number.isInteger(c.fatigue)||c.fatigue<0||c.fatigue>5)throw Error('Fatigue invalide');
- if(!Number.isInteger(c.balance)||c.balance<-3||c.balance>3)throw Error('Équilibre invalide');
+ validateResourceValues(c);
  return true;
 }
 function makeCharacter(id,name,kind='PJ'){
@@ -2794,7 +2813,7 @@ function updateCharacter(lib,id,patch){
  // Les anciennes valeurs importées restent lisibles ; toute nouvelle classification est contrôlée.
  if(Object.hasOwn(patch,'importance')&&patch.importance!==c.importance&&(c.kind!=='PNJ'||!['',...NPC_IMPORTANCE].includes(patch.importance)))throw Error('Importance PNJ invalide');
  const next={...rosterClone(c),...rosterClone(patch),stats:{...c.stats,...(patch.stats||{})}};
- validateCharacter(next);Object.assign(c,next);return c;
+ validateCharacter(next);Object.assign(c,next);if(npcResourceProfile(c))lib.version=2;return c;
 }
 function assignTechnique(lib,id,name,mastery='acquise'){
  if(!MASTERY.includes(mastery)||!name||name.length>120)throw Error('Technique invalide');
@@ -2806,12 +2825,13 @@ function assignTechnique(lib,id,name,mastery='acquise'){
 function addToCombat(lib,combat,id){
  const c=lib.characters.find(x=>x.id===id);if(!c)throw Error('Fiche inconnue');
  validateCharacter(c);
+ if(!resourceLimits(c).combatant)throw Error('Ce PNJ ne possède pas de profil de combattant.');
  if(combat.fighters.some(f=>f.characterId===id))throw Error('Déjà présent dans ce combat');
  const newId='p-'+combat.seq++;
  const f={id:newId,characterId:id,name:c.name,kind:c.kind,fatigue:c.fatigue,balance:c.balance,
  conditions:rosterClone(c.conditions),statuses:c.statuses.map(x=>TO_ENGINE[x]||x),approach:null,roll:null,blocked:[],reactions:[],bonuses:[],
  techniques:rosterClone(c.techniques),stats:rosterClone(c.stats)};
- combat.fighters.push(f);return f;
+ if(c.npcResources){f.npcResources=rosterClone(c.npcResources);f.principles=rosterClone(c.principles);}combat.fighters.push(f);return f;
 }
 function syncCombatToLibrary(lib,combat,id){
  const f=combat.fighters.find(x=>x.id===id);if(!f||!f.characterId)throw Error('Combattant non lié à une fiche');
@@ -2828,13 +2848,13 @@ function normalizeCharacter(c){
  if(!Array.isArray(c.relationships))c.relationships=[];
  if(!Array.isArray(c.playbookMoves))c.playbookMoves=[];
  if(!Array.isArray(c.principles))c.principles=['',''];
- c.conditions=Array.isArray(c.conditions)?[...new Set(c.conditions.map(x=>({'Effrayé':'Terrifié','Troublé':'Confus'}[x]||x)))]:[];
+ if(!c.npcResources)c.conditions=Array.isArray(c.conditions)?[...new Set(c.conditions.map(x=>({'Effrayé':'Terrifié','Troublé':'Confus'}[x]||x)))]:[];
  c.statuses=Array.isArray(c.statuses)?[...new Set(c.statuses.map(x=>({'en_danger':'En danger','renforce':'Renforcé','avantage':'Avantagé','gene':'Gêné','pret':'Prêt','confiant':'Confiant','piege':'Piégé','etourdi':'Étourdi'}[x]||x)))]:[];
  return c;
 }
 function toggleCondition(lib,id,name){
- if(!CONDITIONS.includes(name))throw Error('État inconnu');
  const c=lib.characters.find(x=>x.id===id);if(!c)throw Error('Fiche inconnue');
+ if(!resourceConditionNames(c).includes(name))throw Error('État inconnu');
  const next=c.conditions.includes(name)?c.conditions.filter(x=>x!==name):[...c.conditions,name];
  updateCharacter(lib,id,{conditions:next});return c;
 }
@@ -2865,9 +2885,10 @@ function listNpcs(lib,{location='',search='',training='',role='',importance='',s
 function npcLocations(lib){return [...new Set(lib.characters.filter(c=>c.kind==='PNJ').map(c=>c.location||'').filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
 function importLibrary(raw){
  const lib=typeof raw==='string'?JSON.parse(raw):rosterClone(raw);
- if(lib?.version!==1||!Array.isArray(lib.characters)||!Number.isInteger(lib.seq))throw Error('Format bibliothèque incompatible');
+ if(![1,2].includes(lib?.version)||!Array.isArray(lib.characters)||!Number.isInteger(lib.seq))throw Error('Format bibliothèque incompatible');
  const ids=new Set();
  for(const c of lib.characters){normalizeCharacter(c);validateCharacter(c);if(ids.has(c.id))throw Error('Identifiant dupliqué');ids.add(c.id)}
+ if(lib.characters.some(c=>c.npcResources))lib.version=2;
  return lib;
 }
 window.Roster={NPC_IMPORTANCE,npcImportance,listNpcs,npcLocations,TRAININGS,TO_ENGINE,FROM_ENGINE,STATS,MASTERY,CONDITIONS,STATUSES,normalizeCharacter,toggleCondition,toggleStatus,createLibrary,makeCharacter,validateCharacter,createCharacter,updateCharacter,assignTechnique,addToCombat,syncCombatToLibrary,importLibrary};
@@ -2929,25 +2950,25 @@ function setCombatTab(tab){
 function quickSheetResource(kind,delta){
  const c=selectedSheet();if(!c)return;
  const value=sheetEditing?Number($(kind==='fatigue'?'sheetFatigue':'sheetBalance').value):c[kind];
- const limits=kind==='fatigue'?[0,5]:[-3,3];quickSheetSetResource(kind,Math.min(limits[1],Math.max(limits[0],value+delta)));
+ const rules=resourceLimits(sheetResourcePreview(c)),limits=kind==='fatigue'?[0,rules.fatigueMax]:[rules.balanceMin,rules.balanceMax];quickSheetSetResource(kind,sheetEditing&&value>limits[1]&&delta<0?value+delta:Math.min(limits[1],Math.max(limits[0],value+delta)));
 }
 
 function quickSheetCondition(name){toggleSheetCondition(name);}
 
 function refreshSheetQuick(){
  const c=selectedSheet();if(!c)return;
- renderSheetQuick(sheetEditing?{...c,name:$('sheetName')?.value??c.name,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance),center:Number($('sheetCenter')?.value??c.center),principles:[$('principleLeft')?.value||'', $('principleRight')?.value||''],portrait:$('sheetPortrait')?.value,conditions:sheetDraftConditions,statuses:sheetDraftStatuses,importance:$('sheetImportance')?.value??c.importance}:c);
- if(sheetEditing){for(const [fn,names,values] of [['toggleSheetCondition',Roster.CONDITIONS,sheetDraftConditions],['toggleSheetStatus',Roster.STATUSES,sheetDraftStatuses]])$('sheetForm').querySelectorAll('button[onclick^="'+fn+'"]').forEach((button,i)=>{const active=values.includes(names[i]);button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));button.textContent=(active?'✓ ':'')+names[i];});}
+ renderSheetQuick(sheetResourcePreview(sheetEditing?{...c,name:$('sheetName')?.value??c.name,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance),center:Number($('sheetCenter')?.value??c.center),principles:[$('principleLeft')?.value||'', $('principleRight')?.value||''],portrait:$('sheetPortrait')?.value,conditions:sheetDraftConditions,statuses:sheetDraftStatuses,importance:$('sheetImportance')?.value??c.importance}:c));updateNpcProfileNotice();
+ if(sheetEditing){for(const [fn,names,values] of [['toggleSheetCondition',resourceConditionNames(c),sheetDraftConditions],['toggleSheetStatus',Roster.STATUSES,sheetDraftStatuses]])$('sheetForm').querySelectorAll('button[onclick^="'+fn+'"]').forEach((button,i)=>{const name=button.dataset.condition||names[i],active=values.includes(name);button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));button.textContent=(active?'✓ ':'')+name;});}
 }
 
 function renderSheetQuick(c){
  const bar=$('sheetQuick');if(!bar)return;if(!c){bar.innerHTML='';return;}
- const portrait=safeSheetPortrait(c.portrait),undo=sheetResourceUndo;
- const cells=Array.from({length:5},(_,i)=>`<button type="button" class="resource-cell ${i<c.fatigue?'used':''}" aria-label="Fatigue : ${i+1} sur 5" aria-pressed="${i<c.fatigue}" onclick="quickSheetSetResource('fatigue',${i<c.fatigue?i:i+1})"></button>`).join('');
- bar.innerHTML=`<div class="sheet-portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="34" r="17"/><path d="M18 92v-9a32 32 0 0 1 64 0v9"/></svg>${portrait?`<img src="${safe(portrait)}" alt="Portrait de ${safe(c.name)}" onerror="this.hidden=true">`:''}</div><div class="sheet-side-name"><strong>${safe(c.name)}</strong>${trainingIcon(c.training)}<p>${c.kind==='PJ'?safe(c.livret||'Livret non renseigné'):`<span class="sheet-importance"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</span>`}</p></div><button type="button" class="alt" onclick="includeSheet($('sheetSelect').value)" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button>
- <div class="resource"><div class="resource-heading"><span>Fatigue</span><output>${c.fatigue}/5</output></div><div class="resource-cells">${cells}</div><div class="resource-adjust"><button type="button" class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)" ${c.fatigue<=0?'disabled':''}>−</button><button type="button" class="alt" aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)" ${c.fatigue>=5?'disabled':''}>+</button></div></div>
- <div class="resource"><div class="resource-heading"><span>Équilibre</span><output>${c.balance>0?'+':''}${c.balance}</output></div>${c.kind==='PJ'?`<div class="balance-principles"><span>${safe(c.principles?.[0]||'Premier principe')} ${-c.balance}</span><span>${safe(c.principles?.[1]||'Second principe')} ${c.balance}</span></div>${balanceGraphic(c)}<div class="resource-balance-cells">${Array.from({length:7},(_,i)=>`<button type="button" class="alt" aria-label="Régler l’équilibre à ${i-3}" aria-pressed="${c.balance===i-3}" onclick="quickSheetSetResource('balance',${i-3})">${i-3>0?'+':''}${i-3}</button>`).join('')}</div>${sheetEditing?'<button type="button" class="alt sheet-center-action" onclick="requestSheetCenter()">Modifier le centre…</button>':''}`:`<p class="small-note">${safe(c.principles?.[0]||c.principles?.[1]||'Principe non renseigné')}</p>`}<div class="resource-adjust"><button type="button" class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)" ${c.balance<=-3?'disabled':''}>−</button><button type="button" class="alt" aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)" ${c.balance>=3?'disabled':''}>+</button></div></div>
- <details class="sheet-effects"><summary>États et statuts${c.conditions.length+c.statuses.length?' · '+(c.conditions.length+c.statuses.length):''}</summary><p class="small-note">États</p><div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button type="button" class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" data-condition="${safe(n)}" onclick="quickSheetCondition(this.dataset.condition)">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div><p class="small-note">Statuts de combat</p><div class="card-chips">${c.statuses.map(n=>chipHtml(n,'status')).join('')||'<span class="card-muted">Aucun statut actif.</span>'}</div></details>${!sheetEditing&&undo?.library===lib&&undo.id===c.id?'<button type="button" class="alt" onclick="undoSheetResource()">Annuler le dernier ajustement</button>':''}`;
+ const rules=resourceLimits(c),portrait=safeSheetPortrait(c.portrait),undo=sheetResourceUndo;
+ const cells=Array.from({length:rules.fatigueMax},(_,i)=>`<button type="button" class="resource-cell ${i<c.fatigue?'used':''}" aria-label="Fatigue : ${i+1} sur ${rules.fatigueMax}" aria-pressed="${i<c.fatigue}" onclick="quickSheetSetResource('fatigue',${i<c.fatigue?i:i+1})"></button>`).join('');
+ bar.innerHTML=`<div class="sheet-portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="34" r="17"/><path d="M18 92v-9a32 32 0 0 1 64 0v9"/></svg>${portrait?`<img src="${safe(portrait)}" alt="Portrait de ${safe(c.name)}" onerror="this.hidden=true">`:''}</div><div class="sheet-side-name"><strong>${safe(c.name)}</strong>${trainingIcon(c.training)}<p>${c.kind==='PJ'?safe(c.livret||'Livret non renseigné'):`<span class="sheet-importance"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</span>`}</p></div><button type="button" class="alt" onclick="includeSheet($('sheetSelect').value)" ${!rules.combatant||s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${!rules.combatant?'PNJ non combattant':s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button>
+ ${rules.fatigueMax?`<div class="resource"><div class="resource-heading"><span>Fatigue</span><output>${c.fatigue}/${rules.fatigueMax}</output></div><div class="resource-cells">${cells}</div><div class="resource-adjust"><button type="button" class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)" ${c.fatigue<=0?'disabled':''}>−</button><button type="button" class="alt" aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)" ${c.fatigue>=rules.fatigueMax?'disabled':''}>+</button></div></div>`:''}
+ ${rules.balanceMax?`<div class="resource"><div class="resource-heading"><span>Équilibre</span><output>${c.balance>0?'+':''}${c.balance}</output></div>${c.kind==='PJ'?`<div class="balance-principles"><span>${safe(c.principles?.[0]||'Premier principe')} ${-c.balance}</span><span>${safe(c.principles?.[1]||'Second principe')} ${c.balance}</span></div>${balanceGraphic(c)}<div class="resource-balance-cells">${Array.from({length:7},(_,i)=>`<button type="button" class="alt" aria-label="Régler l’équilibre à ${i-3}" aria-pressed="${c.balance===i-3}" onclick="quickSheetSetResource('balance',${i-3})">${i-3>0?'+':''}${i-3}</button>`).join('')}</div>${sheetEditing?'<button type="button" class="alt sheet-center-action" onclick="requestSheetCenter()">Modifier le centre…</button>':''}`:`<p class="small-note">${safe(c.principles?.[0]||c.principles?.[1]||'Principe non renseigné')}</p>${rules.explicit?'<div class="resource-balance-cells">'+Array.from({length:rules.balanceMax+1},(_,i)=>'<button type="button" class="alt" aria-label="Régler l’équilibre PNJ à '+i+'" aria-pressed="'+(c.balance===i)+'" onclick="quickSheetSetResource(\'balance\','+i+')">'+i+'</button>').join('')+'</div>':''}`}<div class="resource-adjust"><button type="button" class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)" ${c.balance<=rules.balanceMin?'disabled':''}>−</button><button type="button" class="alt" aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)" ${c.balance>=rules.balanceMax?'disabled':''}>+</button></div></div>`:''}
+ <details class="sheet-effects" ${!rules.conditions.length&&!c.statuses.length?'hidden':''}><summary>États et statuts${c.conditions.length+c.statuses.length?' · '+(c.conditions.length+c.statuses.length):''}</summary><p class="small-note" ${!rules.conditions.length?'hidden':''}>États</p><div class="quick-conditions">${rules.conditions.map(n=>`<button type="button" class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" data-condition="${safe(n)}" onclick="quickSheetCondition(this.dataset.condition)">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div><p class="small-note">Statuts de combat</p><div class="card-chips">${c.statuses.map(n=>chipHtml(n,'status')).join('')||'<span class="card-muted">Aucun statut actif.</span>'}</div></details>${!sheetEditing&&undo?.library===lib&&undo.id===c.id?'<button type="button" class="alt" onclick="undoSheetResource()">Annuler le dernier ajustement</button>':''}`;
 }
 
 function disengageOne(id){try{const f=CombatCore.fighter(s,id);if(confirm('Rompre tous les engagements de '+f.name+' ? Cette opération peut être annulée.'))CombatCore.disengageFighter(s,id);render()}catch(e){alert(e.message);render()}}
@@ -2960,7 +2981,7 @@ function triggerTrapUI(id){try{
  const answer=prompt('Adversaire entré dans '+trap.zone+' ?\n'+targets.map((f,i)=>(i+1)+'. '+f.name).join('\n'),'1');
  if(answer===null)return;
  const target=targets[Number(answer)-1];if(!target)throw Error('Adversaire invalide');
- const choices=['Terrifié','En colère','Coupable','Fragile','Confus'].filter(x=>!target.conditions.includes(x));
+ const choices=resourceConditionNames(target).filter(x=>!target.conditions.includes(x));
  const chosen=prompt('État à cocher :\n'+choices.map((c,i)=>(i+1)+'. '+c).join('\n'),'1');if(chosen===null)return;
  const condition=choices[Number(chosen)-1];if(!condition)throw Error('État invalide');
  const dir=prompt('Direction du décentrage (+1 ou -1)','1');if(dir===null)return;
@@ -3043,7 +3064,7 @@ function revealCountertimeUI(id){try{
 function earthLavaUI(id,operation){try{
  const star=s.temporaryEffects.find(e=>e.id===id&&e.originLabel==='Étoile de lave');
  if(!star)throw Error('Étoile de lave : effet introuvable');
- if(operation==='maintain'&&CombatCore.fighter(s,star.targetId).fatigue>=5)throw Error('Étoile de lave : fatigue insuffisante pour entretenir l’étoile ; la laisser s’éteindre ou l’éteindre maintenant.');
+ if(operation==='maintain'&&CombatCore.fighter(s,star.targetId).fatigue>=fatigueLimit(CombatCore.fighter(s,star.targetId)))throw Error('Étoile de lave : fatigue insuffisante pour entretenir l’étoile ; la laisser s’éteindre ou l’éteindre maintenant.');
  if(!confirm(operation==='maintain'?'MJ : payer 1 fatigue en fin de passe pour conserver l’étoile ?':'MJ : éteindre l’étoile de lave ?'))return;
  commitCombatMutation(()=>CombatCore.resolveEarthLava(s,id,operation,true));render();
 }catch(e){alert(e.message)}}
@@ -3075,17 +3096,18 @@ function spendEarthArmorUI(id,mode){try{
 }catch(e){alert(e.message)}}
 function resolveEarthArmorHitUI(id){try{
  const kind=prompt('Armure de terre : type d’impact entrant ? fatigue ou condition','fatigue');if(kind===null)return;
- const raw=prompt(kind==='fatigue'?'Nombre de fatigues entrantes (1 à 20)':'État entrant (Terrifié, En colère, Coupable, Fragile, Confus)',kind==='fatigue'?'2':'Terrifié');if(raw===null)return;
+ const entry=s.temporaryEffects.find(e=>e.id===id&&e.originLabel==='Armure de terre'),names=entry?resourceConditionNames(CombatCore.fighter(s,entry.targetId)):[];
+ const raw=prompt(kind==='fatigue'?'Nombre de fatigues entrantes (1 à 20)':'État entrant : '+names.join(' / '),kind==='fatigue'?'2':names[0]||'');if(raw===null)return;
  const amount=kind==='fatigue'?Number(raw):raw.trim();
  const pointsRaw=prompt('Points de réserve à dépenser (au moins 1, obligatoire pour chaque attaque)', '1');if(pointsRaw===null)return;
  const points=Number(pointsRaw);
  const armor=s.temporaryEffects.find(e=>e.id===id&&e.originLabel==='Armure de terre');
  const wearer=armor?CombatCore.fighter(s,armor.targetId):null;
  const residual=kind==='fatigue'?Math.max(0,amount-2*points):0;
- const overflow=wearer?Math.max(0,wearer.fatigue+residual-5):0;
+ const overflow=wearer?Math.max(0,wearer.fatigue+residual-fatigueLimit(wearer)):0;
  let overflowConditions=[];
  if(overflow){
-  const available=['Terrifié','En colère','Coupable','Fragile','Confus'].filter(c=>!wearer.conditions.includes(c));
+  const available=resourceConditionNames(wearer).filter(c=>!wearer.conditions.includes(c));
   const rawOverflow=prompt('Fatigue excédentaire : choisir '+overflow+' état(s) distinct(s) parmi '+available.join(', ')+' (séparés par des virgules)',available.slice(0,overflow).join(', '));
   if(rawOverflow===null)return;
   overflowConditions=rawOverflow.split(',').map(x=>x.trim());
@@ -3116,7 +3138,7 @@ function earthSeismicInterruptUI(sourceId){try{
  const choice=prompt('Choix de '+enemy.name+' : pay (3 fatigues et technique maintenue) ou cancel (technique annulée) ?', 'cancel');
  if(choice===null)return;
  let overflow=[];
- if(choice==='pay'&&enemy.fatigue+3>5)throw Error('Fatigue insuffisante pour payer 3 fatigues : choisir cancel.');
+ if(choice==='pay'&&enemy.fatigue+3>fatigueLimit(enemy))throw Error('Fatigue insuffisante pour payer 3 fatigues : choisir cancel.');
  let enemyActionId='';
  if(choice==='cancel'){
   const pending=s.actions.filter(a=>a.sourceId===id&&a.round===s.round&&!a.cancelledBySeismic&&!s.history.some(h=>(h.events||[]).some(e=>e.actionId===a.id)));
@@ -3134,7 +3156,7 @@ function earthMudStrikeUI(sourceId,targetId){try{
  const choice=prompt('Boue gluante : conséquence choisie par '+target.name+' : fatigue, condition ou balance ?', 'fatigue');
  if(choice===null)return;
  let detail='';
- if(choice==='condition'){detail=prompt('État à cocher : Terrifié, En colère, Coupable, Fragile ou Confus','Terrifié');if(detail===null)return;}
+ if(choice==='condition'){detail=prompt('État à cocher : '+resourceConditionNames(target).join(' / '),resourceConditionNames(target)[0]||'');if(detail===null)return;}
  if(choice==='balance'){detail=prompt('Déplacement de l’équilibre : +1 ou -1','1');if(detail===null)return;}
  if(!confirm('MJ : résoudre la Frappe supplémentaire de Boue gluante contre '+target.name+' ? Ce choix consommera uniquement son droit de Frapper.'))return;
  commitCombatMutation(()=>CombatCore.resolveEarthMudStrike(s,sourceId,targetId,choice,detail,true,[],()=>{render();return approvalDecisions();}));render();
@@ -3187,10 +3209,10 @@ function editCombatFighter(id){try{
  const dialog=$('combatFighterDialog'),required=CombatCore.requiredFighterStatuses(s,id);dialog.dataset.fighterId=id;
  dialog.innerHTML=`<form onsubmit="event.preventDefault();saveCombatFighter()"><h3 id="combatFighterEditorTitle">Modifier le combattant</h3><p>${safe(f.kind)} · Modifications pour ce combat uniquement${f.characterId?' ; la fiche permanente reste indépendante':''}.</p>
  <label for="combatEditName">Nom dans ce combat</label><input id="combatEditName" required maxlength="100" value="${safe(f.name)}">
- <label for="combatEditFatigue">Fatigue</label><input id="combatEditFatigue" type="number" min="0" max="5" step="1" required value="${f.fatigue}">
- <label for="combatEditBalance">Équilibre</label><input id="combatEditBalance" type="number" min="-3" max="3" step="1" required value="${f.balance}">
+ <label for="combatEditFatigue">Fatigue</label><input id="combatEditFatigue" type="number" min="0" max="${fatigueLimit(f)}" step="1" required value="${f.fatigue}">
+ <label for="combatEditBalance">Équilibre</label><input id="combatEditBalance" type="number" min="${resourceLimits(f).balanceMin}" max="${resourceLimits(f).balanceMax}" step="1" required value="${f.balance}">
  <label for="combatEditMaterials">Matériels</label><input id="combatEditMaterials" type="number" min="0" step="1" required value="${f.materials||0}">
- <fieldset><legend>États</legend>${Roster.CONDITIONS.map(c=>`<label><input class="combat-edit-condition" type="checkbox" value="${safe(c)}" ${f.conditions.includes(c)?'checked':''}>${safe(c)}</label>`).join('')}</fieldset>
+ <fieldset><legend>États</legend>${resourceConditionNames(f).map(c=>`<label><input class="combat-edit-condition" type="checkbox" value="${safe(c)}" ${f.conditions.includes(c)?'checked':''}>${safe(c)}</label>`).join('')}</fieldset>
  <fieldset><legend>Statuts</legend>${CombatCore.STATUS.map(status=>`<label><input class="combat-edit-status" type="checkbox" value="${status}" ${f.statuses.includes(status)||required.includes(status)?'checked':''} ${required.includes(status)?'disabled':''}>${safe(Roster.FROM_ENGINE[status])}${required.includes(status)?' (effet actif)':''}</label>`).join('')}</fieldset>
  <p class="small-note">Les statuts maintenus par une technique se retirent depuis cet effet. La modification peut être annulée avec l’historique du combat.</p>
  <div class="row"><button type="submit">Enregistrer le combattant</button><button type="button" class="alt" onclick="$('combatFighterDialog').close()">Annuler</button></div></form>`;
@@ -3204,7 +3226,7 @@ function saveCombatFighter(){try{
 function openCombatSheet(id){const f=CombatCore.fighter(s,id);if(f.characterId){setView('characters');openCharacterDetail(f.characterId);}}
 function render(){
  renderCombatLibrary();
- $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${f.kind}</span><button type="button" class="alt" title="Disponible avant la révélation des approches" onclick="editCombatFighter('${f.id}')" ${s.phase!=='declaration'||s.actions.length||s.proposals.length?'disabled':''}>Modifier le combattant</button>${f.characterId?`<button type="button" class="alt" onclick="openCombatSheet('${f.id}')">Ouvrir la fiche</button>`:''}${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select onchange="setGeneCombatChoice('${f.id}',this.value)"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" onclick="releaseTrapped('${f.id}')" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" onclick="syncSheet('${f.id}')">Reporter sur la fiche</button>`:''}<p>Fatigue : ${f.fatigue}/5 · Matériels : ${f.materials||0}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${f.balance} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>approachLabels[x]).join(', ')||'—'}</p></div>`).join('');
+ $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${f.kind}</span><button type="button" class="alt" title="Disponible avant la révélation des approches" onclick="editCombatFighter('${f.id}')" ${s.phase!=='declaration'||s.actions.length||s.proposals.length?'disabled':''}>Modifier le combattant</button>${f.characterId?`<button type="button" class="alt" onclick="openCombatSheet('${f.id}')">Ouvrir la fiche</button>`:''}${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select onchange="setGeneCombatChoice('${f.id}',this.value)"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" onclick="releaseTrapped('${f.id}')" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" onclick="syncSheet('${f.id}')">Reporter sur la fiche</button>`:''}<p>Fatigue : ${f.fatigue}/${fatigueLimit(f)} · Matériels : ${f.materials||0}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${f.balance} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>approachLabels[x]).join(', ')||'—'}</p></div>`).join('');
  $('fighters').innerHTML+='<div class="fighter"><b>Engagements (confirmés par le MJ)</b><p class="small-note">Cocher les paires engagées. Glissade permet de rompre et de créer des engagements avec validation MJ. La remise à zéro est une transaction unique, annulable.</p><button type="button" class="alt" onclick="clearAllEngagements()" '+(!(s.engagements||[]).length?'disabled':'')+'>Rompre tous les engagements</button>'+s.fighters.map(f=>'<button type="button" class="alt" onclick="disengageOne(\''+f.id+'\')" '+(!(s.engagements||[]).some(pair=>pair.includes(f.id))?'disabled':'')+'>Désengager '+safe(f.name)+'</button>').join('')+s.fighters.flatMap((f,i)=>s.fighters.slice(i+1).map(g=>'<label><input type="checkbox" style="width:auto" '+(CombatCore.isEngaged(s,f.id,g.id)?'checked':'')+' onchange="changeEngagement(\''+f.id+'\',\''+g.id+'\',this.checked)"> '+safe(f.name)+' ↔ '+safe(g.name)+'</label>')).join('')+'</div>';
  $('fighters').innerHTML+='<div class="fighter"><b>Pièges armés (MJ)</b>' + ((s.traps||[]).length?(s.traps||[]).map(t=>'<p>'+safe(t.zone)+' — '+safe(CombatCore.fighter(s,t.ownerId).name)+' <button type="button" class="alt" onclick="triggerTrapUI(\''+safe(t.id)+'\')" '+(s.proposals.length?'disabled':'')+'>Déclencher (prochain adversaire)</button></p>').join(''):'<p>Aucun piège armé.</p>')+'</div>';
  $('phase').innerHTML=`<h3>Scène ${s.scene||1}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${s.round} — ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin de passe':approachLabels[s.phase]}</h3>`;
@@ -3233,11 +3255,19 @@ function syncTechnique(){
  syncOptions();
 }
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));}
+function syncTargetOptions(){
+ const target=s.fighters.find(f=>f.id===$('target').value);if(!target)return;
+ const names=resourceConditionNames(target);
+ for(const id of ['condition','fireCondition1','fireCondition2','airCushionCondition']){const el=$(id);if(!el)continue;const previous=el.value;el.innerHTML=names.map(name=>`<option value="${safe(name)}">${safe(name)}</option>`).join('');el.value=names.includes(previous)?previous:names[0]||'';}
+ const choice=$('choice');if(!choice)return;
+ if(npcResourceProfile(target)&&!resourceLimits(target).balanceMax)choice.querySelector('option[value="balance"]')?.remove();
+ else if(['Frapper','Charge','Frappe dévastatrice','Fouet d’eau'].includes($('tech').selectedOptions[0]?.textContent.split(' · ')[0])&&!choice.querySelector('option[value="balance"]')){const option=document.createElement('option');option.value='balance';option.textContent='Décalage équilibre';choice.append(option);}
+}
 function syncOptions(){const entry=TECH_CATALOG.find(x=>x.id===$('tech').value),t=entry?.nom||'',f=s.fighters.find(x=>x.id===$('source').value);let opts='';
  $('techHelp').textContent=entry?`${entry.famille} · p. ${entry.page} · ${f?.kind==='PJ'?('Niveau : '+(CombatRules.masteryFor(f,entry)||'non appris')):'PNJ'} · ${['Frapper','Riposter','Protection','Presser l’adversaire','Charge','Acharnement','Dérobade','Observation rapide','Frappe dévastatrice','Frapper un point faible','Fort comme un chêne','Se mettre à l’abri','Serrer les dents','Trouver la faille','Fouet d’eau','Plaque de givre','Gantelet de glace','Électrochoc','Aveuglé par la science','Meilleur, plus rapide, plus fort','Collecter du matériel','Maintenance','Puissance maximale','Colonne de pierre','Projection tellurique','Enfouissement','Jet de flammes','Gantelet de terre','Disque de feu','Mords la poussière','Arc de foudre','Mouvements tectoniques','Tourbillon miniature','Souffle du vent','Aspiration','Vélocité du vent','Boulet de canon','Coussin d’air','Cône d’air','Onde de choc','Vague d’air','Sphère d’air','Oscillations du vent','Amortir le poing rageur','Contre-attaque','Entraves de métal','Escalier de poussière','Boue gluante','Bouclier de roche','Détection du pas lourd','Étoile de lave'].includes(t)?'Effets assistés':'Arbitrage MJ'}`:'';
  $('postureMode').innerHTML=f?.kind==='PJ'&&f.roll==='10+'?'<label>Option de posture (10+)</label><select id="techMode"><option value="double">Deux techniques différentes (base ou maîtrisées)</option><option value="single">Une technique acquise ou pratiquée (coût éventuel)</option></select>':'';
 
- if(['Frapper','Charge','Frappe dévastatrice','Fouet d’eau'].includes(t))opts='<label>Choix de la cible</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">Un état</option><option value="balance">Décalage équilibre</option></select><label>État (si choisi)</label><select id="condition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select><label>Direction du décalage (si choisi)</label><select id="direction"><option value="1">+1</option><option value="-1">−1</option></select>';
+ if(['Frapper','Charge','Frappe dévastatrice','Fouet d’eau'].includes(t))opts='<label>Choix de la cible</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">Un état</option><option value="balance">Décalage équilibre</option></select><label>État (si choisi)</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>`<option>${safe(x)}</option>`).join('')+'</select><label>Direction du décalage (si choisi)</label><select id="direction"><option value="1">+1</option><option value="-1">−1</option></select>';
  if(t==='Souffle du vent')opts='<label>Choix de la cible</label><select id="windChoice"><option value="etourdi">Devenir Étourdi</option><option value="fatigue">Cocher 4 fatigues</option></select><p class="small-note">La cible est renversée ; placement arbitré par le MJ.</p>';
  if(t==='Aspiration')opts='<label>Petit objet visé</label><input id="airObject" maxlength="120" placeholder="Ex. : parchemin, clef"><label>Un personnage choisit-il de résister ?</label><select id="airResistance"><option value="none">Non : objet récupéré</option><option value="resist">Oui : la cible sélectionnée coche 2 fatigues</option></select><p class="small-note">Si résistance, sélectionner le personnage qui retient ou bloque l’objet. L’objet reste narratif.</p>';
  if(t==='Cône d’air')opts='<p class="small-note">Coût : 1 fatigue pour le lanceur et 1 par allié participant ; 2 fatigues infligées par allié. Le MJ confirme la portée et la participation.</p><label><input type="checkbox" id="airConeInRange" style="width:auto"> Portée et participants confirmés par le MJ</label>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<label><input type="checkbox" class="air-cone-ally" value="'+safe(x.id)+'" style="width:auto"> Allié participant : '+safe(x.name)+'</label>').join('');
@@ -3252,9 +3282,9 @@ function syncOptions(){const entry=TECH_CATALOG.find(x=>x.id===$('tech').value),
  if(t==='Entraves de métal')opts='<p class="small-note">Terre p.289 : cible Gênée, ne perd ce statut que si elle maîtrise le métal ou à la fin du combat. Le lanceur est Avantagé tant que la cible est Gênée et engagée. Engagements et libération suivis par le moteur ; dérogation narrative explicite possible pour le MJ.</p><label><input type="checkbox" id="earthMetalConfirmed" style="width:auto"> Maîtrise du métal et cible confirmées par le MJ</label>';
  if(t==='Escalier de poussière')opts='<p class="small-note">Terre p.289 : position surélevée, Avantagé et Prêt ; un adversaire engagé peut cocher 2 fatigues pour annuler cet effet.</p><label><input type="checkbox" id="earthStairsConfirmed" style="width:auto"> Position surélevée confirmée par le MJ</label><label>Adversaire engagé qui annule (facultatif)</label><select id="earthStairsBlocker"><option value="">Aucun : appliquer Avantagé et Prêt</option>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<option value="'+escapeHtml(x.id)+'">'+escapeHtml(x.name)+'</option>').join('')+'</select>';
  if(t==='À contretemps')opts='<p class="small-note">Armes p. 292 : cochez 1 fatigue pour devenir Prêt et obliger un adversaire engagé à révéler son approche avant votre choix à la prochaine passe. Le statut Prêt est appliqué après validation ; le moment de révélation reste arbitré par le MJ.</p><label><input type="checkbox" id="countertimeConfirmed" style="width:auto"> Adversaire engagé et conditions confirmés par le MJ</label>';
- if(t==='Contre-attaque')opts='<p class="small-note">Armes p. 292 : Frapper comme si 1 fatigue avait été cochée, sans payer cette fatigue. Cible engagée ayant déclaré Avancer et attaquer ; aucun statut négatif sur le riposteur. Le MJ confirme la situation.</p><label><input type="checkbox" id="weaponCounterConfirmed" style="width:auto"> Approche adverse et engagement confirmés par le MJ</label><label>Effet imposé</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">Un état</option></select><label>État infligé (si choisi)</label><select id="condition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select>';
+ if(t==='Contre-attaque')opts='<p class="small-note">Armes p. 292 : Frapper comme si 1 fatigue avait été cochée, sans payer cette fatigue. Cible engagée ayant déclaré Avancer et attaquer ; aucun statut négatif sur le riposteur. Le MJ confirme la situation.</p><label><input type="checkbox" id="weaponCounterConfirmed" style="width:auto"> Approche adverse et engagement confirmés par le MJ</label><label>Effet imposé</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">Un état</option></select><label>État infligé (si choisi)</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>`<option>${safe(x)}</option>`).join('')+'</select>';
  if(t==='Désarmement')opts='<p class="small-note">Armes p. 292 : 2 fatigues pour interdire une technique avancée Avancer et attaquer possédée par la cible jusqu’à la fin de la rencontre. Le MJ confirme la possession ; la restriction est levée à la nouvelle scène.</p><label><input type="checkbox" id="weaponDisarmConfirmed" style="width:auto"> Possession et choix confirmés par le MJ</label><label>Technique de la cible à interdire</label><select id="weaponDisarmTechnique">'+TECH_CATALOG.filter(x=>x.famille!=="base"&&x.approche==="Avancer et attaquer").map(x=>'<option value="'+escapeHtml(x.nom)+'">'+escapeHtml(x.nom)+'</option>').join('')+'</select>';
- if(t==='Feinte')opts='<p class="small-note">Armes p. 292 : si vous avez été visé par une ou plusieurs attaques pendant cette passe, cochez 1 fatigue pour infliger immédiatement un état à chacun de vos assaillants. Le MJ identifie tous les assaillants, sans inventer d’historique des attaques.</p><label><input type="checkbox" id="weaponFeintConfirmed" style="width:auto"> Attaques reçues et liste exhaustive des assaillants confirmées par le MJ</label>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<label><input type="checkbox" class="weapon-feint-attacker" value="'+escapeHtml(x.id)+'" style="width:auto"> '+escapeHtml(x.name)+'</label><select class="weapon-feint-condition" data-attacker="'+escapeHtml(x.id)+'">'+CONDITIONS.map(c=>'<option value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>').join('')+'</select>').join('');
+ if(t==='Feinte')opts='<p class="small-note">Armes p. 292 : si vous avez été visé par une ou plusieurs attaques pendant cette passe, cochez 1 fatigue pour infliger immédiatement un état à chacun de vos assaillants. Le MJ identifie tous les assaillants, sans inventer d’historique des attaques.</p><label><input type="checkbox" id="weaponFeintConfirmed" style="width:auto"> Attaques reçues et liste exhaustive des assaillants confirmées par le MJ</label>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<label><input type="checkbox" class="weapon-feint-attacker" value="'+escapeHtml(x.id)+'" style="width:auto"> '+escapeHtml(x.name)+'</label><select class="weapon-feint-condition" data-attacker="'+escapeHtml(x.id)+'">'+resourceConditionNames(x).map(c=>'<option value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>').join('')+'</select>').join('');
  if(t==='Estocade précise')opts='<p class="small-note">Armes p. 292 : 1 fatigue, 2 fatigues et Gêné sur la cible. Option : 1 fatigue de plus pour tenter un déplacement à portée, qu’un adversaire engagé peut bloquer en cochant 1 fatigue.</p><label><input type="checkbox" id="weaponPiercingConfirmed" style="width:auto"> Arme perforante ou d’estoc confirmée par le MJ</label><label><input type="checkbox" id="weaponMoveExtra" style="width:auto"> Tenter le déplacement supplémentaire (+1 fatigue)</label><label><input type="checkbox" id="weaponMoveConfirmed" style="width:auto"> Position à portée confirmée par le MJ</label><label><input type="checkbox" id="weaponMoveBlocked" style="width:auto"> Un adversaire engagé bloque le déplacement (+1 fatigue pour lui)</label><label>Adversaire qui bloque</label><select id="weaponBlockerId"><option value="">Aucun</option>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<option value="'+x.id+'">'+x.name+'</option>').join('')+'</select>';
  if(t==='Clouer une mouche contre un tronc d’arbre')opts='<p class="small-note">Armes p. 292 : 1 fatigue pour Gêné ; 3 fatigues pour Gêné et Piégé.</p><label><input type="checkbox" id="weaponArrowsConfirmed" style="width:auto"> Tir de flèches et cible confirmés par le MJ</label><label>Coût</label><select id="weaponArrowCost"><option value="1">1 fatigue : Gêné</option><option value="3">3 fatigues : Gêné et Piégé</option></select>';
  if(t==='Position surélevée')opts='<p class="small-note">Armes p. 292 : 1 fatigue, Avantagé ; ignorer douleur et statuts négatifs des attaques reçues pendant cette passe. Cette immunité est un rappel narratif : le MJ doit arbitrer les attaques, et aucun effet déjà approuvé n’est effacé automatiquement.</p><label><input type="checkbox" id="weaponHighGroundConfirmed" style="width:auto"> Position surélevée confirmée par le MJ</label>';
@@ -3263,16 +3293,16 @@ function syncOptions(){const entry=TECH_CATALOG.find(x=>x.id===$('tech').value),
  if(t==='Sphère d’air')opts='<p class="small-note">Devenir Avantagé tant que la sphère est maintenue. Sacrifier la sphère pour éviter la fatigue ou un état d’une attaque relève du MJ et reste manuel.</p><label><input type="checkbox" id="airSphereConfirmed" style="width:auto"> Le MJ confirme que la sphère est maintenue</label>';
  const reserve=f?.windReserve;
  if(reserve?.usableRound===s.round&&f?.approach==='attaquer'&&reserve.points>0)opts+='<label>Points Oscillations du vent à dépenser sur le coût de cette technique</label><input type="number" id="windSpend" min="0" max="'+reserve.points+'" value="0"><p class="small-note">Réserve disponible : '+reserve.points+' point(s). Ne peut pas dépasser le coût en fatigue de cette technique.</p>';
- if(t==='Coussin d’air')opts='<p class="small-note">Coût : 1 fatigue. Choisir un allié à portée attaqué pendant cette passe. Le MJ doit confirmer ces conditions.</p><label><input type="checkbox" id="airCushionConfirmed" style="width:auto"> Je confirme que la cible est un allié à portée attaqué pendant cette passe</label><label>Effet à effacer</label><select id="airCushionChoice"><option value="fatigue">Jusqu’à 2 fatigues</option><option value="condition">Un état</option><option value="status">Un statut</option></select><label>État à effacer (si choisi)</label><select id="airCushionCondition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select><label>Statut à effacer (si choisi)</label><select id="airCushionStatus">'+Roster.STATUSES.map(x=>`<option value="${Roster.TO_ENGINE[x]}">${x}</option>`).join('')+'</select>';
- if(t==='Boulet de canon')opts='<p class="small-note">Coût : 1 fatigue. La cible ne doit pas être déjà engagée avec vous ; les anciens engagements sont rompus et la cible subit un état choisi par le MJ.</p><label>État infligé à la cible</label><select id="condition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select>';
+ if(t==='Coussin d’air')opts='<p class="small-note">Coût : 1 fatigue. Choisir un allié à portée attaqué pendant cette passe. Le MJ doit confirmer ces conditions.</p><label><input type="checkbox" id="airCushionConfirmed" style="width:auto"> Je confirme que la cible est un allié à portée attaqué pendant cette passe</label><label>Effet à effacer</label><select id="airCushionChoice"><option value="fatigue">Jusqu’à 2 fatigues</option><option value="condition">Un état</option><option value="status">Un statut</option></select><label>État à effacer (si choisi)</label><select id="airCushionCondition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>`<option>${safe(x)}</option>`).join('')+'</select><label>Statut à effacer (si choisi)</label><select id="airCushionStatus">'+Roster.STATUSES.map(x=>`<option value="${Roster.TO_ENGINE[x]}">${x}</option>`).join('')+'</select>';
+ if(t==='Boulet de canon')opts='<p class="small-note">Coût : 1 fatigue. La cible ne doit pas être déjà engagée avec vous ; les anciens engagements sont rompus et la cible subit un état choisi par le MJ.</p><label>État infligé à la cible</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>`<option>${safe(x)}</option>`).join('')+'</select>';
  if(t==='Vélocité du vent')opts='<p class="small-note">Coût 1 fatigue ; rompt les engagements actuels. La sortie de scène dépend de l’absence de blocage jusqu’à la fin de la passe (MJ).</p>';
  if(t==='Tourbillon miniature')opts='<p class="small-note">Coût de 3 fatigues ; la cible devient Gênée et Étourdie.</p>';
  if(t==='Projection tellurique')opts='<p class="small-note">Coût 1 fatigue, devient Avantagé. Le MJ coche uniquement les adversaires engagés incapables de suivre le lanceur dans les airs. Ces engagements seront rompus automatiquement. Le retour au milieu de l’affrontement à la fin de la passe reste narratif.</p><label>Adversaires incapables de suivre (MJ)</label>'+s.fighters.filter(x=>x.id!==$('source').value&&CombatCore.isEngaged(s,$('source').value,x.id)).map(x=>'<label><input type="checkbox" class="earth-air-unable" value="'+safe(x.id)+'" style="width:auto"> '+safe(x.name)+'</label>').join('');
  if(t==='Mouvements tectoniques')opts='<label><input type="checkbox" id="tectonicZone" style="width:auto"> Cibler une zone (coût : 1 fatigue ; plusieurs adversaires possibles)</label><label>Adversaires concernés (MJ)</label>'+s.fighters.filter(x=>x.id!==$('source').value).map(x=>`<label><input type="checkbox" class="tectonic-target" value="${safe(x.id)}" style="width:auto"> ${safe(x.name)}</label>`).join('');
- if(t==='Arc de foudre')opts='<label>État infligé</label><select id="condition">'+Roster.CONDITIONS.map(x=>'<option>'+x+'</option>').join('')+'</select><p class="small-note">Cible engagée ayant utilisé Avancer et attaquer durant cette passe.</p>';
- if(t==='Gantelet de terre')opts='<label>Choix de la cible</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">1 état</option></select><label>État si choisi</label><select id="condition">'+Roster.CONDITIONS.map(x=>'<option>'+x+'</option>').join('')+'</select><label>Projection (MJ : choix de la cible)</label><select id="earthGauntletProjection"><option value="none">Ne pas projeter</option><option value="project">Projeter : rompre l’engagement</option><option value="resist">Résister : +1 fatigue, engagement maintenu</option></select>';
+ if(t==='Arc de foudre')opts='<label>État infligé</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>'<option>'+safe(x)+'</option>').join('')+'</select><p class="small-note">Cible engagée ayant utilisé Avancer et attaquer durant cette passe.</p>';
+ if(t==='Gantelet de terre')opts='<label>Choix de la cible</label><select id="choice"><option value="fatigue">2 fatigues</option><option value="condition">1 état</option></select><label>État si choisi</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>'<option>'+safe(x)+'</option>').join('')+'</select><label>Projection (MJ : choix de la cible)</label><select id="earthGauntletProjection"><option value="none">Ne pas projeter</option><option value="project">Projeter : rompre l’engagement</option><option value="resist">Résister : +1 fatigue, engagement maintenu</option></select>';
  if(t==='Jet de flammes')opts='<label>Fatigue investie</label><select id="fireCost"><option value="1">1 — Gêné</option><option value="3">3 — Gêné et En danger</option><option value="5">5 — Piégé, En danger et Gêné</option></select>';
- if(t==='Disque de feu')opts='<label>Choix de la cible</label><select id="fireChoice"><option value="esquive">1 fatigue et incendie (MJ)</option><option value="conditions">Deux états</option></select><label>Premier état</label><select id="fireCondition1">'+Roster.CONDITIONS.map(x=>'<option>'+x+'</option>').join('')+'</select><label>Second état (distinct)</label><select id="fireCondition2">'+Roster.CONDITIONS.map(x=>'<option>'+x+'</option>').join('')+'</select>';
+ if(t==='Disque de feu')opts='<label>Choix de la cible</label><select id="fireChoice"><option value="esquive">1 fatigue et incendie (MJ)</option><option value="conditions">Deux états</option></select><label>Premier état</label><select id="fireCondition1">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>'<option>'+safe(x)+'</option>').join('')+'</select><label>Second état (distinct)</label><select id="fireCondition2">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>'<option>'+safe(x)+'</option>').join('')+'</select>';
  if(t==='Fouet d’eau')opts=opts.replace('<option value="balance">Décalage équilibre</option>','');
  if(t==='Fouet d’eau')opts+='<p class="small-note">Choix de la cible : 2 fatigues ou 1 état ; coût de 1 fatigue pour le lanceur (p. 288).</p>';
  if(t==='Frapper')opts+='<label class="small-note"><input type="checkbox" id="forceStrike" style="width:auto" onchange="updateStrikeChoices()"> Cocher 1 fatigue pour imposer 2 fatigues ou 1 état (p. 159)</label><p class="small-note">Sans effort supplémentaire, la cible choisit entre 2 fatigues, 1 état ou un décalage d’équilibre.</p>';
@@ -3284,19 +3314,19 @@ function syncOptions(){const entry=TECH_CATALOG.find(x=>x.id===$('tech').value),
  if(t==='Meilleur, plus rapide, plus fort')opts='<p class="small-note">Technologie, p. 293 : 1 fatigue pour changer de position sans opposition. Pour 1 fatigue de plus, devenir Renforcé tant que la position est tenue OU sécuriser une zone dangereuse. La position et sa durée restent sous arbitrage MJ.</p><label><input type="checkbox" id="positionUnopposed" style="width:auto"> Le MJ confirme que le déplacement est sans opposition</label><label>Position ou zone atteinte</label><input id="positionDescription" maxlength="160" placeholder="Ex. : plateforme au-dessus de la cour"><label>Option supplémentaire</label><select id="positionBonus"><option value="none">Aucune (1 fatigue)</option><option value="reinforced">Renforcé tant que la position est tenue (2 fatigues)</option><option value="secure">Sécuriser une zone dangereuse (2 fatigues)</option></select>';
  if(t==='Aveuglé par la science')opts='<p class="small-note">p. 293 : investir 1 à 3 fatigues. La cible subit 1 fatigue et devient Gênée ; à 2 fatigues, ajouter Piégé ou Étourdi ; à 3, les deux.</p><label>Fatigue investie</label><select id="scienceFatigue"><option value="1">1 fatigue</option><option value="2">2 fatigues</option><option value="3">3 fatigues</option></select><label>Statut supplémentaire (si 2 fatigues)</label><select id="scienceExtra"><option value="piege">Piégé</option><option value="etourdi">Étourdi</option></select>';
  if(t==='Puissance maximale')opts='<p class="small-note">Technologie, p. 293 : devient Gêné, inflige 2 fatigues plus 1 par matériel dépensé (+2 supplémentaires si au moins 3 matériels). Toute la réserve est dépensée. Plus aucun gain de matériel jusqu’à la fin de la scène. Les effets doivent être validés ensemble par le MJ.</p>';
- if(t==='Maintenance')opts='<p class="small-note">Technologie, p. 293 : cocher 1 fatigue, effacer un état déjà coché et réserver 3 matériels. Les trois effets sont soumis à la validation du MJ.</p><label>État à effacer</label><select id="maintenanceCondition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select>';
+ if(t==='Maintenance')opts='<p class="small-note">Technologie, p. 293 : cocher 1 fatigue, effacer un état déjà coché et réserver 3 matériels. Les trois effets sont soumis à la validation du MJ.</p><label>État à effacer</label><select id="maintenanceCondition">'+resourceConditionNames(f).map(x=>`<option>${safe(x)}</option>`).join('')+'</select>';
  if(t==='Collecter du matériel')opts='<p class="small-note">p. 293 : réserver 3 matériels et devenir Prêt. Les matériels sont conservés dans la fiche du combattant. Ils peuvent remplacer les coûts de fatigue des techniques technologiques.</p>';
  if(t==='Pose de pièges')opts='<p class="small-note">p. 293 : 1 fatigue pour armer un piège. Le MJ déclenche son effet lorsque le prochain adversaire entre dans la zone ; état et décentrage sont appliqués ensemble.</p><label>Zone piégée</label><input id="trapZone" maxlength="120" placeholder="Ex. : entrée du hangar">';
  if(t==='Électrochoc')opts='<p class="small-note">p. 293 : cible à portée, coût 1 fatigue. Personne : décentrage ; si technologie ou métal, devient Étourdie. Objet : ralentissement ou arrêt temporaire, suivi MJ.</p><label><input type="checkbox" id="shockInRange" style="width:auto"> Le MJ confirme la portée</label><label>Nature de la cible</label><select id="shockTargetType"><option value="person">Personne</option><option value="object">Objet</option></select><label>Direction du décentrage (personne)</label><select id="shockDirection"><option value="1">+1</option><option value="-1">−1</option></select><label><input type="checkbox" id="shockMetal" style="width:auto"> Personne utilisant la technologie ou couverte de métal</label><label>Objet visé (si cible matérielle)</label><input id="shockObjectName" maxlength="100" placeholder="Ex. : automaton, porte métallique"><p class="small-note">Pour un objet, la cible combattante sélectionnée est ignorée : le nom saisi désigne l’objet narratif.</p>';
  if(t==='Gantelet de glace')opts='<p class="small-note">Vous devenez Prêt. Votre prochaine attaque inflige 1 fatigue supplémentaire, y compris si elle a plusieurs effets. Le bonus est consommé même si la cible est protégée (p. 288).</p>';
  if(t==='Plaque de givre')opts='<label><input type="checkbox" id="iceConfirmed" style="width:auto"> Le MJ confirme que la cible se tient sur la plaque de glace</label><p class="small-note">La cible devient Gênée tant qu’elle reste sur la glace ; le lanceur devient Prêt à l’engager. Retirer Gêné manuellement lorsque la cible quitte la glace (p. 288).</p>';
- if(t==='Dérobade')opts='<label>État à effacer</label><select id="condition">'+Roster.CONDITIONS.map(x=>`<option>${x}</option>`).join('')+'</select>';
+ if(t==='Dérobade')opts='<label>État à effacer</label><select id="condition">'+resourceConditionNames(CombatCore.fighter(s,$('target').value||s.fighters[0]?.id)).map(x=>`<option>${safe(x)}</option>`).join('')+'</select>';
  if(entry&&(entry.famille==='technologie'||entry.famille==='base'))opts+='<p class="small-note">V0.95 — Substitution : 1 matériel remplace 1 fatigue personnelle à payer pour cette technique (si la réserve est suffisante). Les techniques de base exigent confirmation de l’entraînement technologique par le MJ.</p>'+(entry.famille==='base'?'<label><input type="checkbox" id="technologyBasicConfirmed" style="width:auto"> Cette technique de base utilise mon entraînement technologique (MJ)</label>':'')+'<label>Matériels utilisés à la place de fatigue</label><input type="number" id="materialsInsteadOfFatigue" min="0" max="99" value="0">';
  // Un bouclier peut être sacrifié lors de la validation du coût, pas avant.
  const earthTechniques=['Armure de terre','Bouclier de roche','Boue gluante','Colonne de pierre','Détection du pas lourd','Enfouissement','Entraves de métal','Escalier de poussière','Étoile de lave','Gantelet de terre','Mords la poussière','Mouvements tectoniques','Projection tellurique'];
  const myShields=(s.temporaryEffects||[]).filter(e=>e.originLabel==='Bouclier de roche'&&e.originSourceId===$('source').value);
  if(earthTechniques.includes(t)&&myShields.length)opts+='<label>Bouclier de roche à consommer pour réduire le coût (facultatif)</label><select id="earthShieldDiscountId"><option value="">Ne pas consommer</option>'+myShields.map(e=>'<option value="'+safe(e.id)+'">Bouclier protégeant '+safe(CombatCore.fighter(s,e.targetId).name)+'</option>').join('')+'</select><p class="small-note">Réduction de 1 fatigue appliquée automatiquement lors de la validation de la technique. Un coût nul ne permet pas de consommer le bouclier.</p>';
- $('opts').innerHTML=opts;
+ $('opts').innerHTML=opts;const target=s.fighters.find(x=>x.id===$('target').value);if(target&&npcResourceProfile(target)&&!resourceLimits(target).balanceMax)$('choice')?.querySelector('option[value="balance"]')?.remove();
 }
 function updateStrikeChoices(){const choice=$('choice'),forced=$('forceStrike')?.checked;if(!choice)return;const balance=Array.from(choice.options).find(o=>o.value==='balance');if(balance)balance.disabled=!!forced;if(forced&&choice.value==='balance')choice.value='fatigue';}
 function targetOpponent(){const id=$('source').value;const enemy=s.fighters.find(x=>x.id!==id);if(enemy){$('target').value=enemy.id}}
@@ -3394,11 +3424,11 @@ function approvalDecisions(){
   if(e.kind==='condition_remove')state.conditions.delete(e.detail);
   if(e.kind!=='fatigue')continue;
   const next=state.fatigue+e.amount;
-  if(next>5){
+  if(next>fatigueLimit(CombatCore.fighter(s,e.targetId))){
    if(e.fatigueType==='cost')throw Error(CombatCore.fighter(s,e.targetId).name+' : fatigue insuffisante pour ce coût volontaire (p. 100)');
    const chosen=[];
-   for(let i=0;i<next-5;i++){
-    const available=Roster.CONDITIONS.filter(c=>!state.conditions.has(c));
+   for(let i=0;i<next-fatigueLimit(CombatCore.fighter(s,e.targetId));i++){
+    const available=resourceConditionNames(CombatCore.fighter(s,e.targetId)).filter(c=>!state.conditions.has(c));
     if(!available.length)throw Error('Tous les états de '+CombatCore.fighter(s,e.targetId).name+' sont cochés : arbitrage MJ nécessaire.');
     const answer=prompt(CombatCore.fighter(s,e.targetId).name+' : fatigue excédentaire ('+e.reason+'), choisir un état parmi '+available.join(' / '),available[0]);
     if(answer===null)return;
@@ -3407,7 +3437,7 @@ function approvalDecisions(){
    }
    decisions['overflow:'+e.id]=chosen;
   }
-  state.fatigue=Math.max(0,Math.min(5,next));
+  state.fatigue=Math.max(0,Math.min(fatigueLimit(CombatCore.fighter(s,e.targetId)),next));
  }
  return decisions;
 }
@@ -3423,7 +3453,7 @@ function releaseTrapped(id){
  if(!Number.isInteger(fatigue)||fatigue<0||fatigue>3){alert('Indiquer un entier entre 0 et 3.');return}
  const conditions=[];
  for(let i=0;i<3-fatigue;i++){
-  const available=Roster.CONDITIONS.filter(c=>!f.conditions.includes(c)&&!conditions.includes(c));
+  const available=resourceConditionNames(f).filter(c=>!f.conditions.includes(c)&&!conditions.includes(c));
   const chosen=prompt('Choisir un état disponible : '+available.join(' / '),available[0]||'');
   if(chosen===null)return;
   if(!available.includes(chosen)){alert('État invalide ou déjà marqué.');return}
@@ -3433,8 +3463,8 @@ function releaseTrapped(id){
 }
 function step(){try{if(s.phase==='declaration')commitCombatMutation(()=>CombatCore.reveal(s));else if(s.phase==='esquiver')commitCombatMutation(()=>CombatCore.endRound(s));else if(s.phase==='fin'){
  const overflowChoices={};
- for(const f of s.fighters.filter(f=>f.statuses.includes('en_danger')&&f.fatigue>=5)){
-  const available=Roster.CONDITIONS.filter(c=>!f.conditions.includes(c));
+ for(const f of s.fighters.filter(f=>f.statuses.includes('en_danger')&&f.fatigue>=fatigueLimit(f))){
+  const available=resourceConditionNames(f).filter(c=>!f.conditions.includes(c));
   if(!available.length)throw Error(f.name+' : tous les états sont marqués ; mise hors de combat à arbitrer.');
   const choice=prompt(f.name+' : En danger, choisir un état pour reporter la fatigue : '+available.join(' / '),available[0]);
   if(choice===null)return;
@@ -3455,8 +3485,8 @@ function validateCombat(raw){
   if(!f||typeof f!=='object'||typeof f.id!=='string'||!/^p-\d+$/.test(f.id)||ids.has(f.id))throw Error('Identifiant de combattant invalide ou dupliqué');
   ids.add(f.id);
   if(typeof f.name!=='string'||!f.name.trim()||f.name.length>100||!['PJ','PNJ'].includes(f.kind))throw Error('Combattant invalide');
-  if(!Number.isInteger(f.fatigue)||f.fatigue<0||f.fatigue>5||!Number.isInteger(f.balance)||f.balance< -3||f.balance>3)throw Error('Ressources de combattant invalides');
-  if(!Array.isArray(f.conditions)||f.conditions.some(x=>!Roster.CONDITIONS.includes(x))||!Array.isArray(f.statuses)||f.statuses.some(x=>!CombatCore.STATUS.includes(x)))throw Error('États ou statuts de combattant invalides');
+  validateResourceValues(f);if(!resourceLimits(f).combatant)throw Error('Un PNJ non combattant ne peut pas être importé dans le combat.');
+  if(!Array.isArray(f.conditions)||f.conditions.some(x=>!resourceConditionNames(f).includes(x))||!Array.isArray(f.statuses)||f.statuses.some(x=>!CombatCore.STATUS.includes(x)))throw Error('États ou statuts de combattant invalides');
   for(const k of ['blocked','reactions','bonuses'])if(!Array.isArray(f[k]))throw Error('Données de combattant manquantes : '+k);
   if(f.approach!==null&&!CombatCore.APPROACHES.includes(f.approach))throw Error('Approche invalide');
   if(f.roll!==null&&!['6-','7-9','10+'].includes(f.roll))throw Error('Jet invalide');
@@ -3464,6 +3494,7 @@ function validateCombat(raw){
   if(f.materials!==undefined&&(!Number.isInteger(f.materials)||f.materials<0))throw Error('Réserve de matériels invalide');
   if(f.characterId!==undefined&&(typeof f.characterId!=='string'||!f.characterId))throw Error('Lien de fiche invalide');
  }
+ const queue=[raw],seen=new Set();while(queue.length){const snapshot=queue.pop();if(!snapshot||typeof snapshot!=='object'||seen.has(snapshot))continue;seen.add(snapshot);for(const f of snapshot.fighters||[])if(f?.npcResources){validateResourceValues(f);if(!resourceLimits(f).combatant)throw Error('PNJ non combattant dans un instantané de combat');}if(Array.isArray(snapshot.snapshots))queue.push(...snapshot.snapshots);}
  // Les références utilisées dès le premier affichage doivent être valides avant import.
  // Absence et null restent compatibles avec les anciens champs optionnels.
  if(raw.engagements!==undefined&&raw.engagements!==null){
@@ -3514,59 +3545,79 @@ function warnStorage(err){
  const node=document.getElementById('storageWarning');
  if(node){node.textContent=msg;node.hidden=false}else alert(msg);
 }
-function persist(key,value){if(typeof completeImportRecoveryOk!=='undefined'&&!completeImportRecoveryOk){warnStorage(Error('Import incomplet non restauré'));return false}try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){warnStorage(e);return false}}
+function persist(key,value){
+ if(profileLoadBlocked){warnStorage(Error('Sauvegarde PNJ illisible : restaure une sauvegarde complète depuis Gestion.'));return false;}
+ if(storageRecoveryBlocked||typeof completeImportRecoveryOk!=='undefined'&&!completeImportRecoveryOk){warnStorage(Error('Import incomplet non restauré'));return false}
+ try{
+  if((key==='avatar-roster-v020'||key==='avatar-v020')&&!profileStorageActive()&&profileStorageRequired(key==='avatar-roster-v020'?value:null,key==='avatar-v020'?value:null))return persistCompleteBackup(key==='avatar-roster-v020'?value:lib,key==='avatar-v020'?value:s);
+  localStorage.setItem(profileStorageKey(key),JSON.stringify(value));return true;
+ }catch(e){warnStorage(e);return false}
+}
 // Journal de restauration : un import complet écrit deux clés distinctes.
 // Tant que le journal existe, le démarrage restaure les deux valeurs antérieures.
 const COMPLETE_IMPORT_JOURNAL='avatar-complete-import-journal-v1';
+let storageRecoveryBlocked=false,profileLoadBlocked=false;
+const PROFILE_STORAGE_FLAG='avatar-npc-storage-generation';
+function profileStorageActive(){const flag=localStorage.getItem(PROFILE_STORAGE_FLAG);if(flag!==null&&flag!=='1')throw Error('Génération de sauvegarde PNJ invalide');return flag==='1'||localStorage.getItem('avatar-roster-v021')!==null||localStorage.getItem('avatar-v021')!==null;}
+function profileStorageKey(key){if(!['avatar-roster-v020','avatar-v020'].includes(key))return key;return profileStorageActive()?key.replace('v020','v021'):key;}
+function profileStorageRequired(library,combat){const queue=[combat],seen=new Set();if(library?.version===2||library?.characters?.some(c=>c.npcResources))return true;while(queue.length){const node=queue.pop();if(!node||seen.has(node))continue;seen.add(node);if(node.fighters?.some(f=>f.npcResources))return true;if(Array.isArray(node.snapshots))for(const snap of node.snapshots)queue.push(snap);}return false;}
+
 function restoreStorageValue(key,raw){
  if(raw===null)localStorage.removeItem(key);else localStorage.setItem(key,raw);
 }
 function recoverIncompleteImport(){
  let raw;
  try{raw=localStorage.getItem(COMPLETE_IMPORT_JOURNAL)}catch(e){warnStorage(e);return false}
- if(raw===null)return true;
+ if(raw===null){storageRecoveryBlocked=false;return true;}
  try{
   const journal=JSON.parse(raw);
-  if(!journal||journal.version!==1||typeof journal.beforeLibrary!=='string'&&journal.beforeLibrary!==null||typeof journal.beforeCombat!=='string'&&journal.beforeCombat!==null)throw Error('Journal invalide');
-  restoreStorageValue('avatar-roster-v020',journal.beforeLibrary);
-  restoreStorageValue('avatar-v020',journal.beforeCombat);
-  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);
+  if(!journal||![1,2].includes(journal.version)||typeof journal.beforeLibrary!=='string'&&journal.beforeLibrary!==null||typeof journal.beforeCombat!=='string'&&journal.beforeCombat!==null)throw Error('Journal invalide');
+  if(journal.version===2&&(journal.libraryKey!=='avatar-roster-v021'||journal.combatKey!=='avatar-v021'||![null,'1'].includes(journal.beforeFlag)))throw Error('Journal de génération PNJ invalide');
+  restoreStorageValue(journal.version===2?journal.libraryKey:'avatar-roster-v020',journal.beforeLibrary);
+  restoreStorageValue(journal.version===2?journal.combatKey:'avatar-v020',journal.beforeCombat);
+  if(journal.version===2)restoreStorageValue(PROFILE_STORAGE_FLAG,journal.beforeFlag);
+  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);storageRecoveryBlocked=false;
   const node=document.getElementById('recoveryWarning');
   if(node){node.textContent='Un import complet interrompu a été annulé. Les données antérieures ont été restaurées.';node.hidden=false}
   return true;
  }catch(e){warnStorage(e);return false}
 }
 function persistCompleteBackup(library,combat){
- if(!completeImportRecoveryOk)return false;
- let oldLibrary,oldCombat;
+ if(!completeImportRecoveryOk||storageRecoveryBlocked)return false;
  try{
-  oldLibrary=localStorage.getItem('avatar-roster-v020');
-  oldCombat=localStorage.getItem('avatar-v020');
-  localStorage.setItem(COMPLETE_IMPORT_JOURNAL,JSON.stringify({version:1,beforeLibrary:oldLibrary,beforeCombat:oldCombat}));
-  localStorage.setItem('avatar-roster-v020',JSON.stringify(library));
-  localStorage.setItem('avatar-v020',JSON.stringify(combat));
-  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);
-  return true;
- }catch(e){
-  warnStorage(e);
-  // Si la restauration échoue, conserver le journal pour le prochain démarrage.
-  recoverIncompleteImport();
-  return false;
- }
+  const extended=profileStorageActive()||profileStorageRequired(library,combat),libraryKey=extended?'avatar-roster-v021':'avatar-roster-v020',combatKey=extended?'avatar-v021':'avatar-v020';
+  const journal={version:extended?2:1,beforeLibrary:localStorage.getItem(libraryKey),beforeCombat:localStorage.getItem(combatKey)};
+  if(extended)Object.assign(journal,{libraryKey,combatKey,beforeFlag:localStorage.getItem(PROFILE_STORAGE_FLAG)});
+  localStorage.setItem(COMPLETE_IMPORT_JOURNAL,JSON.stringify(journal));
+  localStorage.setItem(libraryKey,JSON.stringify(library));localStorage.setItem(combatKey,JSON.stringify(combat));
+  if(extended)localStorage.setItem(PROFILE_STORAGE_FLAG,'1');
+  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);profileLoadBlocked=false;return true;
+ }catch(e){warnStorage(e);storageRecoveryBlocked=!recoverIncompleteImport();return false}
 }
+
 function loadSaved(keys,validate,fallback){
- let invalid=[];
+ const invalid=[];let result,found=false;
  for(const key of keys){let raw;try{raw=localStorage.getItem(key)}catch(e){warnStorage(e);break}
   if(raw===null)continue;
-  try{return validate(JSON.parse(raw))}catch(e){invalid.push(key+' : '+e.message)}
+  try{result=validate(JSON.parse(raw));found=true;break}catch(e){invalid.push(key+' : '+e.message);if(['avatar-roster-v021','avatar-v021'].includes(key))profileLoadBlocked=true;}
  }
- if(invalid.length){const msg='Sauvegarde locale endommagée : '+invalid.join(' ; ')+'. Une version antérieure a été recherchée. Conserve tes exports JSON.';console.warn(msg);const node=document.getElementById('recoveryWarning');if(node){node.textContent=msg;node.hidden=false}else alert(msg)}
- return fallback();
+ if(invalid.length){const msg='Sauvegarde locale endommagée : '+invalid.join(' ; ')+'. Une version antérieure a été recherchée. Conserve tes exports JSON.'+(profileLoadBlocked?' Les écritures sont bloquées pour préserver les données PNJ illisibles. Restaure une sauvegarde complète depuis Gestion.':'');console.warn(msg);const node=document.getElementById('recoveryWarning');if(node){node.textContent=msg;node.hidden=false}else alert(msg)}
+ return found?result:fallback();
 }
-const ROSTER_KEYS=['avatar-roster-v020','avatar-roster-v019','avatar-roster-v018','avatar-roster-v017','avatar-roster-v016','avatar-roster-v015','avatar-roster-v013','avatar-roster-v012','avatar-roster-v011','avatar-roster-v010','avatar-roster-v09','avatar-roster-v08'];
-const COMBAT_KEYS=['avatar-v020','avatar-v019','avatar-v018','avatar-v017','avatar-v016','avatar-v015','avatar-v013','avatar-v012','avatar-v011','avatar-v010','avatar-v09','avatar-v08'];
-function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.text().then(txt=>{try{const x=JSON.parse(txt);validateCombat(x);validateBackupLinks(lib,x);commitCombatMutation(()=>{s=x;render()})}catch(err){alert(err.message)}}).catch(err=>alert('Lecture impossible : '+err.message)).finally(()=>{ev.target.value=''})}
 
+const ROSTER_KEYS=['avatar-roster-v021','avatar-roster-v020','avatar-roster-v019','avatar-roster-v018','avatar-roster-v017','avatar-roster-v016','avatar-roster-v015','avatar-roster-v013','avatar-roster-v012','avatar-roster-v011','avatar-roster-v010','avatar-roster-v09','avatar-roster-v08'];
+const COMBAT_KEYS=['avatar-v021','avatar-v020','avatar-v019','avatar-v018','avatar-v017','avatar-v016','avatar-v015','avatar-v013','avatar-v012','avatar-v011','avatar-v010','avatar-v09','avatar-v08'];
+function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.text().then(txt=>{try{const parsed=JSON.parse(txt),x=parsed.format==='avatar-compagnon-combat'&&parsed.version===2?parsed.combat:parsed;validateCombat(x);validateBackupLinks(lib,x);commitCombatMutation(()=>{s=x;render()})}catch(err){alert(err.message)}}).catch(err=>alert('Lecture impossible : '+err.message)).finally(()=>{ev.target.value=''})}
+
+function exportPreProfileBackup(){
+ try{
+  if(!profileStorageActive())throw Error('Aucun profil PNJ n’a encore été activé. Utilise la sauvegarde complète habituelle.');
+  const library=loadSaved(ROSTER_KEYS.slice(1),x=>Roster.importLibrary(x),()=>Roster.createLibrary()),combat=loadSaved(COMBAT_KEYS.slice(1),x=>validateCombat(x),()=>CombatCore.createCombat());
+  validateBackupLinks(library,combat);
+  const data={format:'avatar-compagnon-backup',version:1,createdAt:new Date().toISOString(),library,combat};
+  const a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.href=url;a.download='avatar-avant-profils-pnj.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }catch(e){alert('Export de l’état antérieur impossible : '+e.message)}
+}
 function clearCatalogFamilies(){document.querySelectorAll('.catalog-family-check').forEach(el=>el.checked=false);renderCatalog()}
 function renderCatalog(){
  const q=($('catalogSearch')?.value||'').trim().toLocaleLowerCase('fr');
@@ -3706,6 +3757,7 @@ document.addEventListener('keydown',quickNavigation);
 function setView(view,scroll=true,focus=false){
  if(currentView==='characters'&&view!=='characters'&&!confirmSheetNavigation())return;
  if(!VIEWS.includes(view))view='home';
+ if(view==='management'){try{$('exportPreProfileBackup').disabled=!profileStorageActive()}catch(e){$('exportPreProfileBackup').disabled=true}}
  currentView=view;
  document.querySelectorAll('.app-view').forEach(el=>{el.hidden=el.id!=='view-'+view && !(view==='combat'&&el.id==='view-combat-panels')});
  document.querySelectorAll('.main-nav button').forEach(b=>{const active=b.dataset.view===view;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});
@@ -3735,7 +3787,7 @@ let characterDetailOpen=false;
 // UI/UX lot 3 — états d'édition et helpers ; aucune règle de combat modifiée.
 let sheetEditing=false,sheetPortraitPending=false,sheetRevision=0,sheetInitialFields={},sheetInitialFingerprint='';
 let sheetDraftConditions=[],sheetDraftStatuses=[],sheetDraftTechniques=[],sheetResourceUndo=null;
-const SHEET_FIELD_IDS=['sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
+const SHEET_FIELD_IDS=['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames','sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
 function sheetFields(){return Object.fromEntries(SHEET_FIELD_IDS.filter(id=>$(id)).map(id=>[id,$(id).value]));}
 function sheetFingerprint(){return JSON.stringify([sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques]);}
 function sheetIsDirty(){return sheetEditing&&(sheetPortraitPending||sheetFingerprint()!==sheetInitialFingerprint);}
@@ -3754,11 +3806,44 @@ function sheetPatchFromFields(c,initial,fields,conditions,statuses,techniques){
  if(changed('principleLeft')||changed('principleRight'))patch.principles=[fields.principleLeft,fields.principleRight];
  for(const [id,key] of [['sheetRelations','relationships'],['sheetMoves','playbookMoves']])if(changed(id))patch[key]=fields[id].split('\n').map(x=>x.trim()).filter(Boolean);
  for(const [key,value] of [['conditions',conditions],['statuses',statuses],['techniques',techniques]])if(JSON.stringify(c[key])!==JSON.stringify(value))patch[key]=JSON.parse(JSON.stringify(value));
+ if(Object.hasOwn(fields,'npcProfileMode')&&['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames'].some(changed)){const rawProfile=npcProfileFromFields(fields),profile=rawProfile?{...(c.npcResources||{}),...rawProfile}:null;if(JSON.stringify(profile)!==JSON.stringify(c.npcResources??null))patch.npcResources=profile;}
  if(patch.desire!==undefined&&patch.desire.length>240)throw Error('Désir trop long (240 caractères maximum).');
  if(patch.description!==undefined&&patch.description.length>2000)throw Error('Description trop longue (2 000 caractères maximum).');
  if(patch.portrait&&safeSheetPortrait(patch.portrait)!==patch.portrait)throw Error('Portrait invalide : image PNG, JPEG ou WebP locale attendue.');
  return patch;
 }
+// Configuration volontaire : aucune déduction automatique à partir de l'importance.
+function npcProfileFromFields(fields){
+ if(fields.npcProfileMode!=='explicit')return null;
+ const count=Number(fields.npcConditionCount),conditions=fields.npcConditionNames.split('\n').map(x=>x.trim()).filter(Boolean);
+ if(!Number.isInteger(count)||count<0||count>8||conditions.length!==count)throw Error('Renseigne exactement '+count+' noms d’états distincts pour ce profil.');
+ const p={format:'avatar-npc-resources',version:1,combatant:fields.npcCombatant==='yes',fatigueMax:Number(fields.npcFatigueMax),balanceMax:Number(fields.npcBalanceMax),conditions};npcResourceProfile({kind:'PNJ',npcResources:p});return p;
+}
+function sheetResourcePreview(c){
+ if(!sheetEditing||c.kind!=='PNJ'||!$('npcProfileMode'))return c;
+ try{const p=npcProfileFromFields(sheetFields()),candidate={...c,npcResources:p,fatigue:Number($('sheetFatigue')?.value??c.fatigue),balance:Number($('sheetBalance')?.value??c.balance),conditions:sheetDraftConditions,principles:[$('principleLeft')?.value??c.principles?.[0]??'', $('principleRight')?.value??c.principles?.[1]??'']};validateResourceValues(candidate);return candidate;}catch(e){return {...c,npcResources:selectedSheet().npcResources};}
+}
+function proposeNpcResourceProfile(){
+ const importance=$('sheetImportance').value,presets={Mineur:[3,1,1],Majeur:[5,3,2],Champion:[10,5,3],'Légendaire':[15,8,4]},preset=presets[importance];
+ if(!preset){alert('Choisis d’abord une importance connue, ou renseigne le profil manuellement.');return;}
+ $('npcProfileMode').value='explicit';$('npcCombatant').value='yes';$('npcFatigueMax').value=String(preset[0]);$('npcConditionCount').value=String(preset[1]);$('npcBalanceMax').value=String(preset[2]);
+ const labels=[...new Set([...sheetDraftConditions,...Roster.CONDITIONS])];$('npcConditionNames').value=labels.slice(0,Math.max(preset[1],sheetDraftConditions.length)).join('\n');refreshSheetQuick();
+}
+function proposeNpcNoncombatant(){
+ $('npcProfileMode').value='explicit';$('npcCombatant').value='no';$('npcFatigueMax').value='0';$('npcConditionCount').value='0';$('npcConditionNames').value='';$('npcBalanceMax').value='0';refreshSheetQuick();
+}
+function appendNpcResourceEditor(c,identity){
+ if(c.kind!=='PNJ')return;
+ const p=npcResourceProfile(c),r=resourceLimits(c),box=document.createElement('details');box.className='npc-resource-editor';
+ box.innerHTML=`<summary>Ressources du PNJ</summary><p class="small-note">Les propositions ne changent pas les ressources cochées. Les valeurs incompatibles doivent être ajustées explicitement avant l’enregistrement.</p><div class="row"><button type="button" class="alt" onclick="proposeNpcResourceProfile()">Proposer les valeurs de l’importance</button><button type="button" class="alt" onclick="proposeNpcNoncombatant()">Proposer un PNJ non combattant</button></div><label for="npcProfileMode">Profil</label><select id="npcProfileMode"><option value="legacy" ${p?'':'selected'}>Conserver les limites historiques</option><option value="explicit" ${p?'selected':''}>Profil PNJ explicite</option></select><label for="npcCombatant">Participation au combat</label><select id="npcCombatant"><option value="yes" ${r.combatant?'selected':''}>Combattant</option><option value="no" ${r.combatant?'':'selected'}>Non combattant</option></select><div class="grid"><div><label for="npcFatigueMax">Cases de fatigue (0 à 15)</label><input id="npcFatigueMax" type="number" min="0" max="15" step="1" value="${r.fatigueMax}"></div><div><label for="npcBalanceMax">Borne d’équilibre (0 à +4)</label><input id="npcBalanceMax" type="number" min="0" max="4" step="1" value="${p?p.balanceMax:1}"></div></div><label for="npcConditionCount">Nombre d’états (0 à 8)</label><input id="npcConditionCount" type="number" min="0" max="8" step="1" value="${r.conditions.length}"><label for="npcConditionNames">Noms des états (un par ligne)</label><textarea id="npcConditionNames" maxlength="648">${safe(r.conditions.join('\n'))}</textarea><p class="small-note">Les états peuvent être personnalisés. Pour huit cases, complète toi-même les noms manquants ; aucun état n’est inventé automatiquement.</p><p id="npcProfileNotice" class="notice" aria-live="polite"></p>`;
+ identity.append(box);
+}
+function updateNpcProfileNotice(){
+ const notice=$('npcProfileNotice');if(!notice)return;for(const id of ['npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames'])$(id).disabled=$('npcProfileMode').value!=='explicit';
+ try{const c=selectedSheet(),p=npcProfileFromFields(sheetFields());validateResourceValues({...c,npcResources:p,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),conditions:sheetDraftConditions,principles:[$('principleLeft').value,$('principleRight').value]});notice.textContent=p?'Profil prêt. Il sera appliqué uniquement à l’enregistrement.':'Les ressources historiques restent inchangées.';}
+ catch(e){notice.textContent=e.message+' Les commandes gardent les limites enregistrées tant que le brouillon est incompatible.';}
+}
+
 function selectedSheet(){return lib.characters.find(c=>c.id===$('sheetSelect').value);}
 function sheetFeedback(text){$('sheetFeedback').textContent=text;}
 function confirmSheetNavigation(){
@@ -3781,7 +3866,7 @@ function sheetResources(c){return {fatigue:c.fatigue,balance:c.balance,condition
 function finishSheetResourceChange(before){
  const active=document.activeElement,label=active?.getAttribute('aria-label'),condition=active?.dataset.condition,expanded=$('sheetQuick').querySelector('.sheet-effects')?.open;
  const c=selectedSheet();sheetResourceUndo={library:lib,id:c.id,before,after:sheetResources(c)};renderSheets(c.id);
- $('sheetQuick').querySelector('.sheet-effects').open=Boolean(expanded);
+ const effects=$('sheetQuick').querySelector('.sheet-effects');if(effects)effects.open=Boolean(expanded);
  const button=[...$('sheetQuick').querySelectorAll('button')].find(el=>condition?el.dataset.condition===condition:label&&el.getAttribute('aria-label')===label);
  (button&&!button.disabled?button:$('sheetEditButton')).focus({preventScroll:true});
  sheetFeedback('Ressources enregistrées. Annulation disponible.');
@@ -3794,7 +3879,7 @@ function undoSheetResource(){
 }
 function quickSheetSetResource(kind,value){
  try{const c=selectedSheet();if(!c)return;if(!['fatigue','balance'].includes(kind))throw Error('Ressource inconnue');
- const [min,max]=kind==='fatigue'?[0,5]:[-3,3];if(!Number.isInteger(value)||value<min||value>max)throw Error('Valeur hors des limites de la fiche.');
+ const rules=resourceLimits(sheetResourcePreview(sheetEditing?{...c,fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),conditions:sheetDraftConditions}:c)),[min,max]=kind==='fatigue'?[0,rules.fatigueMax]:[rules.balanceMin,rules.balanceMax];const current=sheetEditing?Number($(kind==='fatigue'?'sheetFatigue':'sheetBalance').value):c[kind],progressive=sheetEditing&&current>max&&value===current-1;if(!Number.isInteger(value)||value<min||value>max&&!progressive)throw Error('Valeur hors des limites de la fiche.');
  if(sheetEditing){const input=$(kind==='fatigue'?'sheetFatigue':'sheetBalance');input.value=String(value);const output=$('view-'+input.id);if(output)output.textContent=String(value);refreshSheetQuick();return;}
  if(value===c[kind])return;const id=c.id,before=sheetResources(c);commitLibraryMutation(()=>Roster.updateCharacter(lib,id,{[kind]:value}));finishSheetResourceChange(before);
  }catch(e){alert(e.message)}
@@ -3818,7 +3903,8 @@ function enhanceSheetEditor(c){
  const makeGroup=(tab,tag='div')=>{const el=document.createElement(tag);el.dataset.sheetGroup=tab;el.className='sheet-section';form.append(el);return el;};
  const historic=document.createElement('details');historic.className='sheet-historic';historic.dataset.sheetGroup='identity';historic.innerHTML='<summary>Données historiques et classification</summary>';
  if(c.kind==='PNJ'){form.append(historic);move('sheetLivret',historic);for(const section of [...form.querySelectorAll('[data-sheet-group="identity"]')])if(section!==historic)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
- const metadata=document.createElement('div');metadata.innerHTML=`${c.kind==='PNJ'?`<label for="sheetDesire">Désir</label><input id="sheetDesire" maxlength="240" value="${safe(sheetText(c.desire))}"><label for="sheetDescription">Description (facultative)</label><textarea id="sheetDescription" maxlength="2000">${safe(sheetText(c.description))}</textarea>`:''}<label for="sheetPortraitFile">Portrait (PNG, JPEG ou WebP · 256 Ko maximum)</label><input id="sheetPortraitFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="readSheetPortrait(event)"><input id="sheetPortrait" type="hidden" value="${safe(sheetText(c.portrait))}"><button type="button" class="alt" onclick="clearSheetPortrait()">Retirer le portrait</button>`;identity.append(metadata);
+ appendNpcResourceEditor(c,identity);const metadata=document.createElement('div');metadata.innerHTML=`${c.kind==='PNJ'?`<label for="sheetDesire">Désir</label><input id="sheetDesire" maxlength="240" value="${safe(sheetText(c.desire))}"><label for="sheetDescription">Description (facultative)</label><textarea id="sheetDescription" maxlength="2000">${safe(sheetText(c.description))}</textarea>`:''}<label for="sheetPortraitFile">Portrait (PNG, JPEG ou WebP · 256 Ko maximum)</label><input id="sheetPortraitFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="readSheetPortrait(event)"><input id="sheetPortrait" type="hidden" value="${safe(sheetText(c.portrait))}"><button type="button" class="alt" onclick="clearSheetPortrait()">Retirer le portrait</button>`;identity.append(metadata);
+ if(c.kind==='PNJ'){const editor=identity.querySelector('.npc-resource-editor');move('principleLeft',editor);$('principleLeft').previousElementSibling.textContent='Principe du PNJ (si une jauge d’équilibre est définie)';}
  const resourceSections=[...form.querySelectorAll('[data-sheet-group="resources"]')];
  if(c.kind==='PJ'){move('principleLeft',identity);move('principleRight',identity);move('sheetTraining',identity);}
  else{for(const section of resourceSections)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
@@ -3834,7 +3920,7 @@ function showSheet(){
  if(!c){$('sheetForm').innerHTML='';$('sheetRead').innerHTML='<p>Aucune fiche sélectionnée.</p>';renderSheetQuick(null);return;}
  sheetDraftConditions=[...c.conditions];sheetDraftStatuses=[...c.statuses];sheetDraftTechniques=JSON.parse(JSON.stringify(c.techniques));
  renderLegacySheetEditor();enhanceSheetEditor(c);renderSheetTabs(c);renderSheetRead(c);
- sheetInitialFields=sheetFields();sheetInitialFingerprint=sheetFingerprint();renderSheetQuick(c);applySheetTab();
+ sheetInitialFields=sheetFields();sheetInitialFingerprint=sheetFingerprint();renderSheetQuick(c);applySheetTab();updateNpcProfileNotice();
 }
 
 const POSITIVE_STATUSES=new Set(['Renforcé','Avantagé','Confiant','Prêt']);
@@ -3882,11 +3968,11 @@ function importanceControl(c){
  return `<button type="button" class="importance-control" aria-label="${safe(label)}" title="${safe(label)}" data-chip="${safe(label)}" data-chip-type="importance" onclick="showCardTooltip(event,this)" onmouseenter="showCardTooltip(event,this)" onmouseleave="hideCardTooltip()" onfocus="showCardTooltip(event,this)" onblur="hideCardTooltip()"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span></button>`;
 }
 function characterCard(c){
- const fatigue=c.fatigue,portrait=safeSheetPortrait(c.portrait);
- const cells=Array.from({length:5},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
+ const rules=resourceLimits(c),fatigue=c.fatigue,portrait=safeSheetPortrait(c.portrait);
+ const cells=Array.from({length:rules.fatigueMax},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
  const effects=(c.conditions.length?`<div class="card-effect-group" aria-label="États actifs"><span class="card-effect-label">États</span>${c.conditions.map(x=>chipHtml(x,'condition')).join('')}</div>`:'')+
   (c.statuses.length?`<div class="card-effect-group" aria-label="Statuts de combat"><span class="card-effect-label">Statuts</span>${c.statuses.map(x=>chipHtml(x,'status')).join('')}</div>`:'');
- return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg>${portrait?`<img src="${safe(portrait)}" alt="" onerror="this.hidden=true">`:''}</span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5" title="Fatigue ${fatigue} sur 5">${cells}</div>${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div><div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
+ return `<article class="character-card" data-character-id="${safe(c.id)}" onclick="if(!event.target.closest('button'))openCharacterDetail(this.dataset.characterId)"><div class="card-head"><span class="card-avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg>${portrait?`<img src="${safe(portrait)}" alt="" onerror="this.hidden=true">`:''}</span><div class="card-identity"><div class="card-title-line"><h3><button type="button" class="card-open" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="event.stopPropagation();openCharacterDetail(this.closest('.character-card').dataset.characterId)">${safe(c.name)}</button></h3>${c.kind==='PNJ'?importanceControl(c):''}</div></div>${trainingIcon(c.training)}</div>${rules.fatigueMax?`<div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur ${rules.fatigueMax}" title="Fatigue ${fatigue} sur ${rules.fatigueMax}">${cells}</div>`:''}${effects||'<span class="card-muted">Aucun effet actif</span>'}${c.kind==='PJ'?balanceGraphic(c):`${rules.balanceMax?`<div class="card-npc-balance">Équilibre ${c.balance>0?'+':''}${c.balance}</div>`:''}<div class="card-location"><span aria-hidden="true">⌖</span>${safe(c.location||'Sans lieu')}</div>`}</article>`;
 }
 function showCardTooltip(event,button){
  event.stopPropagation();const name=button.dataset.chip,type=button.dataset.chipType;
@@ -3983,8 +4069,8 @@ function renderLegacySheetEditor(){
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
  ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('stat-${k}',-1,-3,2)">−</button><output id="view-stat-${k}">${c.stats[k]}</output><button type="button" class="stepper" onclick="stepField('stat-${k}',1,-3,2)">+</button><input type="hidden" id="stat-${k}" value="${c.stats[k]}"></div>`).join('')}</div>
  <div class="sheet-section" data-sheet-group="resources"><b>Ressources</b>
- <label>Fatigue</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetFatigue',-1,0,5)">−</button><output id="view-sheetFatigue">${c.fatigue}</output><button type="button" class="stepper" onclick="stepField('sheetFatigue',1,0,5)">+</button><input type="hidden" id="sheetFatigue" value="${c.fatigue}"></div>
- <label>Équilibre (position)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetBalance',-1,-3,3)">−</button><output id="view-sheetBalance">${c.balance}</output><button type="button" class="stepper" onclick="stepField('sheetBalance',1,-3,3)">+</button><input type="hidden" id="sheetBalance" value="${c.balance}"></div></div>
+ <label>Fatigue</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetFatigue',-1,0,${fatigueLimit(c)})">−</button><output id="view-sheetFatigue">${c.fatigue}</output><button type="button" class="stepper" onclick="stepField('sheetFatigue',1,0,${fatigueLimit(c)})">+</button><input type="hidden" id="sheetFatigue" value="${c.fatigue}"></div>
+ <label>Équilibre (position)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetBalance',-1,${resourceLimits(c).balanceMin},${resourceLimits(c).balanceMax})">−</button><output id="view-sheetBalance">${c.balance}</output><button type="button" class="stepper" onclick="stepField('sheetBalance',1,${resourceLimits(c).balanceMin},${resourceLimits(c).balanceMax})">+</button><input type="hidden" id="sheetBalance" value="${c.balance}"></div></div>
  <div class="sheet-section" data-sheet-group="resources"><b>Équilibre et principes</b>
  <p class="small-note">Les deux principes dépendent du livret. Renseigne leurs noms d'après le livre.</p>
  <label>Principe côté −</label><input id="principleLeft" maxlength="80" placeholder="Nom du premier principe" value="${safe(c.principles?.[0]||'')}">
@@ -3993,7 +4079,7 @@ function renderLegacySheetEditor(){
  <label>Centre (position de référence)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetCenter',-1,-3,3)">−</button><output id="view-sheetCenter">${c.center??0}</output><button type="button" class="stepper" onclick="stepField('sheetCenter',1,-3,3)">+</button><input type="hidden" id="sheetCenter" value="${c.center??0}"></div>
  </div>
  <div class="sheet-section" data-sheet-group="resources"><b>États émotionnels</b><p class="small-note">Coche ou décoche d'un clic. Les cinq états officiels sont listés p. 101.</p>
- <div>${Roster.CONDITIONS.map(name=>`<button type="button" class="pill negative ${c.conditions.includes(name)?'active':''}" aria-pressed="${c.conditions.includes(name)}" onclick="toggleSheetCondition('${safe(name)}')">${c.conditions.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div>
+ <div>${resourceConditionNames(c).map(name=>`<button type="button" class="pill negative ${c.conditions.includes(name)?'active':''}" aria-pressed="${c.conditions.includes(name)}" data-condition="${safe(name)}" onclick="toggleSheetCondition(this.dataset.condition)">${c.conditions.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div>
  <p class="small-note">Malus des états et mise hors de combat : à arbitrer selon la manœuvre concernée.</p></div>
  <div class="sheet-section" data-sheet-group="resources"><b>Statuts de combat</b><p class="small-note">Choisis les statuts en fonction de la fiction (pp. 155–157).</p>
  <div>${Roster.STATUSES.map(name=>`<button type="button" class="pill ${c.statuses.includes(name)?'active':''}" aria-pressed="${c.statuses.includes(name)}" onclick="toggleSheetStatus('${safe(name)}')">${c.statuses.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div></div>
@@ -4027,7 +4113,7 @@ function applySelectedBook(){
  }catch(e){alert(e.message)}
 }
 function toggleSheetCondition(name){
- try{if(!Roster.CONDITIONS.includes(name))throw Error('État inconnu');
+ try{if(!(sheetEditing&&sheetDraftConditions.includes(name))&&!resourceConditionNames(sheetResourcePreview(sheetEditing?{...selectedSheet(),fatigue:Number($('sheetFatigue').value),balance:Number($('sheetBalance').value),conditions:sheetDraftConditions}:selectedSheet())).includes(name))throw Error('État inconnu');
  if(sheetEditing){sheetDraftConditions=sheetDraftConditions.includes(name)?sheetDraftConditions.filter(x=>x!==name):[...sheetDraftConditions,name];refreshSheetQuick();return;}
  const c=selectedSheet(),before=sheetResources(c);commitLibraryMutation(()=>Roster.toggleCondition(lib,c.id,name));finishSheetResourceChange(before);
  }catch(e){alert(e.message)}
@@ -4051,6 +4137,8 @@ function saveSheet(quiet=false){
  if(!sheetEditing)return;
  try{if(sheetPortraitPending)throw Error('Lecture du portrait en cours. Patiente avant d’enregistrer.');const c=selectedSheet();if(!c)throw Error('Fiche absente');
  const patch=sheetPatchFromFields(c,sheetInitialFields,sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques);
+ validateResourceValues({...c,...patch});
+ if(patch.npcResources!==undefined&&JSON.stringify(patch.npcResources)!==JSON.stringify(c.npcResources)&&!confirm('Appliquer ce profil PNJ ? Les ressources cochées ne seront pas effacées automatiquement. Les nouveaux exports nécessitent la version avec profils PNJ ; l’état précédent restera accessible dans Gestion.'))return;
  if(patch.center!==undefined&&patch.center!==c.center&&!confirm('Modifier le centre d’équilibre de la fiche ?'))return;
  commitLibraryMutation(()=>Roster.updateCharacter(lib,c.id,patch));
  sheetEditing=false;sheetResourceUndo=null;renderSheets(c.id);render();sheetFeedback('Fiche enregistrée.');if(!quiet)alert('Fiche enregistrée.');$('sheetEditButton').focus({preventScroll:true});
@@ -4065,7 +4153,7 @@ function addSheetTechnique(){try{
 
 function renderCombatLibrary(){
  const select=$('combatSheetSelect');if(!select)return;
- const previous=select.value,available=lib.characters.filter(c=>!s.fighters.some(f=>f.characterId===c.id));
+ const previous=select.value,available=lib.characters.filter(c=>resourceLimits(c).combatant&&!s.fighters.some(f=>f.characterId===c.id));
  select.innerHTML=available.length?available.map(c=>`<option value="${safe(c.id)}">${safe(c.name)} (${c.kind})</option>`).join(''):'<option value="">Aucune fiche disponible à ajouter</option>';
  if(available.some(c=>c.id===previous))select.value=previous;
  select.disabled=!available.length;$('includeSelectedSheetButton').disabled=!available.length;
@@ -4077,7 +4165,7 @@ function syncSheet(fighterId){
  try{commitLibraryMutation(()=>Roster.syncCombatToLibrary(lib,s,fighterId));restoreNpcSessionLocation();renderSheets();render()}catch(e){alert(e.message)}
 }
 function exportCompleteBackup(){
- const data={format:'avatar-compagnon-backup',version:1,createdAt:new Date().toISOString(),library:lib,combat:s};
+ const data={format:'avatar-compagnon-backup',version:profileStorageRequired(lib,s)?2:1,createdAt:new Date().toISOString(),library:lib,combat:s};
  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='avatar-sauvegarde-complete-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
@@ -4087,7 +4175,7 @@ function importCompleteBackup(event){
  file.text().then(text=>{
   try{
    const data=JSON.parse(text);
-   if(data.format!=='avatar-compagnon-backup'||data.version!==1)throw Error('Format de sauvegarde non reconnu');
+   if(data.format!=='avatar-compagnon-backup'||![1,2].includes(data.version))throw Error('Format de sauvegarde non reconnu');
    const restored=Roster.importLibrary(data.library);
    const combat=data.combat;
    validateCombat(combat);validateBackupLinks(restored,combat);
@@ -4173,7 +4261,7 @@ function downloadPublicCombat(){
  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='avatar-compte-rendu-public-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-function download(){const blob=new Blob([JSON.stringify(s,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='avatar-combat-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function download(){const data=profileStorageRequired(null,s)?{format:'avatar-compagnon-combat',version:2,combat:s}:s;const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='avatar-combat-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
 const completeImportRecoveryOk=recoverIncompleteImport();
 lib=loadSaved(ROSTER_KEYS,x=>Roster.importLibrary(x),()=>Roster.createLibrary());
 s=loadSaved(COMBAT_KEYS,x=>validateCombat(x),()=>CombatCore.createCombat());

@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 193 scripts de régression JavaScript |
-| `tests/browser/` | 40 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 195 scripts de régression JavaScript |
+| `tests/browser/` | 41 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -61,8 +61,9 @@ précise ce qui est livré et propose une courte vérification dans le navigateu
 Le [lot 2, galerie et cartes Personnages](docs/RAPPORT_UI_UX_LOT2.md), dépend du lot 1
 et ajoute filtres, tri et classification PNJ sans modifier leurs ressources.
 Le [lot 3A, fiches détaillées](docs/RAPPORT_UI_UX_LOT3.md), sépare consultation et édition,
-protège les brouillons et ajoute les portraits locaux. Les ressources PNJ étendues restent
-une étape dédiée au modèle et au combat, avant de déclarer le lot 3 complet.
+protège les brouillons et ajoute les portraits locaux. Le [lot 3B, ressources PNJ](docs/RAPPORT_UI_UX_LOT3B.md), ajoute les capacités variables,
+les états personnalisés et une activation explicite qui préserve les données antérieures.
+Les exports comportant ces profils nécessitent cette nouvelle version.
 
 ## Règles et suivi
 

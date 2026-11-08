@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 193 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 195 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,7 +41,7 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 40 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 41 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
 `test_uiux_navigation.py` pour le socle de navigation,
@@ -152,3 +152,21 @@ lecture asynchrone retardée, export/restauration et rechargement. Captures dans
 Les anciens parcours de recette et de galerie passent par Modifier et les commandes
 permanentes ; leurs assertions métier sont conservées. Les limites de ressources du moteur
 restent celles de la V2.33 : ces tests ne certifient pas encore les capacités PNJ étendues.
+
+
+## Ressources PNJ — lot 3B
+
+- `node tests/js/test_ressources_pnj.cjs` : 42 scénarios de capacités, coûts,
+  débordements, principe, états personnalisés, protections, Terre, annulation et imports.
+- `node tests/js/test_stockage_profils_pnj.cjs` : 19 scénarios de stockage,
+  journal, panne partielle, récupération et blocage des écritures sur données illisibles.
+- `python tests/browser/test_ressources_pnj.py` : quatre formats (1280×900,
+  390×844, 320×640 et 844×390), activation refusée/confirmée, quota, copies de combat,
+  ressources, annulation, non-combattant et vrais exports/restaurations/rechargements.
+
+Bilan du lot : référence 233/233 ; résultat final 236/236 scripts (195 JS et 41 navigateur).
+Les 42 et 19 scénarios sont internes à leurs scripts, pas 61 scripts supplémentaires.
+Deux régressions intermédiaires de changement de cible ont été détectées par les anciens
+parcours fatigue/piège : correction du code sans retrait de leurs assertions.
+La limite `file://` demeure ; le double-clic sur Chrome macOS reste à vérifier manuellement.
+Voir [le rapport et la recette](RAPPORT_UI_UX_LOT3B.md).
