@@ -75,3 +75,15 @@ La lecture réelle du PDF p. 239–242 confirme que les ressources PNJ exigent u
 du modèle et du combat, pas seulement du rendu. Le lot 3B reste à traiter séparément avec
 compatibilité non destructive et tests de domaine ; le lot 3 n’est donc pas déclaré terminé.
 Lieux hiérarchiques et Livrets détaillés restent les étapes 4 et 5.
+
+
+## Livraison du lot 3B
+
+Le [lot 3B](RAPPORT_UI_UX_LOT3B.md), sur `refonte/ressources-pnj` depuis `cfdd496`,
+dépend du lot 3A (PR nº 5). Capacités PNJ, états personnalisés, principe unique et
+non-combattants sont pris en charge ensemble dans les fiches, le combat et les validations.
+L’adoption reste explicite ; les valeurs incompatibles ne sont jamais écrêtées en silence.
+Le canal local v021 et les exports version 2 protègent le point de retour v020.
+Le MJ conserve les conséquences narratives et les cas non automatisés ; ce lot ne prétend
+pas certifier toutes les règles et interactions. Prochaine étape : Lieux hiérarchiques,
+puis structure des Livrets. Les PR précédentes restent sans fusion automatique.

@@ -137,3 +137,27 @@ elle n’annule pas le combat. Les portraits utilisent des données raster local
 vérifiées ; une révision d’édition empêche les lectures tardives de toucher une autre fiche.
 Les formats/clés de sauvegarde et le moteur sont conservés. Le [rapport](RAPPORT_UI_UX_LOT3.md)
 distingue ce socle de la future adaptation des capacités PNJ dans le modèle et le combat.
+
+
+## Profils PNJ et générations de stockage — lot 3B
+
+`ResourceRules` centralise les limites et validations partagées par Roster, CombatCore et
+l’interface. Le champ optionnel `npcResources` (format `avatar-npc-resources`, version 1)
+porte combattant, capacité de fatigue, borne positive d’équilibre et noms d’états.
+Sans profil, les limites historiques restent strictement conservées. L’importance est
+indépendante : seule une proposition explicitement enregistrée crée un profil.
+Les combattants et les instantanés transportent leur propre copie du profil et du principe.
+Les limites varient ; les quantités fixes des effets et coûts des techniques sont conservées.
+
+Après activation, `persist` route vers `avatar-roster-v021` et `avatar-v021` ; le marqueur
+`avatar-npc-storage-generation` maintient ce canal. Les clés v020 restent intactes.
+La première écriture est une sauvegarde complète journalisée des deux modèles. Le journal
+historique v1 reste récupérable ; le v2 contrôle les clés autorisées et restaure aussi le
+marqueur. Échec de récupération ou données v021 illisibles : écritures ordinaires bloquées.
+Une restauration complète explicitement demandée et validée permet de réparer le chargement.
+
+Bibliothèque et sauvegarde complète passent en version 2 si nécessaire ; le combat isolé
+utilise alors l’enveloppe `avatar-compagnon-combat`, version 2. Les formats historiques
+restent lisibles. Gestion peut exporter le point v020 précédant l’activation. Revenir au code
+ancien retrouve ce point, sans fusion automatique avec les modifications récentes.
+Voir [les garanties, limites et tests](RAPPORT_UI_UX_LOT3B.md).
