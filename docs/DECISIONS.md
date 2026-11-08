@@ -175,3 +175,24 @@
   Aucun PNJ ou sous-lieu n’est supprimé en cascade.
 - Première activation dans le canal v021 existant, sauvegarde complète version 2 et point
   v020 conservé. Aucune nouvelle dépendance, extraction de code, migration destructive ou fusion.
+
+
+## 2026-11-08 — UI/UX, lot 5 : structure des Livrets
+
+- PDF réellement accessible, progression consultée p. 212 : jauge de quatre cases.
+  Le cahier des charges limite ce lot au socle ; aucune attribution de progression,
+  consommation de cases ou évolution de caractéristiques n’est automatisée.
+- Progression seulement dans Livret, jamais dans le panneau permanent ni sur les PNJ.
+  Suivi manuel par Livret exact, conservé après changement ; corrections via Modifier.
+- Moment d’équilibre : indication manuelle non renseignée/non débloqué/débloqué, sans
+  validation de condition, effet de combat ou compteur d’utilisation inventé.
+- Afficher les manœuvres réellement saisies, sans catalogue officiel incomplet ni fausse
+  appartenance à un nouveau Livret. Les déclencheurs et assistances spécifiques sont reportés.
+- Adaptateur de présentation et notes libres pour les spécificités ; Palmarès explicitement
+  non automatisé. Le livre disponible ne constitue pas un modèle de données déjà intégré :
+  ni liste complète d’objectifs ni parcours de récompense partiellement fonctionnel dans ce lot.
+- L’état est optionnel, validé et conservé dans les sauvegardes étendues v021/version 2.
+  Refuser la modification simultanée du Livret choisi et de son suivi, en demandant deux
+  enregistrements distincts ; ne jamais réattribuer silencieusement les cases.
+- Les noms de Livrets personnalisés déjà enregistrés restent visibles et sélectionnés.
+  Aucun PDF ni extrait substantiel versionné, aucune fusion dans main.

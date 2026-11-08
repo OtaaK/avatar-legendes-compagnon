@@ -98,3 +98,15 @@ sont accompagnés de protections de brouillon et de suppression. Les textes hist
 restent conservés ; les orphelins sont signalés. Aucun changement du moteur de combat.
 Voir [le rapport](RAPPORT_UI_UX_LOT4.md). Prochain lot : structure des Livrets, sans programmer
 les mécanismes spécifiques des dix Livrets. Aucune PR précédente n’est fusionnée automatiquement.
+
+
+## Livraison du lot 5 : structure des Livrets
+
+Branche `refonte/livrets`, depuis `1eaa233` (lot 4, PR nº 7). Cartes des manœuvres
+saisies, panneaux de spécificité et de moment d’équilibre, progression quatre cases
+et notes d’évolution dans Livret seulement. Le suivi reste manuel et séparé par Livret.
+Les textes, déclencheurs, conditions et automatismes des dix Livrets ne sont pas inventés.
+Le Palmarès est représenté par son adaptateur de notes ; sélection d’objectifs et parcours
+de récompenses attendent le modèle fiable de la spécification suivante.
+Voir [le rapport](RAPPORT_UI_UX_LOT5.md). Prochain lot : harmonisation et recette transversale,
+sans anticiper les règles détaillées reportées. Aucune fusion automatique des PR.

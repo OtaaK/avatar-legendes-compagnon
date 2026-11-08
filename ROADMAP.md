@@ -72,5 +72,6 @@ Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné 
 - [ ] Examiner le lot 3B et sa procédure de retour aux données antérieures avant intégration.
 - [x] Lot 4 sur branche dépendante : Lieux hiérarchiques, liens PNJ et compatibilité des sauvegardes.
 - [ ] Examiner le lot 4 et effectuer sa recette navigateur avant intégration.
-- [ ] Lot 5 : structure des Livrets ; mécanismes détaillés des dix Livrets reportés.
+- [x] Lot 5 sur branche dépendante : structure des Livrets et suivi manuel ; mécanismes détaillés des dix Livrets reportés.
+- [ ] Examiner le lot 5, les limites explicites du Palmarès et la recette des sauvegardes avant intégration.
 - [ ] Lot 6 : harmonisation et recette transversale finale.

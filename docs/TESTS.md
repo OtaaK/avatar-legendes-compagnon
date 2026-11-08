@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 196 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 197 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,14 +41,15 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 42 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 43 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
 `test_uiux_navigation.py` pour le socle de navigation,
 `test_galerie_personnages.py` pour les cartes et filtres,
 `test_fiches_uiux.py` pour les fiches et brouillons,
 `test_ressources_pnj.py` pour les profils et leur stockage,
-et `test_lieux.py` pour la hiérarchie et les relations PNJ.
+`test_lieux.py` pour la hiérarchie et les relations PNJ,
+et `test_livrets_uiux.py` pour le socle des Livrets et le suivi manuel.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -190,3 +191,19 @@ l’écran Lieux) des reprises réussies du test de navigation actualisé et du 
 Les 238 scripts ont chacun passé ; ce résultat consolidé n’est pas présenté comme une
 campagne locale unique à 238/238 après le dernier changement de libellé. GitHub Actions
 relance la suite complète sur le commit final. Voir le détail dans le rapport du lot.
+
+
+## Livrets — lot 5
+
+`node tests/js/test_livrets_uiux.cjs` : 30 scénarios, dix références existantes,
+progression bornée, suivi par Livret, corrections, champs futurs conservés, imports invalides
+et absence d’effet sur les règles et ressources. Un changement simultané de Livret et
+progression est refusé sans mutation ; une saisie vide ne devient pas implicitement zéro.
+`python tests/browser/test_livrets_uiux.py` : quatre formats, progression exclusivement
+dans Livret, cartes et notes sûres, activation refusée/confirmée, quota/rollback, brouillons,
+changement aller-retour de Livret, notes d’évolution sans consommation de points, export,
+restauration, rechargement, import invalide et Livret personnalisé préservé.
+Les captures sont locales dans `work/`. Aucun ancien test supprimé.
+
+Bilan final du lot 5 : référence isolée 238/238, puis suite complète **240/240**
+(197 JS et 43 navigateur), avec la limite `file://` conservée explicitement.
