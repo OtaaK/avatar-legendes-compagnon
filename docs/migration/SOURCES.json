@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "planning-only",
+  "inspectedOn": "2026-11-08",
+  "business": {
+    "repository": "OtaaK/avatar-legendes-compagnon",
+    "remoteMain": "42b306f71793e755bf2ee7066d515518f07c9987",
+    "referenceBranch": "correctifs/retours-recette-uiux",
+    "commit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+    "htmlSha256": "69f8ddb8e86f01bcc7138c3c2cb9645742aaff2f7b3d6081267b612b11c491bb",
+    "tests": {
+      "javascript": 198,
+      "browser": 45,
+      "passed": 243,
+      "limitation": "Cloud browser blocks file://; native double-click not verified"
+    },
+    "pullRequests": [
+      {
+        "number": 3,
+        "head": "refonte/ui-ux-progressive",
+        "sha": "a32365508086cfdd4da6fb439fec88191c305a10",
+        "base": "main",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 4,
+        "head": "refonte/ui-ux-personnages",
+        "sha": "c6e1e0bb8a00be0f0c8398df07b496877870af7c",
+        "base": "refonte/ui-ux-progressive",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 5,
+        "head": "refonte/ui-ux-fiches",
+        "sha": "cfdd49666246a200f18afff74ad799d37d8c6674",
+        "base": "refonte/ui-ux-personnages",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 6,
+        "head": "refonte/ressources-pnj",
+        "sha": "7cb514bb78388812b0a073002a59cb28db20a9d7",
+        "base": "refonte/ui-ux-fiches",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 7,
+        "head": "refonte/lieux",
+        "sha": "1eaa233f34edd860aba5fe887732fc55a7bcaba9",
+        "base": "refonte/ressources-pnj",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 8,
+        "head": "refonte/livrets",
+        "sha": "977cce66f8b1d3998ea33f066712d98802b06260",
+        "base": "refonte/lieux",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 9,
+        "head": "refonte/recette-ui-ux",
+        "sha": "1e57d22ab8b27b0de91a47e2df27020d5f0abf3b",
+        "base": "refonte/livrets",
+        "state": "open",
+        "merged": false
+      },
+      {
+        "number": 10,
+        "head": "correctifs/retours-recette-uiux",
+        "sha": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+        "base": "refonte/recette-ui-ux",
+        "state": "open",
+        "merged": false
+      }
+    ]
+  },
+  "ui": {
+    "repository": "OtaaK/avatar-legendes-ui",
+    "branch": "main",
+    "commit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+    "provisional": true,
+    "correctedVersionRequiredBeforeIntegration": true,
+    "next": "16.4.3",
+    "reactLocked": "19.2.4",
+    "packageManager": "pnpm@12.3.4",
+    "build": "passed including TypeScript",
+    "trackedFilesModified": false
+  },
+  "preparation": {
+    "documentationBranch": "architecture/convergence-v0",
+    "futureIntegrationBranch": "convergence/react-v0",
+    "uiInspectionBranch": "convergence/preparation-ui",
+    "uiPushed": false,
+    "implementationStarted": false,
+    "deployed": false,
+    "merged": false
+  }
+}
