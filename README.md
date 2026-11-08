@@ -7,8 +7,13 @@ Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2
 La nouvelle interface de référence est [avatar-legendes-ui](https://github.com/OtaaK/avatar-legendes-ui).
 Le [rapport de faisabilité et les sept lots](docs/migration/FAISABILITE_CONVERGENCE_V0.md)
 préparent son raccordement au moteur et aux sauvegardes de ce dépôt. Les
-[contrats proposés](docs/migration/CONTRATS_CIBLES.md) précisent les frontières.
-Le plan et la version v0 corrigée attendent validation avant intégration effective.
+[contrats de référence](docs/migration/CONTRATS_CIBLES.md) précisent les frontières.
+Le propriétaire a validé React/TypeScript/Vite et les sept lots. Le **lot 1** est préparé
+sur `convergence/react-v0`, avec le v0 corrigé `8b8924d` et le métier `a9079fa`.
+Voir le [bilan du lot 1](docs/migration/BILAN_LOT_1.md), le
+[guide sans commande](docs/migration/TESTER_LOT_1.md) et la
+[matrice fonctionnelle](docs/migration/MATRICE_FONCTIONNELLE.md).
+Les lots suivants attendent la validation du lot 1.
 L’application HTML ci-dessous reste disponible ; aucune PR précédente n’est fusionnée
 ou supprimée par ce changement d’orientation.
 
@@ -99,3 +104,20 @@ son ancienneté. Ne pas ajouter le PDF commercial ou des données personnelles a
 
 Projet de fan non officiel, sans affiliation avec les ayants droit d'Avatar ni avec l'éditeur
 du jeu de rôle.
+
+## Développer et vérifier la convergence React
+
+L'utilisateur final n'installe rien : la CI fournit un fichier HTML portable.
+Pour les développeurs uniquement : Node ≥ 22.12, `npm ci --ignore-scripts`, puis
+`npm run build` (sortie `dist/companion/index.html`) ou `npm run dev`.
+
+- `npm run test:extraction` : contrôle des corps extraits et de l'oracle figé.
+- `npm run test:contracts` : contrats de données, erreurs/conflits, parité différentielle et frontières.
+- `npm run test:parity` : scripts JS historiques redirigés vers les API extraites.
+- `npm run test:inventory` : cohérence de l'inventaire technique.
+- `npm run test:react` : shell compilé, navigateur, quatre tailles et essais hors réseau
+  (prérequis Python/Playwright de `requirements-dev.txt`, Chromium).
+- `python scripts/test.py` : régressions historiques sur le HTML conservé.
+
+Aucune de ces commandes ne déploie ou ne fusionne le projet. Le workflow
+`Convergence React — Lot 1` compile, teste et propose uniquement des artefacts à télécharger.

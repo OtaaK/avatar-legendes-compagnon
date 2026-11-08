@@ -249,3 +249,32 @@ React/Vite local, modules métier JavaScript extraits à comportement identique,
 commandes transactionnelles, espace React isolé avec codecs historiques. Ce sont des
 propositions du [plan](migration/FAISABILITE_CONVERGENCE_V0.md), pas des modifications déjà
 appliquées aux sauvegardes ou une autorisation d’intégration.
+
+
+## 2026-11-08 — Validation de convergence et réalisation limitée au lot 1
+
+**Décisions explicites du propriétaire :** React + TypeScript + Vite ; dépôt principal
+`avatar-legendes-compagnon` ; v0 visuel `8b8924d` ; métier `a9079fa` incluant PR 3–10 ;
+sept lots ; conservation de l'ancien HTML, règles, tests et formats ; reprise explicite
+par export/import ; hors ligne sans outils installés par l'utilisateur final.
+Le lot 1 est autorisé, le lot 2 attend une validation séparée. Aucune fusion ni déploiement.
+
+**Mise en œuvre technique courante :** extraction reproductible de 11 modules JS, exports
+ESM et imports explicites sans modifier les corps ; TypeScript aux frontières ; shell v0
+et styles conservés ; React externe au moteur via un store stable ; codecs indépendants
+sans stockage ; repository local isolé, une écriture du couple bibliothèque/combat.
+Le montage n'écrit rien. Une erreur de lecture bloque les écritures et refuse d'exporter
+un faux état vide comme récupération. Les aperçus sont sans écriture et les plans périmés
+sont refusés. Les champs inconnus sont conservés, avec les normalisations historiques.
+
+Le laboratoire écrit sa note fictive sous `avatar-compagnon-react-lab-v1` uniquement.
+Le namespace projet est réservé séparément, sans migration automatique des anciennes clés.
+Web Locks sérialise les écritures quand disponible ; sinon le contrôle est optimiste et ne
+prétend pas garantir deux écritures exactement simultanées. Un seul onglet éditeur reste
+la recommandation. Les données de démonstration v0 ne sont pas un format métier.
+
+Vite + singlefile fournit un prototype d'un seul HTML, sans police distante ni analytics.
+Le cloud bloque les navigations file:// ; les essais hors réseau du document embarqué
+ne certifient pas l'ouverture native macOS. Le design n'a pas été remplacé pour contourner
+cette limite. Voir [bilan](migration/BILAN_LOT_1.md), [matrice](migration/MATRICE_FONCTIONNELLE.md)
+et [recette sans commande](migration/TESTER_LOT_1.md).

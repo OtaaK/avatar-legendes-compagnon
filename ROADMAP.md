@@ -9,8 +9,9 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [x] Examiner les deux dépôts et relever leurs SHA ; vérifier la chaîne des PR récentes.
 - [x] Identifier les fonctions métier, couplages DOM, écarts des modèles et contraintes hors ligne.
 - [x] Préparer un rapport et des contrats proposés sur une branche isolée, sans code migré.
-- [ ] Valider le plan et recevoir la version v0 corrigée à figer pour l’intégration.
-- [ ] Lot 1 : architecture, contrats et extraction fidèle ; socle de compatibilité dès ce lot.
+- [x] Plan validé par le propriétaire ; v0 corrigé figé à `8b8924d`.
+- [x] Lot 1 implémenté : architecture, 11 modules extraits, contrats, shell v0 et prototype portable.
+- [ ] Validation propriétaire du lot 1 et essai réel du HTML sur Mac avant lot 2.
 - [ ] Lot 2 : Personnages, ressources et portraits dans v0.
 - [ ] Lot 3 : Lieux et liens PNJ.
 - [ ] Lot 4 : Livrets et techniques.
@@ -19,7 +20,8 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [ ] Lot 7 : recette visuelle/fonctionnelle/responsive et validation avant toute fusion.
 
 Critères d’acceptation, risques et retours arrière :
-`docs/migration/FAISABILITE_CONVERGENCE_V0.md`. Aucun déploiement ni fusion automatique.
+`docs/migration/FAISABILITE_CONVERGENCE_V0.md`. Résultats et réserves dans
+[le bilan du lot 1](docs/migration/BILAN_LOT_1.md). Aucun déploiement ni fusion automatique.
 
 
 ## V2.33 — audit et corrections de Terre

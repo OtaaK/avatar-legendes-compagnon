@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "planning-only",
+  "status": "lot1-implemented-awaiting-owner-validation",
   "inspectedOn": "2026-11-08",
   "business": {
     "repository": "OtaaK/avatar-legendes-compagnon",
@@ -101,5 +101,42 @@
     "implementationStarted": false,
     "deployed": false,
     "merged": false
+  },
+  "lot1": {
+    "authorized": true,
+    "branch": "convergence/react-v0",
+    "businessCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+    "uiCommit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+    "domainModules": 11,
+    "historicalScriptsBefore": 243,
+    "historicalScriptsAfter": 243,
+    "redirectedScripts": 198,
+    "scriptsCallingExtractedAPI": 171,
+    "publicCalls": 8111,
+    "contractParityBoundaryTests": 21,
+    "viewports": [
+      [
+        1440,
+        1024
+      ],
+      [
+        1280,
+        800
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "singleHtmlBuild": true,
+    "portableHtmlSha256": "18c8c2e39e668c48e91a9a37569e8e89066eecf1ab5426d4d842851209eeafd3",
+    "nativeFileNavigation": "blocked by managed Chromium: ERR_BLOCKED_BY_ADMINISTRATOR; Mac trial pending",
+    "offlineEmbeddedDocument": "cold context via test transport, network disabled, no subresources",
+    "merged": false,
+    "deployed": false
   }
 }
