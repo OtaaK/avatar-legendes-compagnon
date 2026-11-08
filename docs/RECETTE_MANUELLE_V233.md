@@ -1,5 +1,9 @@
 # Tester la V2.33 dans son navigateur, sans commande
 
+> Guide historique de la PR nº 1. Pour la refonte actuelle, suivre
+> [la recette globale UI/UX](RECETTE_REFONTE_UI_UX.md). Les étapes et repères ci-dessous
+> restent ceux de cette ancienne livraison.
+
 Cette vérification est destinée au propriétaire avant toute fusion de la PR nº 1.
 Elle prend environ 10 à 15 minutes. Aucune installation, console ou commande n'est nécessaire.
 

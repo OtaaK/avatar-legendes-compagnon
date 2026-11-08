@@ -24,7 +24,7 @@ try:
                 d.accept('Garde de test' if d.type == 'prompt' else None)
             page.on('dialog',dialog);page.on('pageerror',lambda e:errors.append(str(e)))
             page.goto(url)
-            assert 'correctifs de recette' in page.locator('.app-version').inner_text()
+            assert 'refonte UI/UX en validation' in page.locator('.app-version').inner_text()
             page.get_by_role('button',name='Ouvrir les personnages',exact=True).click()
             page.locator('[data-character-kind="PNJ"]').click()
             page.get_by_role('button',name='+ Nouveau PNJ',exact=True).click()

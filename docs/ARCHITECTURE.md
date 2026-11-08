@@ -210,3 +210,18 @@ Première utilisation : bibliothèque version 2 et canal v021 journalisé exista
 v020 reste conservé. Les imports anciens restent lisibles ; un suivi mal formé est refusé.
 Aucun format de combat, nouvelle clé parallèle ou dépendance n’est ajouté. Voir
 [le rapport, les limites et la recette](RAPPORT_UI_UX_LOT5.md).
+
+
+## Harmonisation et recette transversale — lot 6
+
+`collapsedSheetResources` est un état d’affichage en mémoire, indexé par identifiant de fiche.
+Il n’est écrit ni dans `lib`, ni dans `s`, ni dans une nouvelle clé locale. Les ressources sont
+affichées par défaut, repliables jusqu’à 900 px et toujours visibles au-delà. Le bouton
+n’apparaît pas sur une fiche sans ressource/statut. Les contrôles et transactions existants
+restent les seuls moyens d’appliquer des modifications de ressources.
+
+Le raccourci `targetOpponent` appelle `syncTargetOptions` après changement de cible, comme
+le select manuel. Il ne réinitialise pas les autres paramètres de technique. Les libellés
+évidents sont reliés à leurs champs identifiés, sans mécanisme de formulaire parallèle.
+Le nom générique de l’export du point antérieur remplace son libellé PNJ : son format et son
+origine de données ne changent pas. Voir [la recette et les limites](RAPPORT_UI_UX_LOT6.md).

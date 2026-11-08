@@ -110,3 +110,17 @@ Le Palmarès est représenté par son adaptateur de notes ; sélection d’objec
 de récompenses attendent le modèle fiable de la spécification suivante.
 Voir [le rapport](RAPPORT_UI_UX_LOT5.md). Prochain lot : harmonisation et recette transversale,
 sans anticiper les règles détaillées reportées. Aucune fusion automatique des PR.
+
+
+## Livraison du lot 6 : harmonisation et recette transversale
+
+Branche `refonte/recette-ui-ux`, depuis `977cce6` (lot 5, PR nº 8). Harmoniser l’identification
+et les sauvegardes, relier les libellés évidents et proposer le repli mobile sans changer les
+modèles. Un parcours combiné vérifie profils PNJ, Lieux, Livret, combat, annulation et export/
+restauration après coupure réseau. Le raccourci de cible reçoit la même actualisation de
+ses états que le select manuel.
+
+Voir [le rapport](RAPPORT_UI_UX_LOT6.md), [la grille de critères](BILAN_REFONTE_UI_UX.md) et
+[la recette personnelle sans commandes](RECETTE_REFONTE_UI_UX.md). Le socle est proposé pour
+recette, pas déclaré intégralement conforme aux règles ou aux besoins des dix Livrets.
+Aucune fusion de PR sans accord explicite ; prochaine étape : retours de recette et corrections.

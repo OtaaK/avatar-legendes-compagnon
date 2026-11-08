@@ -41,7 +41,7 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 43 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 44 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
 `test_uiux_navigation.py` pour le socle de navigation,
@@ -49,7 +49,8 @@ hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et d
 `test_fiches_uiux.py` pour les fiches et brouillons,
 `test_ressources_pnj.py` pour les profils et leur stockage,
 `test_lieux.py` pour la hiérarchie et les relations PNJ,
-et `test_livrets_uiux.py` pour le socle des Livrets et le suivi manuel.
+`test_livrets_uiux.py` pour le socle des Livrets et le suivi manuel,
+et `test_recette_uiux.py` pour les modèles combinés et la recette globale.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -207,3 +208,20 @@ Les captures sont locales dans `work/`. Aucun ancien test supprimé.
 
 Bilan final du lot 5 : référence isolée 238/238, puis suite complète **240/240**
 (197 JS et 43 navigateur), avec la limite `file://` conservée explicitement.
+
+
+## Recette transversale — lot 6
+
+`python tests/browser/test_recette_uiux.py` combine profils PNJ, hiérarchie et liens de lieux,
+suivi de Livret et copies de combat dans une sauvegarde. Cinq formats, repli mobile sans
+mutation, aller-retour desktop, quatre segmentations PNJ, formulaire au clavier, vraie Armure
+de terre puis undo, exports récent/antérieur distincts, restauration hors réseau, rechargement
+fidèle et raccourci de cible avec états personnalisés. Le scénario apprend explicitement
+Dérobade au PJ, technique universelle qui ne doit pas devenir accessible par contournement.
+Deux attentes de libellé historiques sont actualisées (repère de version et export générique),
+sans retirer les assertions de données ou d’erreur. Aucune suppression de test.
+Le fonctionnement par double-clic macOS reste à vérifier avec le guide de recette personnelle.
+
+Bilan final du lot 6 : référence isolée **240/240**, puis suite complète **241/241**
+(197 JS et 44 navigateur), limitation file:// conservée explicitement. Voir
+[le rapport](RAPPORT_UI_UX_LOT6.md) et [la recette personnelle](RECETTE_REFONTE_UI_UX.md).
