@@ -157,3 +157,21 @@
 - Écritures bloquées si récupération impossible ou données v021 illisibles ; restauration
   complète volontaire pour réparer. Aucune fusion automatique entre ancien et nouveau canal.
 - Aucun PDF, extrait substantiel, test ancien supprimé ou fusion dans main dans cette livraison.
+
+
+## 2026-11-08 — UI/UX, lot 4 : Lieux
+
+- Application du cahier des charges, sans modification de règle du jeu : modèle narratif
+  dans la bibliothèque commune, identifiants indépendants du nom et du parent.
+- Trois relations séparées : domicile, associations et position. Position non migrée
+  (champ absent) et position explicitement vide (null) restent distinctes. Les groupes Présents,
+  Associés et Domiciliés sont distincts ; un domicile seul ne crée pas une association.
+- Aucun rapprochement automatique de textes identiques. Le rattachement de l’ancien texte
+  à la position est proposé et confirmé ; en cas de noms ambigus, sélection manuelle requise.
+- Cycles et données mal formées refusés ; références absentes structurellement valides
+  conservées et affichées pour réparation volontaire. Aucun effacement silencieux à l’import.
+- Suppression proposée avec dépendances : confirmer la promotion des sous-lieux au parent
+  et le retrait des seuls liens concernés, ou annuler pour réaffecter manuellement.
+  Aucun PNJ ou sous-lieu n’est supprimé en cascade.
+- Première activation dans le canal v021 existant, sauvegarde complète version 2 et point
+  v020 conservé. Aucune nouvelle dépendance, extraction de code, migration destructive ou fusion.

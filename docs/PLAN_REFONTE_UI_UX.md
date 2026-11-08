@@ -87,3 +87,14 @@ Le canal local v021 et les exports version 2 protègent le point de retour v020.
 Le MJ conserve les conséquences narratives et les cas non automatisés ; ce lot ne prétend
 pas certifier toutes les règles et interactions. Prochaine étape : Lieux hiérarchiques,
 puis structure des Livrets. Les PR précédentes restent sans fusion automatique.
+
+
+## Livraison du lot 4 : Lieux
+
+Branche `refonte/lieux`, depuis `7cb514b` (lot 3B, PR nº 6). Le modèle, les fiches et les
+liens PNJ partagent la bibliothèque versionnée. Création et déplacement de sous-lieux,
+fil d’Ariane, illustrations, relations indépendantes, position rapide et filtres descendants
+sont accompagnés de protections de brouillon et de suppression. Les textes historiques
+restent conservés ; les orphelins sont signalés. Aucun changement du moteur de combat.
+Voir [le rapport](RAPPORT_UI_UX_LOT4.md). Prochain lot : structure des Livrets, sans programmer
+les mécanismes spécifiques des dix Livrets. Aucune PR précédente n’est fusionnée automatiquement.

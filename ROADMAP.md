@@ -70,6 +70,7 @@ Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné 
 - [ ] Examiner le lot 3A sans fusion automatique des PR précédentes.
 - [x] Lot 3B sur branche dépendante : modèle et combat compatibles avec capacités PNJ, états personnalisés et bornes à principe unique, sans écraser les anciennes valeurs.
 - [ ] Examiner le lot 3B et sa procédure de retour aux données antérieures avant intégration.
-- [ ] Lot 4 : Lieux hiérarchiques, liens PNJ et compatibilité des sauvegardes.
+- [x] Lot 4 sur branche dépendante : Lieux hiérarchiques, liens PNJ et compatibilité des sauvegardes.
+- [ ] Examiner le lot 4 et effectuer sa recette navigateur avant intégration.
 - [ ] Lot 5 : structure des Livrets ; mécanismes détaillés des dix Livrets reportés.
 - [ ] Lot 6 : harmonisation et recette transversale finale.
