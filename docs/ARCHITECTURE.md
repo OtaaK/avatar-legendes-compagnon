@@ -186,3 +186,27 @@ brouillon de fiche. La position rapide ne modifie que la position. Les mutations
 promotion des enfants au parent et retrait des seuls liens concernés, après présentation des
 dépendances et confirmation ; aucune suppression en cascade de fiches ni de sous-lieux.
 Voir [la recette et les limites](RAPPORT_UI_UX_LOT4.md).
+
+
+## Structure des Livrets — lot 5
+
+`BookState` est un helper pur partagé par la validation Roster et le formulaire PJ.
+Le champ optionnel `playbookState` (format `avatar-playbook-state`, version 1) contient
+une liste `entries`, indexée par nom exact du Livret. Chaque entrée porte `book`,
+`progress` (0…4), `moment` (unknown/locked/unlocked), `notes` et `evolutions`.
+Les champs inconnus restent conservés lors des patches. Navigation et édition sans
+changement ne créent pas de suivi. Les entrées sont conservées lors d’un changement
+de Livret ; le suivi du nouveau Livret ne copie pas celui de l’ancien.
+
+`bookAdapter` décrit la référence réellement intégrée et le panneau de spécificité.
+Il ne fournit aucun texte de manœuvre ni automatisme réglementaire. `playbookMoves`
+reste la liste historique de la fiche, sans attribution automatique au Livret choisi.
+Les réglages du suivi sont réservés à Modifier, avec le brouillon et la transaction
+existants ; changer simultanément de Livret et son suivi est refusé pour éviter une
+attribution ambiguë. Les quatre cases restent affichées à 4 jusqu’à correction manuelle.
+Les notes d’évolution et le déblocage déclaré du moment d’équilibre n’affectent pas le moteur.
+
+Première utilisation : bibliothèque version 2 et canal v021 journalisé existant ; le point
+v020 reste conservé. Les imports anciens restent lisibles ; un suivi mal formé est refusé.
+Aucun format de combat, nouvelle clé parallèle ou dépendance n’est ajouté. Voir
+[le rapport, les limites et la recette](RAPPORT_UI_UX_LOT5.md).

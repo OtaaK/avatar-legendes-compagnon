@@ -176,6 +176,9 @@ label{color:var(--muted)}
 
 /* Lot 4 : lieux */
 .place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px;margin:12px 0}.place-card{border:1px solid var(--line,#405671);border-radius:12px;padding:12px;min-width:0}.place-card p{font-size:12px;color:var(--muted)}.place-breadcrumb{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.place-tree{padding-left:0;list-style:none;max-height:420px;overflow:auto}.place-tree li{margin:6px 0}.place-check{display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}.place-check input{width:auto;flex:none}.place-portrait{max-width:100%;width:420px;max-height:260px;object-fit:contain}.place-thumbnail{display:block;width:100%;height:100px;object-fit:cover;margin-bottom:8px}.place-description{white-space:pre-wrap;overflow-wrap:anywhere}.place-warning{border:1px solid var(--gold,#e2c184);padding:12px;margin:12px 0}#placesContent button{max-width:100%;overflow-wrap:anywhere}#placeForm{max-width:720px}#placesContent h3{overflow-wrap:anywhere}
+
+/* Lot 5 : Livrets, progression uniquement dans leur onglet. */
+.book-move-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}.book-move{min-width:0;overflow-wrap:anywhere}.book-section{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0;overflow-wrap:anywhere}.book-section summary{cursor:pointer;color:var(--gold)}.book-progression{border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.book-gauge{display:flex;gap:8px;max-width:320px;margin:10px 0}.book-gauge span{flex:1;height:22px;border:1px solid var(--muted);border-radius:5px;background:var(--bg)}.book-gauge span.filled{background:var(--gold);border-color:var(--gold)}.book-heading h3{overflow-wrap:anywhere}
 </style>
 <a class="skip-link" href="#appContent">Aller au contenu</a>
 <header class="app-header"><h1>Avatar Légendes · Compagnon</h1><span class="app-version">V2.33 · correctifs de recette · hors ligne</span></header>
@@ -193,7 +196,7 @@ label{color:var(--muted)}
 <section class="app-view" id="view-places" aria-label="Lieux" hidden><div class="panel"><h2>Lieux</h2><p class="small-note">Domicile, associations et position actuelle sont indépendants. Les anciens textes sont conservés.</p><div id="placesContent"></div></div></section>
 <section class="app-view" id="view-management" aria-label="Gestion" hidden><div class="panel"><p class="section-eyebrow">Tes données</p><h2>Gestion</h2><p>Les sauvegardes restent dans ce navigateur. Conserve un export JSON dans un dossier personnel pour pouvoir les retrouver.</p>
 <div class="management-group"><h3>Sauvegarde complète</h3><p>Fiches et combat réunis dans un fichier. Une confirmation est demandée avant de remplacer les données actuelles.</p><div class="row"><button type="button" onclick="exportCompleteBackup()">Exporter la sauvegarde complète</button><button type="button" class="alt" onclick="$('backupImportFile').click()">Restaurer une sauvegarde complète</button></div></div>
-<div class="management-group"><h3>Retour à la version précédente</h3><p>L’activation des profils PNJ ou des Lieux conserve l’état local antérieur. Le bouton ci-dessous exporte le point précédant la première de ces activations. Cette copie permet de retrouver ses données avec l’ancienne application ; les changements suivants restent dans la nouvelle version.</p><button type="button" class="alt" id="exportPreProfileBackup" onclick="exportPreProfileBackup()">Exporter l’état avant les profils PNJ</button></div>
+<div class="management-group"><h3>Retour à la version précédente</h3><p>L’activation des profils PNJ, des Lieux ou du suivi des Livrets conserve l’état local antérieur. Le bouton ci-dessous exporte le point précédant la première de ces activations. Cette copie permet de retrouver ses données avec l’ancienne application ; les changements suivants restent dans la nouvelle version.</p><button type="button" class="alt" id="exportPreProfileBackup" onclick="exportPreProfileBackup()">Exporter l’état avant les profils PNJ</button></div>
 <div class="management-group"><h3>Fiches de personnages</h3><p>Les fiches peuvent aussi être conservées séparément du combat.</p><div class="row"><button type="button" class="alt" onclick="exportRoster()">Exporter les fiches</button><button type="button" class="alt" onclick="$('rosterFile').click()">Importer les fiches</button></div></div>
 <div class="management-group"><h3>Combat</h3><p>L’export privé contient l’état complet. Le compte rendu partageable masque le pari secret.</p><div class="row"><button type="button" class="alt" onclick="download()">Exporter le combat privé</button><button type="button" class="alt" onclick="downloadPublicCombat()">Exporter le compte rendu partageable</button><button type="button" class="alt" onclick="$('importFile').click()">Importer un combat</button></div></div>
 </div></section>
@@ -2775,6 +2778,33 @@ const approachLabels={defendre:'Défendre et prendre à revers',attaquer:'Avance
 'use strict';
 'use strict';
 'use strict';
+// Lot 5 : suivi manuel des Livrets ; aucune manœuvre ou évolution automatisée.
+const BookState=(()=>{
+ const FORMAT='avatar-playbook-state',MOMENTS=['unknown','locked','unlocked'];
+ function validate(c){
+  const state=c.playbookState;if(state===undefined||state===null)return;
+  if(c.kind!=='PJ'||state.format!==FORMAT||state.version!==1||!Array.isArray(state.entries))throw Error('Suivi de Livret invalide');
+  const seen=new Set();
+  for(const e of state.entries){
+   if(!e||typeof e.book!=='string'||!e.book.trim()||e.book.length>120||seen.has(e.book))throw Error('Livret de suivi invalide ou dupliqué');
+   if(!Number.isInteger(e.progress)||e.progress<0||e.progress>4)throw Error('Progression : de 0 à 4 cases');
+   if(!MOMENTS.includes(e.moment))throw Error('Suivi du moment d’équilibre invalide');
+   for(const [key,max] of [['notes',2000],['evolutions',4000]])if(typeof e[key]!=='string'||e[key].length>max)throw Error('Notes de Livret invalides');
+   seen.add(e.book);
+  }
+ }
+ function entry(c,book=c.livret){return c.playbookState?.entries?.find(e=>e.book===book)||{book,progress:0,moment:'unknown',notes:'',evolutions:''};}
+ function patch(c,book,changes){
+  if(c.kind!=='PJ'||typeof book!=='string'||!book.trim())throw Error('Choisis et enregistre d’abord un Livret pour ce PJ.');
+  if(Object.keys(changes).some(k=>!['progress','moment','notes','evolutions'].includes(k)))throw Error('Champ de suivi protégé');
+  const state=JSON.parse(JSON.stringify(c.playbookState||{format:FORMAT,version:1,entries:[]})),i=state.entries.findIndex(e=>e.book===book),next={...entry(c,book),...changes};
+  if(i<0)state.entries.push(next);else state.entries[i]=next;
+  validate({...c,playbookState:state});return state;
+ }
+ return {FORMAT,MOMENTS,validate,entry,patch};
+})();
+window.BookState=BookState;
+
 // UI/UX lot 4 : lieux et relations narratives, indépendants des règles de combat.
 const PlaceRules=(()=>{
  const clone=x=>JSON.parse(JSON.stringify(x)),idOk=x=>typeof x==='string'&&x.length>0&&x.length<=120;
@@ -2843,7 +2873,7 @@ function validateCharacter(c){
  if(c.history!==undefined&&(typeof c.history!=='string'||c.history.length>4000))throw Error('Histoire invalide');
  if(c.playbookMoves!==undefined&&(!Array.isArray(c.playbookMoves)||c.playbookMoves.some(x=>typeof x!=='string'||x.length>120)))throw Error('Manœuvres de livret invalides');
  if(!Array.isArray(c.techniques)||c.techniques.some(t=>!t||typeof t.name!=='string'||!MASTERY.includes(t.mastery)))throw Error('Techniques invalides');
- validateResourceValues(c);
+ validateResourceValues(c);BookState.validate(c);
  return true;
 }
 function makeCharacter(id,name,kind='PJ'){
@@ -2859,7 +2889,7 @@ function updateCharacter(lib,id,patch){
  // Les anciennes valeurs importées restent lisibles ; toute nouvelle classification est contrôlée.
  if(Object.hasOwn(patch,'importance')&&patch.importance!==c.importance&&(c.kind!=='PNJ'||!['',...NPC_IMPORTANCE].includes(patch.importance)))throw Error('Importance PNJ invalide');
  const next={...rosterClone(c),...rosterClone(patch),stats:{...c.stats,...(patch.stats||{})}};
- validateCharacter(next);if(Object.hasOwn(patch,'placeLinks'))PlaceRules.setLinks(rosterClone(lib),id,patch.placeLinks);PlaceRules.validate({...lib,characters:lib.characters.map(x=>x.id===id?next:x)});Object.assign(c,next);if(npcResourceProfile(c)||c.placeLinks)lib.version=2;return c;
+ validateCharacter(next);if(Object.hasOwn(patch,'placeLinks'))PlaceRules.setLinks(rosterClone(lib),id,patch.placeLinks);PlaceRules.validate({...lib,characters:lib.characters.map(x=>x.id===id?next:x)});Object.assign(c,next);if(npcResourceProfile(c)||c.placeLinks||c.playbookState)lib.version=2;return c;
 }
 function assignTechnique(lib,id,name,mastery='acquise'){
  if(!MASTERY.includes(mastery)||!name||name.length>120)throw Error('Technique invalide');
@@ -2934,7 +2964,7 @@ function importLibrary(raw){
  if(![1,2].includes(lib?.version)||!Array.isArray(lib.characters)||!Number.isInteger(lib.seq))throw Error('Format bibliothèque incompatible');
  const ids=new Set();
  for(const c of lib.characters){normalizeCharacter(c);validateCharacter(c);if(ids.has(c.id))throw Error('Identifiant dupliqué');ids.add(c.id)}
- PlaceRules.validate(lib);if(lib.places!==undefined||lib.characters.some(c=>c.npcResources||c.placeLinks))lib.version=2;
+ PlaceRules.validate(lib);if(lib.places!==undefined||lib.characters.some(c=>c.npcResources||c.placeLinks||c.playbookState))lib.version=2;
  return lib;
 }
 window.Roster={NPC_IMPORTANCE,npcImportance,listNpcs,npcLocations,TRAININGS,TO_ENGINE,FROM_ENGINE,STATS,MASTERY,CONDITIONS,STATUSES,normalizeCharacter,toggleCondition,toggleStatus,createLibrary,makeCharacter,validateCharacter,createCharacter,updateCharacter,assignTechnique,addToCombat,syncCombatToLibrary,importLibrary};
@@ -3832,6 +3862,22 @@ function applySheetTab(){
 
 let characterKind='PJ';
 let characterDetailOpen=false;
+// Adaptateur de présentation : les seules données officielles intégrées restent les références.
+function bookAdapter(name){
+ const reference=Playbooks.byName(name);
+ return {reference,title:reference?.id==='audacieux'?'Palmarès d’excellence':'Spécificités du Livret',supportsAutomation:false};
+}
+window.BookAdapters={forName:bookAdapter};
+function bookGauge(value){return `<div class="book-gauge" role="img" aria-label="Progression : ${value} sur 4">${Array.from({length:4},(_,i)=>`<span class="${i<value?'filled':''}"></span>`).join('')}</div>`;}
+function renderBookRead(c){
+ const adapter=bookAdapter(c.livret),e=BookState.entry(c),text=value=>safe(value).replaceAll('\n','<br>'),states={unknown:'Non renseigné',locked:'Non débloqué (suivi manuel)',unlocked:'Débloqué (suivi manuel)'};
+ return `<header class="book-heading"><h3>${safe(c.livret||'Livret non renseigné')}</h3>${adapter.reference?`<p class="small-note">Référence : livre p. ${adapter.reference.page}.</p>`:'<p class="small-note">Aucune référence intégrée pour ce nom. Les saisies existantes restent conservées.</p>'}</header><h3>Manœuvres enregistrées</h3><p class="small-note">Noms saisis sur cette fiche ; leur appartenance et leurs déclencheurs ne sont pas vérifiés automatiquement.</p><div class="book-move-grid">${c.playbookMoves.map(name=>`<details class="sheet-technique book-move"><summary>${safe(name)} <span class="card-muted">Inscrite</span></summary><p>Consulte le Livret pour le déclenchement, les choix et les effets de cette manœuvre. Son automatisation spécifique n’est pas intégrée.</p></details>`).join('')||'<p>Aucune manœuvre renseignée.</p>'}</div><details class="book-section"><summary>${safe(adapter.title)}</summary><p>${text(e.notes)||'Aucune note renseignée.'}</p><p class="small-note">Notes libres. Les listes officielles, sélections d’objectifs, accomplissements et récompenses ne sont pas automatisés dans ce socle.</p></details><details class="book-section"><summary>Moment d’équilibre</summary><p>${states[e.moment]}</p><p class="small-note">Consulte la condition et le texte propres au Livret. Cet état est une indication manuelle ; il ne débloque aucun effet dans le combat. Le suivi d’utilisation n’est pas intégré.</p></details><section class="book-progression"><h3>Progression et évolutions</h3>${bookGauge(e.progress)}<p>${c.playbookState?.entries?.some(x=>x.book===c.livret)?'':'Suivi non encore renseigné · '}${e.progress}/4 cases${e.progress===4?' · Évolution à choisir avec le MJ.':''}</p><p class="small-note">Suivi manuel, livre p. 212. Aucun point n’est consommé, aucune évolution n’est appliquée automatiquement.</p><details class="book-section"><summary>Notes d’évolution</summary><p>${text(e.evolutions)||'Aucune évolution renseignée.'}</p><p class="small-note">Journal libre ; saisir une évolution ne modifie pas les caractéristiques, techniques ou manœuvres.</p></details><button type="button" class="alt" onclick="editBookTracking()" ${typeof c.livret==='string'&&c.livret.trim()?'':'disabled'}>Modifier le suivi du Livret</button></section>`;
+}
+function renderBookEditor(c){const e=BookState.entry(c),enabled=typeof c.livret==='string'&&!!c.livret.trim(),adapter=bookAdapter(c.livret);return `<h3>Suivi de ${safe(c.livret||'Livret non renseigné')}</h3><p class="small-note">Suivi du Livret enregistré à l’ouverture. Enregistre séparément un changement de Livret avant de modifier son suivi ; les anciens suivis sont conservés.</p><fieldset ${enabled?'':'disabled'}><legend>Progression et spécificités</legend><label for="sheetBookProgress">Cases de progression (0 à 4)</label><input id="sheetBookProgress" type="number" required min="0" max="4" step="1" value="${e.progress}" oninput="updateBookPreview()"><div id="bookProgressPreview">${bookGauge(e.progress)}</div><p id="bookProgressStatus" role="status">${e.progress===4?'Évolution à choisir avec le MJ. Les quatre cases restent cochées.':''}</p><label for="sheetBookMoment">Moment d’équilibre — suivi manuel</label><select id="sheetBookMoment"><option value="unknown" ${e.moment==='unknown'?'selected':''}>Non renseigné</option><option value="locked" ${e.moment==='locked'?'selected':''}>Non débloqué</option><option value="unlocked" ${e.moment==='unlocked'?'selected':''}>Débloqué</option></select><label for="sheetBookNotes">${safe(adapter.title)} — notes libres</label><textarea id="sheetBookNotes" maxlength="2000">${safe(e.notes)}</textarea><label for="sheetBookEvolutions">Notes d’évolution (aucun effet automatique)</label><textarea id="sheetBookEvolutions" maxlength="4000">${safe(e.evolutions)}</textarea></fieldset>${enabled?'':'<p>Choisis et enregistre d’abord un Livret dans Aperçu.</p>'}<p class="small-note">Ajuster ou corriger ces valeurs ne déclenche ni manœuvre ni récompense. Aucun coût de progression n’est calculé ici.</p>`;}
+function updateBookPreview(){const raw=$('sheetBookProgress').value,value=Number(raw);if(!raw.trim()||!Number.isInteger(value)||value<0||value>4){$('bookProgressStatus').textContent='Choisis de 0 à 4 cases.';return;}$('bookProgressPreview').innerHTML=bookGauge(value);$('bookProgressStatus').textContent=value===4?'Évolution à choisir avec le MJ. Les quatre cases restent cochées.':'';}
+function editBookTracking(){beginSheetEdit();setSheetTab('playbook');$('sheetBookProgress')?.focus();}
+function ensureBookActivation(){return profileStorageActive()||confirm('Activer le suivi des Livrets ? Les sauvegardes étendues nécessitent cette version. L’état antérieur reste conservé dans ce navigateur.');}
+
 // Lieux : rendu sans récursion et formulaires locaux, aucune dépendance réseau.
 let selectedPlaceId=null,placeEditing=false,placeInitial='',placeImagePending=false,placeEditRevision=0;
 function placeFields(){return ['placeName','placeDescription','placeParent','placePortrait'].map(id=>$(id)?.value||'');}
@@ -3891,7 +3937,7 @@ window.addEventListener('beforeunload',event=>{if(placeDirty()){event.preventDef
 // UI/UX lot 3 — états d'édition et helpers ; aucune règle de combat modifiée.
 let sheetEditing=false,sheetPortraitPending=false,sheetRevision=0,sheetInitialFields={},sheetInitialFingerprint='';
 let sheetDraftConditions=[],sheetDraftStatuses=[],sheetDraftTechniques=[],sheetResourceUndo=null;
-const SHEET_FIELD_IDS=['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames','sheetHomePlace','sheetCurrentPlace','sheetAssociatedPlaces','sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
+const SHEET_FIELD_IDS=['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames','sheetBookProgress','sheetBookMoment','sheetBookNotes','sheetBookEvolutions','sheetHomePlace','sheetCurrentPlace','sheetAssociatedPlaces','sheetName','sheetLivret','sheetLocation','sheetImportance','sheetTraining','sheetHistory','sheetRelations','sheetMoves','sheetNotes','principleLeft','principleRight','sheetFatigue','sheetBalance','sheetCenter','sheetDesire','sheetDescription','sheetPortrait',...Roster.STATS.map(k=>'stat-'+k)];
 function sheetFields(){return Object.fromEntries(SHEET_FIELD_IDS.filter(id=>$(id)).map(id=>[id,$(id).value]));}
 function sheetFingerprint(){return JSON.stringify([sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques]);}
 function sheetIsDirty(){return sheetEditing&&(sheetPortraitPending||sheetFingerprint()!==sheetInitialFingerprint);}
@@ -3912,6 +3958,7 @@ function sheetPatchFromFields(c,initial,fields,conditions,statuses,techniques){
  for(const [key,value] of [['conditions',conditions],['statuses',statuses],['techniques',techniques]])if(JSON.stringify(c[key])!==JSON.stringify(value))patch[key]=JSON.parse(JSON.stringify(value));
  if(Object.hasOwn(fields,'npcProfileMode')&&['npcProfileMode','npcCombatant','npcFatigueMax','npcBalanceMax','npcConditionCount','npcConditionNames'].some(changed)){const rawProfile=npcProfileFromFields(fields),profile=rawProfile?{...(c.npcResources||{}),...rawProfile}:null;if(JSON.stringify(profile)!==JSON.stringify(c.npcResources??null))patch.npcResources=profile;}
  if(['sheetHomePlace','sheetCurrentPlace','sheetAssociatedPlaces'].some(changed)){patch.placeLinks={homeId:null,associatedIds:[],...(c.placeLinks||{})};if(changed('sheetHomePlace'))patch.placeLinks.homeId=fields.sheetHomePlace||null;if(changed('sheetCurrentPlace'))patch.placeLinks.currentId=fields.sheetCurrentPlace||null;if(changed('sheetAssociatedPlaces'))patch.placeLinks.associatedIds=JSON.parse(fields.sheetAssociatedPlaces||'[]');}
+ if(['sheetBookProgress','sheetBookMoment','sheetBookNotes','sheetBookEvolutions'].some(changed)){if(changed('sheetLivret'))throw Error('Enregistre séparément le changement de Livret et les modifications de son suivi. Les suivis antérieurs restent conservés.');const values={};for(const [id,key] of [['sheetBookProgress','progress'],['sheetBookMoment','moment'],['sheetBookNotes','notes'],['sheetBookEvolutions','evolutions']])if(changed(id)){if(key==='progress'&&!String(fields[id]).trim())throw Error('Renseigne de 0 à 4 cases de progression.');values[key]=key==='progress'?Number(fields[id]):fields[id];}patch.playbookState=BookState.patch(c,c.livret,values);}
  if(patch.desire!==undefined&&patch.desire.length>240)throw Error('Désir trop long (240 caractères maximum).');
  if(patch.description!==undefined&&patch.description.length>2000)throw Error('Description trop longue (2 000 caractères maximum).');
  if(patch.portrait&&safeSheetPortrait(patch.portrait)!==patch.portrait)throw Error('Portrait invalide : image PNG, JPEG ou WebP locale attendue.');
@@ -4000,7 +4047,7 @@ function sheetTechniqueCards(techniques){return techniques.map(t=>{const ref=TEC
 function renderSheetRead(c){
  const narrative=value=>safe(sheetText(value)).replaceAll('\n','<br>');
  let overview=c.kind==='PJ'?`<div class="sheet-stat-grid">${Roster.STATS.map((key,i)=>`<div><span>${['Créativité','Concentration','Harmonie','Enthousiasme'][i]}</span><strong>${c.stats[key]>0?'+':''}${c.stats[key]}</strong></div>`).join('')}</div><h3>Entraînement</h3><p>${safe(c.training||'Non renseigné')}</p>`:`<h3>Désir</h3><p>${narrative(c.desire)||'Non renseigné'}</p>${sheetText(c.description)?'<h3>Description</h3><p>'+narrative(c.description)+'</p>':''}<h3>Lieu actuel</h3><p>${safe(PlaceRules.currentName(lib,c)||'Non renseigné')}</p><h3>Principe</h3><p>${safe(c.principles?.[0]||c.principles?.[1]||'Non renseigné')}</p>${c.principles?.[0]&&c.principles?.[1]?'<details><summary>Ancien second principe conservé</summary><p>'+safe(c.principles[1])+'</p></details>':''}`;
- $('sheetRead').innerHTML=`<section data-read-tab="identity">${overview}</section><section data-read-tab="techniques">${sheetTechniqueCards(c.techniques)}</section>${c.kind==='PJ'?`<section data-read-tab="playbook"><h3>${safe(c.livret||'Livret non renseigné')}</h3>${Playbooks.byName(c.livret)?'<p class="small-note">Référence : livre p. '+Playbooks.byName(c.livret).page+'.</p>':''}<h3>Manœuvres enregistrées</h3>${c.playbookMoves.map(name=>`<details class="sheet-technique"><summary>${safe(name)}</summary><p>Consulte le livret pour le déclenchement et les choix de cette manœuvre.</p></details>`).join('')||'<p>Aucune manœuvre renseignée.</p>'}</section><section data-read-tab="story"><h3>Histoire</h3><p>${narrative(c.history)||'Non renseignée'}</p><h3>Relations</h3>${c.relationships.length?'<ul>'+c.relationships.map(r=>'<li>'+safe(r)+'</li>').join('')+'</ul>':'<p>Aucune relation renseignée.</p>'}<h3>Notes</h3><p>${narrative(c.notes)||'Aucune note.'}</p></section>`:`<section data-read-tab="places">${npcPlacesRead(c)}</section>${sheetText(c.notes)||c.relationships.length||c.playbookMoves.length||sheetText(c.history)||sheetText(c.livret)?`<details class="sheet-legacy-read" data-read-tab="identity"><summary>Données historiques conservées</summary><p>${narrative(c.livret)}</p><p>${narrative(c.notes)}</p><p>${narrative(c.history)}</p>${[...c.relationships,...c.playbookMoves].map(value=>'<p>'+safe(value)+'</p>').join('')}</details>`:''}`}`;
+ $('sheetRead').innerHTML=`<section data-read-tab="identity">${overview}</section><section data-read-tab="techniques">${sheetTechniqueCards(c.techniques)}</section>${c.kind==='PJ'?`<section data-read-tab="playbook">${renderBookRead(c)}</section><section data-read-tab="story"><h3>Histoire</h3><p>${narrative(c.history)||'Non renseignée'}</p><h3>Relations</h3>${c.relationships.length?'<ul>'+c.relationships.map(r=>'<li>'+safe(r)+'</li>').join('')+'</ul>':'<p>Aucune relation renseignée.</p>'}<h3>Notes</h3><p>${narrative(c.notes)||'Aucune note.'}</p></section>`:`<section data-read-tab="places">${npcPlacesRead(c)}</section>${sheetText(c.notes)||c.relationships.length||c.playbookMoves.length||sheetText(c.history)||sheetText(c.livret)?`<details class="sheet-legacy-read" data-read-tab="identity"><summary>Données historiques conservées</summary><p>${narrative(c.livret)}</p><p>${narrative(c.notes)}</p><p>${narrative(c.history)}</p>${[...c.relationships,...c.playbookMoves].map(value=>'<p>'+safe(value)+'</p>').join('')}</details>`:''}`}`;
 }
 function enhanceSheetEditor(c){
  const form=$('sheetForm'),identity=form.querySelector('.sheet-identity');
@@ -4016,7 +4063,7 @@ function enhanceSheetEditor(c){
  if(c.kind==='PJ'){move('principleLeft',identity);move('principleRight',identity);move('sheetTraining',identity);}
  else{for(const section of resourceSections)historic.append(section);historic.querySelectorAll('[data-sheet-group]').forEach(el=>el.removeAttribute('data-sheet-group'));}
  const history=$('sheetHistory'),historyArea=document.createElement('textarea');historyArea.id='sheetHistory';historyArea.value=history.value;history.replaceWith(historyArea);const historyLabel=document.createElement('label');historyLabel.htmlFor='sheetHistory';historyLabel.textContent='Histoire';historyArea.before(historyLabel);
- if(c.kind==='PJ'){const book=makeGroup('playbook');move('sheetMoves',book);}
+ if(c.kind==='PJ'){const book=makeGroup('playbook');book.innerHTML=renderBookEditor(c);move('sheetMoves',book);}
  else{for(const section of [...form.querySelectorAll('[data-sheet-group="story"]')]){section.removeAttribute('data-sheet-group');historic.append(section);}}
  const known=form.querySelector('[data-sheet-group="techniques"]');if(known){const list=document.createElement('div');list.id='sheetKnownTechniques';list.innerHTML=sheetTechniqueCards(sheetDraftTechniques);while(known.firstChild&&known.firstChild.tagName!=='LABEL')known.firstChild.remove();known.prepend(list);}
  if(c.kind==='PNJ'){const places=makeGroup('places');move('sheetLocation',places);$('knownNpcLocations')&&places.append($('knownNpcLocations'));}
@@ -4170,7 +4217,7 @@ function renderLegacySheetEditor(){
  if(!c){$('sheetForm').innerHTML='<p>Aucune fiche sélectionnée.</p>';renderSheetQuick(null);return}
  renderSheetQuick(c);
  $('sheetForm').innerHTML=`<div class="sheet-identity"><label>Nom</label><input id="sheetName" oninput="refreshSheetQuick()" value="${safe(c.name)}">
- <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
+ <label>Livret / rôle</label>${c.kind==='PJ'?`<select id="sheetLivret"><option value="">Choisir un livret…</option>${CombatRules.LIVRETS.map(x=>`<option value="${safe(x)}" ${c.livret===x?'selected':''}>${safe(x)}</option>`).join('')}${typeof c.livret==='string'&&c.livret&&!CombatRules.LIVRETS.includes(c.livret)?`<option value="${safe(c.livret)}" selected>${safe(c.livret)} (existant)</option>`:''}</select>`:`<input id="sheetLivret" value="${safe(c.livret)}" placeholder="Rôle du PNJ">`}
  ${c.kind==='PNJ'?`<p class="sheet-importance-editor"><span class="importance-dot" data-importance="${safe(Roster.npcImportance(c))}" aria-hidden="true"></span>${safe(Roster.npcImportance(c)||'Importance non précisée')}</p><label for="sheetImportance">Importance</label><select id="sheetImportance"><option value="">Non précisée</option>${Roster.NPC_IMPORTANCE.map(value=>`<option value="${safe(value)}" ${c.importance===value?'selected':''}>${safe(value)}</option>`).join('')}${typeof c.importance==='string'&&c.importance&&!Roster.npcImportance(c)?`<option value="${safe(c.importance)}" selected>Valeur existante : ${safe(c.importance)}</option>`:''}</select><p class="small-note">La classification ne modifie pas les ressources enregistrées.</p><label for="sheetLocation">Lieu en texte historique (conservé)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
@@ -4246,6 +4293,7 @@ function saveSheet(quiet=false){
  const patch=sheetPatchFromFields(c,sheetInitialFields,sheetFields(),sheetDraftConditions,sheetDraftStatuses,sheetDraftTechniques);
  validateResourceValues({...c,...patch});
  if(patch.npcResources!==undefined&&JSON.stringify(patch.npcResources)!==JSON.stringify(c.npcResources)&&!confirm('Appliquer ce profil PNJ ? Les ressources cochées ne seront pas effacées automatiquement. Les nouveaux exports nécessitent la version avec profils PNJ ; l’état précédent restera accessible dans Gestion.'))return;
+ if(patch.playbookState!==undefined&&!ensureBookActivation())return;
  if(patch.placeLinks!==undefined&&!ensurePlacesActivation())return;
  if(patch.center!==undefined&&patch.center!==c.center&&!confirm('Modifier le centre d’équilibre de la fiche ?'))return;
  commitLibraryMutation(()=>Roster.updateCharacter(lib,c.id,patch));

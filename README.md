@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 196 scripts de régression JavaScript |
-| `tests/browser/` | 42 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 197 scripts de régression JavaScript |
+| `tests/browser/` | 43 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -66,6 +66,8 @@ les états personnalisés et une activation explicite qui préserve les données
 Les exports comportant ces profils nécessitent cette nouvelle version.
 Le [lot 4, Lieux](docs/RAPPORT_UI_UX_LOT4.md), ajoute une arborescence, les liens PNJ
 et les filtres de présence, sans convertir automatiquement les anciens textes.
+Le [lot 5, Livrets](docs/RAPPORT_UI_UX_LOT5.md), organise les manœuvres enregistrées,
+les notes et le suivi manuel de progression, sans automatiser les évolutions.
 
 ## Règles et suivi
 
