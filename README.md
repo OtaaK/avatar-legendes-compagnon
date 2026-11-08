@@ -21,8 +21,8 @@ L’[ancienne recette V2.33](docs/RECETTE_MANUELLE_V233.md) est conservée comme
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 197 scripts de régression JavaScript |
-| `tests/browser/` | 44 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 198 scripts de régression JavaScript |
+| `tests/browser/` | 45 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -72,6 +72,8 @@ Le [lot 5, Livrets](docs/RAPPORT_UI_UX_LOT5.md), organise les manœuvres enregis
 les notes et le suivi manuel de progression, sans automatiser les évolutions.
 Le [lot 6](docs/RAPPORT_UI_UX_LOT6.md) harmonise les repères et vérifie les données combinées ;
 la refonte reste en attente de recette personnelle et d’autorisation avant fusion.
+Les [correctifs issus de la recette](docs/RAPPORT_RETOURS_UI_UX.md) guident le profil légendaire,
+rafraîchissent les cartes après renommage de lieu et ajoutent le retrait protégé de combattants.
 
 ## Règles et suivi
 

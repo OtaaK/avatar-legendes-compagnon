@@ -82,3 +82,15 @@ Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné 
 Bilan des critères : `docs/BILAN_REFONTE_UI_UX.md`. Recette actuelle sans commandes :
 `docs/RECETTE_REFONTE_UI_UX.md`. Les mécanismes propres aux dix Livrets et la refonte
 fonctionnelle de Combats restent des demandes séparées ; le lot 6 ne les déclare pas terminés.
+
+
+## Retours de recette du socle UI/UX
+
+- [x] Clarifier dès le choix d’importance la préparation du profil, dont 15 fatigues légendaires.
+- [x] Rafraîchir cartes et filtres après renommage d’un lieu lié.
+- [x] Ajouter un retrait de combattant protégé, confirmé et annulable, sans supprimer sa fiche.
+- [x] Tester erreurs de stockage, imports et rechargements pour ces corrections.
+- [ ] Faire revalider les points 3, 4 et 6 par le propriétaire avant toute fusion.
+
+Les autres parcours ont été signalés comme fonctionnels par le propriétaire. Voir
+`docs/RAPPORT_RETOURS_UI_UX.md` ; aucune intégration automatique dans main.

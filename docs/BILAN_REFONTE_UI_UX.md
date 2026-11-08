@@ -40,3 +40,12 @@ certifie ni toute l’accessibilité ni toutes les règles du jeu. Les PR resten
 
 Commencer la validation personnelle par [la recette globale](RECETTE_REFONTE_UI_UX.md).
 Voir [le rapport du lot 6](RAPPORT_UI_UX_LOT6.md) pour les changements et résultats exacts.
+
+
+## Retours personnels reçus
+
+Le propriétaire signale les autres parcours comme fonctionnels et trois points à corriger :
+choix Légendaire resté à cinq fatigues, nom de lieu non rafraîchi sur carte, retrait de combattant
+absent. Les [correctifs de recette](RAPPORT_RETOURS_UI_UX.md) sont proposés sur une branche
+suivante. Revalider ces trois points avant autorisation de fusion ; cela ne certifie pas les
+mécanismes des Livrets et combinaisons explicitement différés.

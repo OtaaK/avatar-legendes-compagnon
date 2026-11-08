@@ -213,3 +213,19 @@
   original. Recette Mac et confort attendus du propriétaire avant autorisation de fusion.
 - Les anciens guides restent contextualisés comme historiques. Aucun déploiement, fusion
   automatique ou programmation des dix Livrets dans cette mission.
+
+
+## 2026-11-08 — Retours de recette, points 3, 4 et 6
+
+- Le propriétaire précise que le choix Légendaire seul laissait cinq fatigues. Conserver la
+  possibilité de classification seule, mais proposer immédiatement et explicitement de
+  préparer le profil 15/8/+4. Un profil incomplet ne s’enregistre pas et les noms manquants
+  ne sont pas inventés. Les fiches déjà classées ouvrent leur configuration si la fatigue diffère.
+- Rafraîchir la galerie au retour d’un autre espace ; suivre un filtre renommé seulement si
+  l’ancien nom n’est plus utilisé. Aucun rapprochement automatique des textes historiques.
+- Ajouter Retirer du combat avec confirmation, instantané et protection des dépendances.
+  Déclaration seulement, sans action/proposition/effet dépendant ; ne pas supprimer de fiche
+  ni interpréter une règle de départ ou défaite. L’undo restaure aussi les engagements.
+- Les parcours historiques de classification seule refusent la nouvelle proposition de profil ;
+  leurs assertions de conservation des données restent présentes. Aucun test supprimé.
+- Correctifs sur branche dépendante de la PR nº 9, sans fusion dans main.

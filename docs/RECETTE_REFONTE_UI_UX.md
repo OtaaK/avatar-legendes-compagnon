@@ -1,13 +1,13 @@
 # Tester la refonte UI/UX, sans commandes
 
-Cette recette concerne la branche `refonte/recette-ui-ux`, qui réunit les lots progressifs.
+Cette recette concerne la branche `correctifs/retours-recette-uiux`, qui réunit les lots progressifs.
 Elle ne nécessite aucune fusion dans main. Prévoir environ 15 à 20 minutes ; utiliser des
 personnages fictifs et noter les étapes qui semblent difficiles, même si elles fonctionnent.
 
 ## Ouvrir la bonne application
 
 1. Depuis ton application habituelle, exporter une sauvegarde complète de ta partie et la garder à part.
-2. Ouvrir [le fichier de la branche de recette](https://github.com/OtaaK/avatar-legendes-compagnon/blob/refonte/recette-ui-ux/app/simulateur.html).
+2. Ouvrir [le fichier de la branche de recette](https://github.com/OtaaK/avatar-legendes-compagnon/blob/correctifs/retours-recette-uiux/app/simulateur.html).
 3. Sur GitHub, cliquer **Download raw file / Télécharger le fichier brut** en haut à droite.
    La page de code GitHub n’est pas l’application. Il suffit de télécharger ce seul fichier HTML.
 4. Enregistrer `simulateur.html` dans un dossier de test, puis l’ouvrir avec Chrome par double-clic.
@@ -46,14 +46,19 @@ Enregistrer la fiche confirme le succès. Une erreur de sauvegarde doit rester v
 
 ## 3. Capacités PNJ — sur une fiche fictive uniquement
 
-- Choisir une importance dans Modifier, puis ouvrir Ressources du PNJ.
-- Proposer les valeurs de l’importance ; compléter le principe et les noms d’états demandés.
+- Choisir une importance dans Modifier et accepter de préparer ses ressources.
+- Pour un PNJ déjà classé mais resté à ses anciennes limites, le panneau s’ouvre ; utiliser
+  Proposer les valeurs de l’importance. Compléter le principe et les noms d’états demandés
+  (huit pour Légendaire ; trois noms supplémentaires sont à fournir si cinq sont déjà présents).
 - Enregistrer et lire la confirmation d’activation des données étendues.
 - Vérifier la capacité proposée : 3, 5, 10 ou 15 cases selon l’importance.
 
 Attendu : changer seulement l’importance ne change pas les ressources. Une incompatibilité
 avec les valeurs déjà marquées est signalée ; aucune valeur n’est effacée en silence.
 Pour un PNJ sans profil de combattant, aucun ajout au combat ne doit être possible.
+Une copie de combat déjà ajoutée reste indépendante : pour reprendre le nouveau profil,
+la retirer puis la rajouter en préparation, après sauvegarde et sans effet dépendant.
+Le retrait ne reporte pas automatiquement ses ressources sur la fiche.
 
 ## 4. Lieux et relations indépendantes
 
@@ -88,6 +93,10 @@ Choisir Défendre et prendre à revers pour le premier et Avancer et attaquer po
 puis Révéler les approches. Dans Actions, sélectionner le premier et Armure de terre,
 confirmer le matériau, préparer puis valider les effets dans Validation MJ.
 Vérifier l’effet temporaire et utiliser l’annulation du combat.
+
+Avant révélation et sans effet dépendant, essayer **Retirer du combat** sur un combattant
+de test, puis annuler avec l’historique. Sa fiche de Personnages doit rester présente.
+Le bouton explique son indisponibilité si une action ou mécanique est encore liée.
 
 Ajouter également une fiche depuis Personnages pour vérifier son lien. La copie de combat
 et la fiche permanente restent indépendantes ; modifier une ressource du combat ne réécrit

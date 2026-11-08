@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 197 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 198 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,7 +41,7 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 44 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 45 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
 `test_uiux_navigation.py` pour le socle de navigation,
@@ -50,7 +50,8 @@ hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et d
 `test_ressources_pnj.py` pour les profils et leur stockage,
 `test_lieux.py` pour la hiérarchie et les relations PNJ,
 `test_livrets_uiux.py` pour le socle des Livrets et le suivi manuel,
-et `test_recette_uiux.py` pour les modèles combinés et la recette globale.
+`test_recette_uiux.py` pour les modèles combinés et la recette globale,
+et `test_retours_uiux.py` pour les corrections des points 3, 4 et 6.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -225,3 +226,18 @@ Le fonctionnement par double-clic macOS reste à vérifier avec le guide de rece
 Bilan final du lot 6 : référence isolée **240/240**, puis suite complète **241/241**
 (197 JS et 44 navigateur), limitation file:// conservée explicitement. Voir
 [le rapport](RAPPORT_UI_UX_LOT6.md) et [la recette personnelle](RECETTE_REFONTE_UI_UX.md).
+
+
+## Retours de recette UI/UX
+
+`node tests/js/test_retrait_combattant.cjs` : 25 scénarios sur retrait, dépendances,
+conservation, engagements, import et annulation exacte. `python tests/browser/test_retours_uiux.py`
+couvre quatre formats, profil légendaire préparé depuis le choix d’importance, quinze cases,
+nom de lieu rafraîchi, filtre, quotas, retrait et undo après rechargement, puis sauvegarde restaurée.
+Les tests galerie/fiches refusent explicitement la proposition de ressources pour leurs
+scénarios de classification seule, sans alléger leurs assertions métier.
+Voir [le rapport](RAPPORT_RETOURS_UI_UX.md) pour les limites et la revalidation personnelle.
+
+Bilan de ces correctifs : référence isolée **241/241**, puis campagne complète finale
+**243/243** (198 JS, 45 navigateur), après reprise réussie du parcours historique de profils.
+La limite file:// demeure explicitement signalée.

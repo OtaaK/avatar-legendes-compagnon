@@ -23,6 +23,7 @@ try:
             def dialog(d):
                 if d.type=='alert':alerts.append(d.message);d.accept()
                 elif d.type=='prompt':d.accept(choice['prompt'])
+                elif d.message.startswith('Préparer les ressources de '):d.dismiss()
                 else:
                     confirms.append(d.message)
                     if choice['accept']:d.accept()
