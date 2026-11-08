@@ -74,4 +74,11 @@ Plan et audit : `docs/PLAN_REFONTE_UI_UX.md`. Aucun lot ne doit être fusionné 
 - [ ] Examiner le lot 4 et effectuer sa recette navigateur avant intégration.
 - [x] Lot 5 sur branche dépendante : structure des Livrets et suivi manuel ; mécanismes détaillés des dix Livrets reportés.
 - [ ] Examiner le lot 5, les limites explicites du Palmarès et la recette des sauvegardes avant intégration.
-- [ ] Lot 6 : harmonisation et recette transversale finale.
+- [x] Lot 6 sur branche dépendante : harmonisation et recette transversale automatisée.
+- [ ] Effectuer la recette personnelle Chrome macOS sur la branche complète, puis traiter les retours.
+- [ ] Examiner les PR dépendantes et autoriser explicitement leur intégration avant toute fusion.
+
+
+Bilan des critères : `docs/BILAN_REFONTE_UI_UX.md`. Recette actuelle sans commandes :
+`docs/RECETTE_REFONTE_UI_UX.md`. Les mécanismes propres aux dix Livrets et la refonte
+fonctionnelle de Combats restent des demandes séparées ; le lot 6 ne les déclare pas terminés.

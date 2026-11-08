@@ -196,3 +196,20 @@
   enregistrements distincts ; ne jamais réattribuer silencieusement les cases.
 - Les noms de Livrets personnalisés déjà enregistrés restent visibles et sélectionnés.
   Aucun PDF ni extrait substantiel versionné, aucune fusion dans main.
+
+
+## 2026-11-08 — UI/UX, lot 6 : harmonisation et recette globale
+
+- Repère V2.33 refonte UI/UX en validation ; conserver V2.33 comme version déclarée.
+- Point antérieur nommé données étendues, car activé par profils PNJ, Lieux ou Livrets.
+  Libellé et nom du téléchargement clarifiés, fonctions/format/clés conservés.
+- Repli mobile facultatif par fiche, en mémoire jusqu’au rechargement ; affichage ouvert
+  par défaut et ressources toujours visibles en grand écran. Aucun changement de données.
+- Relier les libellés adjacents à leur champ. La recette clavier n’est pas présentée comme
+  un audit complet d’accessibilité ou une certification de toutes les cibles tactiles.
+- Corriger le raccourci de cible pour actualiser les états possibles ; ne modifier aucune
+  règle ou quantité d’effet et ne réinitialiser aucun autre paramètre.
+- Critères suivis dans un document distinct, sans cocher ni réécrire le cahier des charges
+  original. Recette Mac et confort attendus du propriétaire avant autorisation de fusion.
+- Les anciens guides restent contextualisés comme historiques. Aucun déploiement, fusion
+  automatique ou programmation des dix Livrets dans cette mission.

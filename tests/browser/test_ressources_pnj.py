@@ -106,7 +106,7 @@ try:
             assert backup['version']==2 and backup['library']['version']==2
             with page.expect_download() as pending:page.get_by_role('button',name='Exporter le combat privé',exact=True).click()
             combat=json.loads(Path(pending.value.path()).read_bytes());assert combat['format']=='avatar-compagnon-combat' and combat['version']==2
-            with page.expect_download() as pending:page.get_by_role('button',name='Exporter l’état avant les profils PNJ',exact=True).click()
+            with page.expect_download() as pending:page.get_by_role('button',name='Exporter l’état avant les données étendues',exact=True).click()
             oldraw=Path(pending.value.path()).read_bytes();old=json.loads(oldraw)
             assert old['version']==1 and old['library']==baseline['library'] and old['combat']==baseline['combat']
             page.locator('#backupImportFile').set_input_files({'name':'retour-v1.json','mimeType':'application/json','buffer':oldraw})

@@ -10,8 +10,10 @@ utiliser les exports JSON pour conserver une copie de ses données.
 
 ## Tester la version avant intégration
 
-Le [parcours manuel V2.33](docs/RECETTE_MANUELLE_V233.md) explique comment télécharger
-le fichier de la PR et vérifier les fonctions essentielles dans son navigateur, sans commande.
+Le [parcours global de la refonte UI/UX](docs/RECETTE_REFONTE_UI_UX.md) indique le fichier
+exact à télécharger et les vérifications essentielles, sans commande.
+Le [bilan des critères](docs/BILAN_REFONTE_UI_UX.md) distingue ce qui est livré et ce qui reste différé.
+L’[ancienne recette V2.33](docs/RECETTE_MANUELLE_V233.md) est conservée comme archive de la PR nº 1.
 
 ## Se repérer
 
@@ -20,7 +22,7 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
 | `tests/js/` | 197 scripts de régression JavaScript |
-| `tests/browser/` | 43 scripts navigateur, dont un contrôle hors connexion |
+| `tests/browser/` | 44 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -68,6 +70,8 @@ Le [lot 4, Lieux](docs/RAPPORT_UI_UX_LOT4.md), ajoute une arborescence, les lien
 et les filtres de présence, sans convertir automatiquement les anciens textes.
 Le [lot 5, Livrets](docs/RAPPORT_UI_UX_LOT5.md), organise les manœuvres enregistrées,
 les notes et le suivi manuel de progression, sans automatiser les évolutions.
+Le [lot 6](docs/RAPPORT_UI_UX_LOT6.md) harmonise les repères et vérifie les données combinées ;
+la refonte reste en attente de recette personnelle et d’autorisation avant fusion.
 
 ## Règles et suivi
 
