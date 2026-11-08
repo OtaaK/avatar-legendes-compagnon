@@ -1,0 +1,33 @@
+{
+  "repository": "OtaaK/avatar-legendes-ui",
+  "commit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+  "sourceFiles": {
+    "components/companion-app.tsx": "85478b4ef2009b9e01da5c3a8bef5c9613fd756d16a3a52c4cb9bb9386530d93",
+    "components/companion-ui.tsx": "0465d8b2b46bc67b74dca0b8d7e85e5e2d743c82d606051506137de2f17b31a2",
+    "app/globals.css": "7f6d782e2d4868e8ac48faff37fc83ea6c20d920dab0266e4306ef0ca4bffad7"
+  },
+  "copiedStyles": {
+    "path": "apps/companion/src/shell/v0.css",
+    "sha256": "4ef87ea33afc759ba112704c48ee2b1c6f74ae8bfb161d3e7dc1a5ff1d3e0783",
+    "changes": [
+      "Commentaire de provenance",
+      "Suppression des imports tw-animate-css et shadcn/tailwind.css inutilisés par le shell ; Tailwind conservé"
+    ]
+  },
+  "navigation": [
+    "Accueil",
+    "Personnages",
+    "Lieux",
+    "Combats",
+    "Techniques",
+    "Gestion"
+  ],
+  "adaptations": [
+    "Titres campagne/session/user de démonstration neutralisés",
+    "Accueil sans personnages ou indicateurs fictifs",
+    "Rubriques métier explicitement en attente des lots 2–5",
+    "Contrôles Gestion limités au laboratoire isolé",
+    "Correctifs clavier, focus, petites explications et responsive dans lot1.css séparé"
+  ],
+  "untouchedUpstream": true
+}

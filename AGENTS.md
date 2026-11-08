@@ -73,9 +73,15 @@ reproduction du design v0 dans le HTML historique.
 
 La préparation est décrite dans `docs/migration/FAISABILITE_CONVERGENCE_V0.md`, les contrats
 proposés dans `docs/migration/CONTRATS_CIBLES.md` et les références inspectées dans
-`docs/migration/SOURCES.json`. Le plan doit être validé et la version v0 corrigée fournie
-avant l’intégration effective. Vite, le monorepo et le repository React isolé sont des
-recommandations à valider, pas des choix déjà implémentés.
+`docs/migration/SOURCES.json`. Le propriétaire a validé le plan, les sept lots, React/TypeScript/Vite, le dépôt principal
+unifié et les références initiales : métier `a9079fa5b1babc560ee11a8d28430504df8704fc`,
+v0 corrigé `8b8924de34949d5bdf20bc6ea7ec53be59da28e0`.
+Le lot 1 est autorisé sur `convergence/react-v0` : architecture, extraction contrôlée,
+contrats/parité, shell/navigation et prototype HTML portable. Voir
+`docs/migration/BILAN_LOT_1.md` et `MATRICE_FONCTIONNELLE.md`.
+**Attendre la validation du propriétaire du lot 1 avant de commencer le lot 2.**
+Les réserves v0 (focus PJ, onglets PJ, petits textes, responsive métier) sont suivies dans
+la matrice ; ne pas annoncer leur résolution sur des écrans non encore intégrés.
 
 Conserver le moteur et ses règles ; extraire/adapter les frontières plutôt que réécrire.
 Ne pas promouvoir les données, validations simplifiées ou interactions fictives de v0
@@ -87,3 +93,18 @@ peut continuer à recevoir des modifications. Ne pas modifier directement son ma
 ## Priorité de reprise
 
 La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'elle a réellement modifié depuis V2.32 avant de réutiliser les conclusions de l'ancien audit. Pour les **13 techniques de Terre**, poursuivre une vérification exhaustive, en s'appuyant sur le PDF officiel accessible, sans présumer que les tests existants prouvent la fidélité aux règles. **Auditer et présenter les écarts avant de corriger une interprétation de règle ambiguë.**
+
+## Vérifications de la convergence
+
+- `packages/domain/src` contient les corps métier extraits de l'oracle ;
+  `node scripts/convergence/extract-domain.mjs --check` contrôle leur fidélité.
+  Ne pas modifier ces corps pour contourner un test. Une correction métier demande une
+  mission distincte, des tests, puis une mise à jour explicite de la référence.
+- L'ancien `app/simulateur.html` reste inchangé et tous ses tests restent conservés.
+- `npm run build`, `npm run test:contracts`, `npm run test:parity`,
+  `npm run test:inventory`, `npm run test:react` complètent la suite historique.
+- Aucun import/auto-enregistrement des données fictives v0. Aucun `setItem` au montage.
+  Le shell du lot 1 écrit seulement `avatar-compagnon-react-lab-v1` pour sa note de test ;
+  le futur espace de projet `avatar-compagnon-react-session-v1` est distinct des clés Codex.
+- Le cloud bloque `file://` ; distinguer le document embarqué testé hors réseau du
+  double-clic réel sur Mac, et Web Locks de la seule détection optimiste des conflits.

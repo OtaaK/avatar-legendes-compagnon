@@ -1,0 +1,113 @@
+{
+  "sourceCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+  "htmlSha256": "69f8ddb8e86f01bcc7138c3c2cb9645742aaff2f7b3d6081267b612b11c491bb",
+  "segments": [
+    {
+      "file": "resources.js",
+      "start": "// Profils PNJ explicites.",
+      "end": "\nconst APPROACHES=",
+      "sha256": "e48c7f7c152607a09621861209179672a53e4ef3e6b3f241fb424e696a2135d2",
+      "exports": [
+        "ResourceRules",
+        "npcResourceProfile",
+        "resourceLimits",
+        "validateResourceValues",
+        "fatigueLimit",
+        "resourceConditionNames",
+        "balanceValue"
+      ]
+    },
+    {
+      "file": "combat.js",
+      "start": "const APPROACHES=",
+      "end": "\n\n\n'use strict';\nconst APPROACH_NAME",
+      "sha256": "21714e6fb4c392e0cd782530328ce61e124bbab3ba12e6b501680d8ab1cd3eb9",
+      "exports": [
+        "CombatCore"
+      ]
+    },
+    {
+      "file": "combat-rules.js",
+      "start": "const APPROACH_NAME=",
+      "end": "\n\n\nlet s;",
+      "sha256": "9d10746de02b38fde9f2ceb58b94448386dfb4c060ce5b046f7a324420d65df2",
+      "exports": [
+        "CombatRules"
+      ]
+    },
+    {
+      "file": "books.js",
+      "start": "const BookState=(()=>{",
+      "end": "\n\n// UI/UX lot 4",
+      "sha256": "729fa1d2c3e3d304ef41ac9656eed7331d3806379cfda69fbfc5be6c04eaf72e",
+      "exports": [
+        "BookState"
+      ]
+    },
+    {
+      "file": "places.js",
+      "start": "const PlaceRules=(()=>{",
+      "end": "\n\nconst rosterClone=",
+      "sha256": "baf5be342cb4fea863c461c7b72dfb25c5d8921c1c441855e8249d9a100b1cd7",
+      "exports": [
+        "PlaceRules"
+      ]
+    },
+    {
+      "file": "roster.js",
+      "start": "const rosterClone=",
+      "end": "\n\n\n'use strict';\n// Sources",
+      "sha256": "63d810d77008599e598200ac0c5f6dcf36be57b0d2ba66a91084652a22394403",
+      "exports": [
+        "Roster"
+      ]
+    },
+    {
+      "file": "playbooks.js",
+      "start": "const PLAYBOOKS=",
+      "end": "\n\n\n\nconst TECH_CATALOG",
+      "sha256": "f5d35e7f0b0c5b9c2809b3221df673a5940529d9fd33e7f503762ddab6199a37",
+      "exports": [
+        "Playbooks"
+      ]
+    },
+    {
+      "file": "catalog.js",
+      "start": "const TECH_CATALOG=",
+      "end": "\nlet lib=",
+      "sha256": "5bc4d4fd6eee7b8885b0712ef4163b020947677e751a66c36e7ec2ccf8fa2f31",
+      "exports": [
+        "TECH_CATALOG",
+        "TECH_AUDIT"
+      ]
+    },
+    {
+      "file": "validation.js",
+      "start": "function validateCombat(raw){",
+      "end": "\nlet storageWarningShown=",
+      "sha256": "3983bbed9dc56b07afdd80e0db1486ae2e196591afde41ba5092db33632adba3",
+      "exports": [
+        "validateCombat",
+        "validateBackupLinks"
+      ]
+    },
+    {
+      "file": "storage-version.js",
+      "start": "function profileStorageRequired(",
+      "end": "\n\nfunction restoreStorageValue",
+      "sha256": "cac97f95d3baa9dd0d4232374dcadbf47869ecc44b2adf50555c9cc31fdeac08",
+      "exports": [
+        "profileStorageRequired"
+      ]
+    },
+    {
+      "file": "public-report.js",
+      "start": "function publicCombatReport(combat){",
+      "end": "\nfunction downloadPublicCombat",
+      "sha256": "e7f7e6f2c5734999e971aca0e1e6ec1e5b216d89ce4ccd8fe8bc8701d48bdc22",
+      "exports": [
+        "publicCombatReport"
+      ]
+    }
+  ]
+}

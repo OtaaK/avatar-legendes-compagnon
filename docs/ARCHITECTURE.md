@@ -257,3 +257,36 @@ sans DOM, service de commandes et repository local isolé. Les
 [contrats](migration/CONTRATS_CIBLES.md) préservent les formats, copies de combat, décisions
 MJ et historique. Le [relevé des sources](migration/SOURCES.json) fixe les références
 provisoires inspectées. Aucun changement de code applicatif n’est effectué par cette étude.
+
+
+## Convergence — socle effectivement réalisé au lot 1
+
+Le plan ci-dessus a ensuite été validé par le propriétaire. Le lot 1 se trouve sur
+`convergence/react-v0`, sans intégration des écrans métier des lots 2–5.
+
+- `apps/companion/src/shell` : structure/onglets de navigation et styles v0, accueil,
+  boîte modale. `v0.css` est figé, correctifs locaux dans `lot1.css`.
+- `apps/companion/src/App.tsx` : routage hash des six rubriques et laboratoire technique ;
+  aucune fiche ou technique fictive n'est chargée.
+- `packages/domain/src` : ressources, combat, règles de choix, roster, lieux, livrets,
+  catalogue, validations et export public. Aucun DOM, stockage ou import React.
+- `packages/application/src` : contrats TypeScript et store transactionnel mutable en
+  interne / snapshots figés à l'extérieur, consommés avec `useSyncExternalStore`.
+- `packages/persistence/src` : codecs JSON sans I/O et adaptateur localStorage injecté.
+  Le couple canonique est enregistré dans une enveloppe interne atomique distincte des
+  formats d'export historiques. Aucune lecture/écriture des anciennes clés depuis React.
+- `tests/convergence`, `tests/parity` : contrats, frontières, comparaison différentielle,
+  réexécution de scripts historiques via les API extraites, recette navigateur du build.
+- `scripts/convergence` : extraction contrôlée, inventaire et pilote de parité.
+
+Les décisions MJ complexes ne sont pas connectées à React : leur port est décrit, leur
+collecteur DOM reste à extraire au lot combat. Leurs commandes moteur sont conservées et
+réexécutées dans les régressions, sans nouvelle interprétation réglementaire.
+
+L'oracle HTML garde son hash. Les modules extraits sont la base de développement future ;
+pas de double évolution silencieuse du métier. Toute correction du métier pendant la
+transition demande une référence et un corpus de parité mis à jour explicitement.
+
+Build : `npm run build` produit `dist/companion/index.html` seul. La CI livre ce fichier en
+artefact téléchargeable, sans déployer. Le fonctionnement natif file:// et les limites de
+stockage Safari/Chrome Mac restent à qualifier. [Bilan détaillé](migration/BILAN_LOT_1.md).
