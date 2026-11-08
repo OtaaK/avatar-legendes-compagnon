@@ -124,3 +124,12 @@ Voir [le rapport](RAPPORT_UI_UX_LOT6.md), [la grille de critères](BILAN_REFONTE
 [la recette personnelle sans commandes](RECETTE_REFONTE_UI_UX.md). Le socle est proposé pour
 recette, pas déclaré intégralement conforme aux règles ou aux besoins des dix Livrets.
 Aucune fusion de PR sans accord explicite ; prochaine étape : retours de recette et corrections.
+
+
+## Après recette : correctifs ciblés
+
+Branche `correctifs/retours-recette-uiux`, depuis `1e57d22` (lot 6, PR nº 9) : guidage de
+l’adoption du profil légendaire, cartes/filtres mis à jour après renommage et retrait protégé
+de combattants avec undo. Les autres parcours sont signalés comme fonctionnels. Voir
+[le rapport des retours](RAPPORT_RETOURS_UI_UX.md) et [la recette actualisée](RECETTE_REFONTE_UI_UX.md).
+Aucune fusion de la chaîne sans accord explicite ; les règles détaillées différées le restent.

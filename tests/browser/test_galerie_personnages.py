@@ -21,7 +21,7 @@ try:
             page=context.new_page();errors=[];alerts=[];requests=[]
             page.on('pageerror',lambda e:errors.append(str(e)))
             page.on('request',lambda r:requests.append(r.url))
-            page.on('dialog',lambda d:(alerts.append(d.message) if d.type=='alert' else None,d.accept()))
+            page.on('dialog',lambda d:(alerts.append(d.message) if d.type=='alert' else None,d.dismiss() if d.type=='confirm' and d.message.startswith('Préparer les ressources de ') else d.accept()))
             page.goto(url)
             page.evaluate("""() => {
                 lib=Roster.createLibrary();

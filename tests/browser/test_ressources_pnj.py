@@ -29,7 +29,8 @@ try:
             page.goto(url)
             page.evaluate("""() => {lib=Roster.createLibrary();const c=Roster.createCharacter(lib,'Légendaire de test','PNJ');Roster.updateCharacter(lib,c.id,{importance:'Légendaire',location:'Port'});s=CombatCore.createCombat();CombatCore.addFighter(s,'Opposant','PJ');if(!persistCompleteBackup(lib,s))throw Error('Préparation non sauvegardée');renderSheets();render();setView('characters');setCharacterKind('PNJ');openCharacterDetail(c.id)}""")
             baseline=page.evaluate("({library:lib,combat:s,libRaw:localStorage.getItem('avatar-roster-v020'),combatRaw:localStorage.getItem('avatar-v020')})")
-            page.get_by_role('button',name='Modifier',exact=True).click();page.locator('.npc-resource-editor summary').click()
+            page.get_by_role('button',name='Modifier',exact=True).click()
+            if not page.locator('.npc-resource-editor').evaluate('e=>e.open'):page.locator('.npc-resource-editor summary').click()
             page.get_by_role('button',name='Proposer les valeurs de l’importance',exact=True).click()
             assert page.locator('#npcConditionCount').input_value()=='8'
             assert len(page.locator('#npcConditionNames').input_value().splitlines())==5,'Aucun état inventé pour compléter les huit cases'

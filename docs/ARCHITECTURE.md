@@ -225,3 +225,21 @@ le select manuel. Il ne réinitialise pas les autres paramètres de technique. L
 évidents sont reliés à leurs champs identifiés, sans mécanisme de formulaire parallèle.
 Le nom générique de l’export du point antérieur remplace son libellé PNJ : son format et son
 origine de données ne changent pas. Voir [la recette et les limites](RAPPORT_UI_UX_LOT6.md).
+
+
+## Retours de recette : profils, cache de cartes et retrait
+
+`npcImportanceChanged` propose un profil dans le brouillon, après confirmation. Le refus
+conserve la classification seule. Les valeurs UI sont centralisées dans `NPC_PROFILE_PRESETS` ;
+les validations de profil et formats restent inchangés. Un écart de fatigue sur une fiche
+classée ouvre le panneau de configuration et distingue capacités proposées/enregistrées.
+
+Entrer dans Personnages depuis un autre espace rafraîchit galerie, filtres et fiche consultée.
+`followRenamedPlaceFilter` suit un nom devenu obsolète seulement après réussite de la transaction,
+si aucune position n’utilise encore ce nom. Aucun texte historique ni lien n’est réécrit.
+
+`CombatCore.fighterRemovalBlock` vérifie la phase, les actions/propositions et les dépendances
+mécaniques en cours. `removeFighter` prépare un nouvel état, retire la copie et ses engagements,
+conserve l’historique et ajoute un instantané compatible avec l’undo existant. Le rendu expose
+les motifs de refus ; la commande UI utilise `commitCombatMutation` pour les erreurs de stockage.
+La bibliothèque reste indépendante. Ni migration ni effacement de mécanique implicite.
