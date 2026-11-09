@@ -36,6 +36,8 @@ extract('catalog.js', 'const TECH_CATALOG=', '\nlet lib=', '', ['TECH_CATALOG', 
 extract('validation.js', 'function validateCombat(raw){', '\nlet storageWarningShown=', resources + "\nimport { CombatCore } from './combat.js';", ['validateCombat','validateBackupLinks']);
 extract('storage-version.js', 'function profileStorageRequired(', '\n\nfunction restoreStorageValue', '', ['profileStorageRequired']);
 extract('public-report.js', 'function publicCombatReport(combat){', '\nfunction downloadPublicCombat', '', ['publicCombatReport']);
+extract('character-fields.js', 'function safeSheetPortrait(value){', '\nfunction sheetResourcePreview', resources + "\nimport { Roster } from './roster.js';\nimport { BookState } from './books.js';", ['safeSheetPortrait','sheetPatchFromFields','npcProfileFromFields']);
+extract('npc-presets.js', 'const NPC_PROFILE_PRESETS=', '\nfunction npcImportanceChanged', '', ['NPC_PROFILE_PRESETS']);
 const manifest = JSON.stringify({sourceCommit:'a9079fa5b1babc560ee11a8d28430504df8704fc',htmlSha256:sha,segments},null,2)+'\n';
 if(process.argv.includes('--check')) {
  if(readFileSync(root+'packages/domain/extraction.json','utf8')!==manifest)throw Error('Manifest divergent');
