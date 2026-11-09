@@ -14,7 +14,8 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [x] Lot 1 validé par le propriétaire après essai sur Mac ; lot 2 autorisé.
 - [x] Lot 2 implémenté : Personnages, ressources, portraits et reprise explicite Codex dans v0.
 - [ ] Recette et validation propriétaire du lot 2 avant tout nouveau lot.
-- [ ] Lot indépendant **Bibliothèque de techniques**, après validation du lot 2 : catalogue seul, branche et PR propres.
+- [x] Lot indépendant **Bibliothèque de techniques** autorisé, implémentation sur branche dépendante du lot 2.
+- [ ] Recette propriétaire de la bibliothèque avant tout lot suivant.
 - [ ] Lot 3 : Lieux et liens PNJ.
 - [ ] Lot 4 : Livrets, attribution de techniques et maîtrise individuelle.
 - [ ] Lot 5 : intégralité des capacités de combat existantes dans v0.
@@ -142,4 +143,13 @@ Critères de validation :
    démarrage hors ligne et ressources embarquées.
 6. Recette clavier, tactile et quatre résolutions ; régressions historiques et tests React.
 7. Branche indépendante issue du lot 2 validé, PR en brouillon et prototype portable propres.
-   **Ne pas commencer avant la validation explicite du lot 2**, ni ouvrir le lot 3 sans accord.
+   Le propriétaire a autorisé ce lot indépendamment des ajustements ergonomiques des fiches.
+   Ne pas ouvrir le lot suivant sans accord.
+
+
+## Chantier futur séparé — Ergonomie des fiches PJ/PNJ
+
+À préparer après les intégrations fonctionnelles prioritaires : création PJ, création PNJ,
+formulaires, disposition et hiérarchie des fiches, ressources, techniques, Livrets, relations
+et actions directement accessibles. Aucun remaniement profond des fiches dans le lot
+Bibliothèque. Périmètre à faire valider avant développement, branche et PR propres.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "lot2-implemented-awaiting-owner-validation",
+  "status": "technique-library-implemented-awaiting-owner-validation",
   "inspectedOn": "2026-11-08",
   "business": {
     "repository": "OtaaK/avatar-legendes-compagnon",
@@ -179,6 +179,34 @@
     "nextLot": "Independent techniques library, only after owner validation of Lot 2",
     "libraryLotStarted": false,
     "lot3Started": false,
+    "merged": false,
+    "deployed": false
+  },
+  "library": {
+    "branch": "convergence/bibliotheque-techniques",
+    "baseBranch": "convergence/lot2-personnages",
+    "baseCommit": "457b0313f10267483a3d9c1fd4b1bc9ccd247cb0",
+    "count": 111,
+    "families": [
+      9,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      12,
+      12
+    ],
+    "sourceMetadataVerified": 111,
+    "fullOfficialDescriptionsDistributed": 0,
+    "privateTextRepository": "avatar-compagnon-private-technique-texts-v1",
+    "descriptionsCertified": false,
+    "historicalBefore": 243,
+    "historicalAfter": 243,
+    "contractTests": 43,
+    "singleHtmlBuild": true,
+    "portableHtmlSha256": "61568ac396f1f3933828937873405c745fd1b565baccbcfeb74d697d1c73376d",
     "merged": false,
     "deployed": false
   }

@@ -81,9 +81,15 @@ contrats/parité, shell/navigation et prototype HTML portable. Voir
 `docs/migration/BILAN_LOT_1.md` et `MATRICE_FONCTIONNELLE.md`.
 Le propriétaire a validé le lot 1 après essai sur Mac et autorisé le lot 2 Personnages/
 ressources, sur branche dépendante dédiée. Préserver le v0 corrigé et le métier Codex.
-Un lot indépendant Bibliothèque des 111 techniques est planifié après validation du lot 2,
-avec branche/PR distinctes, sans attribution, maîtrise globale ou moteur de combat.
-**Attendre son accord après le lot 2 avant la bibliothèque ou le lot 3.**
+Le propriétaire autorise désormais le lot indépendant Bibliothèque de techniques, dépendant
+du lot 2 (PR 13). Branche : `convergence/bibliotheque-techniques`. Inventaire 111, recherche
+par nom et filtres par boutons, cartes 3 informations, modales 4 informations, lecture seule.
+Aucune maîtrise, attribution ou commande de combat. Aucun autre lot sans accord.
+Les droits de reproduction des descriptions intégrales ne sont pas établis : aucun PDF ni
+texte intégral dans Git ou les artefacts distribués. Chargement privé explicite séparé des
+sauvegardes. Matrice source sans texte dans `docs/reference/CONTROLE_TECHNIQUES_PDF.json`.
+Les améliorations ergonomiques PJ/PNJ sont un chantier futur distinct, pas une condition
+bloquante de la bibliothèque. **Attendre l’accord après ce lot avant le lot suivant.**
 Les réserves v0 (focus PJ, onglets PJ, petits textes, responsive métier) sont suivies dans
 la matrice ; ne pas annoncer leur résolution sur des écrans non encore intégrés.
 
