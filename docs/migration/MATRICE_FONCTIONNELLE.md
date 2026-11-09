@@ -1,6 +1,6 @@
 # Correspondance fonctionnelle Codex → interface v0
 
-Références figées : métier `a9079fa`, visuel `8b8924d`. État : **lots 1 et 2 préparés ; lot 1 validé, lot 2 en recette**.
+Références figées : métier `a9079fa`, visuel `8b8924d`. État : **lots 1/2 conservés, bibliothèque informative préparée pour recette**.
 Les lignes décrivent les capacités existantes à conserver, pas une conformité réglementaire
 nouvellement vérifiée. Le HTML historique reste utilisable pour chacune de ses fonctions.
 
@@ -45,7 +45,7 @@ permet de retrouver les commandes techniques ; elle ne remplace pas la recette u
 | Livrets officiels connus et noms anciens | Fiche PJ → Livret | Playbooks | Noms canoniques exacts ; ancien livret inconnu conservé | Nom manuel conservé / 2 ; suivi au lot 4 |
 | Suivi manuel par livret | Fiche PJ → Livret | BookState | 0…4, moment, notes/évolutions ; changer/revenir au livret sans effacer | À intégrer / 4 |
 | Préréglages de création | Ajout PJ / Livret | `Playbooks.initialStats/applyPreset` | Préparer sans écraser fatigue, techniques, notes | À intégrer / 4 |
-| Catalogue réel et références | Techniques | TECH_CATALOG, TECH_AUDIT | 111 entrées dont 13 Terre ; pages, rareté, accès PJ/PNJ | Lot indépendant Bibliothèque après validation du lot 2 |
+| Catalogue réel et références | Techniques | TECH_CATALOG, TECH_AUDIT | 111 entrées dont 13 Terre ; pages, rareté, accès PJ/PNJ | Intégrée : inventaire/métadonnées ; textes privés facultatifs, pas de description intégrale distribuée |
 | Techniques personnelles et maîtrise | Fiche → Techniques | `Roster.assignTechnique`, CombatRules | Acquise/pratiquée/maîtrisée par personne, jamais globalement | Consultation des fiches / 2 ; attribution/maîtrise au lot 4 |
 | Techniques personnalisées | Fiche → Techniques | Roster | Nom ancien/personnalisé réexporté ; aucune substitution par ID fictif | Données consultées et préservées / 2 ; édition au lot 4 |
 | Conditions de disponibilité et coûts de posture | Combats → choisir technique | CombatRules | Approche, jet, maîtrise, base/PNJ, simple/double et coût | Non représentée opérationnellement dans v0 / 4–5 |
@@ -96,7 +96,7 @@ séparée. Le suivi manuel BookState reste prévu.
 
 ## Lot indépendant Bibliothèque de techniques
 
-Après validation explicite du lot 2 : catalogue des 111 techniques, recherche, filtres,
+Le propriétaire a autorisé le lot Bibliothèque. Catalogue des 111 techniques, recherche, filtres,
 cartes et détails v0 avec références et assistance existantes. Aucun texte manquant inventé,
 aucune maîtrise globale, attribution, ressource ou commande de combat. Branche et PR propres,
-critères dans [ROADMAP.md](../../ROADMAP.md). Ce lot n'est pas commencé dans le lot 2.
+critères dans [ROADMAP.md](../../ROADMAP.md). Ce lot est préparé sur une branche et PR propres, sans attribution ni combat. Voir `docs/reference/BILAN_BIBLIOTHEQUE.md` pour la limite des descriptions intégrales.

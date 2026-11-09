@@ -1,0 +1,112 @@
+id,nom,famille,approche,page_imprimee,page_pdf,nom_controle,famille_controlee,approche_controlee,description_integrale_distribuee
+base-se-preparer,Se préparer,base,Défendre et prendre à revers,158,159,oui,oui,oui,non
+base-riposter,Riposter,base,Défendre et prendre à revers,158,159,oui,oui,oui,non
+base-changer-de-position,Changer de position,base,Défendre et prendre à revers,158,159,oui,oui,oui,non
+base-frapper,Frapper,base,Avancer et attaquer,159,160,oui,oui,oui,non
+base-presser-l-adversaire,Presser l’adversaire,base,Avancer et attaquer,159,160,oui,oui,oui,non
+base-fracasser,Fracasser,base,Avancer et attaquer,159,160,oui,oui,oui,non
+base-tester-l-equilibre,Tester l’équilibre,base,Esquiver et analyser,160,161,oui,oui,oui,non
+base-soutenir-ou-entraver,Soutenir ou entraver,base,Esquiver et analyser,160,161,oui,oui,oui,non
+base-se-recueillir,Se recueillir,base,Esquiver et analyser,160,161,oui,oui,oui,non
+universelle-observation-rapide,Observation rapide,universelle,Esquiver et analyser,286,287,oui,oui,oui,non
+universelle-perception-de-lenvironnement,Perception de l’environnement,universelle,Esquiver et analyser,286,287,oui,oui,oui,non
+universelle-protection,Protection,universelle,Défendre et prendre à revers,286,287,oui,oui,oui,non
+universelle-se-mettre-a-labri,Se mettre à l’abri,universelle,Défendre et prendre à revers,286,287,oui,oui,oui,non
+universelle-serrer-les-dents,Serrer les dents,universelle,Défendre et prendre à revers,286,287,oui,oui,oui,non
+universelle-trouver-la-faille,Trouver la faille,universelle,Esquiver et analyser,286,287,oui,oui,oui,non
+universelle-acharnement,Acharnement,universelle,Avancer et attaquer,286,287,oui,oui,oui,non
+universelle-charge,Charge,universelle,Avancer et attaquer,286,287,oui,oui,oui,non
+universelle-derobade,Dérobade,universelle,Esquiver et analyser,286,287,oui,oui,oui,non
+universelle-force-debridee,Force débridée,universelle,Avancer et attaquer,286,287,oui,oui,oui,non
+universelle-fort-comme-un-chene,Fort comme un chêne,universelle,Défendre et prendre à revers,286,287,oui,oui,oui,non
+universelle-frappe-devastatrice,Frappe dévastatrice,universelle,Avancer et attaquer,286,287,oui,oui,oui,non
+universelle-frapper-un-point-faible,Frapper un point faible,universelle,Avancer et attaquer,286,287,oui,oui,oui,non
+groupe_pnj-leurrer-lennemi,Leurrer l’ennemi,groupe_pnj,Esquiver et analyser,287,288,oui,oui,oui,non
+groupe_pnj-mur-de-boucliers,Mur de boucliers,groupe_pnj,Défendre et prendre à revers,287,288,oui,oui,oui,non
+groupe_pnj-obeir-aux-ordres,Obéir aux ordres,groupe_pnj,Esquiver et analyser,287,288,oui,oui,oui,non
+groupe_pnj-occuper-le-terrain,Occuper le terrain,groupe_pnj,Défendre et prendre à revers,287,288,oui,oui,oui,non
+groupe_pnj-proteger-un-objectif,Protéger un objectif,groupe_pnj,Défendre et prendre à revers,287,288,oui,oui,oui,non
+groupe_pnj-tirs-nourris,Tirs nourris,groupe_pnj,Avancer et attaquer,287,288,oui,oui,oui,non
+groupe_pnj-assaut-generalise,Assaut généralisé,groupe_pnj,Avancer et attaquer,287,288,oui,oui,oui,non
+groupe_pnj-au-pied-du-mur,Au pied du mur,groupe_pnj,Défendre et prendre à revers,287,288,oui,oui,oui,non
+groupe_pnj-coordination,Coordination,groupe_pnj,Esquiver et analyser,287,288,oui,oui,oui,non
+groupe_pnj-deferlement,Déferlement,groupe_pnj,Avancer et attaquer,287,288,oui,oui,oui,non
+groupe_pnj-dispersion-et-regroupement,Dispersion et regroupement,groupe_pnj,Esquiver et analyser,287,288,oui,oui,oui,non
+groupe_pnj-encerclement,Encerclement,groupe_pnj,Avancer et attaquer,287,288,oui,oui,oui,non
+groupe_pnj-eprouver-la-defense-adverse,Éprouver la défense adverse,groupe_pnj,Esquiver et analyser,287,288,oui,oui,oui,non
+eau-cape-deau,Cape d’eau,eau,Défendre et prendre à revers,288,289,oui,oui,oui,non
+eau-fouet-deau,Fouet d’eau,eau,Défendre et prendre à revers,288,289,oui,oui,oui,non
+eau-gantelet-de-glace,Gantelet de glace,eau,Défendre et prendre à revers,288,289,oui,oui,oui,non
+eau-glissade,Glissade,eau,Esquiver et analyser,288,289,oui,oui,oui,non
+eau-marionnette-de-sang,Marionnette de sang,eau,Avancer et attaquer,288,289,oui,oui,oui,non
+eau-menottes-aquatiques,Menottes aquatiques,eau,Avancer et attaquer,288,289,oui,oui,oui,non
+eau-ondulations-du-ruisseau,Ondulations du ruisseau,eau,Défendre et prendre à revers,288,289,oui,oui,oui,non
+eau-plaque-de-givre,Plaque de givre,eau,Esquiver et analyser,288,289,oui,oui,oui,non
+eau-prison-de-glace,Prison de glace,eau,Avancer et attaquer,288,289,oui,oui,oui,non
+eau-rafraichissement,Rafraîchissement,eau,Esquiver et analyser,288,289,oui,oui,oui,non
+eau-sang-gele,Sang gelé,eau,Avancer et attaquer,288,289,oui,oui,oui,non
+eau-serpent-deau,Serpent d’eau,eau,Avancer et attaquer,288,289,oui,oui,oui,non
+eau-souffle-de-glace,Souffle de glace,eau,Défendre et prendre à revers,288,289,oui,oui,oui,non
+terre-entraves-de-metal,Entraves de métal,terre,Esquiver et analyser,289,290,oui,oui,oui,non
+terre-escalier-de-poussiere,Escalier de poussière,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-etoile-de-lave,Étoile de lave,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-gantelet-de-terre,Gantelet de terre,terre,Avancer et attaquer,289,290,oui,oui,oui,non
+terre-mords-la-poussiere,Mords la poussière,terre,Esquiver et analyser,289,290,oui,oui,oui,non
+terre-mouvements-tectoniques,Mouvements tectoniques,terre,Esquiver et analyser,289,290,oui,oui,oui,non
+terre-projection-tellurique,Projection tellurique,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-armure-de-terre,Armure de terre,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-bouclier-de-roche,Bouclier de roche,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-boue-gluante,Boue gluante,terre,Esquiver et analyser,289,290,oui,oui,oui,non
+terre-colonne-de-pierre,Colonne de pierre,terre,Avancer et attaquer,289,290,oui,oui,oui,non
+terre-detection-du-pas-lourd,Détection du pas lourd,terre,Défendre et prendre à revers,289,290,oui,oui,oui,non
+terre-enfouissement,Enfouissement,terre,Avancer et attaquer,289,290,oui,oui,oui,non
+feu-arc-de-foudre,Arc de foudre,feu,Esquiver et analyser,290,291,oui,oui,oui,non
+feu-disque-de-feu,Disque de feu,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-etincelle-incendiaire,Étincelle incendiaire,feu,Esquiver et analyser,290,291,oui,oui,oui,non
+feu-fouet-de-feu,Fouet de feu,feu,Défendre et prendre à revers,290,291,oui,oui,oui,non
+feu-jet-de-flammes,Jet de flammes,feu,Défendre et prendre à revers,290,291,oui,oui,oui,non
+feu-lame-de-feu,Lame de feu,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-muraille-de-feu,Muraille de feu,feu,Défendre et prendre à revers,290,291,oui,oui,oui,non
+feu-poignards-de-feu,Poignards de feu,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-propulsion,Propulsion,feu,Esquiver et analyser,290,291,oui,oui,oui,non
+feu-rayon-explosif,Rayon explosif,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-souffle-de-feu,Souffle de feu,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-tourbillon-de-flammes,Tourbillon de flammes,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+feu-trait-de-foudre,Trait de foudre,feu,Avancer et attaquer,290,291,oui,oui,oui,non
+air-sphere-dair,Sphère d’air,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-souffle-du-vent,Souffle du vent,air,Avancer et attaquer,291,292,oui,oui,oui,non
+air-souple-comme-un-roseau,Souple comme un roseau,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-tourbillon-miniature,Tourbillon miniature,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-vague-dair,Vague d’air,air,Défendre et prendre à revers,291,292,oui,oui,oui,non
+air-velocite-du-vent,Vélocité du vent,air,Défendre et prendre à revers,291,292,oui,oui,oui,non
+air-amortir-le-poing-rageur,Amortir le poing rageur,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-aspiration,Aspiration,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-boulet-de-canon,Boulet de canon,air,Avancer et attaquer,291,292,oui,oui,oui,non
+air-cone-dair,Cône d’air,air,Avancer et attaquer,291,292,oui,oui,oui,non
+air-coussin-dair,Coussin d’air,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-onde-de-choc,Onde de choc,air,Esquiver et analyser,291,292,oui,oui,oui,non
+air-oscillations-du-vent,Oscillations du vent,air,Défendre et prendre à revers,291,292,oui,oui,oui,non
+armes-a-contretemps,À contretemps,armes,Esquiver et analyser,292,293,oui,oui,oui,non
+armes-bloquer-le-chi,Bloquer le chi,armes,Avancer et attaquer,292,293,oui,oui,oui,non
+armes-boum,Boum!,armes,Avancer et attaquer,292,293,oui,oui,oui,non
+armes-clouer-une-mouche-contre-un-tronc-darbre,Clouer une mouche contre un tronc d’arbre,armes,Avancer et attaquer,292,293,oui,oui,oui,non
+armes-contre-attaque,Contre-attaque,armes,Défendre et prendre à revers,292,293,oui,oui,oui,non
+armes-desarmement,Désarmement,armes,Défendre et prendre à revers,292,293,oui,oui,oui,non
+armes-estocade-precise,Estocade précise,armes,Avancer et attaquer,292,293,oui,oui,oui,non
+armes-feinte,Feinte,armes,Esquiver et analyser,292,293,oui,oui,oui,non
+armes-parade,Parade,armes,Défendre et prendre à revers,292,293,oui,oui,oui,non
+armes-planification,Planification,armes,Esquiver et analyser,292,293,oui,oui,oui,non
+armes-position-surelevee,Position surélevée,armes,Défendre et prendre à revers,292,293,oui,oui,oui,non
+armes-retourner-la-situation,Retourner la situation,armes,Avancer et attaquer,292,293,oui,oui,oui,non
+technologie-evaluation-des-zones-vulnerables,Évaluation des zones vulnérables,technologie,Esquiver et analyser,293,294,oui,oui,oui,non
+technologie-immobilisation,Immobilisation,technologie,Avancer et attaquer,293,294,oui,oui,oui,non
+technologie-maintenance,Maintenance,technologie,Défendre et prendre à revers,293,294,oui,oui,oui,non
+technologie-meilleur-plus-rapide-plus-fort,"Meilleur, plus rapide, plus fort",technologie,Défendre et prendre à revers,293,294,oui,oui,oui,non
+technologie-pose-de-pieges,Pose de pièges,technologie,Esquiver et analyser,293,294,oui,oui,oui,non
+technologie-puissance-maximale,Puissance maximale,technologie,Avancer et attaquer,293,294,oui,oui,oui,non
+technologie-accumulation-denergie,Accumulation d’énergie,technologie,Défendre et prendre à revers,293,294,oui,oui,oui,non
+technologie-aveugle-par-la-science,Aveuglé par la science,technologie,Avancer et attaquer,293,294,oui,oui,oui,non
+technologie-bombe-fumigene,Bombe fumigène,technologie,Défendre et prendre à revers,293,294,oui,oui,oui,non
+technologie-bricolage,Bricolage,technologie,Avancer et attaquer,293,294,oui,oui,oui,non
+technologie-collecter-du-materiel,Collecter du matériel,technologie,Esquiver et analyser,293,294,oui,oui,oui,non
+technologie-electrochoc,Électrochoc,technologie,Avancer et attaquer,293,294,oui,oui,oui,non

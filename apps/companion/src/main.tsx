@@ -4,6 +4,7 @@ import { App } from "./App";
 import "./shell/v0.css";
 import "./shell/lot1.css";
 import "./features/characters/characters.css";
+import "./features/techniques/techniques.css";
 class RecoveryBoundary extends Component<
   { children: ReactNode },
   { error: string | null }

@@ -39,7 +39,7 @@ export function Shell({
           </span>
           <span>
             <b title="Avatar Légendes">Avatar Légendes</b>
-            <small>Personnages et ressources</small>
+            <small>Carnet de campagne</small>
           </span>
           <ChevronDown aria-hidden="true" />
         </div>
@@ -101,7 +101,7 @@ export function Shell({
           </div>
           <div className="topbar-actions">
             <span className="demo-flag">
-              <i /> Lot 2 · Personnages
+              <i /> Compagnon local
             </span>
             <button
               className="icon-button"

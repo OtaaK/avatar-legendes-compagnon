@@ -303,3 +303,29 @@ confirmation et export préalable proposé. Aucune écriture ou récupération d
 La bibliothèque, le combat et leurs historiques restent conservés ensemble par le store.
 La création PJ est manuelle ; aucune logique de Livret ajoutée. L'annulation permanente
 reste temporaire, distincte des instantanés de combat.
+
+
+## 2026-11-09 — Bibliothèque informative autorisée
+
+Le propriétaire autorise une branche dépendante de la PR 13 pour la bibliothèque des 111
+techniques. Cartes v0 limitées à famille/nom/approche, entièrement cliquables ; fenêtres
+famille/nom/approche/description. Recherche par nom sans casse/accents ; filtres indépendants
+par boutons et intersection ET. Aucun changement des règles, maîtrises, fiches ou combats.
+
+Le PDF est accessible localement et les correspondances sont contrôlées sans en publier
+les passages. Aucun droit de reproduction intégrale n'a été trouvé dans le dépôt : pas de
+texte intégral dans le code ou le HTML distribué. Les résumés existants ne sont pas des
+substituts. Un fichier privé explicitement fourni peut alimenter un espace local distinct,
+sans export dans les sauvegardes Codex ; le contenu importé n'est pas certifié éditorialement.
+La matrice précise ses limites : métadonnées/repérage des passages, pas transcription certifiée.
+
+Le chantier ergonomie des fiches PJ/PNJ est distinct et différé. Les formulaires ne sont pas
+refondus pendant ce lot ; aucun autre lot, déploiement ou fusion sans nouvel accord.
+
+### 9 novembre 2026 — Correctifs de recette bibliothèque
+
+Le propriétaire autorise les cartes plus compactes et les neuf bordures discrètes, ainsi que la préparation groupée de ses descriptions depuis son PDF pour usage local privé. PDF.js est embarqué hors réseau ; aucun texte du livre n’est publié. L’export JSON privé reste distinct de la campagne. Les techniques et règles sont inchangées. Relecture du résultat automatique nécessaire, aucune fusion ni autre lot autorisé.
+
+### Autorisation suivante — 9 novembre 2026
+
+Le propriétaire demande les finitions A1–A4 dans PR 14 puis autorise immédiatement le Lot Lieux sur une branche dépendante, sans fusion de main. Les textes privés enrichis sont explicitement versionnés ; les JSON v1 restent littéraux. Le rendu n’interprète aucun HTML. Le chantier ergonomique PJ/PNJ reste différé, sauf raccord nécessaire aux lieux.

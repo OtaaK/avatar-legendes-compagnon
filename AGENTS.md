@@ -81,9 +81,15 @@ contrats/parité, shell/navigation et prototype HTML portable. Voir
 `docs/migration/BILAN_LOT_1.md` et `MATRICE_FONCTIONNELLE.md`.
 Le propriétaire a validé le lot 1 après essai sur Mac et autorisé le lot 2 Personnages/
 ressources, sur branche dépendante dédiée. Préserver le v0 corrigé et le métier Codex.
-Un lot indépendant Bibliothèque des 111 techniques est planifié après validation du lot 2,
-avec branche/PR distinctes, sans attribution, maîtrise globale ou moteur de combat.
-**Attendre son accord après le lot 2 avant la bibliothèque ou le lot 3.**
+Le propriétaire autorise désormais le lot indépendant Bibliothèque de techniques, dépendant
+du lot 2 (PR 13). Branche : `convergence/bibliotheque-techniques`. Inventaire 111, recherche
+par nom et filtres par boutons, cartes 3 informations, modales 4 informations, lecture seule.
+Aucune maîtrise, attribution ou commande de combat. Aucun autre lot sans accord.
+Les droits de reproduction des descriptions intégrales ne sont pas établis : aucun PDF ni
+texte intégral dans Git ou les artefacts distribués. Chargement privé explicite séparé des
+sauvegardes. Matrice source sans texte dans `docs/reference/CONTROLE_TECHNIQUES_PDF.json`.
+Les améliorations ergonomiques PJ/PNJ sont un chantier futur distinct, pas une condition
+bloquante de la bibliothèque. **Attendre l’accord après ce lot avant le lot suivant.**
 Les réserves v0 (focus PJ, onglets PJ, petits textes, responsive métier) sont suivies dans
 la matrice ; ne pas annoncer leur résolution sur des écrans non encore intégrés.
 
@@ -113,3 +119,7 @@ La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'el
   l’import explicite. Aucun accès automatique aux anciennes clés Codex.
 - Le cloud bloque `file://` ; distinguer le document embarqué testé hors réseau du
   double-clic réel sur Mac, et Web Locks de la seule détection optimiste des conflits.
+
+Correctifs bibliothèque autorisés : compactage des cartes, bordures par famille, préparation PDF locale et export/restauration JSON privés. Ne jamais intégrer les textes extraits aux artefacts CI, captures ou commits ; tests synthétiques uniquement. Voir `docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md`.
+
+Dernière autorisation du propriétaire : finaliser A1–A4 Bibliothèque sur PR 14 puis commencer directement le Lot Lieux sur une branche dédiée dépendante. Préserver l’interface v0, PlaceRules, les liens position/domicile/association, sauvegardes et champs inconnus. Ne pas commencer Livrets/combat ni chantier ergonomique PJ/PNJ hors raccord indispensable aux lieux. Aucune fusion ni aucun déploiement sans accord.

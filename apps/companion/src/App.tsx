@@ -22,6 +22,12 @@ import {
 } from "./features/characters/Characters";
 import { ProjectData } from "./features/ProjectData";
 import { createCharacterCommands } from "../../../packages/application/src/character-commands.js";
+import { TechniqueLibrary } from "./features/techniques/TechniqueLibrary";
+import { PrivateDescriptionSettings } from "./features/techniques/PrivateDescriptionSettings";
+import {
+  privateDescriptionRepository,
+  serializePrivateDescriptions,
+} from "../../../packages/reference/src/private-descriptions.js";
 import { TECH_CATALOG } from "../../../packages/domain/src/catalog.js";
 
 function createLabStore(key = LAB_KEY) {
@@ -77,6 +83,17 @@ export function App() {
   const opener = useRef<HTMLElement | null>(null);
   const fileInput = useRef<HTMLInputElement | null>(null);
   const inspectTrigger = useRef<HTMLButtonElement | null>(null);
+  const [privateRepository] = useState(() =>
+    privateDescriptionRepository({
+      getItem: (key: string) => window.localStorage.getItem(key),
+      setItem: (key: string, value: string) =>
+        window.localStorage.setItem(key, value),
+      removeItem: (key: string) => window.localStorage.removeItem(key),
+    }),
+  );
+  const [privateState, setPrivateState] = useState(() =>
+    privateRepository.load(),
+  );
   const [store] = useState(() => createLabStore());
   const [projectStore] = useState(() => createLabStore(SESSION_KEY));
   const projectSnapshot = useSyncExternalStore(
@@ -214,6 +231,8 @@ export function App() {
                 : 0,
             }}
           />
+        ) : page === "Techniques" ? (
+          <TechniqueLibrary descriptions={privateState.descriptions} />
         ) : page === "Personnages" ? (
           <Characters
             store={projectStore}
@@ -232,6 +251,28 @@ export function App() {
               </div>
             </div>
             <div className="management-grid">
+              <PrivateDescriptionSettings
+                count={Object.keys(privateState.descriptions).length}
+                onExport={() =>
+                  download(
+                    serializePrivateDescriptions(privateState.descriptions),
+                    "avatar-descriptions-privees.json",
+                  )
+                }
+                error={privateState.error}
+                onLoad={(texts) =>
+                  setPrivateState({
+                    descriptions: privateRepository.save(texts),
+                    error: null,
+                  })
+                }
+                onClear={() =>
+                  setPrivateState({
+                    descriptions: privateRepository.clear(),
+                    error: null,
+                  })
+                }
+              />
               <ProjectData
                 store={projectStore}
                 onImported={() => commands.invalidate()}
@@ -349,11 +390,7 @@ export function App() {
               <span className="empty-mark">
                 <Search />
               </span>
-              <b>
-                {page === "Techniques"
-                  ? "Bibliothèque prévue après validation du lot 2"
-                  : `Intégration prévue au lot ${pending[page].lot}`}
-              </b>
+              <b>{`Intégration prévue au lot ${pending[page].lot}`}</b>
               <p>
                 La navigation est prête. Les fonctionnalités de cette rubrique
                 restent disponibles dans l’application HTML historique.

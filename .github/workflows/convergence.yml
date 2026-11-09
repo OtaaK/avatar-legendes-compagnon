@@ -1,4 +1,4 @@
-name: Convergence React — Lots 1 et 2
+name: Convergence React — Bibliothèque
 on:
   pull_request:
   workflow_dispatch:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   lot1:
-    name: Architecture, personnages et fichier portable
+    name: Bibliothèque et non-régression
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,12 +31,16 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: npm run test:react
       - run: npm run test:characters
+      - run: npm run test:library
       - uses: actions/upload-artifact@v4
         with:
-          name: avatar-legendes-lot2-portable
+          name: avatar-legendes-bibliotheque-portable
           path: |
             dist/companion/index.html
-            docs/migration/TESTER_LOT_2.md
+            docs/reference/TESTER_BIBLIOTHEQUE.md
+            docs/reference/DESCRIPTIONS_PRIVEES.md
+            docs/reference/DEPENDANCES.md
+            docs/reference/PDFJS_LICENSE.txt
           retention-days: 30
       - uses: actions/upload-artifact@v4
         if: always()
@@ -46,4 +50,5 @@ jobs:
             work/parity/results.json
             work/lot1-browser/
             work/lot2-browser/
+            work/library-browser/
           retention-days: 30

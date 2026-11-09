@@ -1,0 +1,244 @@
+.reference-library .library-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+.reference-library .library-controls .search-field {
+  max-width: none;
+  width: 100%;
+}
+.library-controls fieldset {
+  border: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.library-controls legend {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.reference-library .training-filters button {
+  min-height: 44px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+.reference-library .training-filters .training-mark {
+  width: 22px;
+  height: 22px;
+}
+.reference-library .training-filters .training-mark svg {
+  width: 16px;
+  height: 16px;
+}
+.reference-library .training-filters button.selected {
+  box-shadow: inset 0 -2px var(--gold);
+}
+.reference-library .approach-filters button {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+}
+.reference-library .technique-results {
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.reference-library .reset-filters {
+  min-height: 44px;
+}
+.library-availability {
+  color: var(--muted);
+  font-size: 12px;
+  margin-block: 12px;
+}
+.reference-family-icon {
+  color: var(--gold);
+  border-color: var(--border);
+  background: var(--surface-elevated);
+}
+.reference-library .technique-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 225px), 1fr));
+  gap: 10px;
+  align-items: start;
+}
+.library-card[data-family="base"] {
+  --family-color: #9daabb;
+}
+.library-card[data-family="universelle"] {
+  --family-color: #c38f6a;
+}
+.library-card[data-family="groupe_pnj"] {
+  --family-color: #68a595;
+}
+.library-card[data-family="eau"] {
+  --family-color: #1ba9e1;
+}
+.library-card[data-family="terre"] {
+  --family-color: #92bb52;
+}
+.library-card[data-family="feu"] {
+  --family-color: #d84b63;
+}
+.library-card[data-family="air"] {
+  --family-color: #b8a06a;
+}
+.library-card[data-family="armes"] {
+  --family-color: #4f79b4;
+}
+.library-card[data-family="technologie"] {
+  --family-color: #8e5ec7;
+}
+.reference-library .library-card {
+  min-height: 0;
+  padding: 10px 12px;
+  gap: 6px;
+  border: 1px solid var(--family-color);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.library-card:hover {
+  border-color: var(--family-color);
+  box-shadow: inset 0 0 0 1px var(--family-color);
+  background: var(--surface-hover);
+}
+.library-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.library-card .technique-card-head {
+  gap: 7px;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+.library-card .eyebrow {
+  font-size: 11px;
+}
+.library-card-name {
+  color: var(--text);
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.library-card-approach {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 0;
+  padding-top: 0;
+}
+.library-detail .technique-meta {
+  font-size: 13px;
+}
+.library-detail .library-detail-approach {
+  font-size: 14px;
+  color: var(--gold-soft);
+}
+.library-detail h3 {
+  margin-top: 20px;
+  color: var(--text);
+  font-size: 14px;
+}
+.full-technique-description p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-block: 12px;
+}
+.library-detail .description-unavailable {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.private-technique-settings .button-secondary {
+  margin-top: 10px;
+}
+@media (max-width: 620px) {
+  .reference-library .approach-filters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .reference-library .approach-filters button {
+    width: 100%;
+  }
+  .reference-library .technique-grid {
+    grid-template-columns: 1fr;
+  }
+  .reference-library .page-heading p {
+    font-size: 13px;
+  }
+}
+.library-family-glyph {
+  display: inline-flex;
+}
+
+.library-card .training-mark {
+  width: 24px;
+  height: 24px;
+}
+.library-card .training-mark svg {
+  width: 17px;
+  height: 17px;
+}
+@media (forced-colors: active) {
+  .library-card:focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+/* Recette finale : deux zones en tête, titre complet et hauteur commune intrinsèque. */
+.reference-library .technique-grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+.reference-library .library-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
+  grid-template-rows: minmax(34px, auto) 1fr;
+  align-content: start;
+  align-items: start;
+  gap: 8px;
+}
+.library-card .technique-card-head {
+  min-width: 0;
+  gap: 5px;
+}
+.library-card .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
+}
+.library-card-name {
+  grid-column: 1 / -1;
+  min-height: 2.7em;
+}
+.library-card-approach {
+  justify-self: end;
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+.full-technique-description {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.full-technique-description p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.full-technique-description em {
+  font-style: italic;
+}

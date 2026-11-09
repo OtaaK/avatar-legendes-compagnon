@@ -310,3 +310,19 @@ Deux modules supplémentaires, `character-fields` et `npc-presets`, sont extrait
 réécriture de corps (13 au total). Les types de frontière ne modifient pas leur comportement.
 La rubrique Techniques reste en attente du lot Bibliothèque indépendant, après validation
 du lot 2. Voir [bilan](migration/BILAN_LOT_2.md) et [recette](migration/TESTER_LOT_2.md).
+
+
+## Bibliothèque — projection informative et contenu privé
+
+`packages/reference/src/technique-library.js` projette seulement ID/nom/famille/approche et
+filtre sans mutation. `private-descriptions.js` valide un fichier fourni explicitement et
+utilise une clé distincte ; aucun couplage au store canonique. `features/techniques` reprend
+cartes/styles v0, boutons, icônes et AppModal. Le chargement privé est placé dans Gestion ;
+la consultation des techniques ne déclenche aucune écriture de session.
+
+La matrice `docs/reference/CONTROLE_TECHNIQUES_PDF.json` ne contient que métadonnées et
+empreintes, sans texte officiel intégral. Le PDF et les extractions locales restent exclus
+Git/CI. La banque privée n'est pas distribuée et n'est jamais exportée avec le projet.
+Voir le bilan et les limites éditoriales dans `docs/reference/BILAN_BIBLIOTHEQUE.md`.
+
+La préparation privée des descriptions utilise PDF.js, embarqué avec son worker dans le HTML. `packages/reference/src/pdf-layout.json` décrit les seules coordonnées de lecture de l’édition reconnue, sans texte. `pdf-text.js` est une fonction pure de reconstruction ; `features/techniques/read-private-pdf.ts` adapte PDF.js. Le PDF et les passages restent locaux ; seule une confirmation appelle le dépôt privé, jamais le store de campagne. Un export privé versionné permet de restaurer cette banque indépendamment. Voir `docs/reference/DESCRIPTIONS_PRIVEES.md`.

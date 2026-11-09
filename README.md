@@ -20,6 +20,17 @@ aura ensuite son propre lot et sa PR, après validation du lot 2 ; les autres lo
 L’application HTML ci-dessous reste disponible ; aucune PR précédente n’est fusionnée
 ou supprimée par ce changement d’orientation.
 
+## Bibliothèque de techniques — lot indépendant
+
+La rubrique Techniques dispose des 111 entrées, filtres par boutons et fenêtres v0,
+en lecture seule. Voir le [bilan](docs/reference/BILAN_BIBLIOTHEQUE.md),
+[l’inventaire](docs/reference/INVENTAIRE_TECHNIQUES.csv),
+[le contrôle source](docs/reference/CONTROLE_TECHNIQUES_PDF.json) et
+[la recette Mac](docs/reference/TESTER_BIBLIOTHEQUE.md).
+Les descriptions intégrales du livre ne sont pas distribuées : un
+[fichier privé facultatif](docs/reference/DESCRIPTIONS_PRIVEES.md) peut être chargé localement.
+Aucun résumé mécanique n'est présenté comme description officielle complète.
+
 ## Utiliser l'application
 
 Ouvrir **`app/simulateur.html`** dans un navigateur. Elle fonctionne seule, hors connexion,
@@ -124,4 +135,8 @@ Pour les développeurs uniquement : Node ≥ 22.12, `npm ci --ignore-scripts`, p
 - `python scripts/test.py` : régressions historiques sur le HTML conservé.
 
 Aucune de ces commandes ne déploie ou ne fusionne le projet. Le workflow
-`Convergence React — Lots 1 et 2` compile, teste et propose uniquement des artefacts à télécharger.
+`Convergence React — Bibliothèque` compile, teste et propose uniquement des artefacts à télécharger.
+
+`npm run test:library` exécute la recette navigateur de la bibliothèque et des textes privés synthétiques.
+
+Correctifs de recette de la bibliothèque : [cartes compactes et préparation PDF privée](docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md), [guide Mac sans commandes](docs/reference/DESCRIPTIONS_PRIVEES.md).

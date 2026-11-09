@@ -1,0 +1,2907 @@
+{
+  "edition": "Édition française fournie, pages imprimées 158–161 et 286–293",
+  "width": 612.283,
+  "height": 790.866,
+  "techniques": [
+    {
+      "id": "base-se-preparer",
+      "title": {
+        "page": 159,
+        "x0": 36.28,
+        "x1": 300.28,
+        "top": 229.01,
+        "bottom": 243.01
+      },
+      "approach": {
+        "page": 159,
+        "x0": 36.28,
+        "x1": 300.28,
+        "top": 243.23,
+        "bottom": 252.23
+      },
+      "regions": [
+        {
+          "page": 159,
+          "x0": 36.28,
+          "x1": 300.28,
+          "top": 252.23,
+          "bottom": 574.01
+        }
+      ]
+    },
+    {
+      "id": "base-riposter",
+      "title": {
+        "page": 159,
+        "x0": 36.28,
+        "x1": 300.28,
+        "top": 574.01,
+        "bottom": 588.01
+      },
+      "approach": {
+        "page": 159,
+        "x0": 36.28,
+        "x1": 300.28,
+        "top": 588.23,
+        "bottom": 597.23
+      },
+      "regions": [
+        {
+          "page": 159,
+          "x0": 36.28,
+          "x1": 300.28,
+          "top": 597.23,
+          "bottom": 733.87
+        },
+        {
+          "page": 159,
+          "x0": 300,
+          "x1": 564,
+          "top": 40,
+          "bottom": 183
+        }
+      ]
+    },
+    {
+      "id": "base-changer-de-position",
+      "title": {
+        "page": 159,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 183.01,
+        "bottom": 197.01
+      },
+      "approach": {
+        "page": 159,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 197.23,
+        "bottom": 206.23
+      },
+      "regions": [
+        {
+          "page": 159,
+          "x0": 300.28,
+          "x1": 564.28,
+          "top": 206.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "base-frapper",
+      "title": {
+        "page": 160,
+        "x0": 48.0,
+        "x1": 312.0,
+        "top": 194.51,
+        "bottom": 208.51
+      },
+      "approach": {
+        "page": 160,
+        "x0": 48.0,
+        "x1": 312.0,
+        "top": 208.73,
+        "bottom": 217.73
+      },
+      "regions": [
+        {
+          "page": 160,
+          "x0": 48.0,
+          "x1": 312.0,
+          "top": 217.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "base-presser-l-adversaire",
+      "title": {
+        "page": 160,
+        "x0": 312.0,
+        "x1": 576.0,
+        "top": 45.01,
+        "bottom": 59.01
+      },
+      "approach": {
+        "page": 160,
+        "x0": 312.0,
+        "x1": 576.0,
+        "top": 59.23,
+        "bottom": 68.23
+      },
+      "regions": [
+        {
+          "page": 160,
+          "x0": 312.0,
+          "x1": 576.0,
+          "top": 68.23,
+          "bottom": 390.01
+        }
+      ]
+    },
+    {
+      "id": "base-fracasser",
+      "title": {
+        "page": 160,
+        "x0": 312.0,
+        "x1": 576.0,
+        "top": 390.01,
+        "bottom": 404.01
+      },
+      "approach": {
+        "page": 160,
+        "x0": 312.0,
+        "x1": 576.0,
+        "top": 404.23,
+        "bottom": 413.23
+      },
+      "regions": [
+        {
+          "page": 160,
+          "x0": 312.0,
+          "x1": 576.0,
+          "top": 413.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "base-tester-l-equilibre",
+      "title": {
+        "page": 161,
+        "x0": 35.95,
+        "x1": 299.95,
+        "top": 217.51,
+        "bottom": 231.51
+      },
+      "approach": {
+        "page": 161,
+        "x0": 35.95,
+        "x1": 299.95,
+        "top": 231.73,
+        "bottom": 240.73
+      },
+      "regions": [
+        {
+          "page": 161,
+          "x0": 35.95,
+          "x1": 299.95,
+          "top": 240.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "base-soutenir-ou-entraver",
+      "title": {
+        "page": 161,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 45.01,
+        "bottom": 59.01
+      },
+      "approach": {
+        "page": 161,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 59.23,
+        "bottom": 68.23
+      },
+      "regions": [
+        {
+          "page": 161,
+          "x0": 300.28,
+          "x1": 564.28,
+          "top": 68.23,
+          "bottom": 378.51
+        }
+      ]
+    },
+    {
+      "id": "base-se-recueillir",
+      "title": {
+        "page": 161,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 378.51,
+        "bottom": 392.51
+      },
+      "approach": {
+        "page": 161,
+        "x0": 300.28,
+        "x1": 564.28,
+        "top": 392.73,
+        "bottom": 401.73
+      },
+      "regions": [
+        {
+          "page": 161,
+          "x0": 300.28,
+          "x1": 564.28,
+          "top": 401.73,
+          "bottom": 733.87
+        },
+        {
+          "page": 162,
+          "x0": 48,
+          "x1": 312,
+          "top": 40,
+          "bottom": 125
+        }
+      ]
+    },
+    {
+      "id": "universelle-observation-rapide",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-perception-de-lenvironnement",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 183.23,
+          "bottom": 275.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-protection",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 275.01,
+        "bottom": 289.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 289.23,
+        "bottom": 298.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 298.23,
+          "bottom": 367.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-se-mettre-a-labri",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 367.01,
+        "bottom": 381.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 381.23,
+        "bottom": 390.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 390.23,
+          "bottom": 447.51
+        }
+      ]
+    },
+    {
+      "id": "universelle-serrer-les-dents",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 447.51,
+        "bottom": 461.51
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 461.73,
+        "bottom": 470.73
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 470.73,
+          "bottom": 562.51
+        }
+      ]
+    },
+    {
+      "id": "universelle-trouver-la-faille",
+      "title": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 562.51,
+        "bottom": 576.51
+      },
+      "approach": {
+        "page": 287,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 576.73,
+        "bottom": 585.73
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 585.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "universelle-acharnement",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-charge",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 183.23,
+          "bottom": 263.51
+        }
+      ]
+    },
+    {
+      "id": "universelle-derobade",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 263.51,
+        "bottom": 277.51
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 277.73,
+        "bottom": 286.73
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 286.73,
+          "bottom": 332.51
+        }
+      ]
+    },
+    {
+      "id": "universelle-force-debridee",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 332.51,
+        "bottom": 346.51
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 346.73,
+        "bottom": 355.73
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 355.73,
+          "bottom": 447.51
+        }
+      ]
+    },
+    {
+      "id": "universelle-fort-comme-un-chene",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 447.51,
+        "bottom": 461.51
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 461.73,
+        "bottom": 470.73
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 470.73,
+          "bottom": 528.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-frappe-devastatrice",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 528.01,
+        "bottom": 542.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 542.23,
+        "bottom": 551.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 551.23,
+          "bottom": 620.01
+        }
+      ]
+    },
+    {
+      "id": "universelle-frapper-un-point-faible",
+      "title": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 620.01,
+        "bottom": 634.01
+      },
+      "approach": {
+        "page": 287,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 634.23,
+        "bottom": 643.23
+      },
+      "regions": [
+        {
+          "page": 287,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 643.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-leurrer-lennemi",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-mur-de-boucliers",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 183.23,
+          "bottom": 263.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-obeir-aux-ordres",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 263.51,
+        "bottom": 277.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 277.73,
+        "bottom": 286.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 286.73,
+          "bottom": 355.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-occuper-le-terrain",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 355.51,
+        "bottom": 369.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 369.73,
+        "bottom": 378.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 378.73,
+          "bottom": 470.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-proteger-un-objectif",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 470.51,
+        "bottom": 484.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 484.73,
+        "bottom": 493.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 493.73,
+          "bottom": 597.01
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-tirs-nourris",
+      "title": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 597.01,
+        "bottom": 611.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 611.23,
+        "bottom": 620.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 620.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-assaut-generalise",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 91.23,
+          "bottom": 137.01
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-au-pied-du-mur",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 137.01,
+        "bottom": 151.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 151.23,
+        "bottom": 160.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 160.23,
+          "bottom": 240.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-coordination",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 240.51,
+        "bottom": 254.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 254.73,
+        "bottom": 263.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 263.73,
+          "bottom": 332.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-deferlement",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 332.51,
+        "bottom": 346.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 346.73,
+        "bottom": 355.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 355.73,
+          "bottom": 436.01
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-dispersion-et-regroupement",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 436.01,
+        "bottom": 450.01
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 450.23,
+        "bottom": 459.23
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 459.23,
+          "bottom": 539.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-encerclement",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 539.51,
+        "bottom": 553.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 553.73,
+        "bottom": 562.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 562.73,
+          "bottom": 631.51
+        }
+      ]
+    },
+    {
+      "id": "groupe_pnj-eprouver-la-defense-adverse",
+      "title": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 631.51,
+        "bottom": 645.51
+      },
+      "approach": {
+        "page": 288,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 645.73,
+        "bottom": 654.73
+      },
+      "regions": [
+        {
+          "page": 288,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 654.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "eau-cape-deau",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 91.23,
+          "bottom": 206.01
+        }
+      ]
+    },
+    {
+      "id": "eau-fouet-deau",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 206.01,
+        "bottom": 220.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 220.23,
+        "bottom": 229.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 229.23,
+          "bottom": 286.51
+        }
+      ]
+    },
+    {
+      "id": "eau-gantelet-de-glace",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 286.51,
+        "bottom": 300.51
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 300.73,
+        "bottom": 309.73
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 309.73,
+          "bottom": 367.01
+        }
+      ]
+    },
+    {
+      "id": "eau-glissade",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 367.01,
+        "bottom": 381.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 381.23,
+        "bottom": 390.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 390.23,
+          "bottom": 482.01
+        }
+      ]
+    },
+    {
+      "id": "eau-marionnette-de-sang",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 482.01,
+        "bottom": 496.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 496.23,
+        "bottom": 505.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 505.23,
+          "bottom": 597.01
+        }
+      ]
+    },
+    {
+      "id": "eau-menottes-aquatiques",
+      "title": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 597.01,
+        "bottom": 611.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 36.0,
+        "x1": 300.0,
+        "top": 611.23,
+        "bottom": 620.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 36.0,
+          "x1": 300.0,
+          "top": 620.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "eau-ondulations-du-ruisseau",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "eau-plaque-de-givre",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 183.23,
+          "bottom": 240.51
+        }
+      ]
+    },
+    {
+      "id": "eau-prison-de-glace",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 240.51,
+        "bottom": 254.51
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 254.73,
+        "bottom": 263.73
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 263.73,
+          "bottom": 321.01
+        }
+      ]
+    },
+    {
+      "id": "eau-rafraichissement",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 321.01,
+        "bottom": 335.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 335.23,
+        "bottom": 344.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 344.23,
+          "bottom": 413.01
+        }
+      ]
+    },
+    {
+      "id": "eau-sang-gele",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 413.01,
+        "bottom": 427.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 427.23,
+        "bottom": 436.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 436.23,
+          "bottom": 516.51
+        }
+      ]
+    },
+    {
+      "id": "eau-serpent-deau",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 516.51,
+        "bottom": 530.51
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 530.73,
+        "bottom": 539.73
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 539.73,
+          "bottom": 643.01
+        }
+      ]
+    },
+    {
+      "id": "eau-souffle-de-glace",
+      "title": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 643.01,
+        "bottom": 657.01
+      },
+      "approach": {
+        "page": 289,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 657.23,
+        "bottom": 666.23
+      },
+      "regions": [
+        {
+          "page": 289,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 666.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "terre-entraves-de-metal",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "terre-escalier-de-poussiere",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 183.23,
+          "bottom": 252.01
+        }
+      ]
+    },
+    {
+      "id": "terre-etoile-de-lave",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 252.01,
+        "bottom": 266.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 266.23,
+        "bottom": 275.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 275.23,
+          "bottom": 378.51
+        }
+      ]
+    },
+    {
+      "id": "terre-gantelet-de-terre",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 378.51,
+        "bottom": 392.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 392.73,
+        "bottom": 401.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 401.73,
+          "bottom": 482.01
+        }
+      ]
+    },
+    {
+      "id": "terre-mords-la-poussiere",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 482.01,
+        "bottom": 496.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 496.23,
+        "bottom": 505.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 505.23,
+          "bottom": 562.51
+        }
+      ]
+    },
+    {
+      "id": "terre-mouvements-tectoniques",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 562.51,
+        "bottom": 576.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 576.73,
+        "bottom": 585.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 585.73,
+          "bottom": 654.51
+        }
+      ]
+    },
+    {
+      "id": "terre-projection-tellurique",
+      "title": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 654.51,
+        "bottom": 668.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 668.73,
+        "bottom": 677.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 677.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "terre-armure-de-terre",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 91.23,
+          "bottom": 194.51
+        }
+      ]
+    },
+    {
+      "id": "terre-bouclier-de-roche",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 194.51,
+        "bottom": 208.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 208.73,
+        "bottom": 217.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 217.73,
+          "bottom": 355.51
+        }
+      ]
+    },
+    {
+      "id": "terre-boue-gluante",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 355.51,
+        "bottom": 369.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 369.73,
+        "bottom": 378.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 378.73,
+          "bottom": 470.51
+        }
+      ]
+    },
+    {
+      "id": "terre-colonne-de-pierre",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 470.51,
+        "bottom": 484.51
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 484.73,
+        "bottom": 493.73
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 493.73,
+          "bottom": 551.01
+        }
+      ]
+    },
+    {
+      "id": "terre-detection-du-pas-lourd",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 551.01,
+        "bottom": 565.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 565.23,
+        "bottom": 574.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 574.23,
+          "bottom": 666.01
+        }
+      ]
+    },
+    {
+      "id": "terre-enfouissement",
+      "title": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 666.01,
+        "bottom": 680.01
+      },
+      "approach": {
+        "page": 290,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 680.23,
+        "bottom": 689.23
+      },
+      "regions": [
+        {
+          "page": 290,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 689.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "feu-arc-de-foudre",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 91.23,
+          "bottom": 171.51
+        }
+      ]
+    },
+    {
+      "id": "feu-disque-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 171.51,
+        "bottom": 185.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 185.73,
+        "bottom": 194.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 194.73,
+          "bottom": 263.51
+        }
+      ]
+    },
+    {
+      "id": "feu-etincelle-incendiaire",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 263.51,
+        "bottom": 277.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 277.73,
+        "bottom": 286.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 286.73,
+          "bottom": 390.01
+        }
+      ]
+    },
+    {
+      "id": "feu-fouet-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 390.01,
+        "bottom": 404.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 404.23,
+        "bottom": 413.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 413.23,
+          "bottom": 482.01
+        }
+      ]
+    },
+    {
+      "id": "feu-jet-de-flammes",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 482.01,
+        "bottom": 496.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 496.23,
+        "bottom": 505.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 505.23,
+          "bottom": 574.01
+        }
+      ]
+    },
+    {
+      "id": "feu-lame-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 574.01,
+        "bottom": 588.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 588.23,
+        "bottom": 597.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 597.23,
+          "bottom": 654.51
+        }
+      ]
+    },
+    {
+      "id": "feu-muraille-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 654.51,
+        "bottom": 668.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 668.73,
+        "bottom": 677.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 677.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "feu-poignards-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 91.23,
+          "bottom": 171.51
+        }
+      ]
+    },
+    {
+      "id": "feu-propulsion",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 171.51,
+        "bottom": 185.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 185.73,
+        "bottom": 194.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 194.73,
+          "bottom": 263.51
+        }
+      ]
+    },
+    {
+      "id": "feu-rayon-explosif",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 263.51,
+        "bottom": 277.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 277.73,
+        "bottom": 286.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 286.73,
+          "bottom": 378.51
+        }
+      ]
+    },
+    {
+      "id": "feu-souffle-de-feu",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 378.51,
+        "bottom": 392.51
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 392.73,
+        "bottom": 401.73
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 401.73,
+          "bottom": 482.01
+        }
+      ]
+    },
+    {
+      "id": "feu-tourbillon-de-flammes",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 482.01,
+        "bottom": 496.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 496.23,
+        "bottom": 505.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 505.23,
+          "bottom": 597.01
+        }
+      ]
+    },
+    {
+      "id": "feu-trait-de-foudre",
+      "title": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 597.01,
+        "bottom": 611.01
+      },
+      "approach": {
+        "page": 291,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 611.23,
+        "bottom": 620.23
+      },
+      "regions": [
+        {
+          "page": 291,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 620.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "air-sphere-dair",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "air-souffle-du-vent",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 183.23,
+          "bottom": 240.51
+        }
+      ]
+    },
+    {
+      "id": "air-souple-comme-un-roseau",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 240.51,
+        "bottom": 254.51
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 254.73,
+        "bottom": 263.73
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 263.73,
+          "bottom": 390.01
+        }
+      ]
+    },
+    {
+      "id": "air-tourbillon-miniature",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 390.01,
+        "bottom": 404.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 404.23,
+        "bottom": 413.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 413.23,
+          "bottom": 459.01
+        }
+      ]
+    },
+    {
+      "id": "air-vague-dair",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 459.01,
+        "bottom": 473.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 473.23,
+        "bottom": 482.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 482.23,
+          "bottom": 574.01
+        }
+      ]
+    },
+    {
+      "id": "air-velocite-du-vent",
+      "title": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 574.01,
+        "bottom": 588.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 588.23,
+        "bottom": 597.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 597.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "air-amortir-le-poing-rageur",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 91.23,
+          "bottom": 183.01
+        }
+      ]
+    },
+    {
+      "id": "air-aspiration",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 183.01,
+        "bottom": 197.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 197.23,
+        "bottom": 206.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 206.23,
+          "bottom": 275.01
+        }
+      ]
+    },
+    {
+      "id": "air-boulet-de-canon",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 275.01,
+        "bottom": 289.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 289.23,
+        "bottom": 298.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 298.23,
+          "bottom": 378.51
+        }
+      ]
+    },
+    {
+      "id": "air-cone-dair",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 378.51,
+        "bottom": 392.51
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 392.73,
+        "bottom": 401.73
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 401.73,
+          "bottom": 470.51
+        }
+      ]
+    },
+    {
+      "id": "air-coussin-dair",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 470.51,
+        "bottom": 484.51
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 484.73,
+        "bottom": 493.73
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 493.73,
+          "bottom": 562.51
+        }
+      ]
+    },
+    {
+      "id": "air-onde-de-choc",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 562.51,
+        "bottom": 576.51
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 576.73,
+        "bottom": 585.73
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 585.73,
+          "bottom": 666.01
+        }
+      ]
+    },
+    {
+      "id": "air-oscillations-du-vent",
+      "title": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 666.01,
+        "bottom": 680.01
+      },
+      "approach": {
+        "page": 292,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 680.23,
+        "bottom": 689.23
+      },
+      "regions": [
+        {
+          "page": 292,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 689.23,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "armes-a-contretemps",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 91.23,
+          "bottom": 160.01
+        }
+      ]
+    },
+    {
+      "id": "armes-bloquer-le-chi",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 160.01,
+        "bottom": 174.01
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 174.23,
+        "bottom": 183.23
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 183.23,
+          "bottom": 286.51
+        }
+      ]
+    },
+    {
+      "id": "armes-boum",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 286.51,
+        "bottom": 300.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 300.73,
+        "bottom": 309.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 309.73,
+          "bottom": 390.01
+        }
+      ]
+    },
+    {
+      "id": "armes-clouer-une-mouche-contre-un-tronc-darbre",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 390.01,
+        "bottom": 415.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 415.73,
+        "bottom": 424.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 424.73,
+          "bottom": 493.51
+        }
+      ]
+    },
+    {
+      "id": "armes-contre-attaque",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 493.51,
+        "bottom": 507.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 507.73,
+        "bottom": 516.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 516.73,
+          "bottom": 608.51
+        }
+      ]
+    },
+    {
+      "id": "armes-desarmement",
+      "title": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 608.51,
+        "bottom": 622.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 35.67,
+        "x1": 299.67,
+        "top": 622.73,
+        "bottom": 631.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 35.67,
+          "x1": 299.67,
+          "top": 631.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "armes-estocade-precise",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 91.23,
+          "bottom": 183.01
+        }
+      ]
+    },
+    {
+      "id": "armes-feinte",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 183.01,
+        "bottom": 197.01
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 197.23,
+        "bottom": 206.23
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 206.23,
+          "bottom": 275.01
+        }
+      ]
+    },
+    {
+      "id": "armes-parade",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 275.01,
+        "bottom": 289.01
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 289.23,
+        "bottom": 298.23
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 298.23,
+          "bottom": 378.51
+        }
+      ]
+    },
+    {
+      "id": "armes-planification",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 378.51,
+        "bottom": 392.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 392.73,
+        "bottom": 401.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 401.73,
+          "bottom": 516.51
+        }
+      ]
+    },
+    {
+      "id": "armes-position-surelevee",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 516.51,
+        "bottom": 530.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 530.73,
+        "bottom": 539.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 539.73,
+          "bottom": 608.51
+        }
+      ]
+    },
+    {
+      "id": "armes-retourner-la-situation",
+      "title": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 608.51,
+        "bottom": 622.51
+      },
+      "approach": {
+        "page": 293,
+        "x0": 300.14,
+        "x1": 564.14,
+        "top": 622.73,
+        "bottom": 631.73
+      },
+      "regions": [
+        {
+          "page": 293,
+          "x0": 300.14,
+          "x1": 564.14,
+          "top": 631.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "technologie-evaluation-des-zones-vulnerables",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 91.23,
+          "bottom": 183.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-immobilisation",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 183.01,
+        "bottom": 197.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 197.23,
+        "bottom": 206.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 206.23,
+          "bottom": 275.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-maintenance",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 275.01,
+        "bottom": 289.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 289.23,
+        "bottom": 298.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 298.23,
+          "bottom": 390.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-meilleur-plus-rapide-plus-fort",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 390.01,
+        "bottom": 404.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 404.23,
+        "bottom": 413.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 413.23,
+          "bottom": 505.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-pose-de-pieges",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 505.01,
+        "bottom": 519.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 519.23,
+        "bottom": 528.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 528.23,
+          "bottom": 585.51
+        }
+      ]
+    },
+    {
+      "id": "technologie-puissance-maximale",
+      "title": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 585.51,
+        "bottom": 599.51
+      },
+      "approach": {
+        "page": 294,
+        "x0": 312.14,
+        "x1": 576.14,
+        "top": 599.73,
+        "bottom": 608.73
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 312.14,
+          "x1": 576.14,
+          "top": 608.73,
+          "bottom": 733.87
+        }
+      ]
+    },
+    {
+      "id": "technologie-accumulation-denergie",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 68.01,
+        "bottom": 82.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 82.23,
+        "bottom": 91.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 91.23,
+          "bottom": 194.51
+        }
+      ]
+    },
+    {
+      "id": "technologie-aveugle-par-la-science",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 194.51,
+        "bottom": 208.51
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 208.73,
+        "bottom": 217.73
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 217.73,
+          "bottom": 321.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-bombe-fumigene",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 321.01,
+        "bottom": 335.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 335.23,
+        "bottom": 344.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 344.23,
+          "bottom": 424.51
+        }
+      ]
+    },
+    {
+      "id": "technologie-bricolage",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 424.51,
+        "bottom": 438.51
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 438.73,
+        "bottom": 447.73
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 447.73,
+          "bottom": 562.51
+        }
+      ]
+    },
+    {
+      "id": "technologie-collecter-du-materiel",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 562.51,
+        "bottom": 576.51
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 576.73,
+        "bottom": 585.73
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 585.73,
+          "bottom": 666.01
+        }
+      ]
+    },
+    {
+      "id": "technologie-electrochoc",
+      "title": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 666.01,
+        "bottom": 680.01
+      },
+      "approach": {
+        "page": 294,
+        "x0": 47.67,
+        "x1": 311.67,
+        "top": 680.23,
+        "bottom": 689.23
+      },
+      "regions": [
+        {
+          "page": 294,
+          "x0": 47.67,
+          "x1": 311.67,
+          "top": 689.23,
+          "bottom": 733.87
+        }
+      ]
+    }
+  ]
+}

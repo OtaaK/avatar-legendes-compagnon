@@ -114,7 +114,7 @@ export function Home({
               {
                 name: "Techniques",
                 icon: Sparkles,
-                description: "Catalogue et maîtrise",
+                description: "Bibliothèque de référence",
               },
             ].map(({ name, icon: Icon, description }) => (
               <button
@@ -147,7 +147,7 @@ export function Home({
             </span>
             <b>Vos fiches sont disponibles</b>
             <p>
-              Les personnages sont intégrés. Les autres rubriques suivront dans leurs lots dédiés.
+              Les personnages et la bibliothèque sont disponibles. Les autres rubriques suivront dans leurs lots dédiés.
             </p>
             <button
               type="button"

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "lot2-implemented-awaiting-owner-validation",
+  "status": "technique-library-implemented-awaiting-owner-validation",
   "inspectedOn": "2026-11-08",
   "business": {
     "repository": "OtaaK/avatar-legendes-compagnon",
@@ -181,5 +181,49 @@
     "lot3Started": false,
     "merged": false,
     "deployed": false
+  },
+  "library": {
+    "branch": "convergence/bibliotheque-techniques",
+    "baseBranch": "convergence/lot2-personnages",
+    "baseCommit": "457b0313f10267483a3d9c1fd4b1bc9ccd247cb0",
+    "count": 111,
+    "families": [
+      9,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      12,
+      12
+    ],
+    "sourceMetadataVerified": 111,
+    "fullOfficialDescriptionsDistributed": 0,
+    "privateTextRepository": "avatar-compagnon-private-technique-texts-v1",
+    "descriptionsCertified": false,
+    "historicalBefore": 243,
+    "historicalAfter": 243,
+    "contractTests": 47,
+    "singleHtmlBuild": true,
+    "portableHtmlSha256": "17603dbbe6b49b5ca5fdaf75a30107f8f0876722ebc83e50269ed7f22e435f4d",
+    "merged": false,
+    "deployed": false,
+    "recipeCorrections": {
+      "compactFamilyBorders": 9,
+      "privatePdfPreparation": "local offline, edition-specific, explicit confirmation",
+      "privateBankExportRestore": true,
+      "officialPdfPassagesComparedLocally": 111,
+      "normalizedPassageMatches": 111,
+      "fullTextsInPublicFiles": false,
+      "historicalBeforePassed": 241,
+      "historicalBeforeTimeouts": 2,
+      "isolatedRerunsPassed": 2,
+      "historicalAfterPassed": 242,
+      "historicalAfterTimeouts": 1,
+      "historicalAfterTimeoutTest": "tests/browser/test_uiux_navigation.py",
+      "privatePdfCancelWrongEditionAndRestoreTested": true
+    },
+    "privateRichText": "version 2 opt-in markdown-lite, version 1 unchanged"
   }
 }

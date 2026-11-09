@@ -13,10 +13,12 @@
     "test:parity": "node scripts/convergence/test-parity.mjs",
     "test:react": "python tests/convergence/browser.py",
     "test:inventory": "node scripts/convergence/inventory.mjs --check",
-    "test:characters": "python tests/convergence/characters_browser.py"
+    "test:characters": "python tests/convergence/characters_browser.py",
+    "test:library": "python tests/convergence/library_browser.py"
   },
   "dependencies": {
     "lucide-react": "1.16.0",
+    "pdfjs-dist": "5.4.394",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
