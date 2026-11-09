@@ -123,3 +123,5 @@ La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'el
 Correctifs bibliothèque autorisés : compactage des cartes, bordures par famille, préparation PDF locale et export/restauration JSON privés. Ne jamais intégrer les textes extraits aux artefacts CI, captures ou commits ; tests synthétiques uniquement. Voir `docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md`.
 
 Dernière autorisation du propriétaire : finaliser A1–A4 Bibliothèque sur PR 14 puis commencer directement le Lot Lieux sur une branche dédiée dépendante. Préserver l’interface v0, PlaceRules, les liens position/domicile/association, sauvegardes et champs inconnus. Ne pas commencer Livrets/combat ni chantier ergonomique PJ/PNJ hors raccord indispensable aux lieux. Aucune fusion ni aucun déploiement sans accord.
+
+Lot Lieux en cours de recette : branche `convergence/lot3-lieux`, base Bibliothèque `b037e8d`. Guide et bilan sous `docs/migration/*LOT_LIEUX.md`. `packages/application/src/place-commands.js` adapte PlaceRules au store transactionnel, sans modifier le domaine. `npm run test:places` complète les tests précédents. Ne pas démarrer le lot suivant sans accord.

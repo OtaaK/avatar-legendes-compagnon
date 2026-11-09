@@ -329,3 +329,7 @@ Le propriétaire autorise les cartes plus compactes et les neuf bordures discrè
 ### Autorisation suivante — 9 novembre 2026
 
 Le propriétaire demande les finitions A1–A4 dans PR 14 puis autorise immédiatement le Lot Lieux sur une branche dépendante, sans fusion de main. Les textes privés enrichis sont explicitement versionnés ; les JSON v1 restent littéraux. Le rendu n’interprète aucun HTML. Le chantier ergonomique PJ/PNJ reste différé, sauf raccord nécessaire aux lieux.
+
+### Lot Lieux — intégration autorisée après les finitions Bibliothèque
+
+Branche distincte dépendante, moteur inchangé. Trois groupes PNJ : présents, domiciliés, associés. La suppression n’ajoute aucune stratégie : réutilisation de `promote-unlink` après accord explicite sur les dépendances. Image locale contrôlée ; ancienne illustration non affichable conservée sans téléchargement. Navigation par URL, profondeur de données libre et indentation visuelle contenue pour le responsive. Aucun autre lot ni déploiement/fusion autorisés.

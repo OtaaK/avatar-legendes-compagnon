@@ -16,7 +16,7 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [ ] Recette et validation propriétaire du lot 2 avant tout nouveau lot.
 - [x] Lot indépendant **Bibliothèque de techniques** autorisé, implémentation sur branche dépendante du lot 2.
 - [ ] Recette propriétaire de la bibliothèque avant tout lot suivant.
-- [ ] Lot 3 : Lieux et liens PNJ.
+- [x] Lot 3 : Lieux et liens PNJ implémentés sur branche dépendante ; recette propriétaire à faire.
 - [ ] Lot 4 : Livrets, attribution de techniques et maîtrise individuelle.
 - [ ] Lot 5 : intégralité des capacités de combat existantes dans v0.
 - [ ] Lot 6 : Gestion, annulations, compatibilité et distribution hors ligne qualifiée.
@@ -155,3 +155,7 @@ et actions directement accessibles. Aucun remaniement profond des fiches dans le
 Bibliothèque. Périmètre à faire valider avant développement, branche et PR propres.
 
 Correctifs de recette bibliothèque en PR 14 : cartes compactes/bordures des neuf familles, préparation groupée locale du PDF personnel, export et restauration privés. Recette propriétaire requise ; aucun autre lot commencé.
+
+## Lot Lieux React — autorisation et livraison
+
+`convergence/lot3-lieux`, base Bibliothèque corrigée `b037e8d` / PR 14. Arbre et rendu v0, commandes PlaceRules, relations PNJ indépendantes, suppressions protégées, images locales et sauvegardes préservées. Voir [bilan](docs/migration/BILAN_LOT_LIEUX.md) et [recette Mac](docs/migration/TESTER_LOT_LIEUX.md). Validation attendue avant Livrets ou combat ; aucune fusion/déploiement autorisé. Le chantier ergonomique PJ/PNJ reste distinct et différé.
