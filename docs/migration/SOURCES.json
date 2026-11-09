@@ -204,10 +204,25 @@
     "descriptionsCertified": false,
     "historicalBefore": 243,
     "historicalAfter": 243,
-    "contractTests": 43,
+    "contractTests": 46,
     "singleHtmlBuild": true,
-    "portableHtmlSha256": "61568ac396f1f3933828937873405c745fd1b565baccbcfeb74d697d1c73376d",
+    "portableHtmlSha256": "00defe4be1b515a1dbcc65fe4bd3258ee313a9a5f24f41687c03148bf8c710af",
     "merged": false,
-    "deployed": false
+    "deployed": false,
+    "recipeCorrections": {
+      "compactFamilyBorders": 9,
+      "privatePdfPreparation": "local offline, edition-specific, explicit confirmation",
+      "privateBankExportRestore": true,
+      "officialPdfPassagesComparedLocally": 111,
+      "normalizedPassageMatches": 111,
+      "fullTextsInPublicFiles": false,
+      "historicalBeforePassed": 241,
+      "historicalBeforeTimeouts": 2,
+      "isolatedRerunsPassed": 2,
+      "historicalAfterPassed": 242,
+      "historicalAfterTimeouts": 1,
+      "historicalAfterTimeoutTest": "tests/browser/test_uiux_navigation.py",
+      "privatePdfCancelWrongEditionAndRestoreTested": true
+    }
   }
 }

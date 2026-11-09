@@ -73,7 +73,7 @@ Le texte est rendu comme texte, sans HTML exécutable ; les retours à la ligne 
 **Disponibilité au premier lancement : 0/111 textes intégraux privés chargés.** Aucun pack
 contenant les 111 descriptions du PDF n'est distribué. L'utilisateur doit disposer d'un
 fichier privé qu'il est autorisé à utiliser ; l'application n'en certifie pas l'exactitude
-éditoriale. La préparation de ce fichier reste un travail privé à contrôler humainement.
+éditoriale. La préparation groupée est désormais possible localement depuis le PDF dans Gestion ; une relecture humaine reste nécessaire.
 Cette réserve est visible, pas remplacée par une paraphrase ou un faux contenu officiel.
 
 ## Architecture et non-mutation
@@ -85,7 +85,7 @@ inchangé. La banque privée est un adaptateur séparé, sans accès au store de
 
 L'interface est dans `features/techniques`. Les icônes d'entraînement et la modale v0 sont
 réutilisées. Aucune dépendance d'exécution ajoutée, aucun CDN ou service externe. Le build
-reste un HTML autonome d'environ 541 ko. Les fiches PJ/PNJ du lot 2 sont conservées.
+reste un HTML autonome d'environ 2 Mo après ajout de la lecture PDF privée. Les fiches PJ/PNJ du lot 2 sont conservées.
 
 ## Vérifications et portée
 
@@ -126,3 +126,5 @@ Les limites de taille sont explicites, sans troncature silencieuse.
 La recette Mac est dans [TESTER_BIBLIOTHEQUE.md](TESTER_BIBLIOTHEQUE.md). Le chantier ergonomie
 PJ/PNJ est ajouté à ROADMAP.md, après les intégrations fonctionnelles prioritaires. Aucun lot
 suivant, fusion ou déploiement avant l'accord du propriétaire.
+
+Les [correctifs de recette](CORRECTIFS_RECETTE_BIBLIOTHEQUE.md) complètent ce bilan : cartes compactes colorées, préparation locale depuis le PDF et export/restauration privés.

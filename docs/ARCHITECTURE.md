@@ -324,3 +324,5 @@ La matrice `docs/reference/CONTROLE_TECHNIQUES_PDF.json` ne contient que métado
 empreintes, sans texte officiel intégral. Le PDF et les extractions locales restent exclus
 Git/CI. La banque privée n'est pas distribuée et n'est jamais exportée avec le projet.
 Voir le bilan et les limites éditoriales dans `docs/reference/BILAN_BIBLIOTHEQUE.md`.
+
+La préparation privée des descriptions utilise PDF.js, embarqué avec son worker dans le HTML. `packages/reference/src/pdf-layout.json` décrit les seules coordonnées de lecture de l’édition reconnue, sans texte. `pdf-text.js` est une fonction pure de reconstruction ; `features/techniques/read-private-pdf.ts` adapte PDF.js. Le PDF et les passages restent locaux ; seule une confirmation appelle le dépôt privé, jamais le store de campagne. Un export privé versionné permet de restaurer cette banque indépendamment. Voir `docs/reference/DESCRIPTIONS_PRIVEES.md`.

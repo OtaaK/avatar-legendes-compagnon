@@ -153,3 +153,5 @@ Critères de validation :
 formulaires, disposition et hiérarchie des fiches, ressources, techniques, Livrets, relations
 et actions directement accessibles. Aucun remaniement profond des fiches dans le lot
 Bibliothèque. Périmètre à faire valider avant développement, branche et PR propres.
+
+Correctifs de recette bibliothèque en PR 14 : cartes compactes/bordures des neuf familles, préparation groupée locale du PDF personnel, export et restauration privés. Recette propriétaire requise ; aucun autre lot commencé.

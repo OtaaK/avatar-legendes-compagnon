@@ -48,6 +48,7 @@ try:
    reset(page)
    for a in approaches:approach(page).get_by_role('button',name=a,exact=True).click();count(page,sum(t['approche']==a for t in catalog))
    reset(page);q=page.get_by_role('searchbox',name='Rechercher une technique par nom');q.fill('ÉTOILE');count(page,sum('étoile' in t['nom'].lower() for t in catalog));q.fill('etoile');assert page.locator('[data-technique-id="terre-etoile-de-lave"]').count()==1
+   if w==1440:assert page.locator('.library-card').first.bounding_box()['width']<350
    # Conservation des critères lors du changement de famille/approche et recherche par nom seule.
    q.fill('feu');family(page).get_by_role('button',name='Feu',exact=True).click();approach(page).get_by_role('button',name=approaches[0],exact=True).click();count(page,4);assert q.input_value()=='feu';family(page).get_by_role('button',name='Toutes',exact=True).click();assert approach(page).get_by_role('button',name=approaches[0],exact=True).get_attribute('aria-pressed')=='true';assert q.input_value()=='feu'
    family(page).get_by_role('button',name='Base',exact=True).click();count(page,0);assert page.get_by_text('Aucune technique ne correspond',exact=True).is_visible();reset(page);q.fill('statut contextuel');count(page,0);reset(page)

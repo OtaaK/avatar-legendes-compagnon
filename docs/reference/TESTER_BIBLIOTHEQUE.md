@@ -40,3 +40,14 @@ Conserver l'ancienne application et les exports d'origine.
 Merci de signaler : navigateur/version, lecture des boutons sur téléphone/tablette, clic
 sur toute la carte, focus et résultat hors ligne. Aucune validation de recette n'autorise
 une fusion ou un déploiement ; le lot suivant attend un accord distinct.
+
+## Correctifs de recette : cartes et descriptions privées
+
+- Sur ordinateur, davantage de colonnes ; cartes courtes, sans espace réservé à une description.
+- Les neuf familles ont une bordure de 1 px. Eau, Terre, Feu, Air, Armes et Technologie gardent les couleurs demandées. Base est gris bleuté, Universelles cuivre doux, Groupe jade atténué. Nom et approche restent lisibles.
+- Cliquez sur le fond, la famille ou le nom ; utilisez aussi Tab puis Entrée/Espace. Le focus doré reste visible avec la bordure de famille.
+- Pour les textes : suivez [le guide privé](DESCRIPTIONS_PRIVEES.md), accessible sans commandes. **Gestion → Préparer depuis mon PDF personnel → choisir votre PDF → confirmer → Exporter mes descriptions privées**.
+- Gardez ce JSON sur votre Mac. Rechargez hors Wi-Fi, vérifiez les textes, puis essayez de restaurer le JSON via **Charger un fichier privé de descriptions**. Une annulation ne change rien.
+- Exportez séparément la campagne : elle ne doit contenir aucun texte privé.
+
+Aucun texte intégral n’est livré dans le ZIP. Votre PDF sert à le préparer localement ; aucun copier-coller des 111 descriptions n’est nécessaire avec l’édition reconnue. Une vérification du résultat contre le livre reste recommandée.

@@ -321,3 +321,7 @@ La matrice précise ses limites : métadonnées/repérage des passages, pas tran
 
 Le chantier ergonomie des fiches PJ/PNJ est distinct et différé. Les formulaires ne sont pas
 refondus pendant ce lot ; aucun autre lot, déploiement ou fusion sans nouvel accord.
+
+### 9 novembre 2026 — Correctifs de recette bibliothèque
+
+Le propriétaire autorise les cartes plus compactes et les neuf bordures discrètes, ainsi que la préparation groupée de ses descriptions depuis son PDF pour usage local privé. PDF.js est embarqué hors réseau ; aucun texte du livre n’est publié. L’export JSON privé reste distinct de la campagne. Les techniques et règles sont inchangées. Relecture du résultat automatique nécessaire, aucune fusion ni autre lot autorisé.

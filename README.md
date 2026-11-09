@@ -138,3 +138,5 @@ Aucune de ces commandes ne déploie ou ne fusionne le projet. Le workflow
 `Convergence React — Bibliothèque` compile, teste et propose uniquement des artefacts à télécharger.
 
 `npm run test:library` exécute la recette navigateur de la bibliothèque et des textes privés synthétiques.
+
+Correctifs de recette de la bibliothèque : [cartes compactes et préparation PDF privée](docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md), [guide Mac sans commandes](docs/reference/DESCRIPTIONS_PRIVEES.md).

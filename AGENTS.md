@@ -119,3 +119,5 @@ La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'el
   l’import explicite. Aucun accès automatique aux anciennes clés Codex.
 - Le cloud bloque `file://` ; distinguer le document embarqué testé hors réseau du
   double-clic réel sur Mac, et Web Locks de la seule détection optimiste des conflits.
+
+Correctifs bibliothèque autorisés : compactage des cartes, bordures par famille, préparation PDF locale et export/restauration JSON privés. Ne jamais intégrer les textes extraits aux artefacts CI, captures ou commits ; tests synthétiques uniquement. Voir `docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md`.

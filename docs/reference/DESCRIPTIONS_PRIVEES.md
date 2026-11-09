@@ -1,66 +1,50 @@
-# Descriptions intégrales : disponibilité et usage local
+# Descriptions privées : charger, conserver et restaurer sur Mac
 
-Le PDF français fourni est lisible dans l'environnement de travail. Il n'est pas versionné.
-Aucune licence de redistribution de ses descriptions intégrales n'a été trouvée dans le
-dépôt. **Le HTML distribué n'en contient aucune nouvelle transcription intégrale.**
-Les résumés `effet_resume` et `TECH_AUDIT.resume_verifie` restent dans le métier existant,
-mais la bibliothèque ne les utilise pas comme descriptions officielles.
+Aucun texte intégral du livre n’est inclus dans le dépôt, le prototype, les rapports ou les exports de campagne. Au premier lancement, aucun texte privé n’est chargé. Les 111 références du catalogue restent consultables ; une description absente est signalée, jamais remplacée par un résumé.
 
-## Ce qui est contrôlé
+## Préparer les 111 descriptions depuis votre PDF, sans commandes
 
-Les 111 titres sont repérés sur leurs pages, dans leurs blocs typographiques, et rapprochés
-des familles et approches. Neuf techniques de base : pages imprimées 158–160 ; 102 de
-l'annexe : 286–293 (introduction page 285). Sur cette édition, page PDF = page imprimée + 1.
-Les apostrophes, espaces, casse et marque de rareté sont normalisés pour ce rapprochement.
-Exemple typographique : `Boum!` dans le catalogue, `Boum !` dans le livre ; l'astérisque
-imprimé de rareté n'appartient pas au nom. Aucun nom métier ni identifiant n'est réécrit.
+1. Ouvrez le nouveau `index.html` dans Chrome sur votre Mac, puis **Gestion**.
+2. Dans **Descriptions privées des techniques**, cliquez sur **Préparer depuis mon PDF personnel** et choisissez votre PDF officiel français.
+3. Attendez la lecture des 12 pages utiles. Le PDF est traité dans le navigateur, sans envoi à un serveur. Il n’est pas conservé par l’application.
+4. La fenêtre annonce les **111 passages** associés aux identifiants stables. Cliquez sur **Confirmer le chargement privé**, ou annulez sans rien enregistrer.
+5. Cliquez sur **Exporter mes descriptions privées**. Conservez le fichier `avatar-descriptions-privees.json` dans un dossier privé de votre Mac, avec votre exemplaire du livre.
+6. Dans **Techniques**, ouvrez les fenêtres pour consulter les textes. Vérifiez en particulier les continuations de Riposter et Se recueillir, ainsi que les textes dont la mise en page est inhabituelle.
 
-Le [contrôle JSON](CONTROLE_TECHNIQUES_PDF.json) contient noms, famille, approche, pages,
-présence et empreinte des passages identifiés. **Il ne certifie pas une transcription
-complète, les limites exactes de tous les paragraphes ou une nouvelle interprétation des
-conditions.** Le repérage automatique ne remplace pas une revue éditoriale du fichier privé.
-Aucune nouvelle description ou mécanique n'est inventée, ni affichée en remplacement.
+Vous pouvez couper le Wi-Fi avant ces opérations : bibliothèque PDF.js et worker sont embarqués dans le HTML. Aucun service de conversion, CDN ou compte n’est nécessaire.
 
-Le script `scripts/reference/verify-techniques-pdf.py` reproduit ce contrôle local avec
-pdfplumber et le PDF utilisateur ; la CI vérifie la matrice figée sans disposer du livre.
-Les extractions de travail restent sous `work/`, ignoré par Git et exclu des artefacts CI.
+Le lecteur vise **l’édition française et la mise en page du PDF fourni** : pages imprimées 158–161 et 286–293, soit pages PDF 159–162 et 287–294. Il contrôle la taille des pages, les 111 titres, les approches et la présence des passages. Si le format est différent, scanné, chiffré ou illisible, la préparation échoue explicitement ; aucun import partiel ni contenu inventé n’est enregistré. PDF : 64 Mo maximum.
 
-## Fichier privé facultatif
+**Limite de l’extraction :** ce n’est pas une certification éditoriale. Le texte est extrait avec ses lignes et paragraphes ; les césures discrétionnaires sont réunies. La mise en page et certains caractères peuvent demander une correction dans votre JSON privé, puis une réimportation. Aucun moteur de règles n’est exécuté ou modifié. La lecture vise tout le passage sous chaque technique de base, explications comprises, et les descriptions de l’annexe ; les introductions générales aux approches et les pages étrangères aux techniques sont exclues. Les deux continuations intercolonnes/interpages sont explicitement prévues.
 
-Le chargement se fait dans **Gestion → Descriptions privées des techniques**. Le fichier
-peut être partiel ; chaque ID doit appartenir au catalogue, être unique, et posséder une
-chaîne `description` non vide. L'aperçu précède la confirmation ; celle-ci remplace le jeu
-privé précédent. Les paragraphes et retours à la ligne sont affichés sans troncature.
-Les listes peuvent conserver leurs puces et retours à la ligne dans la chaîne. Le texte
-est rendu comme texte, jamais comme HTML exécutable.
+## Restaurer ou changer de prototype/navigateur
 
-Exemple **de structure uniquement**, avec un texte synthétique sans règle du livre :
+Ouvrez **Gestion → Charger un fichier privé de descriptions**, sélectionnez votre JSON exporté, puis confirmez. Toutes ses entrées sont chargées en une seule opération ; pas de saisie individuelle. Le fichier peut contenir les 111 techniques ou un sous-ensemble. **Un import remplace le jeu privé précédent**, il ne fusionne pas automatiquement les banques.
+
+Les descriptions persistent dans le stockage local du navigateur, sous `avatar-compagnon-private-technique-texts-v1`, indépendamment des campagnes. Après rechargement hors ligne, elles restent consultables. Chrome peut attribuer un stockage différent à un autre chemin `file://` : conservez toujours le JSON privé pour restaurer après déplacement ou remplacement du HTML. Effacer les données de navigation peut aussi effacer cette banque.
+
+L’export privé explicite ne contient que les descriptions et leurs identifiants. Il ne contient ni personnages, ni combat, ni données de campagne. Inversement, l’export de campagne ne contient jamais ces descriptions. N’ajoutez pas votre JSON privé à GitHub, à un rapport de bug, ni à une archive publique du prototype.
+
+## Format JSON versionné
+
+Exemple entièrement synthétique, sans extrait du livre :
 
 ```json
 {
   "format": "avatar-technique-descriptions-privees",
   "version": 1,
   "techniques": [
-    {
-      "id": "base-frapper",
-      "description": "Texte privé de l’utilisateur.\n\n• Élément de structure synthétique."
-    }
+    { "id": "base-frapper", "description": "Texte personnel synthétique.\n\n• Premier élément\n• Dernier élément" }
   ]
 }
 ```
 
-Utiliser seulement un contenu dont l'usage local est autorisé. La préparation d'un fichier
-fidèle depuis son exemplaire doit rester privée et faire l'objet d'une vérification humaine.
-Aucun pack des 111 descriptions officielles n'est fourni dans cette livraison. Aucun service
-externe n'est appelé ; ni le livre ni les textes privés ne sont envoyés par l'application.
+Les IDs sont ceux de [l’inventaire](INVENTAIRE_TECHNIQUES.csv). IDs inconnus/dupliqués, version inconnue ou descriptions vides sont refusés. Maximum : 111 entrées, 1 000 000 caractères par texte, fichier JSON importé de 16 Mo. Les quotas effectifs du navigateur peuvent être inférieurs : un refus est annoncé et conserve la banque précédente. Le rendu est du texte, jamais du HTML exécutable.
 
-Stockage : `avatar-compagnon-private-technique-texts-v1`, séparé du projet, des sauvegardes
-Codex et du laboratoire. La consultation n'écrit rien. Un import privé explicite écrit
-uniquement cette clé ; un quota/refus laisse le jeu précédent intact. Un effacement confirmé
-ne vise que cette clé. Le contenu importé est fourni par l'utilisateur, pas certifié par
-l'application. Limites explicites : 16 Mo par fichier, 1 000 000 caractères par description,
-111 identifiants ; dépassement refusé, jamais tronqué.
+L’annulation de l’aperçu et la consultation n’écrivent rien. L’effacement privé demande confirmation et ne touche pas aux campagnes. Le PDF choisi reste en mémoire pendant la préparation seulement ; son code JavaScript, ses actions et ses images ne sont pas exécutés ou rendus.
 
-Les exports de projet n'incluent pas les descriptions privées. Conserver son fichier privé
-pour un autre navigateur ou un autre emplacement du HTML. En l'absence de texte, la fenêtre
-signale « Description complète non chargée ». Elle ne présente pas un résumé comme intégral.
+## Références techniques et droits
+
+Les droits de redistribution publique des descriptions intégrales ne sont pas établis. Votre utilisation privée du fichier vous appartient ; aucune nouvelle licence de reproduction n’est présumée. Aucun fichier contenant les textes extraits ne sera joint à la PR ni à ses artefacts.
+
+Le plan `packages/reference/src/pdf-layout.json` contient uniquement des identifiants et rectangles de lecture. `scripts/reference/build-pdf-layout.py` permet sa reconstruction locale avec pdfplumber ; il ne produit aucun texte du livre. Le contrôle source antérieur est dans `CONTROLE_TECHNIQUES_PDF.json` et le lecteur dans `read-private-pdf.ts`. Voir [la dépendance PDF.js et sa licence](DEPENDANCES.md).
