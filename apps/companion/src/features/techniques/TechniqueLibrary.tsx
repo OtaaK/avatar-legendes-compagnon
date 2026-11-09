@@ -164,6 +164,7 @@ export function TechniqueLibrary({
             key={t.id}
             type="button"
             data-technique-id={t.id}
+            data-family={t.family}
             onClick={(e) => open(t, e)}
           >
             <span className="technique-card-head">
