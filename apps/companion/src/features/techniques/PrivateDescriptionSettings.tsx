@@ -1,16 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { parsePrivateDescriptions } from "../../../../../packages/reference/src/private-descriptions.js";
+import { PrivatePdfPreparation } from "./PrivatePdfPreparation";
 import { AppModal } from "../../shell/AppModal";
 export function PrivateDescriptionSettings({
   count,
   error,
   onLoad,
   onClear,
+  onExport,
 }: {
   count: number;
   error: string | null;
   onLoad: (texts: Readonly<Record<string, string>>) => void;
   onClear: () => void;
+  onExport: () => void;
 }) {
   const input = useRef<HTMLInputElement | null>(null),
     trigger = useRef<HTMLButtonElement | null>(null),
@@ -19,7 +22,15 @@ export function PrivateDescriptionSettings({
       Record<string, string>
     > | null>(null),
     [message, setMessage] = useState(""),
-    [problem, setProblem] = useState("");
+    [problem, setProblem] = useState(""),
+    [fromPdf, setFromPdf] = useState(false),
+    [pdfBusy, setPdfBusy] = useState(false);
+  useEffect(
+    () => () => {
+      generation.current++;
+    },
+    [],
+  );
   function close() {
     generation.current++;
     setPending(null);
@@ -30,6 +41,7 @@ export function PrivateDescriptionSettings({
     const rev = ++generation.current;
     setProblem("");
     setMessage("");
+    setFromPdf(false);
     try {
       if (file.size > 16 * 1024 * 1024)
         throw Error("Fichier trop volumineux (16 Mo maximum).");
@@ -37,7 +49,7 @@ export function PrivateDescriptionSettings({
       if (rev === generation.current)
         setPending(parsePrivateDescriptions(text));
     } catch (e) {
-      setProblem((e as Error).message);
+      if (rev === generation.current) setProblem((e as Error).message);
     }
   }
   function load() {
@@ -72,10 +84,22 @@ export function PrivateDescriptionSettings({
         {count} description{count === 1 ? "" : "s"} disponible
         {count === 1 ? "" : "s"} dans ce navigateur.
       </p>
+      <PrivatePdfPreparation
+        onBusyChange={setPdfBusy}
+        onPrepared={(texts, opener) => {
+          generation.current++;
+          trigger.current = opener;
+          setFromPdf(true);
+          setProblem("");
+          setMessage("");
+          setPending(texts);
+        }}
+      />
       <button
         ref={trigger}
         className="button-secondary full-width"
         type="button"
+        disabled={pdfBusy}
         onClick={() => input.current?.click()}
       >
         Charger un fichier privé de descriptions
@@ -94,7 +118,25 @@ export function PrivateDescriptionSettings({
       <button
         className="button-secondary full-width"
         type="button"
-        disabled={!count}
+        disabled={!count || !!error || pdfBusy}
+        onClick={() => {
+          try {
+            onExport();
+            setProblem("");
+            setMessage(
+              "Copie privée téléchargée. Conservez ce JSON sur votre Mac, séparément des campagnes.",
+            );
+          } catch (e) {
+            setProblem((e as Error).message);
+          }
+        }}
+      >
+        Exporter mes descriptions privées
+      </button>
+      <button
+        className="button-secondary full-width"
+        type="button"
+        disabled={!count || pdfBusy}
         onClick={() => {
           if (
             !confirm(
@@ -130,6 +172,16 @@ export function PrivateDescriptionSettings({
               actuellement chargé dans ce navigateur, sans modifier le catalogue
               ni les sauvegardes Codex.
             </p>
+            {fromPdf && (
+              <p className="modal-copy">
+                111 passages extraits automatiquement de votre PDF, sans texte
+                inventé ni résumé de remplacement. Les paragraphes, césures et
+                continuations peuvent nécessiter une relecture dans le livre.
+                Après confirmation, exportez votre copie JSON privée depuis
+                Gestion pour la conserver sur votre Mac. Le PDF n’est pas
+                conservé.
+              </p>
+            )}
             {problem && <p role="alert">{problem}</p>}
             <div className="modal-actions">
               <button

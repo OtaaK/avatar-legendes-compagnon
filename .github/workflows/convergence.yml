@@ -38,6 +38,9 @@ jobs:
           path: |
             dist/companion/index.html
             docs/reference/TESTER_BIBLIOTHEQUE.md
+            docs/reference/DESCRIPTIONS_PRIVEES.md
+            docs/reference/DEPENDANCES.md
+            docs/reference/PDFJS_LICENSE.txt
           retention-days: 30
       - uses: actions/upload-artifact@v4
         if: always()

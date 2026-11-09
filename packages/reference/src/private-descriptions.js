@@ -31,6 +31,23 @@ export function parsePrivateDescriptions(text) {
   }
   return Object.freeze(descriptions);
 }
+/** Export privé réimportable ; aucune donnée de campagne ni métadonnée inconnue. */
+export function serializePrivateDescriptions(descriptions) {
+  const raw = JSON.stringify(
+    {
+      format: "avatar-technique-descriptions-privees",
+      version: 1,
+      techniques: Object.entries(descriptions).map(([id, description]) => ({
+        id,
+        description,
+      })),
+    },
+    null,
+    2,
+  );
+  parsePrivateDescriptions(raw);
+  return raw;
+}
 export function privateDescriptionRepository(storage) {
   return {
     load() {
@@ -53,14 +70,7 @@ export function privateDescriptionRepository(storage) {
       }
     },
     save(descriptions) {
-      const raw = JSON.stringify({
-        format: "avatar-technique-descriptions-privees",
-        version: 1,
-        techniques: Object.entries(descriptions).map(([id, description]) => ({
-          id,
-          description,
-        })),
-      });
+      const raw = serializePrivateDescriptions(descriptions);
       const valid = parsePrivateDescriptions(raw);
       storage.setItem(PRIVATE_TEXT_KEY, raw);
       return valid;

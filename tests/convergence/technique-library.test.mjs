@@ -10,6 +10,7 @@ import {
 } from "../../packages/reference/src/technique-library.js";
 import {
   parsePrivateDescriptions,
+  serializePrivateDescriptions,
   privateDescriptionRepository,
   PRIVATE_TEXT_KEY,
 } from "../../packages/reference/src/private-descriptions.js";
@@ -216,4 +217,23 @@ test("quota ou corruption privée : erreur explicite, conservation du précéden
     privateDescriptionRepository({ ...storage, getItem: () => "{" }).load()
       .error,
   );
+});
+
+test("banque complète : export privé réimportable des 111 IDs sans perdre une lettre et sans campagne", () => {
+  const entries = TECHNIQUE_LIBRARY.map((t, i) => ({
+    id: t.id,
+    description: `${synthetic}\n\nPassage synthétique ${i}`,
+  }));
+  const descriptions = parsePrivateDescriptions(pack(entries));
+  const raw = serializePrivateDescriptions(descriptions);
+  assert.equal(Object.keys(descriptions).length, 111);
+  assert.deepEqual(parsePrivateDescriptions(raw), descriptions);
+  assert.deepEqual(Object.keys(JSON.parse(raw)), [
+    "format",
+    "version",
+    "techniques",
+  ]);
+  assert(!raw.includes("combat"));
+  assert(!raw.includes("library"));
+  assert.throws(() => serializePrivateDescriptions({ inconnu: "texte" }));
 });

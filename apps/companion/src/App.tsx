@@ -24,7 +24,10 @@ import { ProjectData } from "./features/ProjectData";
 import { createCharacterCommands } from "../../../packages/application/src/character-commands.js";
 import { TechniqueLibrary } from "./features/techniques/TechniqueLibrary";
 import { PrivateDescriptionSettings } from "./features/techniques/PrivateDescriptionSettings";
-import { privateDescriptionRepository } from "../../../packages/reference/src/private-descriptions.js";
+import {
+  privateDescriptionRepository,
+  serializePrivateDescriptions,
+} from "../../../packages/reference/src/private-descriptions.js";
 import { TECH_CATALOG } from "../../../packages/domain/src/catalog.js";
 
 function createLabStore(key = LAB_KEY) {
@@ -250,6 +253,12 @@ export function App() {
             <div className="management-grid">
               <PrivateDescriptionSettings
                 count={Object.keys(privateState.descriptions).length}
+                onExport={() =>
+                  download(
+                    serializePrivateDescriptions(privateState.descriptions),
+                    "avatar-descriptions-privees.json",
+                  )
+                }
                 error={privateState.error}
                 onLoad={(texts) =>
                   setPrivateState({
