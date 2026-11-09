@@ -278,3 +278,28 @@ Le cloud bloque les navigations file:// ; les essais hors réseau du document em
 ne certifient pas l'ouverture native macOS. Le design n'a pas été remplacé pour contourner
 cette limite. Voir [bilan](migration/BILAN_LOT_1.md), [matrice](migration/MATRICE_FONCTIONNELLE.md)
 et [recette sans commande](migration/TESTER_LOT_1.md).
+
+
+## 2026-11-08 — Lot 1 validé, lot 2 et bibliothèque indépendante
+
+Le propriétaire valide le shell et le fonctionnement général après essai sur Mac. Il
+autorise le lot 2 Personnages/ressources, avec véritable persistance Codex, portraits,
+profils, ajustements annulables, navigation des fiches et import/export contrôlé.
+Les données de combat restent des copies indépendantes. Aucun lot 3 commencé.
+
+Une bibliothèque indépendante est insérée après validation du lot 2 : 111 techniques,
+recherche/filtres/fiches v0, données et assistance existantes uniquement. Attribution et
+maîtrise restent au lot 4, utilisation au lot 5. Branche et PR séparées ; ne pas commencer
+cette bibliothèque avant accord explicite sur le lot 2. Voir les critères dans ROADMAP.md.
+
+
+### Mise en œuvre du lot 2
+
+Les formulaires appliquent le patch minimal Codex, y compris ses limites, normalisations,
+confirmations et conservation des champs inconnus. Deux groupes d'ajout/retrait v0 séparent
+états et statuts. Les profils restent volontaires ; importance seule inchangée côté ressources.
+Le projet utilise le namespace React réel du lot 1 ; l'import est explicite avec aperçu,
+confirmation et export préalable proposé. Aucune écriture ou récupération des anciennes clés.
+La bibliothèque, le combat et leurs historiques restent conservés ensemble par le store.
+La création PJ est manuelle ; aucune logique de Livret ajoutée. L'annulation permanente
+reste temporaire, distincte des instantanés de combat.

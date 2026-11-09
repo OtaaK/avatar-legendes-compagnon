@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "lot1-implemented-awaiting-owner-validation",
+  "status": "lot2-implemented-awaiting-owner-validation",
   "inspectedOn": "2026-11-08",
   "business": {
     "repository": "OtaaK/avatar-legendes-compagnon",
@@ -136,6 +136,49 @@
     "portableHtmlSha256": "18c8c2e39e668c48e91a9a37569e8e89066eecf1ab5426d4d842851209eeafd3",
     "nativeFileNavigation": "blocked by managed Chromium: ERR_BLOCKED_BY_ADMINISTRATOR; Mac trial pending",
     "offlineEmbeddedDocument": "cold context via test transport, network disabled, no subresources",
+    "merged": false,
+    "deployed": false,
+    "ownerValidated": true,
+    "ownerValidationScope": "Mac navigation and general functioning, as stated by owner"
+  },
+  "lot2": {
+    "branch": "convergence/lot2-personnages",
+    "baseBranch": "convergence/react-v0",
+    "baseCommit": "0d40f4319b67f8eeefe57613322b2056c7f02909",
+    "businessCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+    "uiCommit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+    "domainModules": 13,
+    "historicalScriptsBefore": 243,
+    "historicalScriptsAfter": 243,
+    "contractParityBoundaryTests": 33,
+    "historicalRedirectedScripts": 198,
+    "scriptsCallingExtractedAPI": 171,
+    "publicCalls": 8111,
+    "viewports": [
+      [
+        1440,
+        1024
+      ],
+      [
+        1280,
+        800
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "portableHtmlSha256": "a2d03d0e92a4398c297984606737921b8921a1c9e749e420a8fa455ef0de0a31",
+    "singleHtmlBuild": true,
+    "offlineEmbeddedProject": true,
+    "nativeFileDevelopmentEnvironment": "ERR_BLOCKED_BY_ADMINISTRATOR; native CI and Mac results to report separately",
+    "nextLot": "Independent techniques library, only after owner validation of Lot 2",
+    "libraryLotStarted": false,
+    "lot3Started": false,
     "merged": false,
     "deployed": false
   }

@@ -11,10 +11,12 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [x] Préparer un rapport et des contrats proposés sur une branche isolée, sans code migré.
 - [x] Plan validé par le propriétaire ; v0 corrigé figé à `8b8924d`.
 - [x] Lot 1 implémenté : architecture, 11 modules extraits, contrats, shell v0 et prototype portable.
-- [ ] Validation propriétaire du lot 1 et essai réel du HTML sur Mac avant lot 2.
-- [ ] Lot 2 : Personnages, ressources et portraits dans v0.
+- [x] Lot 1 validé par le propriétaire après essai sur Mac ; lot 2 autorisé.
+- [x] Lot 2 implémenté : Personnages, ressources, portraits et reprise explicite Codex dans v0.
+- [ ] Recette et validation propriétaire du lot 2 avant tout nouveau lot.
+- [ ] Lot indépendant **Bibliothèque de techniques**, après validation du lot 2 : catalogue seul, branche et PR propres.
 - [ ] Lot 3 : Lieux et liens PNJ.
-- [ ] Lot 4 : Livrets et techniques.
+- [ ] Lot 4 : Livrets, attribution de techniques et maîtrise individuelle.
 - [ ] Lot 5 : intégralité des capacités de combat existantes dans v0.
 - [ ] Lot 6 : Gestion, annulations, compatibilité et distribution hors ligne qualifiée.
 - [ ] Lot 7 : recette visuelle/fonctionnelle/responsive et validation avant toute fusion.
@@ -118,3 +120,26 @@ fonctionnelle de Combats restent des demandes séparées ; le lot 6 ne les décl
 
 Les autres parcours ont été signalés comme fonctionnels par le propriétaire. Voir
 `docs/RAPPORT_RETOURS_UI_UX.md` ; aucune intégration automatique dans main.
+
+
+## Lot indépendant après le lot 2 — Bibliothèque de techniques
+
+Périmètre validé : remplacer les dix exemples fictifs par les **111 techniques Codex**
+dans la rubrique Techniques v0, en conservant ses cartes, navigation et ergonomie.
+Aucune règle, description ou mécanique ajoutée ; aucune commande de combat ni attribution
+à un personnage. Le lot 4 conserve attribution et maîtrise individuelle, le lot 5 le combat.
+
+Critères de validation :
+
+1. Exactement 111 entrées, identifiants et références conservés, aucune technique fictive.
+2. Recherche, filtres existants adaptés aux données réelles, compte des résultats et
+   réinitialisation fiables ; aucune modification du catalogue lors de la consultation.
+3. Cartes et fiches détaillées v0 présentant uniquement les champs disponibles ; données
+   absentes signalées sans texte inventé. Pages, accès, rareté et indications d'assistance
+   ou de validation existantes conservés, sans surestimer l'automatisation.
+4. Aucun état de maîtrise global, changement de ressource, attribution ou effet de combat.
+5. Catalogue identique après export/réimport des sauvegardes ; consultation sans écriture,
+   démarrage hors ligne et ressources embarquées.
+6. Recette clavier, tactile et quatre résolutions ; régressions historiques et tests React.
+7. Branche indépendante issue du lot 2 validé, PR en brouillon et prototype portable propres.
+   **Ne pas commencer avant la validation explicite du lot 2**, ni ouvrir le lot 3 sans accord.

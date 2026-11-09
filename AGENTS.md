@@ -79,7 +79,11 @@ v0 corrigé `8b8924de34949d5bdf20bc6ea7ec53be59da28e0`.
 Le lot 1 est autorisé sur `convergence/react-v0` : architecture, extraction contrôlée,
 contrats/parité, shell/navigation et prototype HTML portable. Voir
 `docs/migration/BILAN_LOT_1.md` et `MATRICE_FONCTIONNELLE.md`.
-**Attendre la validation du propriétaire du lot 1 avant de commencer le lot 2.**
+Le propriétaire a validé le lot 1 après essai sur Mac et autorisé le lot 2 Personnages/
+ressources, sur branche dépendante dédiée. Préserver le v0 corrigé et le métier Codex.
+Un lot indépendant Bibliothèque des 111 techniques est planifié après validation du lot 2,
+avec branche/PR distinctes, sans attribution, maîtrise globale ou moteur de combat.
+**Attendre son accord après le lot 2 avant la bibliothèque ou le lot 3.**
 Les réserves v0 (focus PJ, onglets PJ, petits textes, responsive métier) sont suivies dans
 la matrice ; ne pas annoncer leur résolution sur des écrans non encore intégrés.
 
@@ -102,9 +106,10 @@ La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'el
   mission distincte, des tests, puis une mise à jour explicite de la référence.
 - L'ancien `app/simulateur.html` reste inchangé et tous ses tests restent conservés.
 - `npm run build`, `npm run test:contracts`, `npm run test:parity`,
-  `npm run test:inventory`, `npm run test:react` complètent la suite historique.
+  `npm run test:inventory`, `npm run test:react` et `npm run test:characters` complètent la suite historique.
 - Aucun import/auto-enregistrement des données fictives v0. Aucun `setItem` au montage.
-  Le shell du lot 1 écrit seulement `avatar-compagnon-react-lab-v1` pour sa note de test ;
-  le futur espace de projet `avatar-compagnon-react-session-v1` est distinct des clés Codex.
+  Le laboratoire du lot 1 reste sous `avatar-compagnon-react-lab-v1` ; le lot 2 utilise
+  `avatar-compagnon-react-session-v1` pour les véritables personnages via les commandes et
+  l’import explicite. Aucun accès automatique aux anciennes clés Codex.
 - Le cloud bloque `file://` ; distinguer le document embarqué testé hors réseau du
   double-clic réel sur Mac, et Web Locks de la seule détection optimiste des conflits.
