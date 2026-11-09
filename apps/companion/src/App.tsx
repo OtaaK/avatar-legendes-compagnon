@@ -13,11 +13,18 @@ import { navItems, pageFromHash, type PageName } from "./shell/navigation";
 import {
   createRepository,
   LAB_KEY,
+  SESSION_KEY,
 } from "../../../packages/persistence/src/local-session-repository.js";
 import { createSessionStore } from "../../../packages/application/src/session-store.js";
+import {
+  Characters,
+  parseCharacterHash,
+} from "./features/characters/Characters";
+import { ProjectData } from "./features/ProjectData";
+import { createCharacterCommands } from "../../../packages/application/src/character-commands.js";
 import { TECH_CATALOG } from "../../../packages/domain/src/catalog.js";
 
-function createLabStore() {
+function createLabStore(key = LAB_KEY) {
   // Accès différé et capturé : un navigateur refusant localStorage doit rester utilisable.
   const storage = {
     getItem: (key: string) => window.localStorage.getItem(key),
@@ -25,7 +32,7 @@ function createLabStore() {
       window.localStorage.setItem(key, value),
   };
   return createSessionStore(
-    createRepository({ storage, key: LAB_KEY, locks: navigator.locks }),
+    createRepository({ storage, key, locks: navigator.locks }),
   );
 }
 function download(text: string, name: string) {
@@ -56,18 +63,48 @@ const pending: Record<
   },
   Techniques: {
     lot: 4,
-    description: "Livrets, catalogue réel et maîtrise par personnage.",
+    description:
+      "Bibliothèque réelle prévue après validation du lot 2 ; attribution et maîtrise dans leurs lots dédiés.",
   },
 };
 export function App() {
-  const [page, setPage] = useState<PageName>(
-    () => pageFromHash(window.location.hash) ?? "Accueil",
+  const [page, setPage] = useState<PageName>(() =>
+    parseCharacterHash(window.location.hash)
+      ? "Personnages"
+      : (pageFromHash(window.location.hash) ?? "Accueil"),
   );
   const [modal, setModal] = useState<"help" | "preview" | null>(null);
   const opener = useRef<HTMLElement | null>(null);
   const fileInput = useRef<HTMLInputElement | null>(null);
   const inspectTrigger = useRef<HTMLButtonElement | null>(null);
-  const [store] = useState(createLabStore);
+  const [store] = useState(() => createLabStore());
+  const [projectStore] = useState(() => createLabStore(SESSION_KEY));
+  const projectSnapshot = useSyncExternalStore(
+    projectStore.subscribe,
+    projectStore.getSnapshot,
+  );
+  const [commands] = useState(() => createCharacterCommands(projectStore));
+  const [hash, setHash] = useState(window.location.hash);
+  const hashRef = useRef(hash);
+  function routeTo(next: string, committed = false) {
+    if (
+      !committed &&
+      !window.dispatchEvent(
+        new Event("avatar-before-navigate", { cancelable: true }),
+      )
+    )
+      return;
+    closeModal();
+    hashRef.current = next;
+    setHash(next);
+    setPage(
+      parseCharacterHash(next)
+        ? "Personnages"
+        : (pageFromHash(next) ?? "Accueil"),
+    );
+    window.history.pushState(null, "", next);
+    window.scrollTo(0, 0);
+  }
   const snapshot = useSyncExternalStore(store.subscribe, store.getSnapshot);
   const [note, setNote] = useState(() =>
     String(snapshot.session.backupMetadata?.lot1Note ?? ""),
@@ -80,13 +117,29 @@ export function App() {
   const previewGeneration = useRef(0);
   useEffect(() => {
     const restore = () => {
-      const next = pageFromHash(window.location.hash);
-      if (next) {
-        setPage(next);
-        closeModal();
+      const next = window.location.hash;
+      if (next === hashRef.current) return;
+      if (
+        !window.dispatchEvent(
+          new Event("avatar-before-navigate", { cancelable: true }),
+        )
+      ) {
+        window.history.pushState(null, "", hashRef.current || "#accueil");
+        return;
       }
+      hashRef.current = next;
+      setHash(next);
+      setPage(
+        parseCharacterHash(next)
+          ? "Personnages"
+          : (pageFromHash(next) ?? "Accueil"),
+      );
+      closeModal();
     };
-    const external = () => store.checkExternal();
+    const external = () => {
+      store.checkExternal();
+      projectStore.checkExternal();
+    };
     window.addEventListener("hashchange", restore);
     window.addEventListener("popstate", restore);
     window.addEventListener("storage", external);
@@ -97,17 +150,14 @@ export function App() {
       window.removeEventListener("storage", external);
       window.removeEventListener("focus", external);
     };
-  }, [store]);
+  }, [store, projectStore]);
   function closeModal() {
     previewGeneration.current++;
     setModal(null);
     setPreview(null);
   }
   function navigate(next: PageName) {
-    closeModal();
-    setPage(next);
-    window.history.pushState(null, "", `#${next.toLocaleLowerCase("fr")}`);
-    window.scrollTo(0, 0);
+    routeTo(`#${next.toLocaleLowerCase("fr")}`);
   }
   function help(event: MouseEvent<HTMLButtonElement>) {
     previewGeneration.current++;
@@ -143,9 +193,35 @@ export function App() {
   }
   return (
     <>
-      <Shell page={page} navigate={navigate} onHelp={help}>
+      <Shell
+        page={page}
+        navigate={navigate}
+        onHelp={help}
+        characterCount={projectSnapshot.session.library.characters.length}
+      >
         {page === "Accueil" ? (
-          <Home navigate={navigate} />
+          <Home
+            navigate={navigate}
+            counts={{
+              pj: projectSnapshot.session.library.characters.filter(
+                (c) => c.kind === "PJ",
+              ).length,
+              pnj: projectSnapshot.session.library.characters.filter(
+                (c) => c.kind === "PNJ",
+              ).length,
+              places: Array.isArray(projectSnapshot.session.library.places)
+                ? projectSnapshot.session.library.places.length
+                : 0,
+            }}
+          />
+        ) : page === "Personnages" ? (
+          <Characters
+            store={projectStore}
+            snapshot={projectSnapshot}
+            commands={commands}
+            route={parseCharacterHash(hash)}
+            onRoute={routeTo}
+          />
         ) : page === "Gestion" ? (
           <div className="page-content management-view">
             <div className="page-heading">
@@ -156,6 +232,10 @@ export function App() {
               </div>
             </div>
             <div className="management-grid">
+              <ProjectData
+                store={projectStore}
+                onImported={() => commands.invalidate()}
+              />
               <section className="management-card about-card">
                 <div className="management-card-icon">
                   <BookOpen />
@@ -269,7 +349,11 @@ export function App() {
               <span className="empty-mark">
                 <Search />
               </span>
-              <b>Intégration prévue au lot {pending[page].lot}</b>
+              <b>
+                {page === "Techniques"
+                  ? "Bibliothèque prévue après validation du lot 2"
+                  : `Intégration prévue au lot ${pending[page].lot}`}
+              </b>
               <p>
                 La navigation est prête. Les fonctionnalités de cette rubrique
                 restent disponibles dans l’application HTML historique.
@@ -297,9 +381,8 @@ export function App() {
             {modal === "help" ? (
               <>
                 <p className="modal-copy">
-                  Cette version vérifie la navigation v0 et les fondations
-                  React. Les personnages, lieux, livrets et combats seront
-                  raccordés progressivement, après validation de chaque lot.
+                  Les personnages et ressources sont disponibles. Les lieux,
+                  livrets, techniques et combats restent dans leurs lots dédiés.
                 </p>
                 <p className="modal-copy">
                   Le fichier portable embarque ses ressources. La persistance

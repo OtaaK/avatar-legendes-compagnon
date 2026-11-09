@@ -10,7 +10,13 @@ import {
 } from "lucide-react";
 import type { PageName } from "./navigation";
 // Classes, composition et illustration CSS reprises de HomeView v0 8b8924d.
-export function Home({ navigate }: { navigate: (page: PageName) => void }) {
+export function Home({
+  navigate,
+  counts,
+}: {
+  navigate: (page: PageName) => void;
+  counts?: { pj: number; pnj: number; places: number };
+}) {
   return (
     <div className="page-content home-view">
       <div className="page-heading">
@@ -60,7 +66,15 @@ export function Home({ navigate }: { navigate: (page: PageName) => void }) {
             </span>
             <span>
               <small>{label}</small>
-              <b>—</b>
+              <b>
+                {counts
+                  ? label === "Personnages joueurs"
+                    ? counts.pj
+                    : label === "Personnages non joueurs"
+                      ? counts.pnj
+                      : counts.places
+                  : "—"}
+              </b>
             </span>
             <button
               type="button"
@@ -124,32 +138,30 @@ export function Home({ navigate }: { navigate: (page: PageName) => void }) {
           <div className="section-title-row">
             <div>
               <span className="eyebrow">CONVERGENCE V0 / CODEX</span>
-              <h2>Lot 1 : les fondations</h2>
+              <h2>Personnages et ressources</h2>
             </div>
           </div>
           <div className="empty-state">
             <span className="empty-mark">
               <Compass />
             </span>
-            <b>Navigation prête</b>
+            <b>Vos fiches sont disponibles</b>
             <p>
-              Les fiches et les combats restent dans l’application historique
-              pendant leur intégration progressive.
+              Les personnages sont intégrés. Les autres rubriques suivront dans leurs lots dédiés.
             </p>
             <button
               type="button"
               className="button-secondary"
-              onClick={() => navigate("Gestion")}
+              onClick={() => navigate("Personnages")}
             >
-              Vérifier le fonctionnement local <ArrowRight />
+              Ouvrir les personnages <ArrowRight />
             </button>
           </div>
         </div>
       </section>
       <p className="disclaimer-line">
         <CircleHelp />
-        Aucune donnée de démonstration v0 n’est enregistrée. Les écrans métier
-        seront raccordés dans les lots suivants.
+        Les données Codex sont reprises par import explicite. Les copies de combat restent indépendantes.
       </p>
     </div>
   );

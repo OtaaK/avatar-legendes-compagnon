@@ -86,7 +86,7 @@ try:
   page.get_by_role('button',name='Enregistrer la note de test').click();page.get_by_role('status').filter(has_text='Quota test').wait_for();assert page.get_by_label('Note de test',exact=True).input_value()=='Brouillon conservé'
   page.evaluate('() => {Storage.prototype.setItem=window.__set}');page.get_by_role('button',name='Enregistrer la note de test').click();page.get_by_role('status').filter(has_text='enregistrée').wait_for();page.reload();assert page.get_by_label('Note de test',exact=True).input_value()=='Brouillon conservé';results['quotaRecovery']=True;context.close()
   # Accès refusé dès le montage : l'interface reste accessible, pas de reset.
-  context=browser.new_context();context.add_init_script("Storage.prototype.getItem=function(){throw new Error('Accès local refusé')}");page=context.new_page();page.goto(url+'#gestion');page.get_by_role('alert').filter(has_text='Accès local refusé').wait_for();assert page.get_by_role('button',name='Enregistrer la note de test').is_disabled();results['deniedStorage']=True;context.close()
+  context=browser.new_context();context.add_init_script("Storage.prototype.getItem=function(){throw new Error('Accès local refusé')}");page=context.new_page();page.goto(url+'#gestion');page.locator('.management-card').filter(has_text='ESSAI HORS LIGNE').get_by_role('alert').filter(has_text='Accès local refusé').wait_for();assert page.get_by_role('button',name='Enregistrer la note de test').is_disabled();results['deniedStorage']=True;context.close()
   # Vrai essai file://, contexte froid et réseau coupé, sans assouplir la politique.
   context=browser.new_context(offline=True,accept_downloads=True);page=context.new_page();requests=[];page.on('request',lambda r:requests.append(r.url))
   try:
