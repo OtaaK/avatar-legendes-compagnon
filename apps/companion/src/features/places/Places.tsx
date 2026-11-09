@@ -60,6 +60,7 @@ function PeopleAtPlace({
                 <Portrait
                   name={view.name}
                   training={view.training}
+                  src={view.portrait}
                   size="small"
                 />
                 <span>

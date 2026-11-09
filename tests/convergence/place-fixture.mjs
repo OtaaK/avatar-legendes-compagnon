@@ -14,6 +14,8 @@ PlaceRules.find(s.library, root).portrait =
   "https://invalid.example.org/ancienne.png";
 PlaceRules.find(s.library, child).future = { keep: 42 };
 const guide = Roster.createCharacter(s.library, "Guide lié", "PNJ");
+guide.portrait =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jFWQAAAAASUVORK5CYII=";
 guide.livret = "Guide";
 guide.history = "Historique conservé";
 guide.future = { keep: true };
