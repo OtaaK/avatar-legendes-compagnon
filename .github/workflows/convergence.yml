@@ -1,4 +1,4 @@
-name: Convergence React — Bibliothèque
+name: Convergence React — Lieux
 on:
   pull_request:
   workflow_dispatch:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   lot1:
-    name: Bibliothèque et non-régression
+    name: Lieux et non-régression
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,11 +32,13 @@ jobs:
       - run: npm run test:react
       - run: npm run test:characters
       - run: npm run test:library
+      - run: npm run test:places
       - uses: actions/upload-artifact@v4
         with:
-          name: avatar-legendes-bibliotheque-portable
+          name: avatar-legendes-lieux-portable
           path: |
             dist/companion/index.html
+            docs/migration/TESTER_LOT_LIEUX.md
             docs/reference/TESTER_BIBLIOTHEQUE.md
             docs/reference/DESCRIPTIONS_PRIVEES.md
             docs/reference/DEPENDANCES.md
@@ -51,4 +53,5 @@ jobs:
             work/lot1-browser/
             work/lot2-browser/
             work/library-browser/
+            work/places-browser/
           retention-days: 30
