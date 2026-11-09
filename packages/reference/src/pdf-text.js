@@ -58,3 +58,16 @@ export function labelInRegion(items, region) {
     .map((i) => i.text)
     .join(" ");
 }
+
+/** Même texte/retours que la lecture simple, avec balises d'italique échappées. */
+export function formattedTextInRegion(items, region, paragraphs = true) {
+  const escape = (s) => s.replace(/[\\*]/g, "\\$&");
+  return textInRegion(
+    items.map((i) => ({
+      ...i,
+      text: i.italic ? "*" + escape(i.text) + "*" : escape(i.text),
+    })),
+    region,
+    paragraphs,
+  );
+}

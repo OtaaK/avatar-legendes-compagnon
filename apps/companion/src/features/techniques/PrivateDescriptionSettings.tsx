@@ -1,3 +1,4 @@
+import type { PrivateTextValue } from "./PrivateText";
 import { useEffect, useRef, useState } from "react";
 import { parsePrivateDescriptions } from "../../../../../packages/reference/src/private-descriptions.js";
 import { PrivatePdfPreparation } from "./PrivatePdfPreparation";
@@ -11,7 +12,7 @@ export function PrivateDescriptionSettings({
 }: {
   count: number;
   error: string | null;
-  onLoad: (texts: Readonly<Record<string, string>>) => void;
+  onLoad: (texts: Readonly<Record<string, PrivateTextValue>>) => void;
   onClear: () => void;
   onExport: () => void;
 }) {
@@ -19,7 +20,7 @@ export function PrivateDescriptionSettings({
     trigger = useRef<HTMLButtonElement | null>(null),
     generation = useRef(0);
   const [pending, setPending] = useState<Readonly<
-      Record<string, string>
+      Record<string, PrivateTextValue>
     > | null>(null),
     [message, setMessage] = useState(""),
     [problem, setProblem] = useState(""),

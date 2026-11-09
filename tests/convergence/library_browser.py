@@ -63,9 +63,10 @@ try:
     card.hover();assert card.evaluate('e=>getComputedStyle(e).borderTopColor')==color
     page.keyboard.press('Tab');card.focus();assert card.evaluate('e=>getComputedStyle(e).outlineStyle')!='none';assert card.evaluate('e=>getComputedStyle(e).borderTopColor')==color
    page.mouse.move(0,0)
+   heights=page.locator('.library-card').evaluate_all('es=>es.map(e=>e.getBoundingClientRect().height)');assert max(heights)-min(heights)<1
    # Cartes = trois informations, un seul élément interactif, nom exact et approche.
    first=page.locator('.library-card').first;assert first.locator('button,input,select,a').count()==0
-   assert [line.casefold() for line in first.inner_text().splitlines()]==[line.casefold() for line in ['Base','Se préparer','Défendre et prendre à revers']],first.inner_text()
+   assert [line.casefold() for line in first.inner_text().splitlines()]==[line.casefold() for line in ['Base','Défendre et prendre à revers','Se préparer']],first.inner_text()
    assert first.locator('.library-card-name').inner_text()=='Se préparer'
    for forbidden in ['Connue','En apprentissage','Maîtrisée','Voir le détail','Apprendre','Utiliser']:assert page.locator('.library-card').get_by_text(forbidden,exact=True).count()==0
    # Chaque zone, clavier Entrée/Espace et tactile ouvrent une seule fenêtre.
@@ -106,6 +107,10 @@ try:
    results['viewports'].append({'width':w,'height':h,'filters':True,'cardAndModal':True,'keyboardAndFocus':True,'privateTextComplete':True,'consultationWrites':0,'pageErrors':errors});context.close()
   # Quota privé et fichier invalide : aucune modification du jeu précédent ou du projet.
   context=browser.new_context();page=context.new_page();page.on('dialog',lambda d:d.accept());page.goto(url+'#techniques');seed(page);before=page.evaluate('({...localStorage})');upload_private(page);page.evaluate("()=>{Storage.prototype.setItem=function(){throw new DOMException('Quota privé','QuotaExceededError')}}");page.get_by_role('button',name='Confirmer le chargement privé').click();page.get_by_role('dialog').get_by_role('alert').filter(has_text='Quota privé').wait_for();assert page.evaluate('({...localStorage})')==before;page.get_by_role('button',name='Annuler le chargement').click();page.get_by_label('Fichier privé de descriptions',exact=True).set_input_files({'name':'invalide.json','mimeType':'application/json','buffer':b'{'});page.get_by_role('alert').first.wait_for();assert page.evaluate('({...localStorage})')==before;results['privateQuotaAndInvalidFile']=True;context.close()
+  # Ancien texte littéral et sous-ensemble structuré sûr : aucune interprétation HTML.
+  context=browser.new_context();page=context.new_page();page.goto(url+'#techniques')
+  rich=json.dumps({'format':'avatar-technique-descriptions-privees','version':2,'techniques':[{'id':'base-frapper','description':'Un *passage italique*.\n\n• Premier\n• Dernier\n<script>window.__unsafe=true</script>','textFormat':'markdown-lite'}]}).encode()
+  upload_private(page,rich);page.get_by_role('button',name='Confirmer le chargement privé').click();page.get_by_role('dialog').wait_for(state='detached');page.get_by_role('navigation',name='Navigation principale').get_by_role('button',name='Techniques',exact=True).click();open_fr(page);assert page.locator('.full-technique-description em').inner_text()=='passage italique';assert page.locator('.full-technique-description script').count()==0;assert page.evaluate('window.__unsafe') is None;assert '• Dernier' in page.locator('.full-technique-description').inner_text();page.keyboard.press('Escape');page.reload();open_fr(page);assert page.locator('.full-technique-description em').inner_text()=='passage italique';results['structuredPrivateSafe']=True;context.close()
   # Préparation PDF hors réseau : PDF fabriqué sans un seul texte du livre.
   pdf_buffer=runpy.run_path(str(ROOT/'tests/convergence/synthetic-technique-pdf.py'))['synthetic_pdf']()
   context=browser.new_context(offline=True,accept_downloads=True);context.route(url,lambda route:route.fulfill(status=200,content_type='text/html',body=(DIST/'index.html').read_text()));page=context.new_page();page.set_default_timeout(30000);page.goto(url+'#gestion');before=page.evaluate('({...localStorage})')
@@ -117,7 +122,7 @@ try:
   page.get_by_role('button',name='Annuler le chargement',exact=True).click();assert page.evaluate('({...localStorage})')==before
   page.get_by_label('PDF personnel des règles',exact=True).set_input_files({'name':'recette-synthetique.pdf','mimeType':'application/pdf','buffer':pdf_buffer});page.get_by_role('dialog').wait_for();page.get_by_role('button',name='Confirmer le chargement privé',exact=True).click();page.get_by_role('dialog').wait_for(state='detached')
   with page.expect_download() as saved:page.get_by_role('button',name='Exporter mes descriptions privées',exact=True).click()
-  bank=json.loads(Path(saved.value.path()).read_text());assert len(bank['techniques'])==111
+  bank=json.loads(Path(saved.value.path()).read_text());assert len(bank['techniques'])==111;assert bank['version']==2;assert all(t.get('textFormat')=='markdown-lite' for t in bank['techniques']),[t['id'] for t in bank['techniques'] if t.get('textFormat')!='markdown-lite']
   for t in bank['techniques']:
    assert 'Texte de recette entierement synthetique.' in t['description'];assert 'Passage '+t['id']+' segment 0.' in t['description']
    if t['id'] in ['base-riposter','base-se-recueillir']:assert 'segment 1.' in t['description']

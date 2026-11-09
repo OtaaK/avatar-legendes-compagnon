@@ -7,7 +7,7 @@ export function parsePrivateDescriptions(text) {
   if (
     !input ||
     input.format !== "avatar-technique-descriptions-privees" ||
-    input.version !== 1 ||
+    ![1, 2].includes(input.version) ||
     !Array.isArray(input.techniques) ||
     input.techniques.length > 111
   )
@@ -27,7 +27,16 @@ export function parsePrivateDescriptions(text) {
       entry.description.length > 1_000_000
     )
       throw Error("Description absente, invalide ou trop volumineuse.");
-    descriptions[entry.id] = entry.description;
+    const format = entry.textFormat ?? "plain";
+    if (
+      !["plain", "markdown-lite"].includes(format) ||
+      (input.version === 1 && format !== "plain")
+    )
+      throw Error("Format de texte privé non reconnu.");
+    descriptions[entry.id] =
+      format === "markdown-lite"
+        ? Object.freeze({ text: entry.description, format })
+        : entry.description;
   }
   return Object.freeze(descriptions);
 }
@@ -36,10 +45,16 @@ export function serializePrivateDescriptions(descriptions) {
   const raw = JSON.stringify(
     {
       format: "avatar-technique-descriptions-privees",
-      version: 1,
+      version: Object.values(descriptions).some((v) => typeof v !== "string")
+        ? 2
+        : 1,
       techniques: Object.entries(descriptions).map(([id, description]) => ({
         id,
-        description,
+        description:
+          typeof description === "string" ? description : description?.text,
+        ...(typeof description !== "string"
+          ? { textFormat: description?.format }
+          : {}),
       })),
     },
     null,

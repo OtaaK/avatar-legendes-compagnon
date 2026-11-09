@@ -204,9 +204,9 @@
     "descriptionsCertified": false,
     "historicalBefore": 243,
     "historicalAfter": 243,
-    "contractTests": 46,
+    "contractTests": 47,
     "singleHtmlBuild": true,
-    "portableHtmlSha256": "00defe4be1b515a1dbcc65fe4bd3258ee313a9a5f24f41687c03148bf8c710af",
+    "portableHtmlSha256": "17603dbbe6b49b5ca5fdaf75a30107f8f0876722ebc83e50269ed7f22e435f4d",
     "merged": false,
     "deployed": false,
     "recipeCorrections": {
@@ -223,6 +223,7 @@
       "historicalAfterTimeouts": 1,
       "historicalAfterTimeoutTest": "tests/browser/test_uiux_navigation.py",
       "privatePdfCancelWrongEditionAndRestoreTested": true
-    }
+    },
+    "privateRichText": "version 2 opt-in markdown-lite, version 1 unchanged"
   }
 }

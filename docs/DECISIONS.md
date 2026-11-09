@@ -325,3 +325,7 @@ refondus pendant ce lot ; aucun autre lot, déploiement ou fusion sans nouvel ac
 ### 9 novembre 2026 — Correctifs de recette bibliothèque
 
 Le propriétaire autorise les cartes plus compactes et les neuf bordures discrètes, ainsi que la préparation groupée de ses descriptions depuis son PDF pour usage local privé. PDF.js est embarqué hors réseau ; aucun texte du livre n’est publié. L’export JSON privé reste distinct de la campagne. Les techniques et règles sont inchangées. Relecture du résultat automatique nécessaire, aucune fusion ni autre lot autorisé.
+
+### Autorisation suivante — 9 novembre 2026
+
+Le propriétaire demande les finitions A1–A4 dans PR 14 puis autorise immédiatement le Lot Lieux sur une branche dépendante, sans fusion de main. Les textes privés enrichis sont explicitement versionnés ; les JSON v1 restent littéraux. Le rendu n’interprète aucun HTML. Le chantier ergonomique PJ/PNJ reste différé, sauf raccord nécessaire aux lieux.

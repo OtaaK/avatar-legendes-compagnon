@@ -1,3 +1,5 @@
+import { PrivateText } from "./PrivateText";
+import type { PrivateTextValue } from "./PrivateText";
 import { useRef, useState, type MouseEvent } from "react";
 import { BookOpen, Compass, Users, Search, RotateCcw } from "lucide-react";
 import {
@@ -34,7 +36,7 @@ export function FamilyIcon({ family }: { family: string }) {
 export function TechniqueLibrary({
   descriptions,
 }: {
-  descriptions: Readonly<Record<string, string>>;
+  descriptions: Readonly<Record<string, PrivateTextValue>>;
 }) {
   const [query, setQuery] = useState(""),
     [family, setFamily] = useState(""),
@@ -171,8 +173,8 @@ export function TechniqueLibrary({
               <FamilyIcon family={t.family} />
               <span className="eyebrow">{familyName(t.family)}</span>
             </span>
-            <span className="library-card-name">{t.name}</span>
             <span className="library-card-approach">{t.approach}</span>
+            <span className="library-card-name">{t.name}</span>
           </button>
         ))}
       </div>
@@ -198,13 +200,7 @@ export function TechniqueLibrary({
             <section aria-label="Description">
               <h3>Description</h3>
               {descriptions[selected.id] ? (
-                <div className="full-technique-description">
-                  {descriptions[selected.id]
-                    .split(/\n\s*\n/)
-                    .map((paragraph, index) => (
-                      <p key={index}>{paragraph}</p>
-                    ))}
-                </div>
+                <PrivateText value={descriptions[selected.id]} />
               ) : (
                 <p className="description-unavailable">
                   Description complète non chargée. Consultez votre exemplaire

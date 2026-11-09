@@ -31,3 +31,9 @@ Le véritable PDF fourni est vérifié séparément et localement, hors artefact
 Le contrôle privé indépendant rapproche les 111 passages extraits par PDF.js d’une extraction pdfplumber des rectangles de cette édition : 111/111 identiques après normalisation des espaces et césures. Les pages paires/impaires emploient des limites de colonnes différentes. Cette comparaison technique ne certifie pas une transcription éditoriale universelle ; aucun contenu des passages n’apparaît dans le rapport public.
 
 Les 46 tests de contrats/parité passent. Le parcours navigateur bibliothèque passe aux quatre résolutions ; les parcours des lots 1/2 passent également. Un contrôle ciblé complémentaire vérifie l’annulation pendant la lecture PDF et le refus d’un titre PDF incohérent, sans écriture tardive. Les textes PDF réels et comparaisons privées restent exclusivement dans le dossier ignoré `work/recette-private/`.
+
+## Ajustements finaux autorisés ensuite
+
+Famille à 10 px ; nom à 17 px principal. Approche complète dans une étiquette secondaire arrondie en haut à droite ; famille/icône à gauche, titre en dessous. Les lignes de grille ont une hauteur commune intrinsèque (`grid-auto-rows: 1fr`), sans hauteur fixe ni troncature, y compris pour le plus long nom. Description dans un encart, texte à 13 px et interligne 1,65, paragraphes/lignes/puces conservés. JSON v1 inchangé ; JSON v2 opt-in pour l’italique sûr, aucun HTML interprété. Les italiques déjà perdus nécessitent une nouvelle lecture privée du PDF, car ils ne peuvent pas être déduits du texte brut.
+
+Le Lot Lieux est désormais explicitement autorisé par le propriétaire après ces contrôles, sur une branche distincte dépendante. Aucune fusion préalable n’est demandée.

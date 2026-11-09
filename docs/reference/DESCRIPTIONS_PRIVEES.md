@@ -48,3 +48,9 @@ L’annulation de l’aperçu et la consultation n’écrivent rien. L’effacem
 Les droits de redistribution publique des descriptions intégrales ne sont pas établis. Votre utilisation privée du fichier vous appartient ; aucune nouvelle licence de reproduction n’est présumée. Aucun fichier contenant les textes extraits ne sera joint à la PR ni à ses artefacts.
 
 Le plan `packages/reference/src/pdf-layout.json` contient uniquement des identifiants et rectangles de lecture. `scripts/reference/build-pdf-layout.py` permet sa reconstruction locale avec pdfplumber ; il ne produit aucun texte du livre. Le contrôle source antérieur est dans `CONTROLE_TECHNIQUES_PDF.json` et le lecteur dans `read-private-pdf.ts`. Voir [la dépendance PDF.js et sa licence](DEPENDANCES.md).
+
+## Présentation enrichie (correctifs finaux)
+
+Les anciennes banques version 1 restent du texte brut : leurs astérisques sont littéraux et aucun contenu n’est converti silencieusement. Pour retrouver les italiques perdus dans un ancien export, relisez votre PDF via Gestion puis confirmez et exportez la nouvelle banque privée.
+
+La version 2 accepte, par entrée, `textFormat: "markdown-lite"` avec `description` toujours textuel. Seuls `*italique*` et les échappements `\*` / `\\` sont interprétés ; les paragraphes, lignes, puces et alinéas restent visibles. Aucun HTML, image, lien ou script importé n’est exécuté. L’extraction PDF récupère les styles des polices, sans inventer de mots. Une banque enrichie exportée reste restaurable dans ce prototype ; une ancienne version du lecteur peut refuser ce nouveau format. Gardez vos fichiers d’origine.

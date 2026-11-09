@@ -156,7 +156,7 @@ test("texte privé invalide : JSON, version, IDs inconnus/dupliqués, vide ou ty
     "null",
     JSON.stringify({
       format: "avatar-technique-descriptions-privees",
-      version: 2,
+      version: 99,
       techniques: [],
     }),
     pack([{ id: "demo-technique", description: synthetic }]),
@@ -236,4 +236,33 @@ test("banque complète : export privé réimportable des 111 IDs sans perdre une
   assert(!raw.includes("combat"));
   assert(!raw.includes("library"));
   assert.throws(() => serializePrivateDescriptions({ inconnu: "texte" }));
+});
+
+test("texte structuré v2 : italique opt-in, export sans HTML et ancienne banque littérale", () => {
+  const v2 = JSON.stringify({
+    format: "avatar-technique-descriptions-privees",
+    version: 2,
+    techniques: [
+      {
+        id: "base-frapper",
+        description: "Un *passage*\n\n• Élément",
+        textFormat: "markdown-lite",
+      },
+    ],
+  });
+  const bank = parsePrivateDescriptions(v2);
+  assert.equal(bank["base-frapper"].format, "markdown-lite");
+  assert.deepEqual(
+    parsePrivateDescriptions(serializePrivateDescriptions(bank)),
+    bank,
+  );
+  assert.equal(
+    parsePrivateDescriptions(
+      pack([{ id: "base-frapper", description: "*texte littéral*" }]),
+    )["base-frapper"],
+    "*texte littéral*",
+  );
+  assert.throws(() =>
+    parsePrivateDescriptions(v2.replace("markdown-lite", "html")),
+  );
 });

@@ -193,3 +193,52 @@
     outline-color: Highlight;
   }
 }
+
+/* Recette finale : deux zones en tête, titre complet et hauteur commune intrinsèque. */
+.reference-library .technique-grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+.reference-library .library-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
+  grid-template-rows: minmax(34px, auto) 1fr;
+  align-content: start;
+  align-items: start;
+  gap: 8px;
+}
+.library-card .technique-card-head {
+  min-width: 0;
+  gap: 5px;
+}
+.library-card .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
+}
+.library-card-name {
+  grid-column: 1 / -1;
+  min-height: 2.7em;
+}
+.library-card-approach {
+  justify-self: end;
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+.full-technique-description {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.full-technique-description p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.full-technique-description em {
+  font-style: italic;
+}

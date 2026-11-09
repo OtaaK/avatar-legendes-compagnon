@@ -1,3 +1,4 @@
+import type { PrivateTextValue } from "./PrivateText";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import workerSource from "pdfjs-dist/build/pdf.worker.min.mjs?raw";
 import layout from "../../../../../packages/reference/src/pdf-layout.json";
@@ -6,6 +7,7 @@ import {
   foldPdfLabel,
   labelInRegion,
   textInRegion,
+  formattedTextInRegion,
 } from "../../../../../packages/reference/src/pdf-text.js";
 import {
   parsePrivateDescriptions,
@@ -17,6 +19,7 @@ type PdfWord = {
   top: number;
   width: number;
   size: number;
+  italic?: boolean;
 };
 /** Lecture locale seulement. Pas de rendu PDF, URL externe, JavaScript PDF ou données de campagne. */
 export async function readPrivatePdf(
@@ -74,6 +77,16 @@ export async function readPrivatePdf(
           "Mise en page PDF non reconnue. Aucune description enregistrée.",
         );
       const content = await page.getTextContent();
+      await page.getOperatorList(); // Métadonnées de police ; aucun rendu ni action PDF.
+      const bodyFonts=[...new Set(content.items.filter(i=>"str" in i && Math.hypot(i.transform[2],i.transform[3])>7.5).map(i=>"str" in i?i.fontName:""))];
+      await Promise.all(bodyFonts.map(name=>new Promise<void>((resolve,reject)=>{
+        if(page.commonObjs.has(name)){resolve();return;}
+        const clean=()=>{clearTimeout(timer);signal.removeEventListener("abort",cancel);};
+        const cancel=()=>{clean();reject(new DOMException("Lecture annulée","AbortError"));};
+        const timer=setTimeout(()=>{clean();reject(Error("Police PDF non disponible. Aucun texte enregistré."));},15000);
+        signal.addEventListener("abort",cancel,{once:true});
+        page.commonObjs.get(name,()=>{clean();resolve();});
+      })));
       pages.set(
         no,
         content.items
@@ -85,6 +98,13 @@ export async function readPrivatePdf(
             const ascent = 0.7; // Même convention géométrique que le plan PDFMiner de cette édition.
             return {
               text: i.str,
+              italic: Boolean(
+                page.commonObjs.has(i.fontName) &&
+                  (page.commonObjs.get(i.fontName)?.italic ||
+                    /italic|oblique/i.test(
+                      page.commonObjs.get(i.fontName)?.name ?? "",
+                    )),
+              ),
               x: i.transform[4],
               top: viewport.height - i.transform[5] - size * ascent,
               width: i.width,
@@ -94,7 +114,7 @@ export async function readPrivatePdf(
       );
       progress(index + 1, numbers.length);
     }
-    const descriptions: Record<string, string> = Object.create(null);
+    const descriptions: Record<string, PrivateTextValue> = Object.create(null);
     for (const entry of layout.techniques) {
       const expected = TECHNIQUE_LIBRARY.find((t) => t.id === entry.id);
       if (!expected) throw Error("Plan de lecture incohérent.");
@@ -121,7 +141,26 @@ export async function readPrivatePdf(
             expected.name +
             " ». Aucun texte de remplacement créé.",
         );
-      descriptions[entry.id] = body;
+      const hasItalic = entry.regions.some((r) =>
+        pages
+          .get(r.page)!
+          .some(
+            (i) =>
+              i.italic &&
+              i.x >= r.x0 - 1 &&
+              i.x < r.x1 &&
+              i.top >= r.top - 1 &&
+              i.top < r.bottom,
+          ),
+      );
+      descriptions[entry.id] = hasItalic
+        ? {
+            text: entry.regions
+              .map((r) => formattedTextInRegion(pages.get(r.page)!, r, true))
+              .join("\n\n"),
+            format: "markdown-lite",
+          }
+        : body;
     }
     return parsePrivateDescriptions(serializePrivateDescriptions(descriptions));
   } finally {

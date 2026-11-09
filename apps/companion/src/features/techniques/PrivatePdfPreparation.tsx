@@ -1,3 +1,4 @@
+import type { PrivateTextValue } from "./PrivateText";
 import { useEffect, useRef, useState } from "react";
 export function PrivatePdfPreparation({
   onPrepared,
@@ -5,7 +6,7 @@ export function PrivatePdfPreparation({
 }: {
   onBusyChange: (busy: boolean) => void;
   onPrepared: (
-    texts: Readonly<Record<string, string>>,
+    texts: Readonly<Record<string, PrivateTextValue>>,
     opener: HTMLButtonElement | null,
   ) => void;
 }) {
