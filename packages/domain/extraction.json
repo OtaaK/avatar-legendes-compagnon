@@ -108,6 +108,26 @@
       "exports": [
         "publicCombatReport"
       ]
+    },
+    {
+      "file": "character-fields.js",
+      "start": "function safeSheetPortrait(value){",
+      "end": "\nfunction sheetResourcePreview",
+      "sha256": "5d3dd53a68f1886d5ff173f520a06d1b841aab5777cc6eabf3afb109fd286139",
+      "exports": [
+        "safeSheetPortrait",
+        "sheetPatchFromFields",
+        "npcProfileFromFields"
+      ]
+    },
+    {
+      "file": "npc-presets.js",
+      "start": "const NPC_PROFILE_PRESETS=",
+      "end": "\nfunction npcImportanceChanged",
+      "sha256": "b4284ca8c90a4d990ae4851bb277174c58f5faf0809dda8f0cd352b46aebf2d9",
+      "exports": [
+        "NPC_PROFILE_PRESETS"
+      ]
     }
   ]
 }

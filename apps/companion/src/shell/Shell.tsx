@@ -13,11 +13,13 @@ export function Shell({
   navigate,
   onHelp,
   children,
+  characterCount = 0,
 }: {
   page: PageName;
   navigate: (page: PageName) => void;
   onHelp: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
+  characterCount?: number;
 }) {
   return (
     <div className="app-shell">
@@ -37,7 +39,7 @@ export function Shell({
           </span>
           <span>
             <b title="Avatar Légendes">Avatar Légendes</b>
-            <small>Lot 1 · Structure React</small>
+            <small>Personnages et ressources</small>
           </span>
           <ChevronDown aria-hidden="true" />
         </div>
@@ -57,7 +59,7 @@ export function Shell({
               >
                 <Icon aria-hidden="true" />
                 <span>{name}</span>
-                {name === "Personnages" && <small>{0}</small>}
+                {name === "Personnages" && <small>{characterCount}</small>}
               </button>
             </div>
           ))}
@@ -99,7 +101,7 @@ export function Shell({
           </div>
           <div className="topbar-actions">
             <span className="demo-flag">
-              <i /> Lot 1 · Convergence
+              <i /> Lot 2 · Personnages
             </span>
             <button
               className="icon-button"

@@ -13,7 +13,10 @@ sur `convergence/react-v0`, avec le v0 corrigé `8b8924d` et le métier `a9079fa
 Voir le [bilan du lot 1](docs/migration/BILAN_LOT_1.md), le
 [guide sans commande](docs/migration/TESTER_LOT_1.md) et la
 [matrice fonctionnelle](docs/migration/MATRICE_FONCTIONNELLE.md).
-Les lots suivants attendent la validation du lot 1.
+Le lot 1 a été validé après essai sur Mac. Le **lot 2 Personnages et ressources** est
+préparé sur `convergence/lot2-personnages` : [bilan](docs/migration/BILAN_LOT_2.md) et
+[recette sans commande](docs/migration/TESTER_LOT_2.md). La bibliothèque de techniques
+aura ensuite son propre lot et sa PR, après validation du lot 2 ; les autres lots attendent leur accord.
 L’application HTML ci-dessous reste disponible ; aucune PR précédente n’est fusionnée
 ou supprimée par ce changement d’orientation.
 
@@ -117,7 +120,8 @@ Pour les développeurs uniquement : Node ≥ 22.12, `npm ci --ignore-scripts`, p
 - `npm run test:inventory` : cohérence de l'inventaire technique.
 - `npm run test:react` : shell compilé, navigateur, quatre tailles et essais hors réseau
   (prérequis Python/Playwright de `requirements-dev.txt`, Chromium).
+- `npm run test:characters` : parcours des personnages, ressources, profils, portraits et import/export réels.
 - `python scripts/test.py` : régressions historiques sur le HTML conservé.
 
 Aucune de ces commandes ne déploie ou ne fusionne le projet. Le workflow
-`Convergence React — Lot 1` compile, teste et propose uniquement des artefacts à télécharger.
+`Convergence React — Lots 1 et 2` compile, teste et propose uniquement des artefacts à télécharger.

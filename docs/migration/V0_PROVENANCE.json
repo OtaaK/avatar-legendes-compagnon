@@ -29,5 +29,21 @@
     "Contrôles Gestion limités au laboratoire isolé",
     "Correctifs clavier, focus, petites explications et responsive dans lot1.css séparé"
   ],
-  "untouchedUpstream": true
+  "untouchedUpstream": true,
+  "lot2": {
+    "uiCommit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+    "componentsReused": [
+      "companion-ui: cartes, portraits, entraînement, fatigue, équilibre, pastilles",
+      "PeopleView: sections PJ/PNJ, recherche, filtres et tris",
+      "CharacterDetail: structure, identité, onglets, détails",
+      "StateManager: ajout/retrait, deux groupes Codex distincts"
+    ],
+    "adaptations": [
+      "Projections de lecture canoniques, jamais persistées comme AppData v0",
+      "Portraits locaux validés, principes et limites réels",
+      "Rôle PNJ lu dans livret, patch minimal pour ne pas modifier les liens",
+      "Fenêtres de brouillon et confirmations Codex, onglets sans débordement vertical",
+      "Lots non intégrés signalés, aucune donnée fictive ni maîtrise globale"
+    ]
+  }
 }

@@ -12,7 +12,8 @@
     "test:contracts": "node --test tests/convergence/*.test.mjs",
     "test:parity": "node scripts/convergence/test-parity.mjs",
     "test:react": "python tests/convergence/browser.py",
-    "test:inventory": "node scripts/convergence/inventory.mjs --check"
+    "test:inventory": "node scripts/convergence/inventory.mjs --check",
+    "test:characters": "python tests/convergence/characters_browser.py"
   },
   "dependencies": {
     "lucide-react": "1.16.0",

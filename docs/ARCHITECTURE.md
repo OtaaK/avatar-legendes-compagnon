@@ -290,3 +290,23 @@ transition demande une référence et un corpus de parité mis à jour explicite
 Build : `npm run build` produit `dist/companion/index.html` seul. La CI livre ce fichier en
 artefact téléchargeable, sans déployer. Le fonctionnement natif file:// et les limites de
 stockage Safari/Chrome Mac restent à qualifier. [Bilan détaillé](migration/BILAN_LOT_1.md).
+
+
+## Lot 2 — Personnages et ressources
+
+`apps/companion/src/features/characters` contient les composants v0 raccordés : projections
+canoniques en lecture, cartes/liste, fiche, formulaire et navigation. `ProjectData` porte
+l'aperçu/import/export explicite nécessaire à la reprise de données réelles. La note de test
+lot 1 reste indépendante. La cascade de styles charge les correctifs après le CSS v0 figé.
+
+Les commandes sont dans `packages/application/src/character-commands.js`. Création et
+édition appliquent les champs réellement modifiés grâce au helper Codex extrait ; aucune
+sérialisation des projections visuelles. Les lieux, techniques, livrets et inconnus non
+édités restent inchangés. La fatigue et l'équilibre permanents ne sont pas liés aux copies
+CombatCore. L'undo temporaire est gardé par révision/profil/ressources ; aucun effet React
+ne sauvegarde. Les formats et le repository du lot 1 sont conservés.
+
+Deux modules supplémentaires, `character-fields` et `npc-presets`, sont extraits sans
+réécriture de corps (13 au total). Les types de frontière ne modifient pas leur comportement.
+La rubrique Techniques reste en attente du lot Bibliothèque indépendant, après validation
+du lot 2. Voir [bilan](migration/BILAN_LOT_2.md) et [recette](migration/TESTER_LOT_2.md).

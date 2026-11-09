@@ -1,4 +1,4 @@
-name: Convergence React — Lot 1
+name: Convergence React — Lots 1 et 2
 on:
   pull_request:
   workflow_dispatch:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   lot1:
-    name: Architecture, navigation et fichier portable
+    name: Architecture, personnages et fichier portable
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,18 +30,20 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m playwright install --with-deps chromium
       - run: npm run test:react
+      - run: npm run test:characters
       - uses: actions/upload-artifact@v4
         with:
-          name: avatar-legendes-lot1-portable
+          name: avatar-legendes-lot2-portable
           path: |
             dist/companion/index.html
-            docs/migration/TESTER_LOT_1.md
+            docs/migration/TESTER_LOT_2.md
           retention-days: 30
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lot1-rapports-et-captures
+          name: convergence-rapports-et-captures
           path: |
             work/parity/results.json
             work/lot1-browser/
+            work/lot2-browser/
           retention-days: 30

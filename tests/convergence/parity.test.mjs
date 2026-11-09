@@ -27,3 +27,18 @@ test('catalogue complet et API publiques identiques à l’oracle',()=>{
  assert.deepEqual(json(TECH_CATALOG),json(ctx.TECH_CATALOG));assert.equal(TECH_CATALOG.length,111);
  for(const name of ['CombatCore','CombatRules','Roster','BookState','PlaceRules','ResourceRules','Playbooks'])assert.deepEqual(Object.keys(extracted[name]),Object.keys(ctx[name]));
 });
+
+test('parité des patches de fiche : identité seule, centre, profils volontaires et refus',async()=>{
+ const {sheetPatchFromFields:patch}=await import('../../packages/domain/src/character-fields.js');
+ const npc=Roster.makeCharacter('char-test','Nom','PNJ');npc.extra={keep:true};npc.placeLinks={homeId:'home',associatedIds:['linked'],currentId:null};
+ const pj=Roster.makeCharacter('char-pj','PJ','PJ');
+ const cases=[
+  [npc,{sheetName:'Nom'},{sheetName:'Renommé'},[],[],[]],
+  [npc,{sheetImportance:''},{sheetImportance:'Légendaire'},[],[],[]],
+  [pj,{sheetCenter:'0',sheetBalance:'0'},{sheetCenter:'-2',sheetBalance:'1'},[],[],[]],
+  [npc,{npcProfileMode:'legacy'},{npcProfileMode:'explicit',npcCombatant:'yes',npcFatigueMax:'15',npcBalanceMax:'4',npcConditionCount:'8',npcConditionNames:'Un\nDeux\nTrois\nQuatre\nCinq'},[],[],[]],
+  [npc,{sheetDescription:''},{sheetDescription:'x'.repeat(2001)},[],[],[]],
+ ];
+ const invoke=(fn,args)=>{try{return {patch:json(fn(...json(args)))}}catch(error){return {error:error.message}}};
+ for(const args of cases)assert.deepEqual(invoke(patch,args),invoke(ctx.sheetPatchFromFields,args));
+});

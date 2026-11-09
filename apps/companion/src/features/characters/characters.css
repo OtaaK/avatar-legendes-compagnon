@@ -1,0 +1,174 @@
+/* Composants v0, adaptations aux données canoniques et correctifs de recette. */
+.local-portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  z-index: 2;
+}
+.detail-tabs {
+  overflow-y: hidden;
+  min-height: 48px;
+}
+.detail-tabs button {
+  min-height: 46px;
+  font-size: 12px;
+}
+.detail-main {
+  min-width: 0;
+  align-self: start;
+}
+.detail-identity .detail-name-row h1 {
+  overflow-wrap: anywhere;
+}
+.resource-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 14px;
+}
+.resource-choices label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.resource-choices input {
+  accent-color: var(--gold);
+}
+.feature-feedback {
+  margin: 12px 20px 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.character-editor fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.character-editor fieldset > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+}
+.character-editor .editor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.editor-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+}
+.character-editor input,
+.character-editor select,
+.character-editor textarea {
+  font-size: 13px !important;
+}
+.profile-editor > * {
+  margin-top: 12px;
+}
+.profile-editor > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.profile-editor .button-secondary {
+  margin-right: 6px;
+}
+.preserve-lines {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.detail-main p,
+.info-item small,
+.info-item b,
+.micro-note,
+.meter-heading,
+.detail-role {
+  font-size: 13px;
+}
+.detail-identity .button-secondary {
+  white-space: normal;
+}
+.detail-identity .identity-bottom {
+  margin-top: 14px;
+}
+.npc-balance-points {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.pj-card .card-subtitle,
+.pnj-card .card-subtitle {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 620px) {
+  .detail-identity {
+    display: flex;
+    flex-direction: column;
+  }
+  .detail-identity > * {
+    width: 100%;
+  }
+  .detail-portrait-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .detail-tabs {
+    padding-inline: 8px;
+  }
+  .detail-tabs button {
+    padding-inline: 8px;
+  }
+  .stat-card {
+    min-width: 0;
+    padding: 8px;
+  }
+  .stat-card > span {
+    overflow-wrap: anywhere;
+    font-size: 11px;
+  }
+  .resource-choices label {
+    min-height: 44px;
+  }
+}
+.detail-tabs {
+  height: 48px;
+  scrollbar-width: none;
+  align-items: stretch;
+}
+.detail-tabs::-webkit-scrollbar {
+  height: 0;
+}
+.detail-tabs button {
+  height: 100%;
+}
+.detail-tabs button.active::after {
+  bottom: 0;
+}
+@media (max-width: 620px) {
+  .detail-identity .meter-actions .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+.editor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+}

@@ -1,0 +1,976 @@
+{
+  "businessCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+  "note": "Complément technique à MATRICE_FONCTIONNELLE.md ; aucune API listée ne prouve une intégration UI. Les handlers dynamiquement construits sont couverts par la matrice et les tests historiques.",
+  "publicFunctions": [
+    {
+      "api": "npcProfileFromFields",
+      "module": "packages/domain/src/character-fields.js",
+      "target": "Personnages → édition/portraits",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "safeSheetPortrait",
+      "module": "packages/domain/src/character-fields.js",
+      "target": "Personnages → édition/portraits",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "sheetPatchFromFields",
+      "module": "packages/domain/src/character-fields.js",
+      "target": "Personnages → édition/portraits",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "ResourceRules.profile",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.limits",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.validate",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.fatigueMax",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.conditions",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.balance",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "ResourceRules.hasProfiles",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions ResourceRules ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "balanceValue",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "fatigueLimit",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "npcResourceProfile",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "resourceConditionNames",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "resourceLimits",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "validateResourceValues",
+      "module": "packages/domain/src/resources.js",
+      "target": "Personnages → ressources / Combats → ressources",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "CombatCore.fighterRemovalBlock",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.removeFighter",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.requiredFighterStatuses",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.updateFighter",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.previewCommit",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.createCombat",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.addFighter",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.fighter",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.isEngaged",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.setEngagement",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.clearEngagements",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.disengageFighter",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.declare",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.reveal",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.allowance",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.setGeneChoice",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.escapeTrap",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.queueTechnique",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.resolveReedBet",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.changeReedApproach",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.revealCountertime",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.waiveCountertime",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.propose",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.manual",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.commit",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.spendEarthArmor",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.resolveEarthArmorHit",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.resolveEarthMudStrike",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.resolveEarthSeismicInterrupt",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.resolveEarthLava",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.earthLavaFracture",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.undo",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.advance",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.endRound",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.nextRound",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.triggerTrap",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.newScene",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.endCombat",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.renameScene",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.addSceneNote",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.editSceneNote",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.removeSceneNote",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.exportSceneJournalCSV",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.addTemporaryEffect",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.editTemporaryEffect",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.removeTemporaryEffect",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.releaseEarthMetal",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatCore.mutateEarthShield",
+      "module": "packages/domain/src/combat.js",
+      "target": "Combats",
+      "lot": 5,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatCore ; scénario utilisateur à compléter au lot 5"
+    },
+    {
+      "api": "CombatRules.masteryFor",
+      "module": "packages/domain/src/combat-rules.js",
+      "target": "Techniques / Combats → choix de technique",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatRules ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "CombatRules.available",
+      "module": "packages/domain/src/combat-rules.js",
+      "target": "Techniques / Combats → choix de technique",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatRules ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "CombatRules.postureCost",
+      "module": "packages/domain/src/combat-rules.js",
+      "target": "Techniques / Combats → choix de technique",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatRules ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "CombatRules.validateChoice",
+      "module": "packages/domain/src/combat-rules.js",
+      "target": "Techniques / Combats → choix de technique",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions CombatRules ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "BookState.validate",
+      "module": "packages/domain/src/books.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions BookState ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "BookState.entry",
+      "module": "packages/domain/src/books.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions BookState ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "BookState.patch",
+      "module": "packages/domain/src/books.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions BookState ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "PlaceRules.all",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.find",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.links",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.validate",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.issues",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.create",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.update",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.setLinks",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.descendants",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.path",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.people",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.dependencies",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.remove",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "PlaceRules.currentName",
+      "module": "packages/domain/src/places.js",
+      "target": "Lieux / Personnages → Lieux",
+      "lot": 3,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions PlaceRules ; scénario utilisateur à compléter au lot 3"
+    },
+    {
+      "api": "Roster.npcImportance",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.listNpcs",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.npcLocations",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.normalizeCharacter",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.toggleCondition",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.toggleStatus",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.createLibrary",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.makeCharacter",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.validateCharacter",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.createCharacter",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.updateCharacter",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.assignTechnique",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.addToCombat",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.syncCombatToLibrary",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Roster.importLibrary",
+      "module": "packages/domain/src/roster.js",
+      "target": "Personnages / Combats → participants",
+      "lot": 2,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Roster ; scénario utilisateur à compléter au lot 2"
+    },
+    {
+      "api": "Playbooks.byName",
+      "module": "packages/domain/src/playbooks.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Playbooks ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "Playbooks.initialStats",
+      "module": "packages/domain/src/playbooks.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Playbooks ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "Playbooks.applyPreset",
+      "module": "packages/domain/src/playbooks.js",
+      "target": "Personnages → Livret",
+      "lot": 4,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Parité et régressions Playbooks ; scénario utilisateur à compléter au lot 4"
+    },
+    {
+      "api": "validateBackupLinks",
+      "module": "packages/domain/src/validation.js",
+      "target": "Gestion → examiner/importer",
+      "lot": 6,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "validateCombat",
+      "module": "packages/domain/src/validation.js",
+      "target": "Gestion → examiner/importer",
+      "lot": 6,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "publicCombatReport",
+      "module": "packages/domain/src/public-report.js",
+      "target": "Combats → exports",
+      "lot": 6,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "profileStorageRequired",
+      "module": "packages/domain/src/storage-version.js",
+      "target": "Gestion → sauvegardes",
+      "lot": 6,
+      "status": "extrait ; à raccorder à React",
+      "scenario": "Contrats de sauvegarde et parité"
+    }
+  ],
+  "htmlStaticHandlers": [
+    "add",
+    "addSceneNoteUI",
+    "addSheetTechnique",
+    "addTemporaryEffectUI",
+    "applySelectedBook",
+    "approve",
+    "back",
+    "beginSheetEdit",
+    "cancelSheetEdit",
+    "changeEngagement",
+    "chooseWizardBonus",
+    "chooseWizardTraining",
+    "clearAllEngagements",
+    "clearCatalogFamilies",
+    "clearNpcSessionLocation",
+    "clearSheetPortrait",
+    "closeCatalogDetail",
+    "closeCharacterDetail",
+    "closest",
+    "createCurrentCharacter",
+    "createFromWizard",
+    "demo",
+    "disengageOne",
+    "download",
+    "downloadPublicCombat",
+    "earthLavaFractureUI",
+    "earthLavaUI",
+    "earthMudStrikeUI",
+    "earthSeismicInterruptUI",
+    "earthShieldUI",
+    "editBookTracking",
+    "editCombatFighter",
+    "editSceneNoteUI",
+    "editTemporaryEffectUI",
+    "endCombatUI",
+    "exportCompleteBackup",
+    "exportPreProfileBackup",
+    "exportRoster",
+    "exportSceneJournalUI",
+    "importCombat",
+    "importCompleteBackup",
+    "importRoster",
+    "includeSelectedSheet",
+    "includeSheet",
+    "linkLegacyNpcPlace",
+    "moveNpcToPlace",
+    "newSceneUI",
+    "newSheet",
+    "npcImportanceChanged",
+    "openCatalogDetail",
+    "openCharacterDetail",
+    "openCombatSheet",
+    "openPlace",
+    "prepare",
+    "preventDefault",
+    "proposeNpcNoncombatant",
+    "proposeNpcResourceProfile",
+    "quickSheetCondition",
+    "quickSheetResource",
+    "quickSheetSetResource",
+    "readSheetPortrait",
+    "refreshSheetQuick",
+    "reject",
+    "releaseTrapped",
+    "removeCombatFighter",
+    "removeSceneNoteUI",
+    "removeTemporaryEffectUI",
+    "renameSceneUI",
+    "renderCatalog",
+    "renderNpcDirectory",
+    "renderSceneJournal",
+    "renderTemporaryEffects",
+    "requestSheetCenter",
+    "resetNpcFilters",
+    "resetWizard",
+    "resolveEarthArmorHitUI",
+    "resolveReedBetUI",
+    "revealCountertimeUI",
+    "saveCombatFighter",
+    "saveSheet",
+    "selectCatalogTechnique",
+    "selectNpcLocationForSession",
+    "setApproach",
+    "setCharacterKind",
+    "setCombatTab",
+    "setGeneCombatChoice",
+    "setRoll",
+    "setSheetTab",
+    "setView",
+    "showCardTooltip",
+    "showSheet",
+    "spendEarthArmorUI",
+    "step",
+    "stepField",
+    "stopPropagation",
+    "syncOptions",
+    "syncSheet",
+    "syncTargetOptions",
+    "syncTechnique",
+    "targetOpponent",
+    "toggleSheetCondition",
+    "toggleSheetResources",
+    "toggleSheetStatus",
+    "toggleWizard",
+    "triggerTrapUI",
+    "undoSheetResource",
+    "updateBookPreview",
+    "updatePlaceAssociations",
+    "updateStrikeChoices",
+    "waiveCountertimeUI",
+    "wizardMove",
+    "wizardPreview"
+  ]
+}
