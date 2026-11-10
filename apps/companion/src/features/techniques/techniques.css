@@ -201,8 +201,8 @@
 }
 .reference-library .library-card {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
-  grid-template-rows: minmax(34px, auto) 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
   align-content: start;
   align-items: start;
   gap: 8px;
@@ -214,14 +214,15 @@
 .library-card .eyebrow {
   font-size: 10px;
   letter-spacing: 0.06em;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 .library-card-name {
   grid-column: 1 / -1;
   min-height: 2.7em;
 }
 .library-card-approach {
-  justify-self: end;
+  justify-self: start;
   padding: 3px 6px;
   border: 1px solid var(--border);
   border-radius: 12px;
