@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "technique-library-implemented-awaiting-owner-validation",
+  "status": "lot3-lieux-implemented-awaiting-owner-validation",
   "inspectedOn": "2026-11-08",
   "business": {
     "repository": "OtaaK/avatar-legendes-compagnon",
@@ -225,5 +225,49 @@
       "privatePdfCancelWrongEditionAndRestoreTested": true
     },
     "privateRichText": "version 2 opt-in markdown-lite, version 1 unchanged"
+  },
+  "lot3": {
+    "branch": "convergence/lot3-lieux",
+    "baseBranch": "convergence/bibliotheque-techniques",
+    "baseCommit": "b037e8d81a574e97dab4f53916f372b0c5333f7c",
+    "businessCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+    "uiCommit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+    "historicalScripts": 243,
+    "historicalPassed": 243,
+    "contractTests": 61,
+    "newPlaceTests": 10,
+    "viewports": [
+      [
+        1440,
+        1024
+      ],
+      [
+        1280,
+        800
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "portableHtmlSha256": "05f8614cc72189d8903328dc5b3dba270a96fc87a632fef7b39df98ea25e61e8",
+    "offlineEmbedded": true,
+    "nativeFileLocal": "ERR_BLOCKED_BY_ADMINISTRATOR; native CI and Mac results separate",
+    "merged": false,
+    "deployed": false,
+    "ownerValidated": false,
+    "libraryRecipe20261110": {
+      "familySingleLine": true,
+      "approachBelowTitle": true,
+      "pdfProseReflow": true,
+      "existingPrivateBankReadOnly": true,
+      "verifiedTypographicCutsRemoved": 91,
+      "lexicalHyphensPreserved": true,
+      "privatePassagesChecked": 111
+    }
   }
 }

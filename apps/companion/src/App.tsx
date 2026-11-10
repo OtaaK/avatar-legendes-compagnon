@@ -1,3 +1,5 @@
+import { Places } from "./features/places/Places";
+import { parsePlaceHash } from "./features/places/routes";
 import {
   useEffect,
   useRef,
@@ -77,7 +79,9 @@ export function App() {
   const [page, setPage] = useState<PageName>(() =>
     parseCharacterHash(window.location.hash)
       ? "Personnages"
-      : (pageFromHash(window.location.hash) ?? "Accueil"),
+      : parsePlaceHash(window.location.hash)
+        ? "Lieux"
+        : (pageFromHash(window.location.hash) ?? "Accueil"),
   );
   const [modal, setModal] = useState<"help" | "preview" | null>(null);
   const opener = useRef<HTMLElement | null>(null);
@@ -117,7 +121,9 @@ export function App() {
     setPage(
       parseCharacterHash(next)
         ? "Personnages"
-        : (pageFromHash(next) ?? "Accueil"),
+        : parsePlaceHash(next)
+          ? "Lieux"
+          : (pageFromHash(next) ?? "Accueil"),
     );
     window.history.pushState(null, "", next);
     window.scrollTo(0, 0);
@@ -149,7 +155,9 @@ export function App() {
       setPage(
         parseCharacterHash(next)
           ? "Personnages"
-          : (pageFromHash(next) ?? "Accueil"),
+          : parsePlaceHash(next)
+            ? "Lieux"
+            : (pageFromHash(next) ?? "Accueil"),
       );
       closeModal();
     };
@@ -233,6 +241,13 @@ export function App() {
           />
         ) : page === "Techniques" ? (
           <TechniqueLibrary descriptions={privateState.descriptions} />
+        ) : page === "Lieux" ? (
+          <Places
+            store={projectStore}
+            snapshot={projectSnapshot}
+            hash={hash}
+            onRoute={routeTo}
+          />
         ) : page === "Personnages" ? (
           <Characters
             store={projectStore}

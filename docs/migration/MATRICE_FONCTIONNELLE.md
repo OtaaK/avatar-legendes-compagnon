@@ -35,13 +35,13 @@ permet de retrouver les commandes techniques ; elle ne remplace pas la recette u
 | États distincts des statuts | Carte/fiche → ressources | Roster, ResourceRules | États du profil ; plusieurs sources de statut ; aucun mélange de listes v0 | Intégrée / 2 |
 | Dernière modification de ressource annulable | Fiche → ressources | futur coordinateur, gardes historiques | Undo après rendu ; refus si génération/profil/ressource intermédiaire modifié | Intégrée, temporaire et protégée / 2 |
 | Histoire, relations et champs libres | Fiche → Histoire et relations | Roster | Texte facultatif ; limites existantes ; champs inconnus conservés | Intégrée / 2 |
-| Arborescence des lieux | Lieux → panneau arbre | PlaceRules | Racine/enfant ; profondeur 12 000 côté modèle, sans récursion de pile | À intégrer / 3 |
-| Création/édition/illustration d'un lieu | Lieux → détail | PlaceRules | Nom, description, parent ; refus de cycle ; illustration locale | À intégrer / 3 |
-| Renommage répercuté partout | Lieux + cartes/filtres/fiches | `PlaceRules.currentName`, sélecteurs | Renommer lieu lié puis revenir aux personnages | À intégrer / 3 |
-| Domicile, liens et position indépendants | Fiche PNJ → Lieux | PlaceRules | Absent ≠ null explicite ≠ texte ancien ≠ ID orphelin | Lecture sans mutation / 2 ; édition au lot 3 |
-| Personnes présentes/associées et descendants | Lieux → relations aux lieux | `PlaceRules.people`, descendants | Inclure sous-lieux, dédupliquer ; consultation sans mutation | À intégrer / 3 |
-| Suppression protégée d'un lieu | Lieux → action à définir | `PlaceRules.dependencies/remove` | Dépendances annoncées, promotion/déliaison explicites, annuler | Non représentée dans v0 / 3 |
-| Lieu actif de session | Lieux / Personnages → filtre de session | préférence locale séparée | Choisir/effacer sans déplacer les PNJ ; reload | Non représentée dans v0 / 3 |
+| Arborescence des lieux | Lieux → panneau arbre | PlaceRules | Racine/enfant ; profondeur 12 000 côté modèle, sans récursion de pile | Implémenté, recette Lot Lieux / 3 |
+| Création/édition/illustration d'un lieu | Lieux → détail | PlaceRules | Nom, description, parent ; refus de cycle ; illustration locale | Implémenté, recette Lot Lieux / 3 |
+| Renommage répercuté partout | Lieux + cartes/filtres/fiches | `PlaceRules.currentName`, sélecteurs | Renommer lieu lié puis revenir aux personnages | Implémenté, recette Lot Lieux / 3 |
+| Domicile, liens et position indépendants | Fiche PNJ → Lieux | PlaceRules | Absent ≠ null explicite ≠ texte ancien ≠ ID orphelin | Édition transactionnelle et consultation / 3 |
+| Personnes présentes/associées et descendants | Lieux → relations aux lieux | `PlaceRules.people`, descendants | Inclure sous-lieux, dédupliquer ; consultation sans mutation | Implémenté, recette Lot Lieux / 3 |
+| Suppression protégée d'un lieu | Lieux → action à définir | `PlaceRules.dependencies/remove` | Dépendances annoncées, promotion/déliaison explicites, annuler | Confirmation avec dépendances, promote-unlink existant / 3 |
+| Lieu actif de session | Lieux / Personnages → filtre de session | préférence locale séparée | Choisir/effacer sans déplacer les PNJ ; reload | Hors périmètre explicite : URL de consultation, aucune préférence partagée nouvelle / suite à cadrer |
 | Livrets officiels connus et noms anciens | Fiche PJ → Livret | Playbooks | Noms canoniques exacts ; ancien livret inconnu conservé | Nom manuel conservé / 2 ; suivi au lot 4 |
 | Suivi manuel par livret | Fiche PJ → Livret | BookState | 0…4, moment, notes/évolutions ; changer/revenir au livret sans effacer | À intégrer / 4 |
 | Préréglages de création | Ajout PJ / Livret | `Playbooks.initialStats/applyPreset` | Préparer sans écraser fatigue, techniques, notes | À intégrer / 4 |

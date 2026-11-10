@@ -38,7 +38,11 @@ export function CharacterDetail({
   onUndo,
   canUndo,
   busy,
+  placesPanel,
+  backLabel,
 }: {
+  placesPanel?: React.ReactNode;
+  backLabel?: string;
   character: Character;
   session: CanonicalSession;
   tab: DetailTab;
@@ -65,7 +69,7 @@ export function CharacterDetail({
       <div className="detail-toolbar">
         <button className="back-link" type="button" onClick={onBack}>
           <ArrowLeft />
-          Retour aux personnages
+          {backLabel ?? "Retour aux personnages"}
         </button>
         <span className="detail-breadcrumb">
           Personnages <ChevronRight />
@@ -312,38 +316,7 @@ export function CharacterDetail({
                 )}
               </section>
             )}
-            {tab === "Lieux" && (
-              <section className="detail-section">
-                <h2>
-                  <MapPin />
-                  Lieux du PNJ
-                </h2>
-                <p>
-                  Liens existants en lecture seule ; leur édition viendra au lot
-                  3.
-                </p>
-                <Info
-                  label="Domicile"
-                  value={placeName(c.placeLinks?.homeId)}
-                />
-                <Info
-                  label="Position actuelle"
-                  value={
-                    PlaceRules.currentName(session.library, c) || "Non définie"
-                  }
-                />
-                <h3>Lieux associés</h3>
-                {c.placeLinks?.associatedIds?.length ? (
-                  <ul>
-                    {c.placeLinks.associatedIds.map((id) => (
-                      <li key={id}>{placeName(id)}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>Aucun lieu associé.</p>
-                )}
-              </section>
-            )}
+            {tab === "Lieux" && <>{placesPanel}</>}
           </div>
         </section>
       </div>

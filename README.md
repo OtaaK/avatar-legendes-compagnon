@@ -140,3 +140,5 @@ Aucune de ces commandes ne déploie ou ne fusionne le projet. Le workflow
 `npm run test:library` exécute la recette navigateur de la bibliothèque et des textes privés synthétiques.
 
 Correctifs de recette de la bibliothèque : [cartes compactes et préparation PDF privée](docs/reference/CORRECTIFS_RECETTE_BIBLIOTHEQUE.md), [guide Mac sans commandes](docs/reference/DESCRIPTIONS_PRIVEES.md).
+
+Lot Lieux React : [bilan détaillé](docs/migration/BILAN_LOT_LIEUX.md), [tester sur Mac sans commandes](docs/migration/TESTER_LOT_LIEUX.md). Nouvelle commande de test : `npm run test:places`. Branche dépendante de la Bibliothèque, en attente de recette.

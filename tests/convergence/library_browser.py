@@ -59,6 +59,8 @@ try:
     card=page.locator(f'.library-card[data-family="{fid}"]').first
     card.scroll_into_view_if_needed();style=card.evaluate('e=>({border:getComputedStyle(e).borderTopColor,width:getComputedStyle(e).borderTopWidth,height:e.getBoundingClientRect().height})')
     assert style['border']==color and style['width']=='1px',style
+    label=card.locator('.eyebrow');assert label.bounding_box()['height']<20
+    name_box=card.locator('.library-card-name').bounding_box();approach_box=card.locator('.library-card-approach').bounding_box();assert approach_box['y']>=name_box['y']+name_box['height']-1
     assert style['height']<155,style
     card.hover();assert card.evaluate('e=>getComputedStyle(e).borderTopColor')==color
     page.keyboard.press('Tab');card.focus();assert card.evaluate('e=>getComputedStyle(e).outlineStyle')!='none';assert card.evaluate('e=>getComputedStyle(e).borderTopColor')==color
@@ -66,7 +68,7 @@ try:
    heights=page.locator('.library-card').evaluate_all('es=>es.map(e=>e.getBoundingClientRect().height)');assert max(heights)-min(heights)<1
    # Cartes = trois informations, un seul élément interactif, nom exact et approche.
    first=page.locator('.library-card').first;assert first.locator('button,input,select,a').count()==0
-   assert [line.casefold() for line in first.inner_text().splitlines()]==[line.casefold() for line in ['Base','Défendre et prendre à revers','Se préparer']],first.inner_text()
+   assert [line.casefold() for line in first.inner_text().splitlines()]==[line.casefold() for line in ['Base','Se préparer','Défendre et prendre à revers']],first.inner_text()
    assert first.locator('.library-card-name').inner_text()=='Se préparer'
    for forbidden in ['Connue','En apprentissage','Maîtrisée','Voir le détail','Apprendre','Utiliser']:assert page.locator('.library-card').get_by_text(forbidden,exact=True).count()==0
    # Chaque zone, clavier Entrée/Espace et tactile ouvrent une seule fenêtre.
@@ -111,6 +113,13 @@ try:
   context=browser.new_context();page=context.new_page();page.goto(url+'#techniques')
   rich=json.dumps({'format':'avatar-technique-descriptions-privees','version':2,'techniques':[{'id':'base-frapper','description':'Un *passage italique*.\n\n• Premier\n• Dernier\n<script>window.__unsafe=true</script>','textFormat':'markdown-lite'}]}).encode()
   upload_private(page,rich);page.get_by_role('button',name='Confirmer le chargement privé').click();page.get_by_role('dialog').wait_for(state='detached');page.get_by_role('navigation',name='Navigation principale').get_by_role('button',name='Techniques',exact=True).click();open_fr(page);assert page.locator('.full-technique-description em').inner_text()=='passage italique';assert page.locator('.full-technique-description script').count()==0;assert page.evaluate('window.__unsafe') is None;assert '• Dernier' in page.locator('.full-technique-description').inner_text();page.keyboard.press('Escape');page.reload();open_fr(page);assert page.locator('.full-technique-description em').inner_text()=='passage italique';results['structuredPrivateSafe']=True;context.close()
+  # Ancienne banque PDF : remise en page à la lecture, sans réécriture du JSON privé.
+  context=browser.new_context(viewport={'width':390,'height':844});page=context.new_page();page.goto(url+'#techniques')
+  old_pdf='Un *envi-*\n*ronnement* qui peut-\nêtre consulté.\nLa suite.\n\n• Premier élément\n• Second élément'
+  old_pack=json.dumps({'format':'avatar-technique-descriptions-privees','version':2,'techniques':[{'id':'base-frapper','description':old_pdf,'textFormat':'markdown-lite'}]}).encode()
+  upload_private(page,old_pack);page.get_by_role('button',name='Confirmer le chargement privé').click();page.get_by_role('dialog').wait_for(state='detached');raw=page.evaluate("localStorage.getItem('avatar-compagnon-private-technique-texts-v1')");page.get_by_role('navigation',name='Navigation principale').get_by_role('button',name='Techniques',exact=True).click();open_fr(page)
+  assert page.locator('.full-technique-description p').first.inner_text()=='Un environnement qui peut-être consulté. La suite.';assert page.locator('.full-technique-description em').inner_text()=='environnement';assert '• Premier élément\n• Second élément' in page.locator('.full-technique-description').inner_text();assert page.evaluate("localStorage.getItem('avatar-compagnon-private-technique-texts-v1')")==raw
+  page.screenshot(path=str(OUT/'lecture-fluide-390.png'),animations='disabled');page.keyboard.press('Escape');page.reload();open_fr(page);assert 'environnement qui peut-être' in page.locator('.full-technique-description').inner_text();results['pdfReflowWithoutStorageMutation']=True;context.close()
   # Préparation PDF hors réseau : PDF fabriqué sans un seul texte du livre.
   pdf_buffer=runpy.run_path(str(ROOT/'tests/convergence/synthetic-technique-pdf.py'))['synthetic_pdf']()
   context=browser.new_context(offline=True,accept_downloads=True);context.route(url,lambda route:route.fulfill(status=200,content_type='text/html',body=(DIST/'index.html').read_text()));page=context.new_page();page.set_default_timeout(30000);page.goto(url+'#gestion');before=page.evaluate('({...localStorage})')

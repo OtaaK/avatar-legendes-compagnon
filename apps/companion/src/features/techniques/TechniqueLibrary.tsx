@@ -173,8 +173,8 @@ export function TechniqueLibrary({
               <FamilyIcon family={t.family} />
               <span className="eyebrow">{familyName(t.family)}</span>
             </span>
-            <span className="library-card-approach">{t.approach}</span>
             <span className="library-card-name">{t.name}</span>
+            <span className="library-card-approach">{t.approach}</span>
           </button>
         ))}
       </div>

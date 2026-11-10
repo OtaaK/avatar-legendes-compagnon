@@ -1,3 +1,5 @@
+import { CharacterPlaces } from "../places/CharacterPlaces";
+import { returnRoute, placeHash, withReturn } from "../places/routes";
 import { useMemo, useRef, useState } from "react";
 import { Roster } from "../../../../../packages/domain/src/roster.js";
 import type {
@@ -23,7 +25,7 @@ import {
 } from "./models";
 export function parseCharacterHash(hash: string) {
   try {
-    const raw = decodeURIComponent(hash.replace(/^#/, ""));
+    const raw = decodeURIComponent(hash.split("?")[0].replace(/^#/, ""));
     if (!raw.startsWith("personnage-")) return null;
     const parts = [
       "histoire-et-relations",
@@ -189,12 +191,38 @@ export function Characters({
             character={c}
             session={snapshot.session}
             tab={tab}
-            onTab={(t) => onRoute(characterHash(c.id, t))}
-            onBack={() => onRoute("#personnages")}
+            onTab={(t) =>
+              onRoute(
+                characterHash(c.id, t) +
+                  (returnRoute(window.location.hash)
+                    ? "?retour=" +
+                      encodeURIComponent(returnRoute(window.location.hash)!)
+                    : ""),
+              )
+            }
+            onBack={() =>
+              onRoute(returnRoute(window.location.hash) ?? "#personnages")
+            }
             onEdit={edit}
             onResource={(k, v) => void resource(k, v)}
             onUndo={() => void undo()}
             canUndo={commands.canUndo(c.id)}
+            backLabel={
+              returnRoute(window.location.hash) ? "Retour au lieu" : undefined
+            }
+            placesPanel={
+              <CharacterPlaces
+                key={c.id}
+                character={c}
+                store={store}
+                snapshot={snapshot}
+                onOpen={(id) =>
+                  onRoute(
+                    withReturn(placeHash(id), characterHash(c.id, "Lieux")),
+                  )
+                }
+              />
+            }
             busy={busy || !!snapshot.error}
           />
         ) : (
