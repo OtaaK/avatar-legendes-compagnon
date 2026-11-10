@@ -37,3 +37,5 @@ Les 46 tests de contrats/parité passent. Le parcours navigateur bibliothèque p
 Famille à 10 px ; nom à 17 px principal. Approche complète dans une étiquette secondaire arrondie en haut à droite ; famille/icône à gauche, titre en dessous. Les lignes de grille ont une hauteur commune intrinsèque (`grid-auto-rows: 1fr`), sans hauteur fixe ni troncature, y compris pour le plus long nom. Description dans un encart, texte à 13 px et interligne 1,65, paragraphes/lignes/puces conservés. JSON v1 inchangé ; JSON v2 opt-in pour l’italique sûr, aucun HTML interprété. Les italiques déjà perdus nécessitent une nouvelle lecture privée du PDF, car ils ne peuvent pas être déduits du texte brut.
 
 Le Lot Lieux est désormais explicitement autorisé par le propriétaire après ces contrôles, sur une branche distincte dépendante. Aucune fusion préalable n’est demandée.
+
+Le [correctif du 10 novembre](CORRECTIFS_LECTURE_FLUIDE.md) remplace ensuite l’approche en tête à droite par une étiquette sous le titre, et réunit les lignes physiques/césures du PDF.

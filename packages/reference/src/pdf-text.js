@@ -1,3 +1,4 @@
+import { flowingText } from "./pdf-flow.js";
 // Lecture déterministe d'un plan de rectangles, indépendante du DOM et des règles.
 export const foldPdfLabel = (text) =>
   text
@@ -5,7 +6,7 @@ export const foldPdfLabel = (text) =>
     .replace(/\p{M}/gu, "")
     .toLowerCase()
     .replace(/[^a-z0-9]/g, "");
-export function textInRegion(items, region, paragraphs = false) {
+export function layoutTextInRegion(items, region, paragraphs = false) {
   const selected = items.filter(
     (i) =>
       i.x >= region.x0 - 1 &&
@@ -42,7 +43,6 @@ export function textInRegion(items, region, paragraphs = false) {
       return (blank ? "\n" : "") + value.trim();
     })
     .join("\n")
-    .replace(/\u00ad\n?/g, "")
     .trim();
 }
 export function labelInRegion(items, region) {
@@ -60,14 +60,24 @@ export function labelInRegion(items, region) {
 }
 
 /** Même texte/retours que la lecture simple, avec balises d'italique échappées. */
-export function formattedTextInRegion(items, region, paragraphs = true) {
+export function layoutFormattedTextInRegion(items, region, paragraphs = true) {
   const escape = (s) => s.replace(/[\\*]/g, "\\$&");
-  return textInRegion(
+  return layoutTextInRegion(
     items.map((i) => ({
       ...i,
       text: i.italic ? "*" + escape(i.text) + "*" : escape(i.text),
     })),
     region,
     paragraphs,
+  );
+}
+
+export function textInRegion(items, region, paragraphs = false) {
+  return flowingText(layoutTextInRegion(items, region, paragraphs));
+}
+export function formattedTextInRegion(items, region, paragraphs = true) {
+  return flowingText(
+    layoutFormattedTextInRegion(items, region, paragraphs),
+    true,
   );
 }

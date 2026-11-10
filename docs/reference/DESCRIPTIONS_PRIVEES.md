@@ -54,3 +54,11 @@ Le plan `packages/reference/src/pdf-layout.json` contient uniquement des identif
 Les anciennes banques version 1 restent du texte brut : leurs astérisques sont littéraux et aucun contenu n’est converti silencieusement. Pour retrouver les italiques perdus dans un ancien export, relisez votre PDF via Gestion puis confirmez et exportez la nouvelle banque privée.
 
 La version 2 accepte, par entrée, `textFormat: "markdown-lite"` avec `description` toujours textuel. Seuls `*italique*` et les échappements `\*` / `\\` sont interprétés ; les paragraphes, lignes, puces et alinéas restent visibles. Aucun HTML, image, lien ou script importé n’est exécuté. L’extraction PDF récupère les styles des polices, sans inventer de mots. Une banque enrichie exportée reste restaurable dans ce prototype ; une ancienne version du lecteur peut refuser ce nouveau format. Gardez vos fichiers d’origine.
+
+## Lecture fluide — correctif du 10 novembre 2026
+
+Les lignes de prose ne reproduisent plus les fins de ligne imposées par les colonnes du PDF : elles se recomposent selon la largeur de la fenêtre. Les vrais paragraphes, listes et italiques restent distincts. Les césures typographiques reconnues de cette édition sont réunies, même lorsque le mot est partagé entre deux fragments en italique ; les traits d’union lexicaux sont conservés.
+
+Cette correction s’applique aussi **à l’affichage des anciens JSON privés**, sans réécrire leur contenu stocké ni leur export d’origine. Une nouvelle préparation depuis le PDF produit directement un JSON remis en page, y compris pour les continuations entre colonnes/pages. Vous pouvez ensuite l’exporter et le restaurer comme auparavant.
+
+Le rendu utilise des fragments de texte sûrs, jamais de HTML importé. La remise en page n’est pas un correcteur orthographique : les traits d’union durs non reconnus comme césures sont conservés. Aucun texte du livre n’est ajouté au prototype ou à Git.

@@ -1,3 +1,4 @@
+import { flowingText } from "../../../../../packages/reference/src/pdf-flow.js";
 import type { PrivateTextValue } from "./PrivateText";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import workerSource from "pdfjs-dist/build/pdf.worker.min.mjs?raw";
@@ -6,8 +7,8 @@ import { TECHNIQUE_LIBRARY } from "../../../../../packages/reference/src/techniq
 import {
   foldPdfLabel,
   labelInRegion,
-  textInRegion,
-  formattedTextInRegion,
+  layoutTextInRegion,
+  layoutFormattedTextInRegion,
 } from "../../../../../packages/reference/src/pdf-text.js";
 import {
   parsePrivateDescriptions,
@@ -78,15 +79,46 @@ export async function readPrivatePdf(
         );
       const content = await page.getTextContent();
       await page.getOperatorList(); // Métadonnées de police ; aucun rendu ni action PDF.
-      const bodyFonts=[...new Set(content.items.filter(i=>"str" in i && Math.hypot(i.transform[2],i.transform[3])>7.5).map(i=>"str" in i?i.fontName:""))];
-      await Promise.all(bodyFonts.map(name=>new Promise<void>((resolve,reject)=>{
-        if(page.commonObjs.has(name)){resolve();return;}
-        const clean=()=>{clearTimeout(timer);signal.removeEventListener("abort",cancel);};
-        const cancel=()=>{clean();reject(new DOMException("Lecture annulée","AbortError"));};
-        const timer=setTimeout(()=>{clean();reject(Error("Police PDF non disponible. Aucun texte enregistré."));},15000);
-        signal.addEventListener("abort",cancel,{once:true});
-        page.commonObjs.get(name,()=>{clean();resolve();});
-      })));
+      const bodyFonts = [
+        ...new Set(
+          content.items
+            .filter(
+              (i) =>
+                "str" in i && Math.hypot(i.transform[2], i.transform[3]) > 7.5,
+            )
+            .map((i) => ("str" in i ? i.fontName : "")),
+        ),
+      ];
+      await Promise.all(
+        bodyFonts.map(
+          (name) =>
+            new Promise<void>((resolve, reject) => {
+              if (page.commonObjs.has(name)) {
+                resolve();
+                return;
+              }
+              const clean = () => {
+                clearTimeout(timer);
+                signal.removeEventListener("abort", cancel);
+              };
+              const cancel = () => {
+                clean();
+                reject(new DOMException("Lecture annulée", "AbortError"));
+              };
+              const timer = setTimeout(() => {
+                clean();
+                reject(
+                  Error("Police PDF non disponible. Aucun texte enregistré."),
+                );
+              }, 15000);
+              signal.addEventListener("abort", cancel, { once: true });
+              page.commonObjs.get(name, () => {
+                clean();
+                resolve();
+              });
+            }),
+        ),
+      );
       pages.set(
         no,
         content.items
@@ -132,9 +164,11 @@ export async function readPrivatePdf(
             expected.name +
             " ». Aucun import partiel silencieux.",
         );
-      const body = entry.regions
-        .map((r) => textInRegion(pages.get(r.page)!, r, true))
-        .join("\n\n");
+      const body = flowingText(
+        entry.regions
+          .map((r) => layoutTextInRegion(pages.get(r.page)!, r, true))
+          .join("\n"),
+      );
       if (body.length < 30)
         throw Error(
           "Passage incomplet pour « " +
@@ -155,9 +189,14 @@ export async function readPrivatePdf(
       );
       descriptions[entry.id] = hasItalic
         ? {
-            text: entry.regions
-              .map((r) => formattedTextInRegion(pages.get(r.page)!, r, true))
-              .join("\n\n"),
+            text: flowingText(
+              entry.regions
+                .map((r) =>
+                  layoutFormattedTextInRegion(pages.get(r.page)!, r, true),
+                )
+                .join("\n"),
+              true,
+            ),
             format: "markdown-lite",
           }
         : body;

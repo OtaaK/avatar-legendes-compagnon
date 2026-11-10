@@ -234,7 +234,7 @@
     "uiCommit": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
     "historicalScripts": 243,
     "historicalPassed": 243,
-    "contractTests": 57,
+    "contractTests": 61,
     "newPlaceTests": 10,
     "viewports": [
       [
@@ -254,11 +254,20 @@
         844
       ]
     ],
-    "portableHtmlSha256": "0918e0934e6323e86e75eb72d73f8b778be18e09acde4ac30e3ba85735aba6bf",
+    "portableHtmlSha256": "05f8614cc72189d8903328dc5b3dba270a96fc87a632fef7b39df98ea25e61e8",
     "offlineEmbedded": true,
     "nativeFileLocal": "ERR_BLOCKED_BY_ADMINISTRATOR; native CI and Mac results separate",
     "merged": false,
     "deployed": false,
-    "ownerValidated": false
+    "ownerValidated": false,
+    "libraryRecipe20261110": {
+      "familySingleLine": true,
+      "approachBelowTitle": true,
+      "pdfProseReflow": true,
+      "existingPrivateBankReadOnly": true,
+      "verifiedTypographicCutsRemoved": 91,
+      "lexicalHyphensPreserved": true,
+      "privatePassagesChecked": 111
+    }
   }
 }

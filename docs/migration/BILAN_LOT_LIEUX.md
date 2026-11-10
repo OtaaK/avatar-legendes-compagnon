@@ -44,3 +44,5 @@ Aucune intégration des Livrets, techniques attribuées ou combat ; leurs donné
 Guide Mac : [TESTER_LOT_LIEUX.md](TESTER_LOT_LIEUX.md). Retour arrière : rouvrir le prototype Bibliothèque ou ancien HTML avec une copie de sauvegarde ; les exports restent au format Codex, sans nouvelle migration destructive.
 
 Résultats locaux finaux : **243/243 historiques**, **57/57 contrats/parité**, parcours Lots 1/2/Bibliothèque conservés et parcours Lieux réussis aux quatre résolutions. Quota avec brouillon/réessai, refus d’édition inter-onglets et démarrage/rechargement embarqué hors réseau réussis. Aucun test historique supprimé et aucun échec historique à masquer sur cette exécution. La CI vérifiera aussi l’ouverture native Linux du HTML.
+
+Correctif de recette du 10 novembre : famille seule en tête des cartes, approche sous le titre et lecture fluide des descriptions privées, sans changement du Lot Lieux. Voir [bilan ciblé](../reference/CORRECTIFS_LECTURE_FLUIDE.md).
