@@ -1,0 +1,998 @@
+{
+  "format": "avatar-playbook-reference",
+  "version": 1,
+  "source": {
+    "book": "Avatar Légendes : le jeu de rôle officiel",
+    "pages": "Pagination imprimée ; métadonnées et reformulations brèves, aucun texte intégral.",
+    "verifiedOn": "2026-11-11"
+  },
+  "origins": [
+    "Campagnard",
+    "Citadin",
+    "Hors-la-loi",
+    "Militaire",
+    "Privilégié",
+    "Vie monacale"
+  ],
+  "generalProgressQuestions": [
+    {
+      "id": "world",
+      "summary": "Apprendre un élément significatif sur le monde.",
+      "page": 212
+    },
+    {
+      "id": "community",
+      "summary": "Résoudre une menace dangereuse ou un problème communautaire.",
+      "page": 212
+    },
+    {
+      "id": "balance",
+      "summary": "Aider quelqu’un vers l’équilibre ou terminer à son centre.",
+      "page": 212
+    }
+  ],
+  "advancements": [
+    {
+      "id": "own-move",
+      "slots": 2,
+      "page": 214
+    },
+    {
+      "id": "foreign-move",
+      "slots": 2,
+      "page": 214
+    },
+    {
+      "id": "stat",
+      "max": 2,
+      "slots": null,
+      "page": 214
+    },
+    {
+      "id": "center",
+      "slots": 2,
+      "page": 214
+    },
+    {
+      "id": "moment",
+      "slots": 2,
+      "requiresUseBeforeSecond": true,
+      "page": 214
+    }
+  ],
+  "books": [
+    {
+      "id": "audacieux",
+      "feature": {
+        "name": "Palmarès d’excellence",
+        "page": 172,
+        "choices": {
+          "objectifs": 4
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Reconnaître sa vulnérabilité ou une erreur et l’intérêt d’un conseil ignoré.",
+        "page": 173,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "audacieux-manoeuvre-01",
+          "name": "C’est pas terminé !",
+          "page": 172,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "audacieux-manoeuvre-02",
+          "name": "Droit au but",
+          "page": 172,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "audacieux-manoeuvre-03",
+          "name": "Meilleur ami",
+          "page": 172,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "compagnon",
+            "lien-personnage"
+          ]
+        },
+        {
+          "id": "audacieux-manoeuvre-04",
+          "name": "Tu as raté un détail",
+          "page": 172,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "audacieux-manoeuvre-05",
+          "name": "Voilà le plan",
+          "page": 172,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-audacieux",
+        "name": "Travail d’équipe",
+        "page": 173,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Besoin de faire ses preuves",
+          "Modèle d’audace",
+          "Approbation inaccessible",
+          "Symbole de sérieux",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 171,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "fripouille",
+      "feature": {
+        "name": "Sales manies",
+        "page": 176,
+        "choices": {
+          "manies": 4
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Amener un ami à pratiquer ou approuver une de ses mauvaises habitudes.",
+        "page": 177,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "fripouille-manoeuvre-01",
+          "name": "C’est tout ce que tu sais faire ?",
+          "page": 176,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "fripouille-manoeuvre-02",
+          "name": "Charme de vaurien",
+          "page": 176,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "fripouille-manoeuvre-03",
+          "name": "Fuyant comme un chien-anguille",
+          "page": 176,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "fripouille-manoeuvre-04",
+          "name": "Repérage",
+          "page": 176,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "fripouille-manoeuvre-05",
+          "name": "Tu n’es pas mon maître !",
+          "page": 176,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-fripouille",
+        "name": "Balayage",
+        "page": 177,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Survie par la transgression",
+          "Amitié repoussée",
+          "Personne voulant changer ses habitudes",
+          "Objet volé préféré",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 175,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "gardien",
+      "feature": {
+        "name": "Fardeau du protecteur",
+        "page": 180,
+        "choices": {
+          "protege": 1
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Poursuivre aussi un désir ou objectif personnel en protégeant autrui.",
+        "page": 181,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "gardien-manoeuvre-01",
+          "name": "Complexe du martyr",
+          "page": 180,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "gardien-manoeuvre-02",
+          "name": "Démasquer un menteur",
+          "page": 180,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "gardien-manoeuvre-03",
+          "name": "Sourcils froncés",
+          "page": 180,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "caracteristique",
+            "confirmation-explicite"
+          ],
+          "passiveStat": {
+            "key": "concentration",
+            "amount": 1,
+            "max": 3
+          }
+        },
+        {
+          "id": "gardien-manoeuvre-04",
+          "name": "Suspicion",
+          "page": 180,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "gardien-manoeuvre-05",
+          "name": "Symbole d’autorité",
+          "page": 180,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-gardien",
+        "name": "Redirection",
+        "page": 181,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Origine du devoir de protection",
+          "Ancien protégé devenu autonome",
+          "Proche ayant trahi sa confiance",
+          "Souvenir des personnes protégées",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 179,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "heritier",
+      "feature": {
+        "name": "Un passé entaché",
+        "page": 184,
+        "choices": {
+          "domaines": 2,
+          "ressources": 2
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Découvrir un élément important sur sa lignée ou son influence.",
+        "page": 185,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "heritier-manoeuvre-01",
+          "name": "Connaissance du monde",
+          "page": 185,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "entrainement-secondaire",
+            "origine-supplementaire",
+            "interdit-deux-elements"
+          ]
+        },
+        {
+          "id": "heritier-manoeuvre-02",
+          "name": "La voie du futur",
+          "page": 185,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "caracteristique",
+            "confirmation-explicite"
+          ],
+          "passiveStat": {
+            "key": "creativite",
+            "amount": 1,
+            "max": 3
+          }
+        },
+        {
+          "id": "heritier-manoeuvre-03",
+          "name": "Marche comme ça !",
+          "page": 185,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "heritier-manoeuvre-04",
+          "name": "Mouton-koala noir",
+          "page": 185,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "heritier-manoeuvre-05",
+          "name": "Une vie de regret",
+          "page": 185,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-heritier",
+        "name": "Briser",
+        "page": 184,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Chef de lignée et relation avec lui",
+          "Proche souhaitant changer la lignée",
+          "Objet évoquant le lieu familial",
+          "Héritage identitaire précieux",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 183,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "icone",
+      "feature": {
+        "name": "Fardeau et tradition",
+        "page": 188,
+        "choices": {
+          "responsabilites": 3,
+          "tabous": 3
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Réaliser un exploit digne de son rôle et de sa tradition.",
+        "page": 189,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "icone-manoeuvre-01",
+          "name": "Bonzu Pépindepommoxocopolis… le troisième du nom",
+          "page": 189,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "icone-manoeuvre-02",
+          "name": "Concentré",
+          "page": 189,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "caracteristique",
+            "confirmation-explicite"
+          ],
+          "passiveStat": {
+            "key": "concentration",
+            "amount": 1,
+            "max": 3
+          }
+        },
+        {
+          "id": "icone-manoeuvre-03",
+          "name": "Exploiter l’élan adverse",
+          "page": 189,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "icone-manoeuvre-04",
+          "name": "Manchots-loutres, unagi et sources chaudes",
+          "page": 189,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "icone-manoeuvre-05",
+          "name": "Yip yip !",
+          "page": 189,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "monture",
+            "choix-fictionnel"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-icone",
+        "name": "Muraille de perfection",
+        "page": 189,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Tradition incarnée et rôle incontournable",
+          "Mentor du devoir",
+          "Initiateur aux plaisirs personnels",
+          "Objet de tradition inséparable",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 187,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "idealiste",
+      "feature": {
+        "name": "Ne jamais tourner le dos",
+        "page": 192,
+        "choices": {
+          "ideaux": 3
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Améliorer la vie d’une communauté ou aider une personne ordinaire en difficulté.",
+        "page": 193,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "idealiste-manoeuvre-01",
+          "name": "Ça ne t’appartient pas !",
+          "page": 192,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "idealiste-manoeuvre-02",
+          "name": "Ces règles, elles sont d’une autre époque !",
+          "page": 192,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "idealiste-manoeuvre-03",
+          "name": "La force du cœur",
+          "page": 192,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "idealiste-manoeuvre-04",
+          "name": "Que puis-je faire pour vous ?",
+          "page": 192,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "idealiste-manoeuvre-05",
+          "name": "Tu ne me terrasseras pas",
+          "page": 192,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-idealiste",
+        "name": "Désorientation",
+        "page": 193,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Tragédie de jeunesse",
+          "Responsable présumé",
+          "Soutien dans le deuil",
+          "Souvenir de la perte",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 191,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "inflexible",
+      "feature": {
+        "name": "Le point de repère",
+        "page": 196,
+        "choices": {
+          "repere": 1
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Demander conseil ou soutien à autrui.",
+        "page": 197,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "inflexible-manoeuvre-01",
+          "name": "C’est celui qui le dit qui l’est",
+          "page": 196,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "inflexible-manoeuvre-02",
+          "name": "C’était une victoire",
+          "page": 196,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "inflexible-manoeuvre-03",
+          "name": "Épris de justice",
+          "page": 196,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "caracteristique",
+            "confirmation-explicite"
+          ],
+          "passiveStat": {
+            "key": "enthousiasme",
+            "amount": 1,
+            "max": 3
+          }
+        },
+        {
+          "id": "inflexible-manoeuvre-04",
+          "name": "Je ne te hais pas",
+          "page": 196,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "inflexible-manoeuvre-05",
+          "name": "Pas de temps pour les sentiments",
+          "page": 196,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-inflexible",
+        "name": "Visée précise",
+        "page": 197,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Manipulation fondatrice de la méfiance",
+          "Ancien point de repère et rupture",
+          "Personne ayant enseigné le pragmatisme",
+          "Objet rappelant son identité",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 195,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "marteau",
+      "feature": {
+        "name": "À abattre !",
+        "page": 200,
+        "choices": {
+          "adversaire": 1,
+          "objectif": 1
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Avancer vers son objectif contre son adversaire.",
+        "page": 201,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "marteau-manoeuvre-01",
+          "name": "Aucun mur ne me retient",
+          "page": 200,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "marteau-manoeuvre-02",
+          "name": "Comprendre l’ennemi",
+          "page": 200,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "marteau-manoeuvre-03",
+          "name": "Frapper là où il faut",
+          "page": 200,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "marteau-manoeuvre-04",
+          "name": "Galvanisé par la rage",
+          "page": 200,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "marteau-manoeuvre-05",
+          "name": "Viens te battre !",
+          "page": 200,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-marteau",
+        "name": "Écraser",
+        "page": 201,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Injustice à l’origine de son engagement",
+          "Modèle de force positive",
+          "Professeur de retenue",
+          "Fragile souvenir préservé",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 199,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "pilier",
+      "feature": {
+        "name": "Chef de peloton",
+        "page": 204,
+        "choices": {
+          "originePeloton": 1,
+          "aspects": {
+            "min": 0,
+            "max": 3
+          },
+          "valeurs": 2,
+          "positionPeloton": 1,
+          "commandement": 2,
+          "soutien": 2
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Aider un compagnon à remporter une victoire personnelle importante ou conduire une réussite collective.",
+        "page": 205,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "pilier-manoeuvre-01",
+          "name": "Ballet offensif",
+          "page": 205,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "pilier-manoeuvre-02",
+          "name": "Cœur de guerrier",
+          "page": 205,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "pilier-manoeuvre-03",
+          "name": "Contenance compréhensive",
+          "page": 205,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises",
+            "caracteristique",
+            "confirmation-explicite"
+          ],
+          "passiveStat": {
+            "key": "harmonie",
+            "amount": 1,
+            "max": 3
+          }
+        },
+        {
+          "id": "pilier-manoeuvre-04",
+          "name": "Prendre les choses en main",
+          "page": 205,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "pilier-manoeuvre-05",
+          "name": "Sans uniforme",
+          "page": 205,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-pilier",
+        "name": "Se faufiler sous les coups",
+        "page": 204,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 1,
+      "historyThemes": {
+        "summaries": [
+          "Accession au commandement",
+          "Confident du peloton",
+          "Opposant à sa légitimité",
+          "Talisman de l’ancien groupe",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 203,
+        "kind": "paraphrase"
+      }
+    },
+    {
+      "id": "prodige",
+      "feature": {
+        "name": "Don extraordinaire",
+        "page": 208,
+        "choices": {
+          "expertises": 2
+        },
+        "optionValidation": "manual-source-review"
+      },
+      "progressQuestion": {
+        "summary": "Remercier un compagnon pour sa présence, son soutien ou son enseignement.",
+        "page": 209,
+        "kind": "paraphrase"
+      },
+      "moves": [
+        {
+          "id": "prodige-manoeuvre-01",
+          "name": "Attendre et écouter",
+          "page": 208,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "prodige-manoeuvre-02",
+          "name": "Défi",
+          "page": 208,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "prodige-manoeuvre-03",
+          "name": "Entrée surprenante",
+          "page": 208,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "prodige-manoeuvre-04",
+          "name": "Évaluer un rival",
+          "page": 208,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        },
+        {
+          "id": "prodige-manoeuvre-05",
+          "name": "Ouverture d’esprit",
+          "page": 208,
+          "dependencies": [
+            "fiction",
+            "decision-joueur-mj",
+            "effets-non-automatises"
+          ]
+        }
+      ],
+      "creationTechnique": {
+        "id": "livret-technique-prodige",
+        "name": "Posture inébranlable",
+        "page": 209,
+        "operational": false
+      },
+      "advancements": ["own-move", "foreign-move", "stat", "center", "moment"],
+      "extraAdvancements": "not-confirmed",
+      "creationMasteredCount": 2,
+      "historyThemes": {
+        "summaries": [
+          "Premier exploit jugé impossible",
+          "Professeur et soutien du talent",
+          "Proche ne comprenant pas son don",
+          "Talisman associé à son art",
+          "Raisons de l’engagement envers le groupe ou sa cause"
+        ],
+        "page": 207,
+        "kind": "paraphrase"
+      }
+    }
+  ]
+}

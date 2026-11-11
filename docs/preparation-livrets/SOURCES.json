@@ -1,0 +1,26 @@
+{
+  "checkedOn": "2026-11-11",
+  "repository": "OtaaK/avatar-legendes-compagnon",
+  "branch": "convergence/preparation-livrets",
+  "base": {
+    "branch": "convergence/lot3-lieux",
+    "sha": "e38f240b904dd5915e79a8c46c2999e937b73a8a",
+    "pullRequest": 15,
+    "state": "open-draft-unmerged",
+    "ownerVisualApproval": "not-inferred"
+  },
+  "extractedDomainOracle": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+  "visualReference": "8b8924de34949d5bdf20bc6ea7ec53be59da28e0",
+  "uiModified": false,
+  "previousOpenDraftPullRequestsChecked": [3,4,5,6,7,8,9,10,11,12,13,14,15],
+  "pdf": {
+    "availableLocally": true,
+    "title": "Avatar Légendes : le jeu de rôle officiel",
+    "printedPagesReviewed": [114,118,120,121,122,123,124,171,172,173,175,176,177,179,180,181,183,184,185,187,188,189,191,192,193,195,196,197,199,200,201,203,204,205,207,208,209,212,213,214,222,223],
+    "publishedContent": "metadata-and-brief-paraphrases-only",
+    "fullMoveMechanicsCertified": false,
+    "fullFeatureOptionMembershipAutomated": false
+  },
+  "reactBundleSha256BaseAndCurrent": "05f8614cc72189d8903328dc5b3dba270a96fc87a632fef7b39df98ea25e61e8",
+  "legacyHtmlSha256": "69f8ddb8e86f01bcc7138c3c2cb9645742aaff2f7b3d6081267b612b11c491bb"
+}

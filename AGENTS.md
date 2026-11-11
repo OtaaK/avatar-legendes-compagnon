@@ -125,3 +125,15 @@ Correctifs bibliothèque autorisés : compactage des cartes, bordures par famill
 Dernière autorisation du propriétaire : finaliser A1–A4 Bibliothèque sur PR 14 puis commencer directement le Lot Lieux sur une branche dédiée dépendante. Préserver l’interface v0, PlaceRules, les liens position/domicile/association, sauvegardes et champs inconnus. Ne pas commencer Livrets/combat ni chantier ergonomique PJ/PNJ hors raccord indispensable aux lieux. Aucune fusion ni aucun déploiement sans accord.
 
 Lot Lieux en cours de recette : branche `convergence/lot3-lieux`, base Bibliothèque `b037e8d`. Guide et bilan sous `docs/migration/*LOT_LIEUX.md`. `packages/application/src/place-commands.js` adapte PlaceRules au store transactionnel, sans modifier le domaine. `npm run test:places` complète les tests précédents. Ne pas démarrer le lot suivant sans accord.
+
+## Autorisation active — préparation Livrets (11 novembre 2026)
+
+Le propriétaire autorise un lot préparatoire sur `convergence/preparation-livrets`, base
+Lot Lieux `e38f240`. Inventaire des dix Livrets, manœuvres et évolutions, contrats de
+création, modules sans interface et tests uniquement. Lire `docs/preparation-livrets/BILAN.md`.
+Ne modifier aucun écran React, formulaire, bibliothèque, lieu ni moteur de combat.
+Réutiliser Playbooks/BookState/Roster/SessionStore ; préserver anciens noms, inconnus et
+historiques. Aucun gain ni consommation automatique des quatre cases. Les propositions
+d’évolution restent en attente ; les techniques préparées ne sont pas attribuées.
+PDF consultable localement, jamais de texte intégral versionné ni inclus aux artefacts.
+PR dédiée en brouillon, sans fusion/déploiement. Attendre l’accord avant toute intégration visuelle.

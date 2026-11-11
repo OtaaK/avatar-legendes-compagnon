@@ -333,3 +333,25 @@ Le propriétaire demande les finitions A1–A4 dans PR 14 puis autorise immédia
 ### Lot Lieux — intégration autorisée après les finitions Bibliothèque
 
 Branche distincte dépendante, moteur inchangé. Trois groupes PNJ : présents, domiciliés, associés. La suppression n’ajoute aucune stratégie : réutilisation de `promote-unlink` après accord explicite sur les dépendances. Image locale contrôlée ; ancienne illustration non affichable conservée sans téléchargement. Navigation par URL, profondeur de données libre et indentation visuelle contenue pour le responsive. Aucun autre lot ni déploiement/fusion autorisés.
+
+### 11 novembre 2026 — Lot préparatoire Livrets autorisé
+
+Demande explicite du propriétaire : préparer les dix Livrets, manœuvres, évolutions et
+contrats de création pendant la conception des fiches v0 ; **pas d’intégration visuelle**.
+Branche dédiée dépendante du dernier Lot Lieux vérifié par CI (`e38f240`), PR en brouillon.
+Aucune validation propriétaire des règles ambiguës n’est déduite de cette autorisation.
+
+Choix techniques : conserver les formats Codex et les corps extraits, ajouter une référence
+de métadonnées et une extension par personnage. Séparer suggestions, choix du brouillon,
+candidat préparé et fiche transactionnellement enregistrée. L’extension n’est créée que
+sur commande confirmée ; les noms anciens et champs inconnus sont conservés.
+Les nouvelles évolutions sont des **propositions non appliquées**, sans consommation
+de progression ni attribution automatique. Les techniques de Livret sont des références
+préparatoires séparées du catalogue des 111 ; aucune maîtrise n’est attribuée.
+
+La vérification des options libres de spécificité reste manuelle avec le livre. Le changement
+de Livret en campagne reste un plan de décisions, sans commande d’application.
+Avant l’intégration : trancher le seuil Communauté du Prodige (contradiction p. 208),
+la procédure des références PJ encore non créés, la complétude progressive des formulaires
+et le traitement explicite des évolutions/historiques lors d’un changement de Livret.
+Ces réserves ne sont pas des règles nouvelles ; voir le [bilan](preparation-livrets/BILAN.md).
