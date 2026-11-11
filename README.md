@@ -31,6 +31,15 @@ Les descriptions intégrales du livre ne sont pas distribuées : un
 [fichier privé facultatif](docs/reference/DESCRIPTIONS_PRIVEES.md) peut être chargé localement.
 Aucun résumé mécanique n'est présenté comme description officielle complète.
 
+## Préparation Livrets — sans nouvel écran
+
+Le [lot préparatoire](docs/preparation-livrets/BILAN.md) inventorie les dix Livrets et
+les 50 manœuvres, prépare les contrats de création PJ et les commandes transactionnelles.
+La [matrice](docs/preparation-livrets/MATRICE_LIVRETS.md), les
+[contrats](docs/preparation-livrets/CONTRATS_CREATION.md) et le
+[rapport de compatibilité](docs/preparation-livrets/COMPATIBILITE.md) précisent les limites.
+Aucun raccord aux écrans React, aucune évolution automatique ; intégration visuelle en attente d’autorisation.
+
 ## Utiliser l'application
 
 Ouvrir **`app/simulateur.html`** dans un navigateur. Elle fonctionne seule, hors connexion,

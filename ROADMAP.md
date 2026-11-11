@@ -17,10 +17,14 @@ restent l’historique et les acquis fonctionnels, pas le design cible de la nou
 - [x] Lot indépendant **Bibliothèque de techniques** autorisé, implémentation sur branche dépendante du lot 2.
 - [ ] Recette propriétaire de la bibliothèque avant tout lot suivant.
 - [x] Lot 3 : Lieux et liens PNJ implémentés sur branche dépendante ; recette propriétaire à faire.
-- [ ] Lot 4 : Livrets, attribution de techniques et maîtrise individuelle.
+- [x] Lot préparatoire Livrets autorisé : inventaire sourcé, contrats de création et adaptateurs sans écrans, branche `convergence/preparation-livrets` dépendante du Lot Lieux.
+- [ ] Recette des contrats et décisions ouvertes : [bilan](docs/preparation-livrets/BILAN.md).
+- [ ] Lot 4 : intégration visuelle Livrets/Manœuvres/Évolutions et formulaires, après autorisation et réception des nouveaux écrans v0 ; attribution de techniques et maîtrise dans leur périmètre dédié.
 - [ ] Lot 5 : intégralité des capacités de combat existantes dans v0.
 - [ ] Lot 6 : Gestion, annulations, compatibilité et distribution hors ligne qualifiée.
 - [ ] Lot 7 : recette visuelle/fonctionnelle/responsive et validation avant toute fusion.
+
+La nouvelle autorisation porte sur la **préparation sans interface** ; elle ne vaut ni validation visuelle de toutes les PR précédentes, ni accord de fusion, ni démarrage des autres lots.
 
 Critères d’acceptation, risques et retours arrière :
 `docs/migration/FAISABILITE_CONVERGENCE_V0.md`. Résultats et réserves dans
