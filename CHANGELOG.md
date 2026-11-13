@@ -1,9 +1,8 @@
 # Historique des changements
 
-**Proposition de consolidation — 13 novembre 2026.** Ce fichier est soumis à Alex dans
-la mission 2. Aucun ancien rapport n’est encore retiré ; aucune fusion de cette proposition
-n’est autorisée implicitement. Il deviendrait le point d’entrée unique des changements,
-avec les audits et guides détaillés conservés séparément.
+**Consolidation approuvée par Alex le 13 novembre 2026 — PR nº 19, non fusionnée.**
+Point d’entrée des changements ; audits et guides détaillés conservés séparément.
+Les anciens rapports sont archivés dans Git sous l’étiquette de sauvegarde.
 
 Les anciennes versions et leurs limites ne doivent pas être présentées comme l’état
 actuel. Les textes complets restent consultables dans
@@ -82,6 +81,15 @@ Détails conservés : [fiabilité des sauvegardes](docs/RAPPORT_FIABILITE_SAUVEG
   L’[inventaire détaillé](docs/maintenance/nettoyage/INVENTAIRE.csv) donne tous leurs noms,
   tailles et identifiants Git.
 
-Cette synthèse ne prétend pas retranscrire chaque phrase historique. L’archivage proposé
-préserve les originaux sous l’étiquette, sans réécriture d’historique. Aucun fichier n’est
-retiré avant l’accord d’Alex sur le [plan de nettoyage](docs/maintenance/nettoyage/PLAN.md).
+Cette synthèse ne prétend pas retranscrire chaque phrase historique. L’archivage approuvé
+préserve les originaux sous l’étiquette, sans réécriture d’historique. Le [plan de nettoyage approuvé](docs/maintenance/nettoyage/PLAN.md) et le
+[bilan de son exécution](docs/maintenance/nettoyage/BILAN.md) donnent les preuves et limites.
+
+## V2.33 — nettoyage approuvé, PR 19 non fusionnée
+
+Archives historiques, ancien inventaire et deux récits de changement regroupés sous le
+point de sauvegarde Git ; audits, guide de recette et rapport de fiabilité conservés.
+Les deux helpers sans appel statique repéré sont retirés, sans changement des parcours.
+Les tests restent à leur place ; une ancienne commande de leur commentaire est corrigée.
+Aucune extraction de moteur, migration de sauvegarde, nouvelle dépendance ou refonte UI.
+Les résultats finaux sont consignés dans le [bilan](docs/maintenance/nettoyage/BILAN.md).

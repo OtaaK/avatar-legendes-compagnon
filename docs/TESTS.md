@@ -72,27 +72,31 @@ python scripts/test.py --jobs 3 --report work/tests.json
 Le workflow `.github/workflows/tests.yml` propose les deux suites pour chaque Pull Request,
 avec uniquement un droit de lecture du dépôt. Il ne fusionne et ne déploie rien.
 
-## Vérifier cette réorganisation
+## Vérifier la réorganisation historique
 
-Le contrôle d’identité ci-dessous s’applique à l’état `67273e0`, avant les correctifs
-de recette autorisés. Il échoue légitimement sur le HTML courant, qui intègre ces correctifs
-d’interface. Ne pas supprimer ce contrôle pour masquer les différences.
-
-La référence de conservation est `backup/v233-before-maintenance`, commit `d247193`.
+Le contrôle d’identité historique est conservé, sans être affaibli. Il vise l’état
+`67273e0`, avant les corrections d’interface et de sécurité, et doit être exécuté dans
+une copie de cet état, pas sur le HTML courant :
 
 ```bash
+git worktree add --detach ../avatar-verification-ancienne 67273e0
+cd ../avatar-verification-ancienne
 python scripts/verify_reorganisation.py --baseline backup/v233-before-maintenance
-python scripts/inventory.py --baseline backup/v233-before-maintenance --output docs/maintenance/INVENTAIRE.csv
+python scripts/inventory.py --baseline backup/v233-before-maintenance --output work/inventaire-ancien.csv
 ```
 
-Le premier contrôle compare réellement le HTML, la matrice et les archives à Git. Il
-recalcule également les seules adaptations autorisées dans les 223 tests historiques :
-chemins et localisation du navigateur. Il échoue si une assertion a été modifiée.
+Les références historiques doivent être disponibles dans le clone. L’ancien inventaire
+complet reste [consultable sous l’étiquette](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/maintenance/INVENTAIRE.csv).
+Ce contrôle compare HTML, matrice, archives et adaptations des 223 tests d’époque ; il
+ne doit pas être réinterprété comme un contrôle du comportement de la version courante.
 
-Ce contrôle est spécifique à la migration depuis cette référence. Une future évolution
-fonctionnelle modifiera légitimement le HTML : ne pas le présenter comme une régression
-sans comparer au bon point de départ. La suite de tests reste la commande de développement
-courante.
+## Vérifier le nettoyage de mission 2
+
+Le [bilan](maintenance/nettoyage/BILAN.md) compare les 192 scripts JS et 38 navigateur
+avant/après. Tous restent en place. Les identifiants Git d’origine sont conservés dans
+l’index ; seul le commentaire de lancement du test Terre est corrigé, avec comparaison
+de son AST hors docstring. Les chemins archivés doivent correspondre exactement aux
+278 lignes approuvées, et le diff HTML uniquement aux deux helpers retirés.
 
 ## Portée et limites
 

@@ -94,3 +94,13 @@ Défaut reproduit indépendamment dans Chromium sur main `42b306f`. Format techn
 ## 13 novembre 2026 — mission 2 : inventaire avant accord
 
 Alex autorise la préparation de l’inventaire après fusion des PR 17/18. Étiquette annotée `avant-nettoyage-2026-11-13` publiée sur `38943c5` avant le travail. Proposition : garder 254 fichiers d’origine ; archiver dans Git 278 chemins (275 archives, ancien inventaire, deux récits V2.33) ; retirer deux helpers sans appel identifié. **Aucun retrait ni déplacement autorisé à ce stade.** Le plan et le CHANGELOG sont proposés, les 230 scripts restent en place. L’accord sur le plan et l’accord de fusion seront distincts. Licence, visibilité et droits restent ouverts ; mission 3 et UI en attente. Voir [le plan](maintenance/nettoyage/PLAN.md).
+
+## 13 novembre 2026 — autorisation d’exécuter le nettoyage
+
+Alex répond « oui » à la question précise d’exécution du plan dans la PR 19, sans fusion.
+Les 278 chemins de l’inventaire peuvent être retirés de la copie courante, originaux
+conservés sous l’étiquette ; seuls openNpc et showPlaybookReference sont retirés du code.
+Les 230 scripts restent à leur place et toutes les assertions sont conservées ; seule
+la commande du commentaire du test Terre change. Retour arrière par restauration ou
+annulation de commit. Aucun accord de fusion, de mission 3, de refonte ou de licence
+n’est déduit de cette autorisation. [Bilan](maintenance/nettoyage/BILAN.md).

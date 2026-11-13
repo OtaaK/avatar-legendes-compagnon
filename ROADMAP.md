@@ -20,7 +20,7 @@
 
 ## Références
 
-Base historique : `docs/AUDIT_V232.md`. Changements : `docs/RAPPORT_V233.md`.
+Base historique : `docs/AUDIT_V232.md`. Changements : `CHANGELOG.md`.
 Validation et périmètre actuel : `docs/AUDIT_V233.md`.
 
 ## Maintenance de structure V2.33
@@ -33,7 +33,7 @@ Validation et périmètre actuel : `docs/AUDIT_V233.md`.
 - [x] Ajouter une procédure commune de test et un contrôle de fonctionnement hors connexion.
 - [x] Examiner et intégrer la PR nº 1 après validation explicite du propriétaire.
 
-Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVENTAIRE.csv`.
+Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et [son inventaire archivé](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/maintenance/INVENTAIRE.csv).
 
 ## Retours de recette manuelle
 
@@ -45,7 +45,7 @@ Voir `docs/maintenance/RAPPORT_REORGANISATION_V233.md` et `docs/maintenance/INVE
 - [x] Obtenir la validation du propriétaire pour les correctifs avant fusion.
 - [ ] Cadrer une future refonte UI/UX, séparément des correctifs et des règles.
 
-Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.
+Voir `CHANGELOG.md` et [le rapport de recette archivé](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/RAPPORT_RETOURS_RECETTE_V233.md).
 
 ## Fiabilité des sauvegardes — proposition suivante
 
@@ -67,3 +67,10 @@ Correctif d’injection aux imports/rendu préparé, tests de non-régression aj
 ## Mission 2 — étape d’inventaire soumise à accord
 
 Missions 0 et 1 fusionnées dans main (PR 17 et 18). Sauvegarde `avant-nettoyage-2026-11-13` publiée. [Plan et preuves](docs/maintenance/nettoyage/PLAN.md), 532 fichiers classés, CHANGELOG proposé, aucun fichier existant retiré/déplacé. Attendre l’accord sur les 278 chemins à archiver et les deux helpers ; conserver les 230 scripts sans regroupement physique. Après réalisation et comparaison des contrôles, demander séparément l’accord de fusion. Mission 3/refonte UI non commencées.
+
+## Exécution approuvée de la mission 2
+
+Plan accepté par Alex le 13 novembre 2026. Nettoyage dans la même PR 19, sans fusion :
+278 chemins archivés, deux helpers retirés, liens corrigés et 230 scripts conservés.
+Résultats et limites : [bilan](docs/maintenance/nettoyage/BILAN.md). L’accord de fusion
+reste distinct ; aucune mission 3 ni refonte UI commencée.
