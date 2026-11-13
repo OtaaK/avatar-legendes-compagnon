@@ -59,3 +59,7 @@ Voir `docs/RAPPORT_FIABILITE_SAUVEGARDES_V233.md`. La refonte UI/UX est prépar�
 ## Priorité de maintenance — 13 novembre 2026
 
 Mission 0 : formaliser les consignes. Mission 1 : vérifier et corriger les injections à l’import/rendu sans changer les règles ni l’interface. Mission 2 : inventaire et accord avant suppression ; mission 3 et refonte UI en attente des accords demandés.
+
+## Mission 1 — correctif préparé sur branche dédiée
+
+Correctif d’injection aux imports/rendu préparé, tests de non-régression ajoutés ; aucune fusion. Voir [le bilan de sécurité](docs/securite/IMPORTS_IDENTIFIANTS.md). Le report vers les branches de convergence doit être vérifié avant intégration. Mission 2 : étiquette et inventaire à présenter avant suppression ; mission 3 et UI toujours en attente des accords requis.

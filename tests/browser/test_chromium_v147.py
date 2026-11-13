@@ -12,11 +12,11 @@ with sync_playwright() as pw:
   page.evaluate("""(status)=>{s=CombatCore.createCombat();const a=CombatCore.addFighter(s,'Bénéficiaire'),b=CombatCore.addFighter(s,'Adversaire');s.round=2;s.phase='declaration';if(status)CombatCore.fighter(s,b).statuses.push(status);else CombatCore.declare(s,b,'attaquer');s.temporaryEffects.push({id:'ct',label:'Révélation différée',originType:'technique',originLabel:'À contretemps',targetId:a,countertimeOpponentId:b,countertimeResolved:false,createdRound:1,expiresAfterRound:2,duration:'round'});render()}""",status)
  setup('etourdi')
  assert page.get_by_role('button',name='Arbitrer impossibilité (MJ)',include_hidden=True).count()==1
- page.evaluate("document.querySelector('#temporaryEffects button[onclick^=\"waiveCountertimeUI\"]').click()")
+ page.evaluate("document.querySelector('#temporaryEffects button[data-ui-click=\"waiveCountertimeUI\"]').click()")
  waived=page.evaluate("""()=>({resolved:s.temporaryEffects[0].countertimeResolved,waived:s.temporaryEffects[0].countertimeWaived,saved:JSON.parse(localStorage.getItem('avatar-v020')).temporaryEffects[0].countertimeWaived})""")
  assert waived=={'resolved':True,'waived':True,'saved':True},waived
  setup()
- page.evaluate("document.querySelector('#temporaryEffects button[onclick^=\"revealCountertimeUI\"]').click()")
+ page.evaluate("document.querySelector('#temporaryEffects button[data-ui-click=\"revealCountertimeUI\"]').click()")
  revealed=page.evaluate("""()=>({resolved:s.temporaryEffects[0].countertimeResolved,saved:JSON.parse(localStorage.getItem('avatar-v020')).temporaryEffects[0].countertimeResolved})""")
  assert revealed=={'resolved':True,'saved':True},revealed
  print('Chromium V1.47 : deux boutons MJ fonctionnels et persistés')

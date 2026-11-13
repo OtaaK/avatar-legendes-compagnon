@@ -2642,6 +2642,7 @@ const MASTERY=['acquise','pratiquee','maitrisee'];
 function createLibrary(){return {version:1,seq:1,characters:[]}}
 function validateCharacter(c){
  if(!c||typeof c!=='object'||!['PJ','PNJ'].includes(c.kind))throw Error('Type PJ/PNJ requis');
+ if(typeof c.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_-]{0,119}(?![\s\S])/.test(c.id))throw Error('Identifiant de fiche invalide');
  if(typeof c.name!=='string'||!c.name.trim()||c.name.length>100)throw Error('Nom invalide');
  if(!c.stats||STATS.some(k=>!Number.isInteger(c.stats[k])||c.stats[k]<-3||c.stats[k]>3))throw Error('Caractéristiques invalides');
  if(!Array.isArray(c.conditions)||c.conditions.some(x=>!CONDITIONS.includes(x))||new Set(c.conditions).size!==c.conditions.length)throw Error('États invalides');
@@ -2695,6 +2696,7 @@ function syncCombatToLibrary(lib,combat,id){
  return updateCharacter(lib,c.id,{fatigue:f.fatigue,balance:f.balance,conditions:rosterClone(f.conditions),statuses:rosterClone(f.statuses.map(x=>FROM_ENGINE[x]||x))});
 }
 function normalizeCharacter(c){
+ if(!c||typeof c!=='object'||typeof c.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_-]{0,119}(?![\s\S])/.test(c.id))throw Error('Identifiant de fiche invalide');
  // Migration des fiches V0.7–V0.9 sans changement des ressources existantes.
  if(c.center===undefined)c.center=0;
  if(c.location===undefined)c.location='';
@@ -2808,9 +2810,9 @@ function refreshSheetQuick(){
 function renderSheetQuick(c){
  const bar=$('sheetQuick');if(!bar)return;
  if(!c){bar.innerHTML='';return}
- bar.innerHTML=`<strong>${safe(c.name)}</strong><button type="button" onclick="includeSheet('${safe(c.id)}')" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button><div class="resource"><span>Fatigue</span><button class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)">−</button><output>${c.fatigue}/5</output><button aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)">+</button></div>
- <div class="resource"><span>Équilibre</span><button class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)">−</button><output>${c.balance>0?'+':''}${c.balance}</output><button aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)">+</button></div>
- <div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" onclick="quickSheetCondition('${safe(n)}')">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div>`;
+ bar.innerHTML=`<strong>${safe(c.name)}</strong><button type="button" data-ui-click="includeSheet" data-id="${safe(c.id)}" ${s.fighters.some(f=>f.characterId===c.id)?'disabled':''}>${s.fighters.some(f=>f.characterId===c.id)?'Déjà dans le combat':'Ajouter au combat'}</button><div class="resource"><span>Fatigue</span><button class="alt" aria-label="Retirer une fatigue" onclick="quickSheetResource('fatigue',-1)">−</button><output>${safe(c.fatigue)}/5</output><button aria-label="Ajouter une fatigue" onclick="quickSheetResource('fatigue',1)">+</button></div>
+ <div class="resource"><span>Équilibre</span><button class="alt" aria-label="Diminuer l’équilibre" onclick="quickSheetResource('balance',-1)">−</button><output>${c.balance>0?'+':''}${safe(c.balance)}</output><button aria-label="Augmenter l’équilibre" onclick="quickSheetResource('balance',1)">+</button></div>
+ <div class="quick-conditions">${Roster.CONDITIONS.map(n=>`<button class="pill negative ${c.conditions.includes(n)?'active':''}" aria-pressed="${c.conditions.includes(n)}" data-ui-click="quickSheetCondition" data-id="${safe(n)}">${c.conditions.includes(n)?'✓ ':''}${safe(n)}</button>`).join('')}</div>`;
 }
 function disengageOne(id){try{const f=CombatCore.fighter(s,id);if(confirm('Rompre tous les engagements de '+f.name+' ? Cette opération peut être annulée.'))CombatCore.disengageFighter(s,id);render()}catch(e){alert(e.message);render()}}
 function clearAllEngagements(){try{if(!(s.engagements||[]).length)return;if(confirm('Rompre tous les engagements actuels ? Cette opération peut être annulée.'))CombatCore.clearEngagements(s);render()}catch(e){alert(e.message);render()}}
@@ -3015,11 +3017,11 @@ function renderTemporaryEffects(){
   const source=e.originType==='personnage'&&e.originSourceId?CombatCore.fighter(s,e.originSourceId).name:'';
   return [e.label,e.originLabel||'',target,source].some(value=>value.toLocaleLowerCase('fr').includes(query));
  });
- root.innerHTML='<h4>Effets temporaires ('+shown.length+' / '+all.length+')</h4>'+(shown.map(e=>'<p><b>'+safe(CombatCore.fighter(s,e.targetId).name)+'</b> — '+safe(e.label)+' · '+(e.originType==='technique'?'Technique'+(e.originLabel?' : '+safe(e.originLabel):''):e.originType==='personnage'&&e.originSourceId?'Personnage : '+safe(CombatCore.fighter(s,e.originSourceId).name):'Décision MJ')+' · '+({round:'fin de passe',scene:'fin de scène',manual:'retrait manuel'}[e.duration])+(e.countertimeOpponentId&&!e.countertimeResolved&&s.round===e.createdRound+1&&s.phase==='declaration'?' <button type="button" onclick="revealCountertimeUI(\''+e.id+'\')">Révéler approche (MJ)</button>'+(CombatCore.fighter(s,e.countertimeOpponentId).statuses.some(x=>x==='etourdi'||x==='piege')&&!CombatCore.fighter(s,e.countertimeOpponentId).approach?' <button type="button" class="alt" onclick="waiveCountertimeUI(\''+e.id+'\')">Arbitrer impossibilité (MJ)</button>':''):'')+(e.reedPrediction&&!e.reedResolved&&s.round===e.createdRound+1&&s.phase!=='declaration'?' <button type="button" onclick="resolveReedBetUI(\''+e.id+'\')">Révéler (MJ)</button>':'')+(e.originLabel==='Bouclier de roche'?(e.shieldBlockedRound===s.round?' <strong>Protection déjà utilisée pour cette passe</strong>':' <strong>Protection disponible</strong> <button type="button" onclick="earthShieldUI(\''+e.id+'\',\'block\')">Bloquer 1re attaque (MJ)</button>')+' <button type="button" onclick="earthShieldUI(\''+e.id+'\',\'consume\')">Consommer (−1 fatigue)</button> <button type="button" onclick="earthShieldUI(\''+e.id+'\',\'revoke\')">Révoquer</button>':'')+(e.originLabel==='Étoile de lave'?' <button type="button" onclick="earthLavaUI(\''+e.id+'\',\'maintain\')">Entretenir (1 fatigue)</button> <button type="button" onclick="earthLavaFractureUI(\''+e.id+'\')">Fracasser le décor (gratuit)</button> <button type="button" onclick="earthLavaUI(\''+e.id+'\',\'extinguish\')">Éteindre</button>':'')+(e.originLabel==='Armure de terre'&&Number.isInteger(e.armorPoints)?' <button type="button" onclick="resolveEarthArmorHitUI(\''+e.id+'\')">Résoudre impact entrant (MJ)</button> <button type="button" onclick="spendEarthArmorUI(\''+e.id+'\',\'condition\')">Annuler 1 état (−1 pt)</button> <button type="button" onclick="spendEarthArmorUI(\''+e.id+'\',\'fatigue\')">Annuler 2 fatigues (−1 pt)</button>':'')+' <button type="button" class="alt" onclick="editTemporaryEffectUI(\''+e.id+'\')">Modifier</button> <button type="button" class="alt" onclick="removeTemporaryEffectUI(\''+e.id+'\')">Retirer</button></p>').join('')||'<p class="small-note">Aucun effet temporaire pour ce filtre.</p>');
+ root.innerHTML='<h4>Effets temporaires ('+shown.length+' / '+all.length+')</h4>'+(shown.map(e=>'<p><b>'+safe(CombatCore.fighter(s,e.targetId).name)+'</b> — '+safe(e.label)+' · '+(e.originType==='technique'?'Technique'+(e.originLabel?' : '+safe(e.originLabel):''):e.originType==='personnage'&&e.originSourceId?'Personnage : '+safe(CombatCore.fighter(s,e.originSourceId).name):'Décision MJ')+' · '+({round:'fin de passe',scene:'fin de scène',manual:'retrait manuel'}[e.duration])+(e.countertimeOpponentId&&!e.countertimeResolved&&s.round===e.createdRound+1&&s.phase==='declaration'?' <button type="button" data-ui-click="revealCountertimeUI" data-id="'+safe(e.id)+'">Révéler approche (MJ)</button>'+(CombatCore.fighter(s,e.countertimeOpponentId).statuses.some(x=>x==='etourdi'||x==='piege')&&!CombatCore.fighter(s,e.countertimeOpponentId).approach?' <button type="button" class="alt" data-ui-click="waiveCountertimeUI" data-id="'+safe(e.id)+'">Arbitrer impossibilité (MJ)</button>':''):'')+(e.reedPrediction&&!e.reedResolved&&s.round===e.createdRound+1&&s.phase!=='declaration'?' <button type="button" data-ui-click="resolveReedBetUI" data-id="'+safe(e.id)+'">Révéler (MJ)</button>':'')+(e.originLabel==='Bouclier de roche'?(e.shieldBlockedRound===s.round?' <strong>Protection déjà utilisée pour cette passe</strong>':' <strong>Protection disponible</strong> <button type="button" data-ui-click="earthShieldUI" data-id="'+safe(e.id)+'" data-extra="block">Bloquer 1re attaque (MJ)</button>')+' <button type="button" data-ui-click="earthShieldUI" data-id="'+safe(e.id)+'" data-extra="consume">Consommer (−1 fatigue)</button> <button type="button" data-ui-click="earthShieldUI" data-id="'+safe(e.id)+'" data-extra="revoke">Révoquer</button>':'')+(e.originLabel==='Étoile de lave'?' <button type="button" data-ui-click="earthLavaUI" data-id="'+safe(e.id)+'" data-extra="maintain">Entretenir (1 fatigue)</button> <button type="button" data-ui-click="earthLavaFractureUI" data-id="'+safe(e.id)+'">Fracasser le décor (gratuit)</button> <button type="button" data-ui-click="earthLavaUI" data-id="'+safe(e.id)+'" data-extra="extinguish">Éteindre</button>':'')+(e.originLabel==='Armure de terre'&&Number.isInteger(e.armorPoints)?' <button type="button" data-ui-click="resolveEarthArmorHitUI" data-id="'+safe(e.id)+'">Résoudre impact entrant (MJ)</button> <button type="button" data-ui-click="spendEarthArmorUI" data-id="'+safe(e.id)+'" data-extra="condition">Annuler 1 état (−1 pt)</button> <button type="button" data-ui-click="spendEarthArmorUI" data-id="'+safe(e.id)+'" data-extra="fatigue">Annuler 2 fatigues (−1 pt)</button>':'')+' <button type="button" class="alt" data-ui-click="editTemporaryEffectUI" data-id="'+safe(e.id)+'">Modifier</button> <button type="button" class="alt" data-ui-click="removeTemporaryEffectUI" data-id="'+safe(e.id)+'">Retirer</button></p>').join('')||'<p class="small-note">Aucun effet temporaire pour ce filtre.</p>');
  const seismic=(s.fighters||[]).filter(f=>(f.bonuses||[]).some(b=>b.type==='earth_seismic_interrupt'&&b.round===s.round)&&f.statuses.includes('pret'));
- if(seismic.length)root.innerHTML+='<h4>Détection du pas lourd — interruption (passe '+s.round+')</h4>'+seismic.map(f=>'<p>'+safe(f.name)+' <button type="button" onclick="earthSeismicInterruptUI(\''+f.id+'\')">Interrompre une technique (MJ)</button></p>').join('');
+ if(seismic.length)root.innerHTML+='<h4>Détection du pas lourd — interruption (passe '+safe(s.round)+')</h4>'+seismic.map(f=>'<p>'+safe(f.name)+' <button type="button" data-ui-click="earthSeismicInterruptUI" data-id="'+safe(f.id)+'">Interrompre une technique (MJ)</button></p>').join('');
  const mud=(s.fighters||[]).flatMap(f=>(f.bonuses||[]).filter(b=>b.type==='earth_mud_strike'&&b.round===s.round).map(b=>({source:f,target:s.fighters.find(x=>x.id===b.targetId)}))).filter(x=>x.target);
- if(mud.length)root.innerHTML+='<h4>Boue gluante — Frapper supplémentaire (passe '+s.round+')</h4>'+mud.map(x=>'<p>'+safe(x.source.name)+' → '+safe(x.target.name)+' <button type="button" onclick="earthMudStrikeUI(\''+x.source.id+'\',\''+x.target.id+'\')">Frapper (MJ)</button></p>').join('');
+ if(mud.length)root.innerHTML+='<h4>Boue gluante — Frapper supplémentaire (passe '+safe(s.round)+')</h4>'+mud.map(x=>'<p>'+safe(x.source.name)+' → '+safe(x.target.name)+' <button type="button" data-ui-click="earthMudStrikeUI" data-id="'+safe(x.source.id)+'" data-extra="'+safe(x.target.id)+'">Frapper (MJ)</button></p>').join('');
 
 }
 function exportSceneJournalUI(){try{
@@ -3041,7 +3043,7 @@ function renderSceneJournal(){
  const matches=(s.sceneJournal||[]).filter(n=>(sceneSelect.value==='all'||n.scene===Number(sceneSelect.value))&&(!query||n.text.toLocaleLowerCase('fr').includes(query)||(n.title||'').toLocaleLowerCase('fr').includes(query)));
  const limit=limitSelect.value==='all'?matches.length:20;
  const visible=matches.slice(-limit).reverse();
- $('sceneJournal').innerHTML='<h4>Journal narratif ('+matches.length+' note(s))</h4>'+(visible.map(n=>'<p><b>Scène '+Number(n.scene)+(n.title?' — '+safe(n.title):'')+' · Passe '+Number(n.round)+'</b> — '+safe(n.text)+' <button type="button" class="alt" onclick="editSceneNoteUI(\''+n.id+'\')">Modifier</button> <button type="button" class="alt" onclick="removeSceneNoteUI(\''+n.id+'\')">Supprimer</button></p>').join('')||'<p class="small-note">Aucune note correspondante.</p>')+(visible.length<matches.length?'<p class="small-note">'+(matches.length-visible.length)+' note(s) masquée(s) : choisir « Toutes » pour les afficher.</p>':'');
+ $('sceneJournal').innerHTML='<h4>Journal narratif ('+matches.length+' note(s))</h4>'+(visible.map(n=>'<p><b>Scène '+Number(n.scene)+(n.title?' — '+safe(n.title):'')+' · Passe '+Number(n.round)+'</b> — '+safe(n.text)+' <button type="button" class="alt" data-ui-click="editSceneNoteUI" data-id="'+safe(n.id)+'">Modifier</button> <button type="button" class="alt" data-ui-click="removeSceneNoteUI" data-id="'+safe(n.id)+'">Supprimer</button></p>').join('')||'<p class="small-note">Aucune note correspondante.</p>')+(visible.length<matches.length?'<p class="small-note">'+(matches.length-visible.length)+' note(s) masquée(s) : choisir « Toutes » pour les afficher.</p>':'');
 }
 function editCombatFighter(id){try{
  const f=CombatCore.fighter(s,id);
@@ -3049,9 +3051,9 @@ function editCombatFighter(id){try{
  const dialog=$('combatFighterDialog'),required=CombatCore.requiredFighterStatuses(s,id);dialog.dataset.fighterId=id;
  dialog.innerHTML=`<form onsubmit="event.preventDefault();saveCombatFighter()"><h3 id="combatFighterEditorTitle">Modifier le combattant</h3><p>${safe(f.kind)} · Modifications pour ce combat uniquement${f.characterId?' ; la fiche permanente reste indépendante':''}.</p>
  <label for="combatEditName">Nom dans ce combat</label><input id="combatEditName" required maxlength="100" value="${safe(f.name)}">
- <label for="combatEditFatigue">Fatigue</label><input id="combatEditFatigue" type="number" min="0" max="5" step="1" required value="${f.fatigue}">
- <label for="combatEditBalance">Équilibre</label><input id="combatEditBalance" type="number" min="-3" max="3" step="1" required value="${f.balance}">
- <label for="combatEditMaterials">Matériels</label><input id="combatEditMaterials" type="number" min="0" step="1" required value="${f.materials||0}">
+ <label for="combatEditFatigue">Fatigue</label><input id="combatEditFatigue" type="number" min="0" max="5" step="1" required value="${safe(f.fatigue)}">
+ <label for="combatEditBalance">Équilibre</label><input id="combatEditBalance" type="number" min="-3" max="3" step="1" required value="${safe(f.balance)}">
+ <label for="combatEditMaterials">Matériels</label><input id="combatEditMaterials" type="number" min="0" step="1" required value="${safe(f.materials||0)}">
  <fieldset><legend>États</legend>${Roster.CONDITIONS.map(c=>`<label><input class="combat-edit-condition" type="checkbox" value="${safe(c)}" ${f.conditions.includes(c)?'checked':''}>${safe(c)}</label>`).join('')}</fieldset>
  <fieldset><legend>Statuts</legend>${CombatCore.STATUS.map(status=>`<label><input class="combat-edit-status" type="checkbox" value="${status}" ${f.statuses.includes(status)||required.includes(status)?'checked':''} ${required.includes(status)?'disabled':''}>${safe(Roster.FROM_ENGINE[status])}${required.includes(status)?' (effet actif)':''}</label>`).join('')}</fieldset>
  <p class="small-note">Les statuts maintenus par une technique se retirent depuis cet effet. La modification peut être annulée avec l’historique du combat.</p>
@@ -3066,23 +3068,23 @@ function saveCombatFighter(){try{
 function openCombatSheet(id){const f=CombatCore.fighter(s,id);if(f.characterId){setView('characters');openCharacterDetail(f.characterId);}}
 function render(){
  renderCombatLibrary();
- $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${f.kind}</span><button type="button" class="alt" title="Disponible avant la révélation des approches" onclick="editCombatFighter('${f.id}')" ${s.phase!=='declaration'||s.actions.length||s.proposals.length?'disabled':''}>Modifier le combattant</button>${f.characterId?`<button type="button" class="alt" onclick="openCombatSheet('${f.id}')">Ouvrir la fiche</button>`:''}${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select onchange="setGeneCombatChoice('${f.id}',this.value)"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" onclick="releaseTrapped('${f.id}')" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" onclick="syncSheet('${f.id}')">Reporter sur la fiche</button>`:''}<p>Fatigue : ${f.fatigue}/5 · Matériels : ${f.materials||0}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${f.balance} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>approachLabels[x]).join(', ')||'—'}</p></div>`).join('');
- $('fighters').innerHTML+='<div class="fighter"><b>Engagements (confirmés par le MJ)</b><p class="small-note">Cocher les paires engagées. Glissade permet de rompre et de créer des engagements avec validation MJ. La remise à zéro est une transaction unique, annulable.</p><button type="button" class="alt" onclick="clearAllEngagements()" '+(!(s.engagements||[]).length?'disabled':'')+'>Rompre tous les engagements</button>'+s.fighters.map(f=>'<button type="button" class="alt" onclick="disengageOne(\''+f.id+'\')" '+(!(s.engagements||[]).some(pair=>pair.includes(f.id))?'disabled':'')+'>Désengager '+safe(f.name)+'</button>').join('')+s.fighters.flatMap((f,i)=>s.fighters.slice(i+1).map(g=>'<label><input type="checkbox" style="width:auto" '+(CombatCore.isEngaged(s,f.id,g.id)?'checked':'')+' onchange="changeEngagement(\''+f.id+'\',\''+g.id+'\',this.checked)"> '+safe(f.name)+' ↔ '+safe(g.name)+'</label>')).join('')+'</div>';
- $('fighters').innerHTML+='<div class="fighter"><b>Pièges armés (MJ)</b>' + ((s.traps||[]).length?(s.traps||[]).map(t=>'<p>'+safe(t.zone)+' — '+safe(CombatCore.fighter(s,t.ownerId).name)+' <button type="button" class="alt" onclick="triggerTrapUI(\''+safe(t.id)+'\')" '+(s.proposals.length?'disabled':'')+'>Déclencher (prochain adversaire)</button></p>').join(''):'<p>Aucun piège armé.</p>')+'</div>';
- $('phase').innerHTML=`<h3>Scène ${s.scene||1}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${s.round} — ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin de passe':approachLabels[s.phase]}</h3>`;
+ $('fighters').innerHTML=s.fighters.map(f=>`<div class="fighter"><b>${safe(f.name)}</b> <span class="chip">${safe(f.kind)}</span><button type="button" class="alt" title="Disponible avant la révélation des approches" data-ui-click="editCombatFighter" data-id="${safe(f.id)}" ${s.phase!=='declaration'||s.actions.length||s.proposals.length?'disabled':''}>Modifier le combattant</button>${f.characterId?`<button type="button" class="alt" data-ui-click="openCombatSheet" data-id="${safe(f.id)}">Ouvrir la fiche</button>`:''}${s.phase==='declaration'&&f.statuses.includes('gene')?`<label>Gêné — traitement pour cette passe<select data-ui-change="setGeneCombatChoice" data-id="${safe(f.id)}"><option value="malus" ${f.geneChoice!=='fatigue'?'selected':''}>Subir le malus (PJ : −2 physique ; PNJ : −1 technique)</option><option value="fatigue" ${f.geneChoice==='fatigue'?'selected':''}>Cocher 1 fatigue pour ignorer le malus</option></select></label>`:''}${f.statuses.includes('piege')&&(s.phase==='declaration'||s.phase==='fin')?`<button type="button" class="alt" data-ui-click="releaseTrapped" data-id="${safe(f.id)}" title="Libération confirmée par le MJ : répartir 3 coûts entre fatigue et états">Libérer de Piégé (3 coûts)</button>`:''}${f.characterId?`<button class="alt" data-ui-click="syncSheet" data-id="${safe(f.id)}">Reporter sur la fiche</button>`:''}<p>Fatigue : ${safe(f.fatigue)}/5 · Matériels : ${safe(f.materials||0)}${f.equipmentDisabled?" (équipement hors service)":""} · Équilibre : ${safe(f.balance)} · États : ${f.conditions.map(safe).join(', ')||'—'}<br>Statuts : ${f.statuses.map(x=>safe(Roster.FROM_ENGINE[x]||x)).join(', ')||'—'} · Blocages : ${f.blocked.map(x=>safe(approachLabels[x]||x)).join(', ')||'—'}</p></div>`).join('');
+ $('fighters').innerHTML+='<div class="fighter"><b>Engagements (confirmés par le MJ)</b><p class="small-note">Cocher les paires engagées. Glissade permet de rompre et de créer des engagements avec validation MJ. La remise à zéro est une transaction unique, annulable.</p><button type="button" class="alt" onclick="clearAllEngagements()" '+(!(s.engagements||[]).length?'disabled':'')+'>Rompre tous les engagements</button>'+s.fighters.map(f=>'<button type="button" class="alt" data-ui-click="disengageOne" data-id="'+safe(f.id)+'" '+(!(s.engagements||[]).some(pair=>pair.includes(f.id))?'disabled':'')+'>Désengager '+safe(f.name)+'</button>').join('')+s.fighters.flatMap((f,i)=>s.fighters.slice(i+1).map(g=>'<label><input type="checkbox" style="width:auto" '+(CombatCore.isEngaged(s,f.id,g.id)?'checked':'')+' data-ui-change="changeEngagement" data-id="'+safe(f.id)+'" data-extra="'+safe(g.id)+'"> '+safe(f.name)+' ↔ '+safe(g.name)+'</label>')).join('')+'</div>';
+ $('fighters').innerHTML+='<div class="fighter"><b>Pièges armés (MJ)</b>' + ((s.traps||[]).length?(s.traps||[]).map(t=>'<p>'+safe(t.zone)+' — '+safe(CombatCore.fighter(s,t.ownerId).name)+' <button type="button" class="alt" data-ui-click="triggerTrapUI" data-id="'+safe(t.id)+'" '+(s.proposals.length?'disabled':'')+'>Déclencher (prochain adversaire)</button></p>').join(''):'<p>Aucun piège armé.</p>')+'</div>';
+ $('phase').innerHTML=`<h3>Scène ${safe(s.scene||1)}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${safe(s.round)} — ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin de passe':approachLabels[s.phase]}</h3>`;
  renderSceneJournal();
  const temporary=s.temporaryEffects||[];
  renderTemporaryEffects();
- $('declarations').innerHTML=s.phase==='declaration'?'<p class="small-note">Les combattants Étourdis ou Piégés ne déclarent pas d’approche. Le MJ doit lever le statut ou résoudre leur libération.</p>'+ s.fighters.filter(f=>!f.statuses.includes('etourdi')&&!f.statuses.includes('piege')).map(f=>`<label>${safe(f.name)} — approche</label><select onchange="setApproach('${f.id}',this.value)"><option value="">Choisir…</option>${CombatCore.APPROACHES.map(a=>`<option value="${a}" ${f.approach===a?'selected':''}>${approachLabels[a]}</option>`).join('')}</select>${f.kind==='PJ'?`<label>Posture</label><select id="roll-${f.id}" onchange="setRoll('${f.id}',this.value)">${['6-','7-9','10+'].map(r=>`<option ${f.roll===r?'selected':''}>${r}</option>`).join('')}</select>`:''}`).join(''):'<p>Approches déclarées : '+s.fighters.map(f=>`${safe(f.name)} : ${approachLabels[f.approach]}`).join(' · ')+'</p>';
+ $('declarations').innerHTML=s.phase==='declaration'?'<p class="small-note">Les combattants Étourdis ou Piégés ne déclarent pas d’approche. Le MJ doit lever le statut ou résoudre leur libération.</p>'+ s.fighters.filter(f=>!f.statuses.includes('etourdi')&&!f.statuses.includes('piege')).map(f=>`<label>${safe(f.name)} — approche</label><select data-ui-change="setApproach" data-id="${safe(f.id)}"><option value="">Choisir…</option>${CombatCore.APPROACHES.map(a=>`<option value="${a}" ${f.approach===a?'selected':''}>${approachLabels[a]}</option>`).join('')}</select>${f.kind==='PJ'?`<label>Posture</label><select id="roll-${safe(f.id)}" data-ui-change="setRoll" data-id="${safe(f.id)}">${['6-','7-9','10+'].map(r=>`<option ${f.roll===r?'selected':''}>${r}</option>`).join('')}</select>`:''}`).join(''):'<p>Approches déclarées : '+s.fighters.map(f=>`${safe(f.name)} : ${safe(approachLabels[f.approach]||f.approach)}`).join(' · ')+'</p>';
  $('step').textContent=s.phase==='declaration'?'Révéler les approches':s.phase==='esquiver'?'Terminer la passe':s.phase==='fin'?'Passe suivante':'Approche suivante';
  $('help').textContent=s.phase==='fin'?'Renforcé s’applique à la fin de la passe. En danger s’applique au début de la suivante.':'Les effets d’une même approche sont proposés puis validés par le MJ. Gêné : appliquer −2 aux jets physiques PJ si le coût de fatigue n’a pas été payé.';
  const oldSrc=$('source').value,oldTar=$('target').value;
- $('source').innerHTML=s.fighters.filter(f=>f.approach===s.phase).map(f=>`<option value="${f.id}" ${f.id===oldSrc?'selected':''}>${safe(f.name)}</option>`).join('');
- $('target').innerHTML=s.fighters.map(f=>`<option value="${f.id}" ${f.id===oldTar?'selected':''}>${safe(f.name)}</option>`).join('');
+ $('source').innerHTML=s.fighters.filter(f=>f.approach===s.phase).map(f=>`<option value="${safe(f.id)}" ${f.id===oldSrc?'selected':''}>${safe(f.name)}</option>`).join('');
+ $('target').innerHTML=s.fighters.map(f=>`<option value="${safe(f.id)}" ${f.id===oldTar?'selected':''}>${safe(f.name)}</option>`).join('');
  syncTechnique();
- $('proposals').innerHTML=s.proposals.length?s.proposals.map(e=>`<label><input type="checkbox" id="accept-${e.id}" checked style="width:auto"> ${safe(e.kind)} — ${safe(CombatCore.fighter(s,e.targetId).name)} ${safe(e.detail||'')} ${e.amount||''}</label>`).join(''):'<p>Aucune proposition en attente.</p>';
- $('history').innerHTML=s.history.slice(-8).reverse().map(h=>`<p>Passe ${h.round} · ${safe(h.phase)} : ${h.events.length} événement(s) validé(s)</p>`).join('')||'<p>Historique vide.</p>';
- $('combatSummary').textContent=`Scène ${s.scene||1}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${s.round} · ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin':approachLabels[s.phase]} · ${s.fighters.length} combattant(s) · ${s.proposals.length} effet(s) en attente`;
+ $('proposals').innerHTML=s.proposals.length?s.proposals.map(e=>`<label><input type="checkbox" id="accept-${safe(e.id)}" checked style="width:auto"> ${safe(e.kind)} — ${safe(CombatCore.fighter(s,e.targetId).name)} ${safe(e.detail||'')} ${safe(e.amount||'')}</label>`).join(''):'<p>Aucune proposition en attente.</p>';
+ $('history').innerHTML=s.history.slice(-8).reverse().map(h=>`<p>Passe ${safe(h.round)} · ${safe(h.phase)} : ${h.events.length} événement(s) validé(s)</p>`).join('')||'<p>Historique vide.</p>';
+ $('combatSummary').textContent=`Scène ${safe(s.scene||1)}${s.sceneTitle?" — "+safe(s.sceneTitle):""} · Passe ${safe(s.round)} · ${s.phase==='declaration'?'Déclaration':s.phase==='fin'?'Fin':approachLabels[s.phase]} · ${s.fighters.length} combattant(s) · ${s.proposals.length} effet(s) en attente`;
  setCombatTab(currentCombatTab);
 }
 function syncTechnique(){
@@ -3139,7 +3141,7 @@ function syncOptions(){const entry=TECH_CATALOG.find(x=>x.id===$('tech').value),
  if(t==='Fouet d’eau')opts+='<p class="small-note">Choix de la cible : 2 fatigues ou 1 état ; coût de 1 fatigue pour le lanceur (p. 288).</p>';
  if(t==='Frapper')opts+='<label class="small-note"><input type="checkbox" id="forceStrike" style="width:auto" onchange="updateStrikeChoices()"> Cocher 1 fatigue pour imposer 2 fatigues ou 1 état (p. 159)</label><p class="small-note">Sans effort supplémentaire, la cible choisit entre 2 fatigues, 1 état ou un décalage d’équilibre.</p>';
  if(t==='Presser l’adversaire')opts='<label>Approche interdite à la prochaine passe</label><select id="blocked">'+CombatCore.APPROACHES.map(a=>`<option value="${a}">${approachLabels[a]}</option>`).join('')+'</select>';
- if(t==='Observation rapide')opts=`<label>Réponse du MJ obtenue ?</label><select id="answer"><option value="yes">Oui</option><option value="no">Non</option></select><label>Partager le plan avec</label><select id="share"><option value="">Personne</option>${s.fighters.filter(f=>f.id!==$('source').value).map(f=>`<option value="${f.id}">${safe(f.name)}</option>`).join('')}</select>`;
+ if(t==='Observation rapide')opts=`<label>Réponse du MJ obtenue ?</label><select id="answer"><option value="yes">Oui</option><option value="no">Non</option></select><label>Partager le plan avec</label><select id="share"><option value="">Personne</option>${s.fighters.filter(f=>f.id!==$('source').value).map(f=>`<option value="${safe(f.id)}">${safe(f.name)}</option>`).join('')}</select>`;
  if(t==='Frapper un point faible')opts='<p class="small-note">Engagement requis dans le panneau Engagements du MJ (vérifié automatiquement). La cible doit être Gênée ; fatigue infligée = nombre de ses états cochés.</p>';
  if(t==='Trouver la faille')opts='<label>Direction du décalage différé</label><select id="direction"><option value="1">+1</option><option value="-1">−1</option></select><label><input type="checkbox" id="principleKnown" style="width:auto"> Principe adverse connu (confirmé par le MJ)</label><label><input type="checkbox" id="extraShift" style="width:auto"> Cocher 1 fatigue pour un deuxième décalage lorsque la faille est exploitée</label><p class="small-note">La faille est consommée à la prochaine fatigue ou au prochain état effectivement infligé à cette cible.</p>';
  if(t==='Glissade')opts='<p class="small-note">Choisir les ennemis à portée et les résistances. Cocher ensuite les nouveaux engagements voulus : seuls les liens impliquant un ennemi déplacé sont pris en compte. Les changements d’engagement de cette Glissade doivent être tous acceptés ou tous refusés ensemble lors de la validation MJ ; fatigue et états restent indépendants.</p>'+s.fighters.filter(x=>x.id!==f?.id).map(x=>'<label><input type="checkbox" class="glissade-enemy" value="'+safe(x.id)+'" style="width:auto"> À portée : '+safe(x.name)+'</label><label class="small-note"><input type="checkbox" class="glissade-resist" value="'+safe(x.id)+'" style="width:auto"> '+safe(x.name)+' résiste (1 fatigue + Gêné)</label>').join('')+'<p><b>Nouveaux engagements souhaités</b></p>'+s.fighters.flatMap((x,i)=>s.fighters.slice(i+1).map(y=>'<label><input type="checkbox" class="glissade-new-pair" data-a="'+safe(x.id)+'" data-b="'+safe(y.id)+'" style="width:auto"> '+safe(x.name)+' ↔ '+safe(y.name)+'</label>')).join('');
@@ -3324,7 +3326,7 @@ function validateCombat(raw){
   if(f.roll!==null&&!['6-','7-9','10+'].includes(f.roll))throw Error('Jet invalide');
   if(f.equipmentDisabled!==undefined&&typeof f.equipmentDisabled!=='boolean')throw Error('État de l’équipement invalide');
   if(f.materials!==undefined&&(!Number.isInteger(f.materials)||f.materials<0))throw Error('Réserve de matériels invalide');
-  if(f.characterId!==undefined&&(typeof f.characterId!=='string'||!f.characterId))throw Error('Lien de fiche invalide');
+  if(f.characterId!==undefined&&(typeof f.characterId!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_-]{0,119}(?![\s\S])/.test(f.characterId)))throw Error('Lien de fiche invalide');
  }
  // Les références utilisées dès le premier affichage doivent être valides avant import.
  // Absence et null restent compatibles avec les anciens champs optionnels.
@@ -3336,12 +3338,12 @@ function validateCombat(raw){
   if(!Array.isArray(raw.traps))throw Error('Pièges invalides : liste attendue');
   const trapIds=new Set();
   for(const trap of raw.traps){
-   if(!trap||typeof trap!=='object'||typeof trap.id!=='string'||!trap.id.trim()||trapIds.has(trap.id)||!ids.has(trap.ownerId)||typeof trap.zone!=='string'||!trap.zone.trim()||trap.zone.length>120||(trap.round!==undefined&&(!Number.isInteger(trap.round)||trap.round<1||trap.round>raw.round)))throw Error('Piège invalide : identifiant, propriétaire, zone ou passe incohérents');
+   if(!trap||typeof trap!=='object'||typeof trap.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_-]{0,119}(?![\s\S])/.test(trap.id)||trapIds.has(trap.id)||!ids.has(trap.ownerId)||typeof trap.zone!=='string'||!trap.zone.trim()||trap.zone.length>120||(trap.round!==undefined&&(!Number.isInteger(trap.round)||trap.round<1||trap.round>raw.round)))throw Error('Piège invalide : identifiant, propriétaire, zone ou passe incohérents');
    trapIds.add(trap.id);
   }
  }
  for(const a of raw.actions){if(!a||typeof a!=='object'||!ids.has(a.sourceId)||!Number.isInteger(a.round))throw Error('Action invalide');if(a.targetId!==undefined&&a.targetId!==null&&!ids.has(a.targetId))throw Error('Cible d’action inconnue')}
- for(const e of raw.proposals){if(!e||typeof e!=='object'||!ids.has(e.targetId)||typeof e.id!=='string')throw Error('Proposition invalide')}
+ for(const e of raw.proposals){if(!e||typeof e!=='object'||!ids.has(e.targetId)||(typeof e.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_-]{0,119}(?![\s\S])/.test(e.id)))throw Error('Proposition invalide')}
  for(const h of raw.history){if(!h||!Number.isInteger(h.round)||!Array.isArray(h.events))throw Error('Historique invalide')}
  if(raw.temporaryEffects!==undefined){
   if(!Array.isArray(raw.temporaryEffects)||raw.temporaryEffects.length>10000)throw Error('Effets temporaires invalides');
@@ -3436,13 +3438,13 @@ function renderCatalog(){
  $('catalogFamilySummary').textContent=families.length?families.length===1?document.querySelector('.catalog-family-check:checked').parentElement.innerText.trim():families.length+' familles sélectionnées':'Toutes les familles';
  const found=TECH_CATALOG.filter(t=>(!q||t.nom.toLocaleLowerCase('fr').includes(q))&&(!families.length||families.includes(t.famille))&&(!approach||t.approche===approach)&&(!rare||(rare==='rare')===!!t.rare));
  $('catalogCount').textContent=found.length+' technique(s) trouvée(s) · 102 effets avancés documentés · 2 automatisations testées, 100 sous arbitrage MJ';
- $('catalogResults').innerHTML=found.map(t=>`<button type="button" class="catalog-mini" data-family="${safe(t.famille)}" onclick="openCatalogDetail('${safe(t.id)}')"><strong>${safe(t.nom)}</strong><span class="catalog-tag">${safe(t.famille)}</span>${t.rare?'<span class="catalog-rare-star" title="Technique rare" aria-label="Technique rare">★</span>':''}<small>${safe(t.approche)}</small></button>`).join('')||'<p>Aucun résultat.</p>';
+ $('catalogResults').innerHTML=found.map(t=>`<button type="button" class="catalog-mini" data-family="${safe(t.famille)}" data-ui-click="openCatalogDetail" data-id="${safe(t.id)}"><strong>${safe(t.nom)}</strong><span class="catalog-tag">${safe(t.famille)}</span>${t.rare?'<span class="catalog-rare-star" title="Technique rare" aria-label="Technique rare">★</span>':''}<small>${safe(t.approche)}</small></button>`).join('')||'<p>Aucun résultat.</p>';
  $('catalogBrowser').hidden=false;$('catalogDetail').hidden=true;
 }
 function openCatalogDetail(id){
  const t=TECH_CATALOG.find(x=>x.id===id);if(!t)return;
  $('catalogBrowser').hidden=true;$('catalogDetail').hidden=false;
- $('catalogDetail').innerHTML=`<button class="alt catalog-back" onclick="closeCatalogDetail()">← Retour aux techniques</button><h3>${safe(t.nom)}</h3><p><span class="chip">${safe(t.famille)}</span> ${t.rare?'<span class="chip">Rare</span>':''}</p><p><b>Approche :</b> ${safe(t.approche)}</p><p><b>Référence :</b> Livre p. ${safe(t.page)}</p>${t.prerequis_specialise?'<p><b>Prérequis :</b> '+safe(t.prerequis_specialise)+'</p>':''}${t.famille!=='base'?(TECH_AUDIT[t.id]?'<p class="small-help" role="note"><b>Effet comparé au texte extrait du livre (p. ${TECH_AUDIT[t.id].page}).</b> '+(TECH_AUDIT[t.id].automatisation==='assistance_partielle_v233'?'Assistance testée V2.33 ; choix narratifs soumis au MJ, arbitrages de règles encore ouverts.':TECH_AUDIT[t.id].automatisation==='validee_v049'?'Automatisation testée V0.49 (cas couverts par les tests ; autres choix soumis au MJ).':(/^validee_v0/.test(TECH_AUDIT[t.id].automatisation)?'Automatisation testée (certains choix restent soumis au MJ).':'Automatisation non validée ; arbitrage MJ nécessaire.'))+'</p><p><b>Effet vérifié (synthèse) :</b> '+safe(TECH_AUDIT[t.id].resume_verifie)+'</p>':'<p class="small-help" role="note"><b>Validation des règles en attente :</b> les effets et prérequis de cette technique avancée n’ont pas encore été vérifiés individuellement. L’attribution à une fiche ne signifie pas que ses effets sont automatisés. Consulter le livre et arbitrer en tant que MJ.</p>'):''}${t.effet_resume?'<p><b>Résumé de travail :</b> '+safe(t.effet_resume)+'</p>':'<p class="small-help">Effet détaillé non transcrit : consulter le livre de règles.</p>'}<button class="alt" onclick="selectCatalogTechnique('${safe(t.id)}')">Attribuer à une fiche</button>`;
+ $('catalogDetail').innerHTML=`<button class="alt catalog-back" onclick="closeCatalogDetail()">← Retour aux techniques</button><h3>${safe(t.nom)}</h3><p><span class="chip">${safe(t.famille)}</span> ${t.rare?'<span class="chip">Rare</span>':''}</p><p><b>Approche :</b> ${safe(t.approche)}</p><p><b>Référence :</b> Livre p. ${safe(t.page)}</p>${t.prerequis_specialise?'<p><b>Prérequis :</b> '+safe(t.prerequis_specialise)+'</p>':''}${t.famille!=='base'?(TECH_AUDIT[t.id]?'<p class="small-help" role="note"><b>Effet comparé au texte extrait du livre (p. ${TECH_AUDIT[t.id].page}).</b> '+(TECH_AUDIT[t.id].automatisation==='assistance_partielle_v233'?'Assistance testée V2.33 ; choix narratifs soumis au MJ, arbitrages de règles encore ouverts.':TECH_AUDIT[t.id].automatisation==='validee_v049'?'Automatisation testée V0.49 (cas couverts par les tests ; autres choix soumis au MJ).':(/^validee_v0/.test(TECH_AUDIT[t.id].automatisation)?'Automatisation testée (certains choix restent soumis au MJ).':'Automatisation non validée ; arbitrage MJ nécessaire.'))+'</p><p><b>Effet vérifié (synthèse) :</b> '+safe(TECH_AUDIT[t.id].resume_verifie)+'</p>':'<p class="small-help" role="note"><b>Validation des règles en attente :</b> les effets et prérequis de cette technique avancée n’ont pas encore été vérifiés individuellement. L’attribution à une fiche ne signifie pas que ses effets sont automatisés. Consulter le livre et arbitrer en tant que MJ.</p>'):''}${t.effet_resume?'<p><b>Résumé de travail :</b> '+safe(t.effet_resume)+'</p>':'<p class="small-help">Effet détaillé non transcrit : consulter le livre de règles.</p>'}<button class="alt" data-ui-click="selectCatalogTechnique" data-id="${safe(t.id)}">Attribuer à une fiche</button>`;
  $('catalogDetail').scrollIntoView({block:'start'});
 }
 function closeCatalogDetail(){$('catalogBrowser').hidden=false;$('catalogDetail').hidden=true}
@@ -3473,7 +3475,7 @@ function wizardPreview(){
  if(!keys.some(([key],i)=>key===bonus&&p.stats[i]<2)){bonus=keys.find(([key],i)=>p.stats[i]<2)[0];$('wizardBonus').value=bonus;}
  $('wizardStatChoices').innerHTML=keys.map(([key,label])=>{
   let value=p.stats[keys.findIndex(item=>item[0]===key)]+(bonus===key?1:0),invalid=p.stats[keys.findIndex(item=>item[0]===key)]>=2;
-  return `<button type="button" class="wizard-stat ${bonus===key?'selected':''}" aria-pressed="${bonus===key}" ${invalid?'disabled':''} onclick="chooseWizardBonus('${key}')"><span>${label}</span><strong>${value>=0?'+':''}${value}</strong>${bonus===key?'<em>✓ Bonus appliqué</em>':'<em>Cliquer pour +1</em>'}</button>`;
+  return `<button type="button" class="wizard-stat ${bonus===key?'selected':''}" aria-pressed="${bonus===key}" ${invalid?'disabled':''} data-ui-click="chooseWizardBonus" data-id="${safe(key)}"><span>${label}</span><strong>${value>=0?'+':''}${value}</strong>${bonus===key?'<em>✓ Bonus appliqué</em>':'<em>Cliquer pour +1</em>'}</button>`;
  }).join('');
  $('wizardRelationsBox').hidden=false; // Les dix livrets officiels comportent une rubrique « Relations ».
  try{
@@ -3486,7 +3488,7 @@ function renderWizardTraining(){
  const selected=$('wizardTraining').value;
  const icons={'Maîtrise de l’Air':'◌','Maîtrise de l’Eau':'≈','Maîtrise de la Terre':'◆','Maîtrise du Feu':'♨','Armes':'⚔','Technologie':'⚙'};
  const colors={'Maîtrise de l’Air':'#A4B6C5','Maîtrise de l’Eau':'#2196F3','Maîtrise de la Terre':'#22B85A','Maîtrise du Feu':'#EF4444','Armes':'#505866','Technologie':'#790F66'};
- $('wizardTrainingChoices').innerHTML=Roster.TRAININGS.filter(Boolean).map(t=>`<button type="button" class="wizard-training ${selected===t?'selected':''}" style="--training-color:${colors[t]}" aria-pressed="${selected===t}" onclick="chooseWizardTraining('${safe(t)}')"><span class="wizard-training-icon">${icons[t]}</span><span>${safe(t)}</span>${selected===t?'<b class="wizard-training-check">✓</b>':''}</button>`).join('');
+ $('wizardTrainingChoices').innerHTML=Roster.TRAININGS.filter(Boolean).map(t=>`<button type="button" class="wizard-training ${selected===t?'selected':''}" style="--training-color:${colors[t]}" aria-pressed="${selected===t}" data-ui-click="chooseWizardTraining" data-id="${safe(t)}"><span class="wizard-training-icon">${icons[t]}</span><span>${safe(t)}</span>${selected===t?'<b class="wizard-training-check">✓</b>':''}</button>`).join('');
 }
 function wizardReview(){
  const x=wizardData(),p=Playbooks.byName(x.livret);
@@ -3619,7 +3621,7 @@ function characterCard(c){
  const cells=Array.from({length:5},(_,i)=>`<span class="${i<fatigue?'used':''}"></span>`).join('');
  const conditions=(c.conditions||[]).map(x=>chipHtml(x,'condition')).join('')||'<span class="card-muted">Aucun état</span>';
  const statuses=(c.statuses||[]).map(x=>chipHtml(x,'status')).join('')||'<span class="card-muted">Aucun statut</span>';
- return `<article class="character-card" role="button" tabindex="0" aria-label="Ouvrir la fiche de ${safe(c.name)}" onclick="openCharacterDetail('${safe(c.id)}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openCharacterDetail('${safe(c.id)}')}"><div class="card-head"><div><h3>${safe(c.name)}</h3><p class="sub">${safe(c.livret|| (c.kind==='PJ'?'Livret non précisé':'Rôle non précisé'))}</p></div><span aria-hidden="true">›</span></div><div class="card-risk"><div class="card-label">Fatigue et états</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5">${cells}</div><div class="card-chips">${conditions}</div></div>${balanceGraphic(c)}<div class="card-status"><div class="card-label">Statuts de combat</div><div class="card-chips">${statuses}</div></div>${c.kind==='PNJ'?`<div class="card-location">⌖ ${safe(c.location||'Sans lieu')}</div>`:''}</article>`;
+ return `<article class="character-card" role="button" tabindex="0" aria-label="Ouvrir la fiche de ${safe(c.name)}" data-ui-click="openCharacterDetail" data-id="${safe(c.id)}" data-ui-keydown="openCharacterDetail"><div class="card-head"><div><h3>${safe(c.name)}</h3><p class="sub">${safe(c.livret|| (c.kind==='PJ'?'Livret non précisé':'Rôle non précisé'))}</p></div><span aria-hidden="true">›</span></div><div class="card-risk"><div class="card-label">Fatigue et états</div><div class="fatigue-cells" role="img" aria-label="Fatigue ${fatigue} sur 5">${cells}</div><div class="card-chips">${conditions}</div></div>${balanceGraphic(c)}<div class="card-status"><div class="card-label">Statuts de combat</div><div class="card-chips">${statuses}</div></div>${c.kind==='PNJ'?`<div class="card-location">⌖ ${safe(c.location||'Sans lieu')}</div>`:''}</article>`;
 }
 function showCardTooltip(event,button){
  event.stopPropagation();const name=button.dataset.chip,type=button.dataset.chipType;
@@ -3680,10 +3682,10 @@ function openNpc(id){
 }
 function renderSheets(selected){
  const el=$('sheetSelect'),prev=selected||el.value;
- el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${c.kind})</option>`).join('');
+ el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${safe(c.kind)})</option>`).join('');
  showSheet();
  renderNpcDirectory();renderCharacterCards();renderCombatLibrary();
- $('sheetList').innerHTML=lib.characters.map(c=>`<div class="fighter"><b>${safe(c.name)}</b> · ${c.kind} · ${safe(c.livret||'Livret non précisé')}<br><small>${c.techniques.length} technique(s)</small><br><button onclick="includeSheet('${c.id}')">Ajouter au combat</button></div>`).join('')||'<p>Crée une fiche pour commencer.</p>';
+ $('sheetList').innerHTML=lib.characters.map(c=>`<div class="fighter"><b>${safe(c.name)}</b> · ${safe(c.kind)} · ${safe(c.livret||'Livret non précisé')}<br><small>${c.techniques.length} technique(s)</small><br><button data-ui-click="includeSheet" data-id="${safe(c.id)}">Ajouter au combat</button></div>`).join('')||'<p>Crée une fiche pour commencer.</p>';
 }
 function showSheet(){
  const c=lib.characters.find(x=>x.id===$('sheetSelect').value);
@@ -3694,22 +3696,22 @@ function showSheet(){
  ${c.kind==='PNJ'?`<label for="sheetLocation">Lieu (modifiable)</label><input id="sheetLocation" maxlength="120" list="knownNpcLocations" value="${safe(c.location||'')}" placeholder="Ex. Ba Sing Se"><datalist id="knownNpcLocations">${Roster.npcLocations(lib).map(x=>`<option value="${safe(x)}"></option>`).join('')}</datalist>`:''}
  ${c.kind==='PJ'?`<button type="button" class="alt" onclick="applySelectedBook()">Réappliquer les valeurs de départ du livret…</button><p class="small-help">Attention : cette action remplace les caractéristiques, principes, équilibre et centre, pas les autres informations.</p>`:''}
  </div><div class="sheet-section" data-sheet-group="identity"><b>Caractéristiques</b><p class="small-note">Utilise + et −. Maximum +2 sans manœuvre spéciale autorisant +3 (p. 122). Les valeurs initiales dépendent du livret : à renseigner d'après le livre.</p>
- ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('stat-${k}',-1,-3,2)">−</button><output id="view-stat-${k}">${c.stats[k]}</output><button type="button" class="stepper" onclick="stepField('stat-${k}',1,-3,2)">+</button><input type="hidden" id="stat-${k}" value="${c.stats[k]}"></div>`).join('')}</div>
+ ${Roster.STATS.map(k=>`<div class="field-head"><label>${safe(k[0].toUpperCase()+k.slice(1))}</label></div><div class="stepfield"><button type="button" class="stepper alt" data-ui-click="stepField" data-id="stat-${safe(k)}" data-extra="-1" data-min="-3" data-max="2">−</button><output id="view-stat-${k}">${safe(c.stats[k])}</output><button type="button" class="stepper" data-ui-click="stepField" data-id="stat-${safe(k)}" data-extra="1" data-min="-3" data-max="2">+</button><input type="hidden" id="stat-${k}" value="${safe(c.stats[k])}"></div>`).join('')}</div>
  <div class="sheet-section" data-sheet-group="resources"><b>Ressources</b>
- <label>Fatigue</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetFatigue',-1,0,5)">−</button><output id="view-sheetFatigue">${c.fatigue}</output><button type="button" class="stepper" onclick="stepField('sheetFatigue',1,0,5)">+</button><input type="hidden" id="sheetFatigue" value="${c.fatigue}"></div>
- <label>Équilibre (position)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetBalance',-1,-3,3)">−</button><output id="view-sheetBalance">${c.balance}</output><button type="button" class="stepper" onclick="stepField('sheetBalance',1,-3,3)">+</button><input type="hidden" id="sheetBalance" value="${c.balance}"></div></div>
+ <label>Fatigue</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetFatigue',-1,0,5)">−</button><output id="view-sheetFatigue">${safe(c.fatigue)}</output><button type="button" class="stepper" onclick="stepField('sheetFatigue',1,0,5)">+</button><input type="hidden" id="sheetFatigue" value="${safe(c.fatigue)}"></div>
+ <label>Équilibre (position)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetBalance',-1,-3,3)">−</button><output id="view-sheetBalance">${safe(c.balance)}</output><button type="button" class="stepper" onclick="stepField('sheetBalance',1,-3,3)">+</button><input type="hidden" id="sheetBalance" value="${safe(c.balance)}"></div></div>
  <div class="sheet-section" data-sheet-group="resources"><b>Équilibre et principes</b>
  <p class="small-note">Les deux principes dépendent du livret. Renseigne leurs noms d'après le livre.</p>
  <label>Principe côté −</label><input id="principleLeft" maxlength="80" placeholder="Nom du premier principe" value="${safe(c.principles?.[0]||'')}">
  <label>Principe côté +</label><input id="principleRight" maxlength="80" placeholder="Nom du second principe" value="${safe(c.principles?.[1]||'')}">
  <div class="balance-legend"><span id="balanceLeft">${safe(c.principles?.[0]||'Principe −')}</span><span id="balanceRight">${safe(c.principles?.[1]||'Principe +')}</span></div>
- <label>Centre (position de référence)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetCenter',-1,-3,3)">−</button><output id="view-sheetCenter">${c.center??0}</output><button type="button" class="stepper" onclick="stepField('sheetCenter',1,-3,3)">+</button><input type="hidden" id="sheetCenter" value="${c.center??0}"></div>
+ <label>Centre (position de référence)</label><div class="stepfield"><button type="button" class="stepper alt" onclick="stepField('sheetCenter',-1,-3,3)">−</button><output id="view-sheetCenter">${safe(c.center??0)}</output><button type="button" class="stepper" onclick="stepField('sheetCenter',1,-3,3)">+</button><input type="hidden" id="sheetCenter" value="${safe(c.center??0)}"></div>
  </div>
  <div class="sheet-section" data-sheet-group="resources"><b>États émotionnels</b><p class="small-note">Coche ou décoche d'un clic. Les cinq états officiels sont listés p. 101.</p>
- <div>${Roster.CONDITIONS.map(name=>`<button type="button" class="pill negative ${c.conditions.includes(name)?'active':''}" aria-pressed="${c.conditions.includes(name)}" onclick="toggleSheetCondition('${safe(name)}')">${c.conditions.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div>
+ <div>${Roster.CONDITIONS.map(name=>`<button type="button" class="pill negative ${c.conditions.includes(name)?'active':''}" aria-pressed="${c.conditions.includes(name)}" data-ui-click="toggleSheetCondition" data-id="${safe(name)}">${c.conditions.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div>
  <p class="small-note">Malus des états et mise hors de combat : à arbitrer selon la manœuvre concernée.</p></div>
  <div class="sheet-section" data-sheet-group="resources"><b>Statuts de combat</b><p class="small-note">Choisis les statuts en fonction de la fiction (pp. 155–157).</p>
- <div>${Roster.STATUSES.map(name=>`<button type="button" class="pill ${c.statuses.includes(name)?'active':''}" aria-pressed="${c.statuses.includes(name)}" onclick="toggleSheetStatus('${safe(name)}')">${c.statuses.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div></div>
+ <div>${Roster.STATUSES.map(name=>`<button type="button" class="pill ${c.statuses.includes(name)?'active':''}" aria-pressed="${c.statuses.includes(name)}" data-ui-click="toggleSheetStatus" data-id="${safe(name)}">${c.statuses.includes(name)?'✓ ':''}${safe(name)}</button>`).join('')}</div></div>
  <div class="sheet-section" data-sheet-group="story"><b>Entraînement et relations</b><label>Entraînement</label><select id="sheetTraining">${Roster.TRAININGS.map(t=>`<option value="${safe(t)}" ${c.training===t?'selected':''}>${safe(t||'À choisir…')}</option>`).join('')}</select>
  <input type="hidden" id="sheetHistory" value="${safe(c.history||'')}">
  ${c.kind==='PJ'&&Playbooks.byName(c.livret)?'<label>Relations du livret (une par ligne)</label>':'<label>Relations (facultatif)</label>'}<textarea id="sheetRelations" maxlength="3000" placeholder="Qui me fait confiance ? Qui dois-je protéger ?">${safe((c.relationships||[]).join('\n'))}</textarea>
@@ -3759,7 +3761,7 @@ function addSheetTechnique(){try{saveSheet(true);const id=$('sheetSelect').value
 function renderCombatLibrary(){
  const select=$('combatSheetSelect');if(!select)return;
  const previous=select.value,available=lib.characters.filter(c=>!s.fighters.some(f=>f.characterId===c.id));
- select.innerHTML=available.length?available.map(c=>`<option value="${safe(c.id)}">${safe(c.name)} (${c.kind})</option>`).join(''):'<option value="">Aucune fiche disponible à ajouter</option>';
+ select.innerHTML=available.length?available.map(c=>`<option value="${safe(c.id)}">${safe(c.name)} (${safe(c.kind)})</option>`).join(''):'<option value="">Aucune fiche disponible à ajouter</option>';
  if(available.some(c=>c.id===previous))select.value=previous;
  select.disabled=!available.length;$('includeSelectedSheetButton').disabled=!available.length;
 }
@@ -3912,6 +3914,59 @@ for(const name of ['demo','add','setGeneCombatChoice','setApproach','setRoll','p
   case 'earthMudStrikeUI':earthMudStrikeUI=protectedAction;break;
  }
 }
+// Données inertes dans les attributs ; seules ces actions fixes peuvent être appelées.
+function handleDataAction(event){
+ const node=event.target.closest?.('[data-ui-'+event.type+']');
+ if(!node||node.disabled)return;
+ const action=node.getAttribute('data-ui-'+event.type);
+ if(event.type==='keydown'){
+  if(action!=='openCharacterDetail'||event.target!==node||!['Enter',' '].includes(event.key))return;
+  event.preventDefault();openCharacterDetail(node.dataset.id);return;
+ }
+ if(event.type==='change'){
+  switch(action){
+   case 'changeEngagement':changeEngagement(node.dataset.id,node.dataset.extra,node.checked);break;
+   case 'setGeneCombatChoice':setGeneCombatChoice(node.dataset.id,node.value);break;
+   case 'setApproach':setApproach(node.dataset.id,node.value);break;
+   case 'setRoll':setRoll(node.dataset.id,node.value);break;
+  }
+  return;
+ }
+ if(event.type!=='click')return;
+ switch(action){
+  case 'chooseWizardBonus':chooseWizardBonus(node.dataset.id);break;
+  case 'chooseWizardTraining':chooseWizardTraining(node.dataset.id);break;
+  case 'disengageOne':disengageOne(node.dataset.id);break;
+  case 'earthLavaFractureUI':earthLavaFractureUI(node.dataset.id);break;
+  case 'earthLavaUI':earthLavaUI(node.dataset.id,node.dataset.extra);break;
+  case 'earthMudStrikeUI':earthMudStrikeUI(node.dataset.id,node.dataset.extra);break;
+  case 'earthSeismicInterruptUI':earthSeismicInterruptUI(node.dataset.id);break;
+  case 'earthShieldUI':earthShieldUI(node.dataset.id,node.dataset.extra);break;
+  case 'editCombatFighter':editCombatFighter(node.dataset.id);break;
+  case 'editSceneNoteUI':editSceneNoteUI(node.dataset.id);break;
+  case 'editTemporaryEffectUI':editTemporaryEffectUI(node.dataset.id);break;
+  case 'includeSheet':includeSheet(node.dataset.id);break;
+  case 'openCatalogDetail':openCatalogDetail(node.dataset.id);break;
+  case 'openCharacterDetail':openCharacterDetail(node.dataset.id);break;
+  case 'openCombatSheet':openCombatSheet(node.dataset.id);break;
+  case 'quickSheetCondition':quickSheetCondition(node.dataset.id);break;
+  case 'releaseTrapped':releaseTrapped(node.dataset.id);break;
+  case 'removeSceneNoteUI':removeSceneNoteUI(node.dataset.id);break;
+  case 'removeTemporaryEffectUI':removeTemporaryEffectUI(node.dataset.id);break;
+  case 'resolveEarthArmorHitUI':resolveEarthArmorHitUI(node.dataset.id);break;
+  case 'resolveReedBetUI':resolveReedBetUI(node.dataset.id);break;
+  case 'revealCountertimeUI':revealCountertimeUI(node.dataset.id);break;
+  case 'selectCatalogTechnique':selectCatalogTechnique(node.dataset.id);break;
+  case 'spendEarthArmorUI':spendEarthArmorUI(node.dataset.id,node.dataset.extra);break;
+  case 'stepField':stepField(node.dataset.id,Number(node.dataset.extra),Number(node.dataset.min),Number(node.dataset.max));break;
+  case 'syncSheet':syncSheet(node.dataset.id);break;
+  case 'toggleSheetCondition':toggleSheetCondition(node.dataset.id);break;
+  case 'toggleSheetStatus':toggleSheetStatus(node.dataset.id);break;
+  case 'triggerTrapUI':triggerTrapUI(node.dataset.id);break;
+  case 'waiveCountertimeUI':waiveCountertimeUI(node.dataset.id);break;
+ }
+}
+for(const type of ['click','change','keydown'])document.addEventListener(type,handleDataAction);
 // Le premier affichage ne doit pas écraser une sauvegarde corrompue ou non restaurée.
 originalRender();
 restoreNpcSessionLocation();renderSheets();renderCatalog();initWizard();renderCharacterCards();

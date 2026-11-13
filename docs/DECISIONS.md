@@ -86,3 +86,7 @@
 ## 13 novembre 2026 — mission 0 : collaboration
 
 Alex demande une PR courte de consignes, puis une PR de sécurité indépendante. Base vérifiée : main `42b306f`. Les PR de convergence restent préservées. Aucune fusion, suppression ou nouvelle refonte autorisée par cette mission. Les décisions de licence, visibilité et reproduction restent ouvertes.
+
+## 13 novembre 2026 — mission 1 : sécurité des imports
+
+Défaut reproduit indépendamment dans Chromium sur main `42b306f`. Format technique strict pour les identifiants (ASCII alphanumérique, tiret/souligné, 1–120 caractères, début alphanumérique), sans renommage silencieux ; données séparées du code des événements. Aucun changement de règle, de catalogue ou de dépendance. Refus explicite des anciens identifiants hors format ; fichiers et stockage originaux conservés. Les branches de convergence restent à contrôler avant report. Licence/visibilité/droits restent à décider par Alex. Rapport : [sécurité des imports](securite/IMPORTS_IDENTIFIANTS.md).
