@@ -82,3 +82,7 @@
   les modèles précédents ; conserver le journal existant pour la sauvegarde complète.
 - Aucun nettoyage ni migration silencieuse de sauvegarde ; aucune fusion de cette nouvelle
   proposition sans accord du propriétaire.
+
+## 13 novembre 2026 — mission 0 : collaboration
+
+Alex demande une PR courte de consignes, puis une PR de sécurité indépendante. Base vérifiée : main `42b306f`. Les PR de convergence restent préservées. Aucune fusion, suppression ou nouvelle refonte autorisée par cette mission. Les décisions de licence, visibilité et reproduction restent ouvertes.
