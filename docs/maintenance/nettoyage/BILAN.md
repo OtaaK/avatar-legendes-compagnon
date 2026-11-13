@@ -1,81 +1,103 @@
-# Bilan de l’étape d’inventaire — mission 2
+# Bilan de mission 2 — nettoyage exécuté sur sa branche
 
-13 novembre 2026. **Étape préparée, nettoyage non exécuté, accord d’Alex attendu.**
+**13 novembre 2026 — plan approuvé par Alex, PR 19 non fusionnée.**
+L’accord porte sur l’exécution du nettoyage, pas sur sa fusion. Aucune mission 3,
+refonte UI, nouvelle dépendance ou modification de règle du jeu.
 
-## Ce qui est fait
+## Résultat
 
-- Main vérifié au commit `38943c5`, après les fusions des missions 0 et 1.
-- Étiquette annotée `avant-nettoyage-2026-11-13` créée et publiée sur ce commit, sans
-  remplacement d’étiquette ou de branche ; cible distante vérifiée.
-- Les 532 fichiers d’origine sont classés dans l’[inventaire](INVENTAIRE.csv), avec objet
-  Git, taille, code de justification, références indicatives et copies identiques.
-- Le [plan](PLAN.md) propose de garder 254 fichiers et d’archiver 278 chemins dans Git,
-  ainsi que le retrait conditionnel de deux anciennes fonctions. Aucun de ces retraits
-  n’est effectué. Les archives et l’ancien inventaire restent présents.
-- Un [CHANGELOG en brouillon](../../../CHANGELOG.md) propose une entrée unique pour les
-  changements, avec liens aux audits conservés et aux originaux sous l’étiquette.
-- Les 230 scripts sont indexés par thèmes dans [INDEX_TESTS.csv](INDEX_TESTS.csv), sans
-  déplacement, renommage, changement de code ou perte d’assertion.
-- Commande JS du cahier des charges et comptes de tests du README/guide actualisés.
-  Le commentaire périmé d’un test est signalé pour l’étape de nettoyage, sans toucher
-  au fichier de test pendant cet inventaire.
-- Le nouvel outil `scripts/audit_cleanup.py` ne dépend que de Python/Git. Il produit les
-  preuves depuis une référence, ne lit ni CLAUDE.md ni les PDF et refuse de produire un
-  rapport qui écraserait un fichier de cette référence.
+| Ensemble | Résultat vérifié |
+|---|---|
+| Sauvegarde | Étiquette annotée `avant-nettoyage-2026-11-13`, sur `38943c5`, publiée et conservée |
+| Chemins retirés de la copie courante | **278 exactement**, tous listés dans l’inventaire approuvé |
+| Détail | 275 archives, l’ancien CSV d’inventaire, deux récits V2.33 consolidés |
+| Originaux archivés | Chaque objet Git vérifié dans l’étiquette avant retrait ; historique intact |
+| Fichiers d’origine gardés | **254**, aucun retrait supplémentaire |
+| Tests | **230 scripts** à leur place, aucun renommage, déplacement ou retrait |
+| HTML | Deux helpers retirés : `openNpc` et `showPlaybookReference`, aucun autre changement |
+| Commentaire de test | Ancienne commande de lancement du test Terre corrigée ; AST inchangé hors docstring |
+| Suivi | CHANGELOG centralisé, références actives corrigées, audits et guides conservés |
 
-Aucun changement d’application, de données métier, règles, sauvegardes, framework,
-configuration CI ou ancienne assertion. Aucune branche de convergence n’est supprimée
-ni réorganisée, aucun déploiement ni aucune fusion de cette étape.
+Les [532 lignes de l’inventaire](INVENTAIRE.csv) et [SOURCE.json](SOURCE.json) restent la
+photographie **avant action**, avec les propositions originales et `changesApplied: false`
+à cette date. L’état réalisé est donné par [EXECUTION.json](EXECUTION.json), qui ne doit
+pas être confondu avec cette photographie. Les 278 chemins retirés n’ont pas été remplacés
+par des copies dans un autre dossier du dépôt.
 
-## Tests et preuves réellement exécutés
+Les textes intégraux sont consultables dans la
+[sauvegarde](https://github.com/OtaaK/avatar-legendes-compagnon/tree/avant-nettoyage-2026-11-13).
+L’ancien rapport V2.32 subsiste dans `docs/` ; sa copie historique est comprise dans les
+278 chemins archivés. Aucune branche ni étiquette supprimée, aucun historique réécrit.
 
-| Contrôle | Avant les ajouts d’inventaire | Après les ajouts |
+## Étapes et vérifications
+
+1. Référence et sauvegarde revérifiées ; **230/230 scripts** réussis avant action.
+2. CHANGELOG finalisé et références préparées vers les originaux archivés.
+3. Avant `git rm`, contrôle de la liste exacte et des objets des 278 originaux ; après
+   archivage, nouvelle suite **192/192 JS** réussie.
+4. Retrait des deux seuls helpers, avec comparaison du HTML attendu calculé depuis la
+   sauvegarde. Le diff correspond exactement à ces deux blocs ; moteur/catalogue et tout
+   le reste du HTML sont identiques.
+5. Correction d’une commande de docstring dans le test Terre. Tous les autres fichiers
+   de tests sont identiques ; comparaison de l’AST Python hors docstring pour celui-ci.
+6. Suite complète finale et comparaison des noms/résultats avant/après ; mêmes scripts,
+   mêmes réussites et même limitation préexistante.
+
+| Contrôle | Avant nettoyage | Après nettoyage |
 |---|---:|---:|
-| Suite JavaScript | 192/192 réussis | 192/192 réussis |
-| Suite navigateur Chromium | 38/38 réussis | 38/38 réussis |
+| Scripts JavaScript | 192/192 réussis | 192/192 réussis |
+| Scripts Chromium | 38/38 réussis | 38/38 réussis |
 | Échecs | 0 | 0 |
-| Limite préexistante | `file://` cloud bloqué | Même limite, aucun nouveau défaut |
+| Limitation cloud `file://` | 1 | 1, identique |
 
-Les suites sont lancées par `python scripts/test.py --suite js --jobs 2` et
-`python scripts/test.py --suite browser --jobs 2`. Les rapports JSON détaillés sont dans
-`work/nettoyage/` localement ; les contrôles GitHub ont leur propre résultat dans la PR.
-Ils ne sont pas déclarés réussis avant leur exécution.
+Commandes réellement exécutées : `python scripts/test.py --jobs 2` avant et après,
+et `--suite js --jobs 2` après archivage. Rapports locaux :
+`work/nettoyage/execution-before.json`, `after-archive-js.json`, `execution-after.json`.
+Les contrôles GitHub ont leur résultat propre dans la PR ; aucune réussite n’est
+annoncée avant leur exécution.
 
-La restriction du navigateur cloud empêche le double-clic natif. Le contrôle existant
-bascule vers un serveur HTTP local puis coupe le réseau ; ce n’est pas un test macOS.
+Les suites comprennent imports/exports et sauvegardes réelles, rechargement, erreurs de
+stockage/import, ressources, ajout/édition de combattants, annulation, 13 formulaires
+Terre desktop/mobile et fonctionnement hors réseau. Le cloud bloque le double-clic
+`file://` : le contrôle existant utilise alors HTTP local puis coupe le réseau. Cela ne
+certifie pas un double-clic natif sur Mac ni Safari.
 
-Autres vérifications :
+Preuves supplémentaires :
 
-- Comparaison des ensembles de noms et des résultats avant/après : les mêmes 230 scripts
-  sont conservés et réussissent.
-- Comparaison binaire avec l’étiquette de **tous** les fichiers `app/`, `data/` et `tests/` :
-  identité exacte. Les règles et chaque fichier de test restent ainsi inchangés.
-- Régénération dans un second dossier : les quatre fichiers de données produits sont
-  identiques octet pour octet (inventaire, références, index des tests, source).
-- Essai d’une sortie écrasant l’ancien inventaire : refus explicite, fichier original
-  vérifié identique après l’essai.
-- Contrôle de la présence des 532 chemins d’origine, des liens documentaires nouveaux et
-  de `git diff --check`, sans nouvelle suppression.
+- **Aucune différence** des 192 fichiers JS, des 37 autres scripts navigateur et des deux
+  helpers : 231 fichiers sur 232 identiques octet pour octet. Le fichier restant ne
+  diffère que par sa commande de docstring ; ses instructions/assertions sont identiques.
+- Matrice de techniques, runner, anciens outils, configuration CI et dépendance de test
+  inchangés. Aucun format de sauvegarde ni mécanisme de persistance modifié.
+- Les quatre fichiers de données de l’inventaire restent reproductibles depuis l’étiquette,
+  même après retrait des fichiers courants : l’outil lit les objets Git d’origine.
+- Les liens locaux et les cibles des liens vers les fichiers archivés sont contrôlés.
+  L’ancien contrôle de réorganisation reste intact et documenté pour son checkout historique.
+- `git diff --check` réussi ; ensemble des suppressions comparé exactement au plan.
 
-## Ce qui n’est pas démontré
+## Taille et portée
 
-Un nombre élevé de fichiers, un nom de version ou l’absence de référence littérale ne
-prouve pas l’inutilité. Les thèmes sont indicatifs ; ni couverture de lignes ni équivalence
-sémantique de tests n’est prétendue. Les deux fonctions n’ont pas d’appel statique repéré,
-mais un usage externe/manual ne peut pas être exclu par cette recherche.
+Les chemins archivés représentent **363 586 octets**. Le retrait des deux fonctions
+réduit le HTML de **634 octets**, de 444 841 à 444 207 octets. Le gain brut n’est pas le
+gain net : les nouveaux index, preuves et le CHANGELOG occupent aussi de la place.
+La copie courante compte **263 fichiers suivis**, contre 532 dans la sauvegarde ;
+le gain net après ajout du CHANGELOG, des index et des preuves est d’environ
+**198 Kio**. Ce chiffre exclut les métadonnées et l’historique Git.
+Le dépôt de travail est plus lisible ; aucune réduction de l’historique Git n’est promise.
 
-L’inventaire couvre main sauvegardé, pas toutes les branches de convergence. Il ne vaut
-pas autorisation de supprimer leurs composants. Les questions de licence, visibilité et
-droits de reproduction restent ouvertes et hors de ce plan.
+Cette mission couvre le main sauvegardé et sa branche de nettoyage. Les branches de
+convergence restent intactes ; aucune compatibilité de leurs points d’entrée externes
+n’est déduite de ce contrôle. Les tests passent et aucun appel statique aux deux helpers
+n’existait, mais un éventuel usage manuel externe n’a pas été testé.
 
-## Décision à prendre
+Licence, visibilité et droits des textes restent des décisions distinctes, sans modification.
 
-Examiner [le plan précis](PLAN.md) et approuver ou refuser **l’archivage des 278 chemins et
-le retrait des deux fonctions**, en conservant tous les tests à leur place. Le gain brut
-concerne environ 355 Kio des fichiers de travail, avant ajout des index et du CHANGELOG ;
-il ne réduit ni l’historique Git ni le temps de chargement du HTML autonome.
+## Retour arrière et décision suivante
 
-Après accord, le nettoyage sera réalisé par étapes dans cette même PR, avec de nouveaux
-contrôles avant/après et correction des références. La fusion nécessitera ensuite un
-accord séparé. Retour arrière par restauration depuis l’étiquette ou annulation de commit,
-sans force push ni réécriture d’historique. Mission 3 et refonte UI restent en attente.
+Restaurer les chemins concernés depuis `avant-nettoyage-2026-11-13` dans un nouveau
+commit, ou annuler les commits de nettoyage ; pas de force push ni réinitialisation forcée.
+La sauvegarde contient déjà le correctif de sécurité des missions précédentes.
+
+Recommandation : examiner la PR 19 et ses contrôles, puis décider explicitement de sa
+fusion. **Aucune fusion ni aucun déploiement réalisés.** L’accord de nettoyage ne vaut
+pas accord de mission 3 ou de refonte UI.

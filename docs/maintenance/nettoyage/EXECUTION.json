@@ -1,0 +1,66 @@
+{
+  "status": "applied-on-branch-not-merged",
+  "authorizedBy": "Alex — accord explicite sur le plan de PR 19, sans fusion",
+  "baselineTag": "avant-nettoyage-2026-11-13",
+  "baselineCommit": "38943c54c732857db60ae38ebda92c61fdb7e5cc",
+  "planCommit": "631a187a0b158df64e5636182db0a5b6df839ef9",
+  "originalFiles": 532,
+  "retainedOriginalFiles": 254,
+  "archivedPaths": 278,
+  "archivedBytes": 363586,
+  "exactApprovedPathSet": true,
+  "archivedObjectsVerified": true,
+  "inventorySnapshotSha256": "ad7597f955a1974d0aec45fbae88b17ee0e56fb3a230e187b38ced0514c96ce0",
+  "html": {
+    "beforeBytes": 444841,
+    "afterBytes": 444207,
+    "onlyRemovedFunctions": [
+      "openNpc",
+      "showPlaybookReference"
+    ],
+    "engineAndCatalogIdentical": true,
+    "expectedDiffVerified": true,
+    "afterSha256": "e9dfff872790584aabcfc282766c63764323644adf8ae22059a8c0f36a3bd468"
+  },
+  "tests": {
+    "scripts": 230,
+    "js": 192,
+    "browser": 38,
+    "filesIncludingHelpers": 232,
+    "byteIdenticalFiles": 231,
+    "docstringOnlyFile": "tests/browser/test_terre_v233_browser.py",
+    "pythonAstIdenticalOutsideDocstring": true,
+    "samePathsAndResults": true,
+    "beforePassed": 230,
+    "afterArchiveJsPassed": 192,
+    "afterPassed": 230,
+    "limitationsBefore": [
+      {
+        "file": "tests/browser/test_offline.py",
+        "detail": "LIMITATION: file:// bloqué par la politique du navigateur ; double-clic non vérifié. Contrôle hors réseau après chargement HTTP local."
+      }
+    ],
+    "limitationsAfter": [
+      {
+        "file": "tests/browser/test_offline.py",
+        "detail": "LIMITATION: file:// bloqué par la politique du navigateur ; double-clic non vérifié. Contrôle hors réseau après chargement HTTP local."
+      }
+    ]
+  },
+  "unchanged": [
+    "data/",
+    "scripts existants",
+    "configuration CI",
+    "requirements-dev.txt",
+    "persistance et formats de sauvegarde"
+  ],
+  "notPerformed": [
+    "fusion main",
+    "déploiement",
+    "mission 3",
+    "refonte UI",
+    "modification des branches de convergence",
+    "réécriture d’historique",
+    "suppression de branche"
+  ]
+}

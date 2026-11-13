@@ -1,6 +1,9 @@
 # Mission 2 — inventaire et plan soumis à Alex
 
-**13 novembre 2026 — proposition uniquement, aucune suppression ni déplacement appliqué.**
+**Plan approuvé par Alex le 13 novembre 2026 ; exécution dans la PR 19, sans fusion.**
+Ce document conserve le détail de la proposition au commit `631a187` ; les formulations
+conditionnelles ci-dessous décrivent ce plan initial. L’état réellement réalisé et les
+contrôles sont consignés dans le [bilan](BILAN.md) et [EXECUTION.json](EXECUTION.json).
 Branche : `maintenance/inventaire-nettoyage`. Référence vérifiée : `main`, commit
 `38943c54c732857db60ae38ebda92c61fdb7e5cc`, après fusion des missions 0 et 1.
 
@@ -43,7 +46,7 @@ fiabilité des sauvegardes et guide manuel ont des rôles distincts.
 - [INDEX_TESTS.csv](INDEX_TESTS.csv) : les **230 scripts** avec thèmes non exclusifs et
   objet Git d’origine. Les thèmes sont une aide automatique de navigation, pas une preuve
   de redondance ou de couverture complète.
-- [SOURCE.json](SOURCE.json) : source figée, totaux et mention `changesApplied: false`.
+- [SOURCE.json](SOURCE.json) : source figée de l’inventaire avant action, avec `changesApplied: false` à cette date ; ne pas confondre avec l’état actuel d’[exécution](EXECUTION.json).
 - `scripts/audit_cleanup.py` permet de reproduire ces fichiers depuis l’étiquette, sans
   modifier, déplacer ni supprimer les originaux. Il ne lit pas CLAUDE.md ni les PDF.
 
@@ -111,7 +114,7 @@ archiver sa copie historique, sans compter deux fois ce retrait.
 | `docs/RAPPORT_V233.md` | Récit A1–A8 et références aux preuves | Consolider dans CHANGELOG, archiver l’original sous l’étiquette |
 | `docs/RAPPORT_RETOURS_RECETTE_V233.md` | Retours et corrections, résultats datés, limites de recette | Consolider dans CHANGELOG, archiver l’original sous l’étiquette |
 
-Le [CHANGELOG proposé](../../../CHANGELOG.md) est ajouté en brouillon. Ce n’est pas une
+Le [CHANGELOG](../../../CHANGELOG.md) est ajouté en brouillon. Ce n’est pas une
 retranscription de chaque phrase des 275 archives : les originaux restent disponibles
 intégralement sous l’étiquette. Aucun arbitrage de règle n’est créé pour les résumer.
 Les documents d’audit et DECISIONS restent les lieux des preuves et questions ouvertes.

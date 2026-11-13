@@ -47,7 +47,7 @@
   Les assertions des 223 tests historiques sont conservées ; seuls leurs chemins et la localisation
   de Chromium changent. Un nouveau test vérifie l'utilisation hors connexion et le réimport JSON.
 - Tous les rapports historiques sont conservés. L'ancien accueil V0.71 devient
-  `docs/historique/README_ORIGINAL_V071.md` et un index contextualise les archives.
+  [docs/historique/README_ORIGINAL_V071.md](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/historique/README_ORIGINAL_V071.md) et un index contextualise les archives.
 - Les deux exemplaires du rapport V2.32 restent conservés ; les fonctions sans appel statique
   identifié ne sont pas supprimées faute de preuve suffisante d'inutilité.
 - Modularisation du HTML évaluée et reportée à une mission distincte : conserver un HTML autonome
