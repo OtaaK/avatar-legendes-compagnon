@@ -115,3 +115,7 @@ Seuls deux helpers d’affichage sans appel identifié sont retirés du HTML. Le
 archivés restent sous `avant-nettoyage-2026-11-13`. Aucun nouveau découpage physique du
 moteur, aucune persistance modifiée ni test migré. Le runner, ses globs et les points
 d’entrée conservés restent identiques. [Bilan et preuves](maintenance/nettoyage/BILAN.md).
+
+## Mission 3A — référence et frontières préparées
+
+Le main de départ `55d56f6` garde le HTML comme oracle. [Contrats](architecture/CONTRATS.md) et [plan](architecture/PLAN_MISSION_3.md). Un helper de test charge les corps existants en VM isolée : moteur/règles, modèles/références, validation puis persistance facultative. Les marqueurs sont vérifiés uniques et ordonnés ; pas d’édition ni de second moteur. REFERENCE.json observe 80 entrées publiques, 111 identifiants de techniques, dix Livrets et les clés de stockage. Cette étape ne réalise pas encore l’extraction ou la génération. La future séparation devra préserver les transactions UI et le journal multi-clés ; les propriétés supplémentaires des modèles ne sont pas un schéma fermé.

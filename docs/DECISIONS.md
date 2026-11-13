@@ -104,3 +104,7 @@ Les 230 scripts restent à leur place et toutes les assertions sont conservées 
 la commande du commentaire du test Terre change. Retour arrière par restauration ou
 annulation de commit. Aucun accord de fusion, de mission 3, de refonte ou de licence
 n’est déduit de cette autorisation. [Bilan](maintenance/nettoyage/BILAN.md).
+
+## 13 novembre 2026 — mission 3 autorisée, étape 3A
+
+Après fusion des PR 17, 18 et 19, Alex autorise la suite (« En avant »). Départ main `55d56f6`. Plan en cinq étapes, avec persistance et affichage isolés en PR distinctes. 3A : contrats observés et banc de tests transitoire uniquement ; aucune modification du HTML, des anciens tests, règles ou sauvegardes. Node/Python standard, coût de dépendances ajoutées : zéro. Référence API/identifiants/clefs et comparaison du même scénario Node/Chromium ; repères textuels encore présents, pas de modularisation déjà annoncée. Mutations internes non toutes transactionnelles et métadonnées d’enveloppe non garanties sont signalées, sans correction cachée. Fusion et refonte UI non autorisées. [Plan](architecture/PLAN_MISSION_3.md).

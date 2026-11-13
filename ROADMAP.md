@@ -74,3 +74,7 @@ Plan accepté par Alex le 13 novembre 2026. Nettoyage dans la même PR 19, sans 
 278 chemins archivés, deux helpers retirés, liens corrigés et 230 scripts conservés.
 Résultats et limites : [bilan](docs/maintenance/nettoyage/BILAN.md). L’accord de fusion
 reste distinct ; aucune mission 3 ni refonte UI commencée.
+
+## Mission 3 — architecture sans changement de fonctionnement
+
+Missions 0/1/2 fusionnées ; mission 3 autorisée. [Plan en cinq PR](docs/architecture/PLAN_MISSION_3.md). 3A préparée : contrats et contrôles, HTML et anciens tests inchangés. 3B : extraction et HTML généré déterministe ; 3C : persistance ; 3D : affichage/commandes ; 3E : migration progressive des tests vers des imports. Aucun nouveau paquet/framework, aucune refonte UI. Les étapes sont livrées et examinées séparément, sans fusion automatique.

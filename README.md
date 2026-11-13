@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 192 scripts de régression JavaScript |
-| `tests/browser/` | 38 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 193 scripts de régression JavaScript |
+| `tests/browser/` | 39 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `CHANGELOG.md` | Historique synthétique ; originaux archivés sous une étiquette Git |
@@ -67,9 +67,23 @@ son ancienneté. Ne pas ajouter le PDF commercial ou des données personnelles a
 Projet de fan non officiel, sans affiliation avec les ayants droit d'Avatar ni avec l'éditeur
 du jeu de rôle.
 
-## Nettoyage V2.33 — PR 19 en attente de fusion
+## Nettoyage V2.33 — PR 19 fusionnée
 
 Le [CHANGELOG](CHANGELOG.md) centralise les changements. Les 278 documents retirés de
 l’arborescence restent intacts dans la [sauvegarde avant nettoyage](https://github.com/OtaaK/avatar-legendes-compagnon/tree/avant-nettoyage-2026-11-13).
 Le [bilan et les preuves](docs/maintenance/nettoyage/BILAN.md) précisent les fichiers
 conservés et archivés. Aucun test déplacé ou supprimé ; aucune règle du jeu modifiée.
+
+## Mission 3 — contrats avant extraction
+
+L’[étape 3A](docs/architecture/BILAN_3A.md) prépare les
+[contrats observés](docs/architecture/CONTRATS.md) et les contrôles de parité Node/HTML.
+Le [plan en cinq étapes](docs/architecture/PLAN_MISSION_3.md) sépare ensuite extraction,
+persistance, affichage et migration des tests, avec une PR par étape. Aucun changement
+visible, format ou installation supplémentaire pour utiliser le compagnon.
+
+Contrôle de référence, réservé au développement :
+
+```bash
+node scripts/architecture/check-contracts.cjs
+```
