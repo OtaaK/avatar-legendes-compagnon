@@ -1,0 +1,25 @@
+{
+  "reference": "avant-nettoyage-2026-11-13",
+  "commit": "38943c54c732857db60ae38ebda92c61fdb7e5cc",
+  "files": 532,
+  "bytes": 1440169,
+  "proposals": {
+    "garder": 254,
+    "archiver_git_apres_accord": 278
+  },
+  "bytesByProposal": {
+    "garder": 1076583,
+    "archiver_git_apres_accord": 363586
+  },
+  "duplicateGroups": [
+    [
+      "docs/RAPPORT_V232.md",
+      "docs/historique/RAPPORT_V232.md"
+    ]
+  ],
+  "jsScripts": 192,
+  "browserScripts": 38,
+  "changesApplied": false,
+  "scope": "main tag uniquement ; branches de convergence exclues",
+  "referencesLimit": "références statiques indicatives, jamais preuve suffisante d’inutilité ; thèmes de tests heuristiques non exclusifs"
+}

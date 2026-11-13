@@ -1,10 +1,15 @@
 # Rapport de maintenance — réorganisation V2.33
 
+> Rapport historique du point `67273e0` : les états « conservé » et « aucune fusion »
+> ci-dessous décrivent ce moment. Après accord ultérieur, les originaux historiques et
+> l’inventaire sont archivés sous `avant-nettoyage-2026-11-13` ; voir le bilan actuel de
+> [mission 2](nettoyage/BILAN.md). Le corps des preuves reste daté.
+
 Date : 7 novembre 2026. Mission : assainissement de structure, sans modification des règles.
 Branche de travail : `maintenance/organisation-v233`. Aucune fusion dans `main`.
 
 Ce rapport décrit la maintenance achevée au commit `67273e0`. Les changements d’interface
-autorisés ensuite par les retours de recette sont suivis dans le [rapport distinct](../RAPPORT_RETOURS_RECETTE_V233.md).
+autorisés ensuite par les retours de recette sont suivis dans le [rapport distinct](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/RAPPORT_RETOURS_RECETTE_V233.md).
 Les preuves d’identité du HTML ci-dessous concernent ce point de maintenance, pas les correctifs ultérieurs.
 
 ## Sécurisation préalable
@@ -41,7 +46,7 @@ uniquement cette maintenance, comparer son résultat à `d247193`, pas à l'anci
 | Documents Markdown | 282 | Conservés ; références actives actualisées ; archives intactes |
 | `.gitignore` | 1 | Conservé et complété pour caches/résultats locaux |
 
-L'inventaire détaillé [INVENTAIRE.csv](INVENTAIRE.csv) contient une ligne pour chacun des
+L'inventaire détaillé [INVENTAIRE.csv](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/maintenance/INVENTAIRE.csv) contient une ligne pour chacun des
 508 fichiers d'origine : ancien emplacement, destination, décision, justification et empreintes
 avant/après. Les fichiers créés pour cette maintenance sont décrits ci-dessous.
 

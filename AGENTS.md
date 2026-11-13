@@ -23,7 +23,7 @@ Pour toute modification liée aux règles : consulter d'abord les pages pertinen
 - Catalogue / matrice de techniques : `data/MATRICE_TECHNIQUES.csv`.
 - Tests JavaScript : `tests/js/test*.cjs` ; tests navigateur Python : `tests/browser/test*.py`.
 - Commande commune : `python scripts/test.py` ; chemins communs : `tests/support/paths.cjs` et `tests/browser/_paths.py`.
-- Suivi : `README.md`, `ROADMAP.md`, `docs/DECISIONS.md`, `docs/AUDIT_V232.md`, `docs/RAPPORT_V232.md` et `docs/historique/`.
+- Suivi : `README.md`, `ROADMAP.md`, `docs/DECISIONS.md`, `docs/AUDIT_V232.md`, `docs/RAPPORT_V232.md` et `CHANGELOG.md` ; les archives originales sont sous l’étiquette `avant-nettoyage-2026-11-13`.
 
 Prendre connaissance de ces ressources avant une intervention importante. Les tests et rapports historiques sont des indications utiles, pas une garantie de conformité fonctionnelle. Ne pas entreprendre une refonte générale du HTML sans raison concrète et approbation.
 
@@ -79,3 +79,11 @@ La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'el
 - Mission 3 seulement après accord sur les missions 1 et 2 : plan par étapes réversibles, comportement identique, sans dépendance/framework supplémentaire sans proposition chiffrée et accord. La refonte UI attend la mission 3 ; ne pas implémenter la maquette de passe d’armes.
 - Ne lire ni appliquer `CLAUDE.md` ; ces règles viennent de la demande explicite d’Alex. Les branches de convergence existantes restent conservées et ne sont pas intégrées implicitement.
 - Licence, visibilité du dépôt et droits des textes officiels : demander la décision d’Alex avant toute modification ; ne rien déduire du caractère public du dépôt.
+
+## Autorisation de nettoyage — 13 novembre 2026
+
+Alex a approuvé le plan de la PR 19 : archiver dans Git les 278 chemins exactement
+listés, retirer uniquement openNpc et showPlaybookReference, corriger les références et
+conserver les 230 scripts à leur place avec toutes leurs assertions. Les originaux sont
+sous `avant-nettoyage-2026-11-13`. Consulter CHANGELOG et le bilan de mission 2.
+Cet accord permet le nettoyage sur sa branche ; **pas sa fusion**, pas la mission 3 ni UI.

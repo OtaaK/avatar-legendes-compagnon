@@ -25,7 +25,8 @@ docs/
   TESTS.md                    Procédures et limites de validation
   AUDIT_*.md / RAPPORT_*.md    Audits et rapports des versions récentes
   maintenance/                Rapport de réorganisation et inventaire détaillé
-  historique/                 Notices et rapports anciens conservés
+  maintenance/nettoyage/      Inventaire, plan approuvé et preuves de nettoyage
+CHANGELOG.md                  Changements ; originaux sous une étiquette Git
 .github/workflows/tests.yml   Vérifications proposées sur les Pull Requests
 requirements-dev.txt          Dépendance de test navigateur uniquement
 ```
@@ -50,7 +51,7 @@ source vide, gestionnaire de paquets JavaScript ou système de compilation n'est
 | Scripts de maintenance | Python standard ; Git pour l'inventaire et la comparaison | Découverte des tests, bilans, inventaire et invariants |
 
 La phase de réorganisation (`67273e0`) conserve le HTML octet pour octet. Les correctifs
-d’interface demandés après recette sont décrits dans `RAPPORT_RETOURS_RECETTE_V233.md`.
+d’interface demandés après recette sont décrits dans [le rapport archivé](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/RAPPORT_RETOURS_RECETTE_V233.md).
 Ils conservent les clés de stockage, les formats de sauvegarde, les noms des exports,
 les règles et les catalogues embarqués.
 
@@ -72,9 +73,9 @@ les règles et les catalogues embarqués.
 - L'ancien placement des tests à côté du HTML imposait des chemins relatifs dispersés.
   Les chemins de lecture sont maintenant centralisés dans les deux modules de support.
 
-La recherche statique ne trouve pas d'appel à `openNpc` et `showPlaybookReference` en
-plus de leur déclaration. Ce sont des candidats à examiner, pas une preuve suffisante
-pour supprimer des points d'entrée d'interface. Ils restent conservés.
+Après accord d’Alex, les deux helpers `openNpc` et `showPlaybookReference` sans appel
+statique identifié sont retirés. Les parcours PNJ et Livrets utilisent leurs autres
+points d’entrée existants ; aucune donnée ni fonction du moteur n’est modifiée.
 
 ## Modularisation : recommandation et limites
 
@@ -103,3 +104,14 @@ Cette PR est documentaire : aucun changement du HTML autonome, des tests ou des 
 ## Mission 1 — frontière données/événements
 
 Les identifiants sont contrôlés dans la normalisation et la validation de fiches, puis à l’import combat pour les références exposées. Le HTML reste autonome et sans dépendance : attributs `data-ui-click`, `data-ui-change`, `data-ui-keydown` et paramètres échappés, puis écouteur à liste fixe d’actions. Aucune donnée importée interprétée en JavaScript ; gestionnaires statiques conservés. Persistance, règles et moteur inchangés. Voir [le contrôle détaillé](securite/IMPORTS_IDENTIFIANTS.md).
+
+## Mission 2 — photographie et limites de l’inventaire
+
+Base main `38943c5` : un HTML autonome de 444 841 octets, 206 déclarations nommées repérées, tests encore extraits par marqueurs et découverts par globs non récursifs. Aucun changement de cette structure pendant l’inventaire. `scripts/audit_cleanup.py` lit une référence Git pour produire classement, empreintes, références statiques et index de thèmes ; il ne modifie pas les fichiers inventoriés. Les thèmes ne sont pas un graphe exhaustif ni une mesure de couverture. Aucune nouvelle dépendance, aucun contrat/extraction/build de mission 3 engagé. [Plan proposé](maintenance/nettoyage/PLAN.md).
+
+## Mission 2 — exécution approuvée
+
+Seuls deux helpers d’affichage sans appel identifié sont retirés du HTML. Les 278 chemins
+archivés restent sous `avant-nettoyage-2026-11-13`. Aucun nouveau découpage physique du
+moteur, aucune persistance modifiée ni test migré. Le runner, ses globs et les points
+d’entrée conservés restent identiques. [Bilan et preuves](maintenance/nettoyage/BILAN.md).

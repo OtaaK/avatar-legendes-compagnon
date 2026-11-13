@@ -47,7 +47,7 @@
   Les assertions des 223 tests historiques sont conservées ; seuls leurs chemins et la localisation
   de Chromium changent. Un nouveau test vérifie l'utilisation hors connexion et le réimport JSON.
 - Tous les rapports historiques sont conservés. L'ancien accueil V0.71 devient
-  `docs/historique/README_ORIGINAL_V071.md` et un index contextualise les archives.
+  [docs/historique/README_ORIGINAL_V071.md](https://github.com/OtaaK/avatar-legendes-compagnon/blob/avant-nettoyage-2026-11-13/docs/historique/README_ORIGINAL_V071.md) et un index contextualise les archives.
 - Les deux exemplaires du rapport V2.32 restent conservés ; les fonctions sans appel statique
   identifié ne sont pas supprimées faute de preuve suffisante d'inutilité.
 - Modularisation du HTML évaluée et reportée à une mission distincte : conserver un HTML autonome
@@ -90,3 +90,17 @@ Alex demande une PR courte de consignes, puis une PR de sécurité indépendante
 ## 13 novembre 2026 — mission 1 : sécurité des imports
 
 Défaut reproduit indépendamment dans Chromium sur main `42b306f`. Format technique strict pour les identifiants (ASCII alphanumérique, tiret/souligné, 1–120 caractères, début alphanumérique), sans renommage silencieux ; données séparées du code des événements. Aucun changement de règle, de catalogue ou de dépendance. Refus explicite des anciens identifiants hors format ; fichiers et stockage originaux conservés. Les branches de convergence restent à contrôler avant report. Licence/visibilité/droits restent à décider par Alex. Rapport : [sécurité des imports](securite/IMPORTS_IDENTIFIANTS.md).
+
+## 13 novembre 2026 — mission 2 : inventaire avant accord
+
+Alex autorise la préparation de l’inventaire après fusion des PR 17/18. Étiquette annotée `avant-nettoyage-2026-11-13` publiée sur `38943c5` avant le travail. Proposition : garder 254 fichiers d’origine ; archiver dans Git 278 chemins (275 archives, ancien inventaire, deux récits V2.33) ; retirer deux helpers sans appel identifié. **Aucun retrait ni déplacement autorisé à ce stade.** Le plan et le CHANGELOG sont proposés, les 230 scripts restent en place. L’accord sur le plan et l’accord de fusion seront distincts. Licence, visibilité et droits restent ouverts ; mission 3 et UI en attente. Voir [le plan](maintenance/nettoyage/PLAN.md).
+
+## 13 novembre 2026 — autorisation d’exécuter le nettoyage
+
+Alex répond « oui » à la question précise d’exécution du plan dans la PR 19, sans fusion.
+Les 278 chemins de l’inventaire peuvent être retirés de la copie courante, originaux
+conservés sous l’étiquette ; seuls openNpc et showPlaybookReference sont retirés du code.
+Les 230 scripts restent à leur place et toutes les assertions sont conservées ; seule
+la commande du commentaire du test Terre change. Retour arrière par restauration ou
+annulation de commit. Aucun accord de fusion, de mission 3, de refonte ou de licence
+n’est déduit de cette autorisation. [Bilan](maintenance/nettoyage/BILAN.md).

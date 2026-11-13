@@ -3675,11 +3675,6 @@ function renderNpcDirectory(){
  $('npcDirectory').innerHTML=npcs.map(characterCard).join('')||'<p>Aucun PNJ ne correspond à cette recherche.</p>';
 }
 function restoreNpcSessionLocation(){try{npcSessionLocation=localStorage.getItem('avatar-session-location')||''}catch(e){npcSessionLocation=''}}
-function openNpc(id){
- openCharacterDetail(id);return;
- if($('sheetSelect').value&&$('sheetSelect').value!==id)try{saveSheet(true)}catch(e){return}
- $('sheetSelect').value=id;showSheet();setSheetTab('identity');$('sheetSelect').focus();
-}
 function renderSheets(selected){
  const el=$('sheetSelect'),prev=selected||el.value;
  el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${safe(c.kind)})</option>`).join('');
@@ -3723,12 +3718,6 @@ function showSheet(){
  <label>Ajouter une technique du catalogue</label><select id="sheetTechnique">${TECH_CATALOG.filter(t=>c.kind==='PNJ'||t.accessible_pj!==false).map(t=>`<option value="${safe(t.id)}">${safe(t.nom)} (${safe(t.famille)})</option>`).join('')}</select><label>Degré</label><select id="sheetMastery"><option value="acquise">Acquise</option><option value="pratiquee">Pratiquée</option><option value="maitrisee">Maîtrisée</option></select>
  <button onclick="addSheetTechnique()">Ajouter / actualiser</button></div>`;
  applySheetTab();
-}
-function showPlaybookReference(){
- const c=lib.characters.find(x=>x.id===$('sheetSelect').value);
- const p=Playbooks.byName($('sheetLivret')?.value||c?.livret);
- const el=$('playbookReference');if(!el)return;
- el.textContent=p?'Principes : '+p.principles.join(' / ')+' · Fiche officielle p. '+p.page+' · Renseigner les manœuvres à partir du livre.':'Aucun livret officiel sélectionné.';
 }
 function applySelectedBook(){
  try{const id=$('sheetSelect').value,livret=$('sheetLivret').value;
