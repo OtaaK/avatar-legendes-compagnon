@@ -1,5 +1,5 @@
 """V2.33 : 13 formulaires, validation, stockage réel, rechargement et undo.
-Lancer : python app/test_terre_v233_browser.py (Playwright et Chromium requis).
+Lancer : python tests/browser/test_terre_v233_browser.py (Playwright et Chromium requis).
 """
 from _paths import APP_DIR, APP_HTML, CHROMIUM_EXECUTABLE
 from functools import partial
