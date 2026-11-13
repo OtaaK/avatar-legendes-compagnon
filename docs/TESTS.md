@@ -131,7 +131,8 @@ de test explicitement fourni et des notifications limitées.
   par défaut, identifiants et clés à `docs/architecture/REFERENCE.json`.
 - `tests/js/test_architecture_contracts.cjs` ajoute 20 scénarios de contrats, refus,
   isolation, copies, quotas et reprise. Il garde aussi l’identité HTML pour cette étape.
-- Le scénario partagé est exécuté sous Node et dans le véritable HTML Chromium, en
+- Le job navigateur de CI prépare désormais Node 22 comme le job JS, sans nouveau
+paquet. Le scénario partagé est exécuté sous Node et dans le véritable HTML Chromium, en
   1280×900 et 390×844. États et résultats doivent être identiques ; ni la session réelle
   ni le stockage du navigateur ne doivent changer, y compris après rechargement.
 

@@ -19,6 +19,9 @@
 - Un scénario synthétique partagé tourne sous Node et dans le véritable HTML Chromium,
   avec comparaison des résultats/états et contrôle d’absence d’écriture de session.
 
+Le job navigateur déclare désormais Node 22, déjà utilisé par le job JS, pour le
+comparatif Node/Chromium ; il ne dépend pas d’un Node préinstallé implicitement.
+
 Le HTML, données, ancien runner, 230 anciens scripts et leurs helpers sont **identiques
 à main**. Aucun module métier n’est encore extrait et aucun HTML n’est encore généré.
 Le pont de test utilise encore des repères textuels ; la migration des anciens tests
