@@ -1,1 +1,0 @@
-V0.82 : ouvrir simulateur.html dans un navigateur. Électrochoc est disponible pour les combattants autorisés à employer cette technique ; choisir les options dans le panneau de combat. Voir RAPPORT_V082.md.
