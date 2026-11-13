@@ -271,7 +271,7 @@ Changer sa position ne doit pas changer son domicile ni ses lieux associés ; ch
 
 ### Technique et qualité
 
-- [ ] Tests JS existants exécutés : `for test in app/test*.cjs; do node "$test" || exit 1; done` (ou commande courante équivalente du dépôt), résultats documentés ; **188/188 est un chiffre historique V2.32, pas une garantie V2.33**.
+- [ ] Tests JS existants exécutés : `python scripts/test.py --suite js` (ou commande courante équivalente du dépôt), résultats documentés ; **188/188 est un chiffre historique V2.32, pas une garantie V2.33**.
 - [ ] Tests de non-régression ciblés ajoutés pour fatigue, équilibre, changement d'importance, tri PNJ, hiérarchie des lieux, relations et import/export.
 - [ ] Tests navigateur manuels ou automatisés desktop/tablette/mobile et parcours au clavier.
 - [ ] Fonctionnement hors ligne vérifié ; les nouvelles dépendances nécessaires sont locales.

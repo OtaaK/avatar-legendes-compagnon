@@ -90,3 +90,7 @@ Alex demande une PR courte de consignes, puis une PR de sécurité indépendante
 ## 13 novembre 2026 — mission 1 : sécurité des imports
 
 Défaut reproduit indépendamment dans Chromium sur main `42b306f`. Format technique strict pour les identifiants (ASCII alphanumérique, tiret/souligné, 1–120 caractères, début alphanumérique), sans renommage silencieux ; données séparées du code des événements. Aucun changement de règle, de catalogue ou de dépendance. Refus explicite des anciens identifiants hors format ; fichiers et stockage originaux conservés. Les branches de convergence restent à contrôler avant report. Licence/visibilité/droits restent à décider par Alex. Rapport : [sécurité des imports](securite/IMPORTS_IDENTIFIANTS.md).
+
+## 13 novembre 2026 — mission 2 : inventaire avant accord
+
+Alex autorise la préparation de l’inventaire après fusion des PR 17/18. Étiquette annotée `avant-nettoyage-2026-11-13` publiée sur `38943c5` avant le travail. Proposition : garder 254 fichiers d’origine ; archiver dans Git 278 chemins (275 archives, ancien inventaire, deux récits V2.33) ; retirer deux helpers sans appel identifié. **Aucun retrait ni déplacement autorisé à ce stade.** Le plan et le CHANGELOG sont proposés, les 230 scripts restent en place. L’accord sur le plan et l’accord de fusion seront distincts. Licence, visibilité et droits restent ouverts ; mission 3 et UI en attente. Voir [le plan](maintenance/nettoyage/PLAN.md).

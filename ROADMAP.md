@@ -63,3 +63,7 @@ Mission 0 : formaliser les consignes. Mission 1 : vérifier et corriger les inje
 ## Mission 1 — correctif préparé sur branche dédiée
 
 Correctif d’injection aux imports/rendu préparé, tests de non-régression ajoutés ; aucune fusion. Voir [le bilan de sécurité](docs/securite/IMPORTS_IDENTIFIANTS.md). Le report vers les branches de convergence doit être vérifié avant intégration. Mission 2 : étiquette et inventaire à présenter avant suppression ; mission 3 et UI toujours en attente des accords requis.
+
+## Mission 2 — étape d’inventaire soumise à accord
+
+Missions 0 et 1 fusionnées dans main (PR 17 et 18). Sauvegarde `avant-nettoyage-2026-11-13` publiée. [Plan et preuves](docs/maintenance/nettoyage/PLAN.md), 532 fichiers classés, CHANGELOG proposé, aucun fichier existant retiré/déplacé. Attendre l’accord sur les 278 chemins à archiver et les deux helpers ; conserver les 230 scripts sans regroupement physique. Après réalisation et comparaison des contrôles, demander séparément l’accord de fusion. Mission 3/refonte UI non commencées.

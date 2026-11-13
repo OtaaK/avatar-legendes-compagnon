@@ -19,8 +19,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 |---|---|
 | `app/` | Application autonome |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 191 scripts de régression JavaScript |
-| `tests/browser/` | 37 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 192 scripts de régression JavaScript |
+| `tests/browser/` | 38 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `docs/historique/` | Rapports anciens conservés, avec leur contexte d'époque |
@@ -66,3 +66,10 @@ son ancienneté. Ne pas ajouter le PDF commercial ou des données personnelles a
 
 Projet de fan non officiel, sans affiliation avec les ayants droit d'Avatar ni avec l'éditeur
 du jeu de rôle.
+
+## Inventaire de nettoyage — propositions à examiner
+
+Le [plan de mission 2](docs/maintenance/nettoyage/PLAN.md) recense les 532 fichiers de
+`main` sauvegardés sous `avant-nettoyage-2026-11-13`. Le [CHANGELOG proposé](CHANGELOG.md)
+est en brouillon : aucune archive, aucun test ni helper n’est encore retiré ou déplacé.
+Les choix d’archivage et de retrait de code attendent l’accord d’Alex.

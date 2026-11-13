@@ -103,3 +103,7 @@ Cette PR est documentaire : aucun changement du HTML autonome, des tests ou des 
 ## Mission 1 — frontière données/événements
 
 Les identifiants sont contrôlés dans la normalisation et la validation de fiches, puis à l’import combat pour les références exposées. Le HTML reste autonome et sans dépendance : attributs `data-ui-click`, `data-ui-change`, `data-ui-keydown` et paramètres échappés, puis écouteur à liste fixe d’actions. Aucune donnée importée interprétée en JavaScript ; gestionnaires statiques conservés. Persistance, règles et moteur inchangés. Voir [le contrôle détaillé](securite/IMPORTS_IDENTIFIANTS.md).
+
+## Mission 2 — photographie et limites de l’inventaire
+
+Base main `38943c5` : un HTML autonome de 444 841 octets, 206 déclarations nommées repérées, tests encore extraits par marqueurs et découverts par globs non récursifs. Aucun changement de cette structure pendant l’inventaire. `scripts/audit_cleanup.py` lit une référence Git pour produire classement, empreintes, références statiques et index de thèmes ; il ne modifie pas les fichiers inventoriés. Les thèmes ne sont pas un graphe exhaustif ni une mesure de couverture. Aucune nouvelle dépendance, aucun contrat/extraction/build de mission 3 engagé. [Plan proposé](maintenance/nettoyage/PLAN.md).
