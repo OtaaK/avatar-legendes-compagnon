@@ -93,3 +93,10 @@ Les deux helpers sans appel statique repéré sont retirés, sans changement des
 Les tests restent à leur place ; une ancienne commande de leur commentaire est corrigée.
 Aucune extraction de moteur, migration de sauvegarde, nouvelle dépendance ou refonte UI.
 Les résultats finaux sont consignés dans le [bilan](docs/maintenance/nettoyage/BILAN.md).
+
+## V2.33 — mission 3A, préparation architecturale non fusionnée
+
+Contrats de référence et préparation centralisée des nouveaux tests ; comparaison d’un
+scénario métier entre Node et le vrai HTML dans Chromium. Les anciens tests et le HTML
+restent identiques ; aucun changement de règle, stockage, interface ou dépendance.
+Les étapes suivantes restent distinctes ; [bilan](docs/architecture/BILAN_3A.md).

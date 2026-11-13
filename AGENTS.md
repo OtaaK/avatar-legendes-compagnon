@@ -87,3 +87,13 @@ listés, retirer uniquement openNpc et showPlaybookReference, corriger les réf�
 conserver les 230 scripts à leur place avec toutes leurs assertions. Les originaux sont
 sous `avant-nettoyage-2026-11-13`. Consulter CHANGELOG et le bilan de mission 2.
 Cet accord permet le nettoyage sur sa branche ; **pas sa fusion**, pas la mission 3 ni UI.
+
+## Autorisation active — mission 3 (13 novembre 2026)
+
+Les missions 0, 1 et 2 sont fusionnées. Après leur intégration, Alex demande « En avant » :
+mission 3 autorisée sur branches dédiées, une PR par étape, sans fusion automatique.
+Voir `docs/architecture/PLAN_MISSION_3.md`. Étape 3A : contrats et contrôles de référence,
+HTML et anciens tests inchangés. Utiliser le main nettoyé `55d56f6`, ne pas reprendre
+implicitement l’ancienne référence des branches React. Aucun framework ni dépendance
+supplémentaire sans proposition chiffrée et accord ; aucune refonte UI pendant cette mission.
+Les tests ajoutés sont des observations de comportement, pas des règles officielles nouvelles.

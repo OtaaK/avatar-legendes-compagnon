@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 192 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 193 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -41,10 +41,11 @@ système adéquats). Le workflow GitHub prévoit cette installation sur sa machi
 Les tests utilisent `CHROMIUM_PATH` s'il est défini, sinon un Chromium présent dans le PATH,
 sinon le Chromium installé par Playwright. Aucun téléchargement n'est déclenché par les tests.
 
-La suite compte 38 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
+La suite compte 39 scripts : 34 conservés, `test_offline.py` pour le fonctionnement
 hors réseau, `test_retours_recette_v233.py` pour les corrections de fiches et de combat,
 `test_imports_fiabilite.py` pour les erreurs et la restauration des sauvegardes,
-et `test_security_import_ids.py` pour les identifiants piégés et le rendu inerte.
+`test_security_import_ids.py` pour les identifiants piégés et le rendu inerte,
+et `test_architecture_contracts.py` pour la parité du scénario Node/HTML.
 Le premier tente l'ouverture en `file://`, un cycle de combat et un export/réimport fidèle.
 Si une politique administrateur interdit `file://`, ce seul cas est annoncé par
 `LIMITATION:` : le test charge alors le HTML via HTTP local puis coupe le réseau.
@@ -118,3 +119,22 @@ fichiers invalides, échecs de rendu et de stockage des trois imports, lecture i
 annulation et export/restauration avec effets et historique, puis rechargement et annulation.
 Les erreurs injectées sont artificielles ; elles ne reproduisent pas toutes les pannes
 possibles du navigateur. Aucun test existant n’est supprimé.
+
+## Mission 3A — contrats et frontières de test
+
+`tests/support/legacy-application.cjs` centralise les repères et charge les corps réels
+sans démarrage de l’interface. Aucun moteur recopié. Le DOM, le réseau et le stockage
+sont interdits au chargement métier ; la persistance n’est chargée qu’avec un stockage
+de test explicitement fourni et des notifications limitées.
+
+- `node scripts/architecture/check-contracts.cjs` compare les entrées publiques, champs
+  par défaut, identifiants et clés à `docs/architecture/REFERENCE.json`.
+- `tests/js/test_architecture_contracts.cjs` ajoute 20 scénarios de contrats, refus,
+  isolation, copies, quotas et reprise. Il garde aussi l’identité HTML pour cette étape.
+- Le scénario partagé est exécuté sous Node et dans le véritable HTML Chromium, en
+  1280×900 et 390×844. États et résultats doivent être identiques ; ni la session réelle
+  ni le stockage du navigateur ne doivent changer, y compris après rechargement.
+
+Ce pont de test reste transitoire : il utilise encore des repères textuels. Les 230
+scripts historiques ne sont pas réécrits ni remplacés par ce contrôle. Les futures
+extractions auront un contrôle de génération et une parité propres à leur étape.
