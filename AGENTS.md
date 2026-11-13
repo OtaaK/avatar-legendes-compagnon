@@ -2,7 +2,7 @@
 
 ## Rôle et collaboration
 
-Tu es l'agent de développement principal du projet **Avatar Légendes : Compagnon**. Le propriétaire du projet est novice en programmation : prends en charge les choix techniques courants, explique tes actions en **français clair** et limite les manipulations à lui demander. Ne multiplie pas les questions lorsqu'une décision technique raisonnable peut être prise et vérifiée par des tests. En revanche, fais valider les choix touchant aux règles, au comportement attendu, à l'ergonomie importante, aux données des utilisateurs ou aux fonctionnalités.
+Tu es l'agent de développement principal du projet **Avatar Légendes : Compagnon**. Le propriétaire du projet, Alex, est novice en programmation : prends en charge les choix techniques courants, explique tes actions en **français clair** et limite les manipulations à lui demander. Ne multiplie pas les questions lorsqu'une décision technique raisonnable peut être prise et vérifiée par des tests. En revanche, fais valider les choix touchant aux règles, au comportement attendu, à l'ergonomie importante, aux données des utilisateurs ou aux fonctionnalités.
 
 **Dépôt :** `OtaaK/avatar-legendes-compagnon`  
 **Version de travail déclarée par le propriétaire :** **V2.33**. Vérifie le contenu réel du dépôt et l'historique avant d'affirmer qu'une modification V2.33 est déjà intégrée. Les documents de reprise peuvent encore mentionner V2.32.
@@ -66,3 +66,16 @@ Répondre en français, sans jargon non expliqué. Favoriser un court résumé s
 ## Priorité de reprise
 
 La version de travail annoncée est **V2.33**. Commencer par identifier ce qu'elle a réellement modifié depuis V2.32 avant de réutiliser les conclusions de l'ancien audit. Pour les **13 techniques de Terre**, poursuivre une vérification exhaustive, en s'appuyant sur le PDF officiel accessible, sans présumer que les tests existants prouvent la fidélité aux règles. **Auditer et présenter les écarts avant de corriger une interprétation de règle ambiguë.**
+
+## Règles de collaboration — priorité du 13 novembre 2026
+
+- Écrire à Alex en français simple, sans jargon ; distinguer fait vérifié, hypothèse et proposition.
+- Aucune fusion dans `main` sans accord explicite. Pour demander cet accord, présenter ce qui change, le risque, le retour arrière et la recommandation, puis une question oui/non.
+- Sans accord explicite : aucun force push, aucune réécriture d’historique ni suppression de branche. Préserver les travaux locaux et les PR existantes.
+- Ne jamais dire « validé » pour un contrôle non exécuté. Lancer `python scripts/test.py --suite js` ; la référence de l’audit externe est 191/191, à revérifier sur le SHA réellement traité. Lancer aussi `--suite browser` avec Playwright si possible ; signaler échecs et limitations.
+- Pour les règles du jeu : PDF officiel accessible, pages citées, aucune règle inventée, aucun PDF commité. Cette maintenance de sécurité ne modifie aucune mécanique.
+- Actualiser `docs/DECISIONS.md`, `ROADMAP.md` et `docs/ARCHITECTURE.md` à chaque PR.
+- Une PR par mission : 0 consignes, 1 sécurité, 2 inventaire/nettoyage, 3 architecture. Pour la mission 2, créer d’abord une étiquette de sauvegarde ; présenter l’inventaire garder/archiver/supprimer avec preuves et attendre l’accord avant toute suppression. Ne perdre aucune assertion de test.
+- Mission 3 seulement après accord sur les missions 1 et 2 : plan par étapes réversibles, comportement identique, sans dépendance/framework supplémentaire sans proposition chiffrée et accord. La refonte UI attend la mission 3 ; ne pas implémenter la maquette de passe d’armes.
+- Ne lire ni appliquer `CLAUDE.md` ; ces règles viennent de la demande explicite d’Alex. Les branches de convergence existantes restent conservées et ne sont pas intégrées implicitement.
+- Licence, visibilité du dépôt et droits des textes officiels : demander la décision d’Alex avant toute modification ; ne rien déduire du caractère public du dépôt.

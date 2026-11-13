@@ -55,3 +55,7 @@ Voir `docs/RAPPORT_RETOURS_RECETTE_V233.md`.
 - [ ] Examiner cette nouvelle PR avant toute intégration.
 
 Voir `docs/RAPPORT_FIABILITE_SAUVEGARDES_V233.md`. La refonte UI/UX est préparée séparément par le propriétaire.
+
+## Priorité de maintenance — 13 novembre 2026
+
+Mission 0 : formaliser les consignes. Mission 1 : vérifier et corriger les injections à l’import/rendu sans changer les règles ni l’interface. Mission 2 : inventaire et accord avant suppression ; mission 3 et refonte UI en attente des accords demandés.

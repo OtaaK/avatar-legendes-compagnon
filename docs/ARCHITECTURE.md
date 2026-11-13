@@ -95,3 +95,7 @@ Une progression raisonnable serait :
 
 Il n'est pas nécessaire de choisir un framework ni d'ajouter des dépendances pour cette
 progression. Une refonte générale et une modification des règles restent hors périmètre.
+
+## Mission 0 — cadre de maintenance
+
+Cette PR est documentaire : aucun changement du HTML autonome, des tests ou des formats. Les futures extractions nécessitent leur mission et leur accord ; les branches React existantes ne sont ni supprimées ni intégrées. Base examinée : main `42b306f`, distinct des branches de convergence.
