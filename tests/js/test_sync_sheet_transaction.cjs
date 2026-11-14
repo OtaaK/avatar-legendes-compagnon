@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const code=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
 const sync=code.slice(code.indexOf('function syncSheet('),code.indexOf('function exportCompleteBackup('));
-const tx=code.slice(code.indexOf('function commitLibraryMutation('),code.indexOf('function commitCombatMutation('));
+const tx=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/commands/mutation.js'),'utf8')+'\n'+code.slice(code.indexOf('function commitLibraryMutation('),code.indexOf('function commitCombatMutation('));
 let stored,fail=false,alerts=[],renders=0;
 const ctx={lib:{version:1,characters:[{id:'a',fatigue:0}]},s:{fighters:[{id:'p-1',characterId:'a',fatigue:3}]},confirm:()=>true,
  Roster:{importLibrary:JSON.parse,syncCombatToLibrary:(lib,s,id)=>{lib.characters[0].fatigue=s.fighters[0].fatigue;return lib.characters[0]}},

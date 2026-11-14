@@ -131,3 +131,8 @@ Le main de départ `55d56f6` garde le HTML comme oracle. [Contrats](architecture
 ## 3C — stockage séparé des notifications
 
 Le service `src/persistence/storage.js` ignore le DOM et reçoit ses ports explicitement. Le pont `src/legacy/persistence.js` conserve les fonctions publiques, avertissements et accès tardif au navigateur. Aucun accès à la création. Les clés, journal et ordre des opérations restent inchangés ; les préférences UI restent à traiter en 3D. [Bilan](architecture/BILAN_3C.md).
+
+
+## 3D — commandes et cycle de démarrage
+
+`src/commands/mutation.js` isole la transaction synchrone ; les ponts UI donnent accès à l’état, à la sauvegarde et au rafraîchissement. Les préférences passent par un service séparé. Les fragments exports, reprise/chargement, protection des actions, dispatcher et premier affichage sont nommés explicitement dans le manifeste. Les gestionnaires DOM restent des adaptateurs historiques ; ce n’est pas une refonte des écrans. [Bilan et limites](architecture/BILAN_3D.md).

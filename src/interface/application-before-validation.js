@@ -11,7 +11,7 @@ function setCombatTab(tab){
  currentCombatTab=tab;
  document.querySelectorAll('.combat-panel').forEach(p=>p.hidden=p.dataset.combatTab!==tab);
  document.querySelectorAll('[data-combat-nav]').forEach(b=>{const active=b.dataset.combatNav===tab;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});
- try{localStorage.setItem('avatar-combat-tab',tab)}catch(e){}
+ uiPreferences.write('avatar-combat-tab',tab)
 }
 function quickSheetResource(kind,delta){
  try{

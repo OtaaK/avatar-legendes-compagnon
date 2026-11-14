@@ -135,14 +135,13 @@ function quickNavigation(e){
   e.preventDefault();setView(VIEWS[Number(e.key)-1]);
  }
 }
-document.addEventListener('keydown',quickNavigation);
 function setView(view,scroll=true){
  if(!VIEWS.includes(view))view='home';
  currentView=view;
  document.querySelectorAll('.app-view').forEach(el=>{el.hidden=el.id!=='view-'+view && !(view==='combat'&&el.id==='view-combat-panels')});
  document.querySelectorAll('.main-nav button').forEach(b=>{const active=b.dataset.view===view;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});
  if(scroll)window.scrollTo({top:0,behavior:'instant'});
- try{localStorage.setItem('avatar-ui-view',view)}catch(e){}
+ uiPreferences.write('avatar-ui-view',view)
 }
 function setSheetTab(tab){
  if(!['identity','resources','story','techniques'].includes(tab))return;
@@ -200,8 +199,6 @@ function showCardTooltip(event,button){
  tip.style.top=(rect.bottom+height+10<window.innerHeight?rect.bottom+7:Math.max(8,rect.top-height-7))+'px';
 }
 function hideCardTooltip(force=true){if(force)$('cardTooltip').hidden=true}
-document.addEventListener('click',e=>{if(!e.target.closest?.('.card-chip'))hideCardTooltip()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')hideCardTooltip()});
 function renderCharacterCards(){
  $('pjDirectory').innerHTML=lib.characters.filter(c=>c.kind==='PJ').sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(characterCard).join('')||'<p>Aucun PJ. Utilise « Nouveau PJ » pour commencer.</p>';
  document.querySelectorAll('[data-character-kind]').forEach(b=>{b.classList.toggle('active',b.dataset.characterKind===characterKind);b.setAttribute('aria-pressed',String(b.dataset.characterKind===characterKind))});
@@ -228,10 +225,10 @@ let npcSessionLocation='';
 function selectNpcLocationForSession(){
  const selected=$('npcLocationFilter').value;
  if(!selected){alert('Choisis un lieu pour la session.');return}
- npcSessionLocation=selected;try{localStorage.setItem('avatar-session-location',selected)}catch(e){}
+ npcSessionLocation=selected;uiPreferences.write('avatar-session-location',selected)
  renderNpcDirectory();
 }
-function clearNpcSessionLocation(){npcSessionLocation='';try{localStorage.removeItem('avatar-session-location')}catch(e){}renderNpcDirectory()}
+function clearNpcSessionLocation(){npcSessionLocation='';uiPreferences.remove('avatar-session-location');renderNpcDirectory()}
 function renderNpcDirectory(){
  const filter=$('npcLocationFilter'),current=filter.value;
  const locations=Roster.npcLocations(lib);
@@ -243,7 +240,7 @@ function renderNpcDirectory(){
  $('npcSessionBanner').textContent=npcSessionLocation?'Lieu de session : '+(npcSessionLocation==='__none__'?'Sans lieu':npcSessionLocation):'Aucun lieu de session sélectionné';
  $('npcDirectory').innerHTML=npcs.map(characterCard).join('')||'<p>Aucun PNJ ne correspond à cette recherche.</p>';
 }
-function restoreNpcSessionLocation(){try{npcSessionLocation=localStorage.getItem('avatar-session-location')||''}catch(e){npcSessionLocation=''}}
+function restoreNpcSessionLocation(){npcSessionLocation=uiPreferences.read('avatar-session-location','')}
 function renderSheets(selected){
  const el=$('sheetSelect'),prev=selected||el.value;
  el.innerHTML=lib.characters.map(c=>`<option value="${safe(c.id)}" ${c.id===prev?'selected':''}>${safe(c.name)} (${safe(c.kind)})</option>`).join('');
@@ -355,178 +352,3 @@ function importCompleteBackup(event){
   }catch(e){alert('Import impossible : '+e.message)}
  }).catch(e=>alert('Lecture de la sauvegarde impossible : '+e.message)).finally(()=>{event.target.value=''});
 }
-function commitLibraryMutation(change){
- // A failed write must not leave a sheet modified only in memory.
- const previous=JSON.stringify(lib);
- try{
-  const result=change();
-  if(!saveLibrary())throw Error('Modification annulée : impossible d’enregistrer la bibliothèque. Vérifie le stockage et conserve ton export.');
-  return result;
- }catch(err){
-  lib=Roster.importLibrary(previous);
-  throw err;
- }
-}
-function commitCombatMutation(change){
- // Les commandes UI imbriquées forment UNE seule transaction et une seule écriture.
- // En cas d'erreur, seul le propriétaire externe restaure le combat entier.
- if((commitCombatMutation.depth||0)>0)return change();
- const previous=JSON.stringify(s);
- commitCombatMutation.depth=(commitCombatMutation.depth||0)+1;
- try{
-  const result=change();
-  if(JSON.stringify(s)!==previous&&!persist('avatar-v020',s))
-   throw Error('Action de combat annulée : impossible de sauvegarder. Conserve ton export JSON.');
-  return result;
- }catch(err){
-  s=JSON.parse(previous);
-  originalRender();
-  throw err;
- }finally{commitCombatMutation.depth--;}
-}
-function saveLibrary(){return persist('avatar-roster-v020',lib)}
-function exportRoster(){const blob=new Blob([JSON.stringify(lib,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='avatar-fiches-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function importRoster(e){
- const f=e.target.files?.[0];if(!f)return;
- f.text().then(text=>{
-  let rendering=false;const oldSheet=$('sheetSelect').value;
-  try{
-   const restored=Roster.importLibrary(text);
-   // An isolated roster import must never silently orphan the active combat.
-   validateBackupLinks(restored,s);
-   commitLibraryMutation(()=>{lib=restored;rendering=true;renderSheets();render();});
-  }catch(err){if(rendering){renderSheets(oldSheet);originalRender();}alert('Import des fiches impossible : '+err.message)}
- }).catch(err=>alert('Lecture des fiches impossible : '+err.message))
- .finally(()=>{e.target.value=''});
-}
-// V1.34 : export de consultation, distinct des sauvegardes restaurables.
-// Parcours aussi les instantanés et les actions anciennes : le secret peut y être dupliqué.
-function publicCombatReport(combat){
- const scrub=(value)=>{
-  if(Array.isArray(value))return value.map(scrub);
-  if(value&&typeof value==='object'){
-   const out={};
-   for(const [key,item] of Object.entries(value)){
-    if(key==='airReedPrediction'||key==='reedPrediction')continue;
-    // Éviter que les anciennes versions conservent une prédiction dans un champ libre.
-    out[key]=scrub(item);
-   }
-   return out;
-  }
-  return value;
- };
- return {format:'avatar-compagnon-compte-rendu-public',version:1,
-  avertissement:'Document de consultation uniquement. Ne pas importer comme sauvegarde ; vérifier les notes libres avant partage.',
-  combat:scrub(combat)};
-}
-function downloadPublicCombat(){
- const data=publicCombatReport(s);
- const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download='avatar-compte-rendu-public-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-function download(){const blob=new Blob([JSON.stringify(s,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='avatar-combat-v2-33.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-const completeImportRecoveryOk=recoverIncompleteImport();
-lib=loadSaved(ROSTER_KEYS,x=>Roster.importLibrary(x),()=>Roster.createLibrary());
-s=loadSaved(COMBAT_KEYS,x=>validateCombat(x),()=>CombatCore.createCombat());
-const originalRender=render;
-// Rendering is read-only. Persistence belongs to the transaction, not to a repaint.
-render=function(){originalRender()};
-// All entry points that mutate the combat are protected, including undo and phase changes.
-for(const name of ['demo','add','setGeneCombatChoice','setApproach','setRoll','prepare','approve','reject','back','releaseTrapped','step','includeSheet','changeEngagement','disengageOne','clearAllEngagements','triggerTrapUI','renameSceneUI','editSceneNoteUI','removeSceneNoteUI','addSceneNoteUI','addTemporaryEffectUI','editTemporaryEffectUI','removeTemporaryEffectUI','newSceneUI','resolveReedBetUI','waiveCountertimeUI','revealCountertimeUI','earthLavaUI','earthLavaFractureUI','spendEarthArmorUI','resolveEarthArmorHitUI','earthShieldUI','earthSeismicInterruptUI','earthMudStrikeUI']){
- const action=({demo,add,setGeneCombatChoice,setApproach,setRoll,prepare,approve,reject,back,releaseTrapped,step,includeSheet,changeEngagement,disengageOne,clearAllEngagements,triggerTrapUI,renameSceneUI,editSceneNoteUI,removeSceneNoteUI,addSceneNoteUI,addTemporaryEffectUI,editTemporaryEffectUI,removeTemporaryEffectUI,newSceneUI,resolveReedBetUI,waiveCountertimeUI,revealCountertimeUI,earthLavaUI,earthLavaFractureUI,spendEarthArmorUI,resolveEarthArmorHitUI,earthShieldUI,earthSeismicInterruptUI,earthMudStrikeUI})[name];
- const protectedAction=(...args)=>{try{return commitCombatMutation(()=>action(...args))}catch(err){alert(err.message)}};
- switch(name){
-  case 'demo':demo=protectedAction;break;
-  case 'add':add=protectedAction;break;
-  case 'setGeneCombatChoice':setGeneCombatChoice=protectedAction;break;
-  case 'setApproach':setApproach=protectedAction;break;
-  case 'setRoll':setRoll=protectedAction;break;
-  case 'prepare':prepare=protectedAction;break;
-  case 'approve':approve=protectedAction;break;
-  case 'reject':reject=protectedAction;break;
-  case 'back':back=protectedAction;break;
-  case 'releaseTrapped':releaseTrapped=protectedAction;break;
-  case 'step':step=protectedAction;break;
-  case 'includeSheet':includeSheet=protectedAction;break;
-  case 'changeEngagement':changeEngagement=protectedAction;break;
-  case 'disengageOne':disengageOne=protectedAction;break;
-  case 'clearAllEngagements':clearAllEngagements=protectedAction;break;
-  case 'triggerTrapUI':triggerTrapUI=protectedAction;break;
-  case 'renameSceneUI':renameSceneUI=protectedAction;break;
-  case 'editSceneNoteUI':editSceneNoteUI=protectedAction;break;
-  case 'removeSceneNoteUI':removeSceneNoteUI=protectedAction;break;
-  case 'addSceneNoteUI':addSceneNoteUI=protectedAction;break;
-  case 'addTemporaryEffectUI':addTemporaryEffectUI=protectedAction;break;
-  case 'editTemporaryEffectUI':editTemporaryEffectUI=protectedAction;break;
-  case 'removeTemporaryEffectUI':removeTemporaryEffectUI=protectedAction;break;
-  case 'newSceneUI':newSceneUI=protectedAction;break;
-  case 'resolveReedBetUI':resolveReedBetUI=protectedAction;break;
-  case 'waiveCountertimeUI':waiveCountertimeUI=protectedAction;break;
-  case 'revealCountertimeUI':revealCountertimeUI=protectedAction;break;
-  case 'earthLavaUI':earthLavaUI=protectedAction;break;
-  case 'earthLavaFractureUI':earthLavaFractureUI=protectedAction;break;
-  case 'spendEarthArmorUI':spendEarthArmorUI=protectedAction;break;
-  case 'resolveEarthArmorHitUI':resolveEarthArmorHitUI=protectedAction;break;
-  case 'earthShieldUI':earthShieldUI=protectedAction;break;
-  case 'earthSeismicInterruptUI':earthSeismicInterruptUI=protectedAction;break;
-  case 'earthMudStrikeUI':earthMudStrikeUI=protectedAction;break;
- }
-}
-// Données inertes dans les attributs ; seules ces actions fixes peuvent être appelées.
-function handleDataAction(event){
- const node=event.target.closest?.('[data-ui-'+event.type+']');
- if(!node||node.disabled)return;
- const action=node.getAttribute('data-ui-'+event.type);
- if(event.type==='keydown'){
-  if(action!=='openCharacterDetail'||event.target!==node||!['Enter',' '].includes(event.key))return;
-  event.preventDefault();openCharacterDetail(node.dataset.id);return;
- }
- if(event.type==='change'){
-  switch(action){
-   case 'changeEngagement':changeEngagement(node.dataset.id,node.dataset.extra,node.checked);break;
-   case 'setGeneCombatChoice':setGeneCombatChoice(node.dataset.id,node.value);break;
-   case 'setApproach':setApproach(node.dataset.id,node.value);break;
-   case 'setRoll':setRoll(node.dataset.id,node.value);break;
-  }
-  return;
- }
- if(event.type!=='click')return;
- switch(action){
-  case 'chooseWizardBonus':chooseWizardBonus(node.dataset.id);break;
-  case 'chooseWizardTraining':chooseWizardTraining(node.dataset.id);break;
-  case 'disengageOne':disengageOne(node.dataset.id);break;
-  case 'earthLavaFractureUI':earthLavaFractureUI(node.dataset.id);break;
-  case 'earthLavaUI':earthLavaUI(node.dataset.id,node.dataset.extra);break;
-  case 'earthMudStrikeUI':earthMudStrikeUI(node.dataset.id,node.dataset.extra);break;
-  case 'earthSeismicInterruptUI':earthSeismicInterruptUI(node.dataset.id);break;
-  case 'earthShieldUI':earthShieldUI(node.dataset.id,node.dataset.extra);break;
-  case 'editCombatFighter':editCombatFighter(node.dataset.id);break;
-  case 'editSceneNoteUI':editSceneNoteUI(node.dataset.id);break;
-  case 'editTemporaryEffectUI':editTemporaryEffectUI(node.dataset.id);break;
-  case 'includeSheet':includeSheet(node.dataset.id);break;
-  case 'openCatalogDetail':openCatalogDetail(node.dataset.id);break;
-  case 'openCharacterDetail':openCharacterDetail(node.dataset.id);break;
-  case 'openCombatSheet':openCombatSheet(node.dataset.id);break;
-  case 'quickSheetCondition':quickSheetCondition(node.dataset.id);break;
-  case 'releaseTrapped':releaseTrapped(node.dataset.id);break;
-  case 'removeSceneNoteUI':removeSceneNoteUI(node.dataset.id);break;
-  case 'removeTemporaryEffectUI':removeTemporaryEffectUI(node.dataset.id);break;
-  case 'resolveEarthArmorHitUI':resolveEarthArmorHitUI(node.dataset.id);break;
-  case 'resolveReedBetUI':resolveReedBetUI(node.dataset.id);break;
-  case 'revealCountertimeUI':revealCountertimeUI(node.dataset.id);break;
-  case 'selectCatalogTechnique':selectCatalogTechnique(node.dataset.id);break;
-  case 'spendEarthArmorUI':spendEarthArmorUI(node.dataset.id,node.dataset.extra);break;
-  case 'stepField':stepField(node.dataset.id,Number(node.dataset.extra),Number(node.dataset.min),Number(node.dataset.max));break;
-  case 'syncSheet':syncSheet(node.dataset.id);break;
-  case 'toggleSheetCondition':toggleSheetCondition(node.dataset.id);break;
-  case 'toggleSheetStatus':toggleSheetStatus(node.dataset.id);break;
-  case 'triggerTrapUI':triggerTrapUI(node.dataset.id);break;
-  case 'waiveCountertimeUI':waiveCountertimeUI(node.dataset.id);break;
- }
-}
-for(const type of ['click','change','keydown'])document.addEventListener(type,handleDataAction);
-// Le premier affichage ne doit pas écraser une sauvegarde corrompue ou non restaurée.
-originalRender();
-restoreNpcSessionLocation();renderSheets();renderCatalog();initWizard();renderCharacterCards();
-try{setCombatTab(localStorage.getItem('avatar-combat-tab')||'fighters')}catch(e){setCombatTab('fighters')}
-try{setView(localStorage.getItem('avatar-ui-view')||'home',false)}catch(e){setView('home',false)}

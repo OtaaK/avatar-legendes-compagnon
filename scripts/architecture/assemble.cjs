@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 const {TextDecoder}=require('node:util');
 const ROOT = path.resolve(__dirname,'../..');
-const GROUPS = new Set(['core','models','validators','persistence','ui']);
+const GROUPS = new Set(['core','models','validators','persistence','commands','ui']);
 const BINDINGS = new Set(['TECH_CATALOG','TECH_AUDIT']);
 function within(root, target) {
   const relative = path.relative(root,target);

@@ -117,3 +117,8 @@ Alex autorise 3B après fusion de la PR 20. Référence main `3059eff`, HTML con
 ## 3C — service de persistance
 
 Après accord explicite, PR 21 fusionnée à `a8cbd38`. 3C sépare les opérations de stockage de leurs notifications, sans modifier les clés, formats ou ordre de restauration. Les préférences UI restent pour 3D. Pas de migration, dépendance, règle ou refonte. PR 3C distincte, sans autorisation de fusion.
+
+
+## 3D — continuer sans fusion implicite
+
+Alex demande « Continue » après livraison de PR 22. 3D démarre depuis `ae4c86a`, sur branche dépendante ; PR 22 reste non fusionnée. Isoler commandes synchrones, préférences, événements et démarrage sans refonte ni règle modifiée. Conserver le défaut préexistant de retour à Combattants au rechargement pour une correction distincte.

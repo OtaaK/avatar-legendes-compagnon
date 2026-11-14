@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const helper=script.slice(script.indexOf('function commitLibraryMutation('),script.indexOf('function exportRoster('));
+const helper=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/commands/mutation.js'),'utf8')+'\n'+script.slice(script.indexOf('function commitLibraryMutation('),script.indexOf('function exportRoster('));
 let saved=null,fail=false, warnings=0;
 const ctx={lib:{seq:2,characters:[{id:'a',name:'Avant'}]},Roster:{importLibrary:txt=>JSON.parse(txt)},persist:(key,obj)=>{if(fail)return false;saved=JSON.stringify(obj);return true;},console,Error};
 vm.createContext(ctx);vm.runInContext(helper,ctx);

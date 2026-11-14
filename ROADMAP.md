@@ -87,3 +87,8 @@ Missions 0/1/2 fusionnées ; mission 3 autorisée. [Plan en cinq PR](docs/archit
 ## 3C — persistance, préparée
 
 3B fusionnée PR 21. 3C : service injectable, pont compatible et tests de refus/reprise ; attendre revue de sa PR avant fusion. Puis 3D affichage/commandes et 3E migration progressive des tests, UI ensuite.
+
+
+## 3D — commandes et affichage, préparée
+
+PR 22 (3C) reste en attente. 3D est préparée sur branche dépendante, sans fusion automatique. Commandes et préférences injectables, démarrage/événements/exports séparés, mêmes écrans. Puis 3E : migration progressive des tests. À corriger dans une tâche fonctionnelle distincte : restauration de l’onglet de combat au rechargement.

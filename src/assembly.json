@@ -17,6 +17,11 @@
     },
     {
       "kind": "classic",
+      "path": "src/commands/mutation.js",
+      "group": "commands"
+    },
+    {
+      "kind": "classic",
       "path": "src/interface/globals.js",
       "group": "ui"
     },
@@ -66,12 +71,52 @@
     },
     {
       "kind": "classic",
+      "path": "src/persistence/preferences.js",
+      "group": "persistence"
+    },
+    {
+      "kind": "classic",
       "path": "src/legacy/persistence.js",
       "group": "persistence"
     },
     {
       "kind": "classic",
+      "path": "src/interface/preferences.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
       "path": "src/interface/application-after-validation.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/commands.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/exports.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/startup-state.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/combat-command-bindings.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/events.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/bootstrap.js",
       "group": "ui"
     }
   ]

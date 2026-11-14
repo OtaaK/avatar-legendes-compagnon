@@ -1,0 +1,52 @@
+{
+  "baseCommit": "ae4c86a94335c11e2f4b79a708d03990939572c5",
+  "unchangedParts": [
+    {
+      "path": "src/interface/exports.js",
+      "bytes": 2327,
+      "sha256": "9d63ee3445ffb4383a9ea1c43683f068e9cdab4720b1694ee59882a12a2d8da1",
+      "identicalToBase": true
+    },
+    {
+      "path": "src/interface/startup-state.js",
+      "bytes": 368,
+      "sha256": "11c20cd835bf84f4eb349e56ff7612fd07911289abf4926b586d22d3d9b5d750",
+      "identicalToBase": true
+    },
+    {
+      "path": "src/interface/combat-command-bindings.js",
+      "bytes": 3432,
+      "sha256": "961b1a48103b6299b53e8c54d0c002de265ddf6d43beafbd4f5a91960b5c452c",
+      "identicalToBase": true
+    },
+    {
+      "path": "src/interface/events.js",
+      "bytes": 3121,
+      "sha256": "afb7ac31830635e5e0170f478d898bea214abbdf54ce62286ca148b3286d1ef6",
+      "identicalToBase": true
+    }
+  ],
+  "changedParts": [
+    "Commandes injectables et pont UI",
+    "Préférences et accès UI",
+    "Regroupement des enregistrements de listeners au démarrage"
+  ],
+  "unchangedAreas": [
+    "Moteur",
+    "Modèles",
+    "Catalogue",
+    "Validation",
+    "Persistance 3C",
+    "Balisage",
+    "Styles",
+    "39 anciens scripts navigateur"
+  ],
+  "commandComparisons": 36,
+  "visualComparisons": 16,
+  "visualTolerance": {
+    "maxChannelDelta": 1,
+    "maxChangedPixelRatio": 0.001,
+    "minimumAllowedChangedPixels": 100,
+    "reason": "Arrondis de bordures antialiasées Chromium ; aucun écart supérieur admis."
+  }
+}

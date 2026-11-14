@@ -113,3 +113,8 @@ précédente ; mêmes règles, sauvegardes et interface, sans dépendance ajout�
 ## 14 novembre 2026 — architecture 3C, non fusionnée
 
 Service de persistance injectable sans DOM, pont navigateur compatible, tests de refus et restauration. Aucun format ni règle changé. 3B intégrée par PR 21 avec accord du propriétaire.
+
+
+## 14 novembre 2026 — architecture 3D, non fusionnée
+
+Commandes synchrones et préférences injectables, événements/exports/démarrage distincts. Données, règles, sauvegardes et interface conservées. Branche dépendante de PR 22 ; aucune fusion ni déploiement.
