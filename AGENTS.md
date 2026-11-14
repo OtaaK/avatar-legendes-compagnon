@@ -19,7 +19,8 @@ Pour toute modification liée aux règles : consulter d'abord les pages pertinen
 
 ## Architecture et repères
 
-- Application principale : `app/simulateur.html` (HTML autonome et logique associée).
+- Application distribuée : `app/simulateur.html` (HTML autonome généré).
+- Sources éditables : `src/`, ordre dans `src/assembly.json` ; `node scripts/build.cjs` puis `--check`.
 - Catalogue / matrice de techniques : `data/MATRICE_TECHNIQUES.csv`.
 - Tests JavaScript : `tests/js/test*.cjs` ; tests navigateur Python : `tests/browser/test*.py`.
 - Commande commune : `python scripts/test.py` ; chemins communs : `tests/support/paths.cjs` et `tests/browser/_paths.py`.
@@ -97,3 +98,13 @@ HTML et anciens tests inchangés. Utiliser le main nettoyé `55d56f6`, ne pas re
 implicitement l’ancienne référence des branches React. Aucun framework ni dépendance
 supplémentaire sans proposition chiffrée et accord ; aucune refonte UI pendant cette mission.
 Les tests ajoutés sont des observations de comportement, pas des règles officielles nouvelles.
+
+## Autorisation active — mission 3B (14 novembre 2026)
+
+Après fusion de la PR 20, Alex autorise 3B (« Vas-y »). Départ main `3059eff`.
+Les sources se modifient dans `src/` ; l’HTML distribué est généré et contrôlé, jamais
+maintenu manuellement en parallèle. Lire `docs/architecture/SOURCES_ET_BUILD.md`.
+Conserver les corps, ordre, exports et données ; aucune règle ou interface changée.
+Avant les suites, exécuter `node scripts/build.cjs --check` ; ne pas régénérer en CI
+pour masquer un écart. Les clés/formats et les tests historiques restent conservés.
+Aucune nouvelle dépendance, fusion, refonte UI, ni changement implicite des branches React.

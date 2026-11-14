@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 193 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 195 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -139,3 +139,18 @@ paquet. Le scénario partagé est exécuté sous Node et dans le véritable HTML
 Ce pont de test reste transitoire : il utilise encore des repères textuels. Les 230
 scripts historiques ne sont pas réécrits ni remplacés par ce contrôle. Les futures
 extractions auront un contrôle de génération et une parité propres à leur étape.
+
+## Étape 3B — génération et import depuis les sources
+
+Exécuter `node scripts/build.cjs --check` avant les suites. La CI fait ce contrôle sans
+écrire l’HTML. `test_generated_html.cjs` couvre le déterminisme, les sorties absentes ou
+périmées, les erreurs sans écrasement, les données inertes, les chemins/gabarits et l’UTF-8.
+`test_source_domain.cjs` compare les mêmes contrats, états, notifications et reprises entre
+le domaine importé et les blocs du HTML ; il importe aussi sans gabarit, style ou UI.
+
+Le test navigateur de 3A garde toutes ses assertions et ajoute une égalité avec le domaine
+source. Le même scénario est donc comparé entre trois exécutions : source Node, blocs HTML
+Node et vrai document Chromium, en desktop/mobile. La préparation VM est partagée comme
+outil, les corps JS ne sont ni recopiés ni remplacés par des simulations métier.
+Les 193 anciens scripts JS sont inchangés ; une assertion navigateur est ajoutée, aucune
+supprimée. Aucun test n’est déplacé ni ignoré. Voir [le bilan](architecture/BILAN_3B.md).

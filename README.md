@@ -17,9 +17,10 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 
 | Dossier | Contenu |
 |---|---|
-| `app/` | Application autonome |
+| `app/` | HTML autonome généré, à ouvrir directement |
+| `src/` | Sources éditables, données, styles et manifeste d’assemblage |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 193 scripts de régression JavaScript |
+| `tests/js/` | 195 scripts de régression JavaScript |
 | `tests/browser/` | 39 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
@@ -87,3 +88,13 @@ Contrôle de référence, réservé au développement :
 ```bash
 node scripts/architecture/check-contracts.cjs
 ```
+
+## Sources et HTML autonome — étape 3B
+
+Le [guide de génération](docs/architecture/SOURCES_ET_BUILD.md) décrit les fichiers à
+modifier. Pour développer : éditer `src/`, puis `node scripts/build.cjs` et contrôler
+avec `node scripts/build.cjs --check`. Pour utiliser le compagnon, ouvrir seulement
+`app/simulateur.html` : aucune commande ni installation supplémentaire.
+
+Le [bilan 3B](docs/architecture/BILAN_3B.md) détaille la conservation des corps métier,
+les parités et les limites. La persistance et l’affichage ne sont pas encore découplés.

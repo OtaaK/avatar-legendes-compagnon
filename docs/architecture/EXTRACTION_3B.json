@@ -1,0 +1,120 @@
+{
+  "baseCommit": "3059efffdfa7f58f2c91d27a0c255b3e6d9a9b15",
+  "htmlSha256": "e9dfff872790584aabcfc282766c63764323644adf8ae22059a8c0f36a3bd468",
+  "htmlBytes": 444207,
+  "scriptSha256": "e7afab9149cf3017bfa315111054a3126eedc09041b817dcbea47c6ff184dd50",
+  "stylesSha256": "a8e2f1e4b87e1271c6f263f8fad9851fac9b219be63c9a335b47df408169b9f2",
+  "rangesUnit": "Offsets de caractères Unicode Python dans le script original ; empreintes calculées sur les octets UTF-8.",
+  "parts": [
+    {
+      "path": "src/domain/combat.js",
+      "kind": "classic",
+      "group": "core",
+      "originalStart": 0,
+      "originalEnd": 191168,
+      "renderedSha256": "5e876a86bb0e1f4e9ae749a8ac6e06102c82aeb8cd3aa726754facdd1c6b7c69",
+      "renderedBytes": 193371
+    },
+    {
+      "path": "src/domain/combat-rules.js",
+      "kind": "classic",
+      "group": "core",
+      "originalStart": 191168,
+      "originalEnd": 193157,
+      "renderedSha256": "96f62556133b0c797e3a0008ac8318a76ac1eb4e16eac942f59d4658b6e1d6b7",
+      "renderedBytes": 2020
+    },
+    {
+      "path": "src/interface/globals.js",
+      "kind": "classic",
+      "group": "ui",
+      "originalStart": 193157,
+      "originalEnd": 193503,
+      "renderedSha256": "76e937e5d5349272eff3e130060819b59371cf447ea097a73ca638813576d5f9",
+      "renderedBytes": 348
+    },
+    {
+      "path": "src/domain/roster.js",
+      "kind": "classic",
+      "group": "models",
+      "originalStart": 193503,
+      "originalEnd": 201588,
+      "renderedSha256": "b2b98c4361e451f40bb371939bae6ffc6a679f524e27abec0888e23e42fc86bf",
+      "renderedBytes": 8140
+    },
+    {
+      "path": "src/data/playbooks.js",
+      "kind": "classic",
+      "group": "models",
+      "originalStart": 201588,
+      "originalEnd": 202834,
+      "renderedSha256": "938c35b508abe6edd09c84c9be9d8ba4618246e6ab60c406a5aa97e123eadb9b",
+      "renderedBytes": 1280
+    },
+    {
+      "path": "src/domain/playbooks.js",
+      "kind": "classic",
+      "group": "models",
+      "originalStart": 202834,
+      "originalEnd": 203844,
+      "renderedSha256": "8a7b31e54fdc90e91f6e23af1acf71582f12fc21bb3b6da94087aa8f8f9a376a",
+      "renderedBytes": 1014
+    },
+    {
+      "path": "src/data/techniques.json",
+      "kind": "json",
+      "group": "models",
+      "originalStart": 203844,
+      "originalEnd": 229434,
+      "renderedSha256": "c7e0546622fcb95e80229ae8abe124db56c648541c53d59152c1269cfbc1a415",
+      "renderedBytes": 25766
+    },
+    {
+      "path": "src/data/technique-audit.json",
+      "kind": "json",
+      "group": "models",
+      "originalStart": 229434,
+      "originalEnd": 265373,
+      "renderedSha256": "286026e6eaa3474974bc98ec7e9f072d47cc0d00e98d21a70f5e9239a38a0f37",
+      "renderedBytes": 36855
+    },
+    {
+      "path": "src/interface/application-before-validation.js",
+      "kind": "classic",
+      "group": "ui",
+      "originalStart": 265373,
+      "originalEnd": 345796,
+      "renderedSha256": "bb2762934fd9345e237578f29c0fe305857407203b2e471ae0590c25c9fb4f9a",
+      "renderedBytes": 81545
+    },
+    {
+      "path": "src/legacy/validation.js",
+      "kind": "classic",
+      "group": "validators",
+      "originalStart": 345796,
+      "originalEnd": 352279,
+      "renderedSha256": "c36d424b723efcc88b08da70a49985bff03dbb946b09c8a148527f8eb47dede5",
+      "renderedBytes": 6515
+    },
+    {
+      "path": "src/legacy/persistence.js",
+      "kind": "classic",
+      "group": "persistence",
+      "originalStart": 352279,
+      "originalEnd": 355982,
+      "renderedSha256": "99b98efcc0aeb11f495957809a31f8792ce8d057393b23ef99a26095dd125f86",
+      "renderedBytes": 3729
+    },
+    {
+      "path": "src/interface/application-after-validation.js",
+      "kind": "classic",
+      "group": "ui",
+      "originalStart": 355982,
+      "originalEnd": 402348,
+      "renderedSha256": "92be468a390423f2dbb07e1c6e37db703fb29ec2bbdfa891f7f5398bb6f56205",
+      "renderedBytes": 46683
+    }
+  ],
+  "addedRuleText": false,
+  "newDependencies": 0
+}
