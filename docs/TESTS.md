@@ -259,3 +259,32 @@ CI sur les futures assertions. Les anciennes preuves figées 3E.1 s’appliquent
 de PR 24 : leur inventaire de fichiers conservés devient historique avec ce nouveau lot.
 Pour l’état courant, utiliser la preuve 3E.2 ci-dessus ; ne pas réécrire les anciennes
 empreintes pour masquer cette évolution autorisée.
+
+
+## Étape 3E.3 — derniers moteurs et frontières finales
+
+Le nombre de scripts reste 198 JS et 40 navigateur. Les 28 derniers chargements moteur
+ordinaires utilisent la façade existante. Tous leurs corps après chargement et toutes
+leurs lignes d’assertion restent identiques ; dix ne lisent plus le HTML du tout.
+Les autres conservent les contrôles d’interface/données embarquées, y compris les
+assertions placées avant l’ancien chargement.
+
+```bash
+node scripts/architecture/verify-final-test-migration.cjs
+node scripts/architecture/verify-final-test-migration.cjs --compare-base
+node scripts/architecture/audit-test-boundaries.cjs
+python scripts/architecture/check-source-only-tests.py --final
+```
+
+`--compare-base` nécessite le commit `49ed8a2` localement. Le dernier contrôle exécute
+les dix nouveaux scripts sans HTML/interface/helpers historiques ; sans `--final`,
+l’outil continue à contrôler les 145 scripts du premier lot. Ces preuves restent
+ponctuelles ; la CI continue à exécuter les suites ordinaires et le contrôle de build.
+
+L’inventaire final classe les 198 scripts JS par rôle principal : 159 sources, 25 sources
+avec contrôles HTML, 11 structure/données embarquées, 2 parités et 1 générateur. Le relevé
+est textuel et revu pour cet état du dépôt, pas une analyse de sécurité générale.
+Les six appels VM directs conservés exécutent des sources ou une constante de test ;
+le chargeur HTML de référence reste volontairement utilisé par les deux tests de parité.
+Les audits de données embarquées lisent du JSON, sans exécuter le texte du catalogue.
+Voir [bilan et limites](architecture/BILAN_3E3.md).

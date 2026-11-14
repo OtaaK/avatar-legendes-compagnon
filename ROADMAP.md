@@ -102,3 +102,8 @@ PR 22 (3C) reste en attente. 3D est préparée sur branche dépendante, sans fus
 ## 3E.2 — services et validation, préparée
 
 Huit scripts migrés, assertions HTML conservées, helper de source testé. Les PR 22 à 24 restent non fusionnées ; cette étape dépend de 24. Suite 3E.3 proposée : derniers préambules moteur/mélangés et inventaire final des contrôles HTML volontairement conservés. La migration 3E complète et la refonte UI ne sont pas déclarées terminées.
+
+
+## 3E.3 — préparation de la mission 3 achevée
+
+Derniers chargements moteur ordinaires migrés ; inventaire final des tests et exceptions intentionnelles de parité. 238 scripts avant/après réussis, application inchangée. Prochaine étape recommandée : revue de la chaîne PR 22 → 23 → 24 → 25 → lot 3E.3, puis intégration uniquement sur accord et recette Mac. La reprise UI nécessite une validation distincte et une comparaison des anciennes branches React/v0.

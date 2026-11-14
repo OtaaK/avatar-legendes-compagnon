@@ -191,3 +191,18 @@ fonctions de simulation explicitement demandées sont restaurées, pas toutes le
 propriétés éventuellement définies avant une exception. Aucune incidence sur le build.
 Les contrôles structurels du HTML continuent à lire le document distribué.
 [Bilan et limites](BILAN_3E2.md).
+
+
+## Évolution 3E.3 — frontière finale des tests
+
+Les 28 derniers anciens chargements moteur sont remplacés par la façade source, en
+gardant les alias de contexte nécessaires aux corps historiques. Les contrôles HTML
+restent des lectures de chaînes ou JSON ; ils ne deviennent pas le code exécuté par
+les scénarios métier. Les quatre extraits de moteur encore utilisés par des assertions
+structurelles ne sont plus exécutés en VM.
+
+L’ancien chargeur `tests/support/legacy-application.cjs` garde une exception explicite :
+il fournit l’oracle indépendant du HTML pour la parité avec les sources. Ses marqueurs
+restent vérifiés uniques/ordonnés et les tests de refus sont conservés. Le retirer ferait
+perdre cette comparaison. Les contextes de services, eux, chargent les fichiers sources
+complets. [Inventaire et bilan](BILAN_3E3.md).

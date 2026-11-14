@@ -149,3 +149,14 @@ assertions et contrôles HTML conservés. Doubles de test restaurés expliciteme
 jamais charger les événements ou le bootstrap dans ces fixtures. Application inchangée.
 Les preuves de 3E.1 restent historiques ; utiliser la preuve 3E.2 pour ce lot. La migration
 3E n’est pas entièrement terminée. Voir `docs/architecture/BILAN_3E2.md`.
+
+
+## Autorisation active — mission 3E.3 (14 novembre 2026)
+
+Après PR 25, Alex demande « Continue ». Branche dépendante de 3E.2, base `49ed8a2`,
+aucune fusion des PR 22 à 25 implicite. Derniers 28 chargements moteur ordinaires depuis
+les sources ; corps et assertions conservés. Garder les lectures HTML structurelles et
+l’oracle indépendant de parité, explicitement inventoriés. Les étapes de mission 3 sont
+préparées sur branches ; ne pas les annoncer fusionnées ou déjà dans main. La refonte UI
+et l’intégration des anciennes branches React restent distinctes, sans autorisation
+automatique. Voir `docs/architecture/BILAN_MISSION_3.md` et `docs/architecture/BILAN_3E3.md`.

@@ -1,7 +1,7 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const assert=require('assert');
+const fs=require('fs');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};const C=ctx.window.CombatCore;
 function setup(kind,external=false){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Allié');const f=C.fighter(s,b);const status=kind==='Bouclier de roche'?'gene':'avantage';f.statuses.push(status);s.temporaryEffects.push({id:'effect',targetId:b,originSourceId:a,originLabel:kind,shieldGrantedGene:true,shieldExternalGene:external,armorPoints:3,armorExternalAdvantage:external});return {s,b,status};}
 for(const kind of ['Bouclier de roche','Armure de terre'])for(const external of [false,true]){
  const {s,b,status}=setup(kind,external);const before=JSON.stringify(s);assert.throws(()=>C.editTemporaryEffect(s,'effect','x','manual'),/Effet mécanique/);assert.strictEqual(JSON.stringify(s),before);
