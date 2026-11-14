@@ -141,3 +141,8 @@ Le service `src/persistence/storage.js` ignore le DOM et reçoit ses ports expli
 ## 3E.1 — tests du moteur depuis les sources
 
 145 tests homogènes utilisent la façade `src/domain/index.cjs` au lieu d’extraire le moteur du HTML. Aucun moteur, adaptateur, manifeste de build ou HTML modifié. Les contrôles d’intégration de la distribution restent actifs. Les tests mixtes ne sont pas convertis automatiquement. [Bilan et inventaire](architecture/BILAN_3E1.md).
+
+
+## 3E.2 — préparation des tests de services
+
+`tests/support/source-fixtures.cjs` charge des ensembles fixes de sources complètes dans les contextes de test. Les doubles nécessaires sont conservés explicitement ; aucun démarrage ou rendu réel n’est déclenché au chargement. Le helper n’est pas distribué et aucune source d’application n’est modifiée. Les assertions structurelles du HTML restent actives. [Bilan](architecture/BILAN_3E2.md).

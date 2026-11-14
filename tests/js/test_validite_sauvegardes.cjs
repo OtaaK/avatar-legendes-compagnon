@@ -1,10 +1,7 @@
 'use strict';
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const script=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
-const rosterExport=script.match(/window\.Roster=\{[^;]+;/)[0];
-const context={window:{},console};vm.createContext(context);vm.runInContext(script.slice(0,script.indexOf('window.Roster='))+rosterExport,context);
-context.CombatCore=context.window.CombatCore;context.Roster=context.window.Roster;
-vm.runInContext(script.slice(script.indexOf('function validateCombat('),script.indexOf('function validateBackupLinks(')),context);
+const assert=require('node:assert/strict');
+const context=require('../../src/domain/index.cjs').loadDomain();
+context.validateCombat=context.validators.validateCombat;
 const C=context.CombatCore;let count=0;
 function test(label,run){try{run();count++;}catch(error){error.message=label+' : '+error.message;throw error;}}
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');s.engagements=[[a,b]];s.traps=[{id:'trap-e-3',ownerId:a,zone:'Passage',round:1}];return {s,a,b};}

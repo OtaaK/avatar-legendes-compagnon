@@ -1,9 +1,9 @@
 'use strict';
+const {readFixture}=require('../support/source-fixtures.cjs');
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const roster=code.slice(code.indexOf('const rosterClone='),code.indexOf('window.Roster=')+code.slice(code.indexOf('window.Roster=')).indexOf(';')+1);
-const context={window:{}};vm.createContext(context);vm.runInContext(roster,context);const R=context.window.Roster;
+const R=require('../../src/domain/index.cjs').loadDomain().Roster;
 let count=0;const test=(name,f)=>{f();count++;console.log('OK '+name);};
 const invalid=[undefined,null,0,{},[],true,'',' ','a b','a\nb','a\n','a\r','a\r\n','a\tb','a\u0000b','é','_hidden','a'.repeat(121),"char-1');globalThis.__audit=1;//",'a&quot;onclick=&quot;alert(1)','a" autofocus onfocus="alert(1)'];
 for(const id of invalid)test('identifiant invalide refusé sans normalisation silencieuse : '+JSON.stringify(id),()=>{
@@ -24,7 +24,7 @@ test('aucune donnée dynamique dans les attributs de code événementiel',()=>{
  const dispatch=code.slice(code.indexOf('function handleDataAction('),code.indexOf('// Le premier affichage'));
  assert.ok(dispatch.includes('switch(action)'));assert.doesNotMatch(dispatch,/eval\(|new Function|window\[|globalThis\[/);
 });
-const vcode=code.slice(code.indexOf('function validateCombat('),code.indexOf('function validateBackupLinks('));
+const vcode=readFixture('validation');
 const cctx={Roster:{CONDITIONS:R.CONDITIONS},CombatCore:{STATUS:[],APPROACHES:['attaquer','esquiver','defendre']}};vm.createContext(cctx);vm.runInContext(vcode,cctx);
 const combat=()=>({round:1,seq:2,phase:'declaration',fighters:[{id:'p-1',name:'Test',kind:'PJ',fatigue:0,balance:0,conditions:[],statuses:[],blocked:[],reactions:[],bonuses:[],approach:null,roll:null}],actions:[],proposals:[],history:[],snapshots:[],notes:[]});
 test('références importées : characterId, id de piège et id de proposition contrôlés',()=>{

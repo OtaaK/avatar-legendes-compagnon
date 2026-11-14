@@ -127,3 +127,8 @@ Alex demande « Continue » après livraison de PR 22. 3D démarre depuis `ae4c8
 ## 3E.1 — migration des tests sans fusion implicite
 
 Après « Continue », branche depuis `b337017` (PR 23), sans fusion de 22 ou 23. Lot homogène de 145 tests moteur : import du domaine existant, seuls préambules changés ; corps, assertions, module assert et mode strict préservés. Tests mixtes/structurels conservés pour un lot suivant, aucune modification de l’application.
+
+
+## 3E.2 — tests de services depuis les sources
+
+Après « Continue », branche dépendante de PR 24, base `3bfd3f3`, sans fusion des PR 22 à 24. Migrer huit préparations vers les fichiers sources complets avec doubles explicitement conservés. Préserver les assertions HTML et tous les scénarios. Ajouter neuf vérifications du helper ; application inchangée.

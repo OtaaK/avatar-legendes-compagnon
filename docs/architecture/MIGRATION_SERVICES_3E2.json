@@ -1,0 +1,121 @@
+{
+  "format": "avatar-service-test-migration-proof",
+  "version": 1,
+  "baseCommit": "3bfd3f359415ee9c9379a77755d6d8d7beff31d6",
+  "migrated": [
+    {
+      "path": "tests/js/test_transactions.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "7ef165d6253b351579a803f02cebf0a2b0cb9069dc211fa6cbbf5c86b2ffaf00",
+      "regions": [
+        {
+          "start": "let count=0;function test(label,fn)",
+          "end": null,
+          "sha256": "0ea16fa12ac405724c87ae6d050ff2104020c4a26b540e618c4bb3ebb583361f"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_combat_transactions.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "d13cbc2404e8573afafa794e231f447a8f6cc7c92112fc69f04c4fd5272fcb0a",
+      "regions": [
+        {
+          "start": "let count=0;const test=",
+          "end": null,
+          "sha256": "752e4837cf7cfcd3886d5c3fa205930d3e42af01f9e3f4816f74911ace4a988c"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_roster_links.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "d2f2ced44913ec910ef5f02d838803651de6a4e85bc4cfb6816d1c7b3a8e91d8",
+      "regions": [
+        {
+          "start": "test('import des fiches compatible",
+          "end": null,
+          "sha256": "dc7d915041cd12c3e08693703997999d929bb94bd1e72d8f954c0e2b56113e13"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_sync_sheet_transaction.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "10453d4c1fdfb1e342b83431f4263221a96330c3a2d0be8f00e2905ca05aa4fb",
+      "regions": [
+        {
+          "start": "\nctx.syncSheet('p-1');",
+          "end": null,
+          "sha256": "6a7b4587d85c6f226198ce2026e33d4af2f8d280972bb1d258c020d1c9c4eb2a"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_persistance.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "625d11252bfe76b3da2a3e7cd9da1f064f796f3e2b1040e00b5b529bf887d27a",
+      "regions": [
+        {
+          "start": "let count=0;function test(label,fn)",
+          "end": null,
+          "sha256": "b02aaabba3b4dce2146f7ed92ae7ecd7b19e50ebcdd268945879bd93d79d4608"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_complete_import.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "assertionLinesSha256": "867a283c45c240235a5650b436d5d51338521367bcfbbf92d6698e886bc0b6fb",
+      "regions": [
+        {
+          "start": "let count=0;function test(name,fn)",
+          "end": null,
+          "sha256": "81f3ce14c9c70a731fa05f081f41d576fbcff85e0d35f1eeab05e36e8ef7cfe6"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_validite_sauvegardes.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "assertionLinesSha256": "a68f46acb678a4037770d706e412ac3d9d45fa6ef24f0f62c068f663414e52c6",
+      "regions": [
+        {
+          "start": "const C=context.CombatCore;let count=0;",
+          "end": null,
+          "sha256": "08f2f8c15397f80fb765e1a7e0f85bd5d6c992db09723d498c52de16cd9e4f10"
+        }
+      ]
+    },
+    {
+      "path": "tests/js/test_security_import_ids.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "assertionLinesSha256": "123a5fe0cb031dbbb7ca8f72345d629c8865c49baea3b5784184afffdec2ca23",
+      "regions": [
+        {
+          "start": "let count=0;const test=",
+          "end": "\nconst vcode=",
+          "sha256": "67979bd3ca26af2bc03bd66aa67d91d014b210596704f302467c82dd9b718796"
+        },
+        {
+          "start": "\nconst cctx=",
+          "end": null,
+          "sha256": "a732923e3cf495e63c7fdecacb4eaa232b2c0442f2fd1d016a9f2f6ae70744c7"
+        }
+      ]
+    }
+  ],
+  "added": [
+    "tests/js/test_source_fixtures.cjs"
+  ],
+  "retainedJs": 189,
+  "retainedBrowser": 40
+}

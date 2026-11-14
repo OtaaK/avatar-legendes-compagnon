@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 197 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 198 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -228,3 +228,34 @@ futures modifications légitimes des scénarios. La CI ordinaire continue de dé
 et exécuter tous les scripts. Les contrôles du HTML, du générateur et les parcours
 Chromium restent actifs : tester les sources ne remplace pas tester la distribution.
 L’inventaire et le [bilan](architecture/BILAN_3E1.md) précisent les tests conservés et la suite.
+
+
+## Étape 3E.2 — services, validation et doubles explicites
+
+198 scripts JS et 40 scripts navigateur. Huit préparations chargent les sources sans
+extraire du HTML le code à exécuter. Le helper `tests/support/source-fixtures.cjs`
+utilise des listes fixes de fichiers complets ; il ne charge ni bootstrap ni HTML.
+`runFixture` restaure les fonctions de simulation demandées explicitement par le test
+après chargement des ponts. Aucun objet importé par un utilisateur n’est exécuté.
+
+Toutes les lignes d’assertion et neuf régions complètes de scénarios sont conservées.
+Les lectures/découpes HTML destinées aux assertions structurelles restent présentes :
+ordre validation/transaction, remise à zéro d’un sélecteur, rendu sans sauvegarde et
+absence de code événementiel dynamique. Elles ne sont plus exécutées comme programme.
+Le nouveau test du helper couvre neuf cas : refus, contexte sans DOM/stockage,
+conservation des doubles, isolation et sources manquantes/invalides.
+
+Preuve ponctuelle de ce lot :
+
+```bash
+node scripts/architecture/verify-service-test-migration.cjs
+node scripts/architecture/verify-service-test-migration.cjs --compare-base
+```
+
+Le second mode nécessite le commit `3bfd3f3` localement et compare également les 189
+anciens scripts JS non concernés ainsi que les sources, données, HTML et navigateur.
+Les sorties des huit scripts sont identiques avant/après. Le lot n’ajoute aucun verrou
+CI sur les futures assertions. Les anciennes preuves figées 3E.1 s’appliquent à l’état
+de PR 24 : leur inventaire de fichiers conservés devient historique avec ce nouveau lot.
+Pour l’état courant, utiliser la preuve 3E.2 ci-dessus ; ne pas réécrire les anciennes
+empreintes pour masquer cette évolution autorisée.

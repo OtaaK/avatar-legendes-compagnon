@@ -1,12 +1,11 @@
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const {runFixture}=require('../support/source-fixtures.cjs');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const validation=script.slice(script.indexOf('function validateBackupLinks('),script.indexOf('let storageWarningShown='));
-const tx=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/commands/mutation.js'),'utf8')+'\n'+script.slice(script.indexOf('function commitLibraryMutation('),script.indexOf('function commitCombatMutation('));
 const rosterImport=script.slice(script.indexOf('function importRoster('),script.indexOf('function download('));
 let count=0;function test(name,fn){fn();console.log('OK '+name);count++}
 const ctx={lib:{version:1,seq:2,characters:[{id:'a',name:'Ancien'}]},s:{fighters:[{id:'p-1',characterId:'a'}]},Roster:{importLibrary:JSON.parse},persist:()=>true,saveLibrary:()=>ctx.persist(),console,alert:()=>{}};
-vm.createContext(ctx);vm.runInContext(validation+tx+rosterImport,ctx);
+runFixture('roster-links',ctx,{preserve:['saveLibrary']});
 test('import des fiches compatible avec combat existant',()=>assert.doesNotThrow(()=>ctx.validateBackupLinks({characters:[{id:'a'}]},ctx.s)));
 test('import des fiches refuse les combattants orphelins',()=>assert.throws(()=>ctx.validateBackupLinks({characters:[{id:'b'}]},ctx.s),/fiche absente/));
 test('combat sans lien autorisé',()=>assert.doesNotThrow(()=>ctx.validateBackupLinks({characters:[]},{fighters:[{id:'x'}]})));
