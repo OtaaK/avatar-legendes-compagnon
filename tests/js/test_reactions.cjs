@@ -1,5 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function start(){let s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B'),c=C.addFighter(s,'C');for(const id of [a,b,c])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);return {s,a,b,c}}
 let n=0;function test(name,fn){fn();console.log('OK',name);n++}
 test('Riposte dérivée : preview sans mutation et choix état',()=>{let {s,a,b}=start();let victim=C.fighter(s,b);victim.reactions.push({type:'riposte',round:s.round});C.fighter(s,a).fatigue=5;C.manual(s,a,b,'fatigue',1);const before=s.seq;const preview=C.previewCommit(s,{});assert.equal(s.seq,before);const reaction=preview.find(x=>x.reason==='Riposter');assert(reaction);assert.throws(()=>C.commit(s,{}),/état\(s\) à choisir/);assert.equal(s.proposals.length,1);C.commit(s,{['overflow:'+reaction.id]:['Fragile']});assert(C.fighter(s,a).conditions.includes('Fragile'))});

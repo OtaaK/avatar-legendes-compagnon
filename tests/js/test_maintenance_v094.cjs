@@ -1,7 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),id=C.addFighter(s,'Technicien','PNJ');const f=C.fighter(s,id);f.conditions.push('Terrifié');f.approach='defendre';s.phase='defendre';return {s,id,f};}
 {
  const {s,id,f}=setup();const a=C.queueTechnique(s,id,'Maintenance','defendre',id,{maintenanceCondition:'Terrifié'});

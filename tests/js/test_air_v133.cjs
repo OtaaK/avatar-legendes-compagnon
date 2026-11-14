@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function scene(){const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Ennemi');const act={id:'bet',round:s.round,sourceId:a,targetId:b,name:'Souple comme un roseau',approach:'esquiver',options:{airReedConfirmed:true,airReedPrediction:'attaquer'}};s.actions.push(act);C.propose(s,act);C.commit(s);s.phase='fin';C.nextRound(s);C.declare(s,a,'esquiver');C.declare(s,b,'attaquer');C.reveal(s);return {s,a,b,id:s.temporaryEffects[0].id};}
 {
  const {s,a,b,id}=scene();s.actions.push({id:'already',round:s.round,sourceId:b,targetId:a,name:'Frapper',approach:'attaquer',options:{}});

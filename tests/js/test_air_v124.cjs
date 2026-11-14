@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(name,options){const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Ennemi'),c=C.addFighter(s,'Allié'),d=C.addFighter(s,'Autre');const act={id:'air-124',round:s.round,sourceId:a,targetId:b,name,approach:'esquiver',options};s.actions.push(act);return {s,a,b,c,d,act};}
 {
  const {s,a,b,c,d,act}=setup('Cône d’air',{airConeInRange:true,airConeAllies:[]});act.options.airConeAllies=[c,d];

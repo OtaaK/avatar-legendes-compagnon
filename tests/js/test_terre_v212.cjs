@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Gardien'),b=C.addFighter(s,'Allié');s.phase='esquiver';return {s,a,b};}
 // Fin de passe avec protection réussie : Confiant, phase et historique sont annulables.
 {const {s,a,b}=setup();C.fighter(s,a).reactions.push({type:'protection',round:1,allyId:b,targeted:false});const n=s.snapshots.length;C.endRound(s);assert.equal(s.phase,'fin');assert(C.fighter(s,a).statuses.includes('confiant'));assert(C.fighter(s,b).statuses.includes('confiant'));assert.equal(s.snapshots.length,n+1);assert(C.undo(s));assert.equal(s.phase,'esquiver');assert(!C.fighter(s,a).statuses.includes('confiant'));assert(!C.fighter(s,b).statuses.includes('confiant'));}

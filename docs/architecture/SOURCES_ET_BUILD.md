@@ -156,3 +156,20 @@ fixe : les données importées restent des valeurs inertes, jamais du code inter
 Les fonctions d’écran historiques continuent à lire le DOM et appeler les ponts ;
 cette étape ne transforme pas chaque gestionnaire en composant pur. Le moteur, modèles,
 catalogue, styles et balisage restent inchangés. [Bilan](BILAN_3D.md).
+
+
+## Évolution 3E.1 — imports des tests du moteur
+
+145 tests homogènes passent par la façade Node existante :
+
+```js
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
+```
+
+Il n’y a pas de nouvelle copie du moteur ni de chargeur ajouté à l’application. La façade
+charge aussi les modèles et validateurs dans un contexte indépendant, sans démarrer
+l’interface ou consulter le stockage. Le moteur lui-même reste inchangé.
+
+Le corps des scripts, leur choix du module d’assertion et le mode strict sont conservés.
+Les contrôles structurels et les tests mixtes restent à migrer séparément ; les contrôles
+de parité sources/HTML et navigateur sont maintenus. [Bilan 3E.1](BILAN_3E1.md).

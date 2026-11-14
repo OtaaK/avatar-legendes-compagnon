@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function make(extra){const s=C.createCombat(),id=C.addFighter(s,'Terre'),f=C.fighter(s,id);f.statuses.push('avantage');s.temporaryEffects.push({id:'armor',originLabel:'Armure de terre',targetId:id,armorPoints:1,armorExternalAdvantage:false,label:'Armure de terre : 1 / 3 points'});extra(s,id,f);return {s,id,f};}
 for(const [name,extra] of [
  ['lava',(s,id)=>s.temporaryEffects.push({id:'lava',originLabel:'Étoile de lave',targetId:id,duration:'manual'})],

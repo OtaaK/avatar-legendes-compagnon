@@ -92,3 +92,8 @@ Missions 0/1/2 fusionnées ; mission 3 autorisée. [Plan en cinq PR](docs/archit
 ## 3D — commandes et affichage, préparée
 
 PR 22 (3C) reste en attente. 3D est préparée sur branche dépendante, sans fusion automatique. Commandes et préférences injectables, démarrage/événements/exports séparés, mêmes écrans. Puis 3E : migration progressive des tests. À corriger dans une tâche fonctionnelle distincte : restauration de l’onglet de combat au rechargement.
+
+
+## 3E.1 — premier lot de tests préparé
+
+145 tests moteur migrés vers les sources, 52 autres scripts JS conservés pour analyse distincte ou déjà autonomes. PR dépendante de 3D ; 22 et 23 non fusionnées. Prochain lot 3E.2 proposé : préparations des tests de persistance/commandes/validation, puis tests mixtes avec contrôles HTML maintenus. La refonte UI reste en attente de la mission 3.

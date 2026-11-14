@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Ennemi');s.phase='attaquer';C.fighter(s,a).approach='attaquer';return {s,a,b};}
 function act(s,a,b,name,options={}){const x={id:'a'+s.seq++,round:s.round,sourceId:a,targetId:b,name,approach:s.phase,options};s.actions.push(x);C.propose(s,x);return x;}
 {const {s,a,b}=setup();C.setEngagement(s,a,b,true);act(s,a,b,'Gantelet de terre',{choice:'fatigue',earthGauntletProjection:'project'});s.engagements=[];assert.throws(()=>C.commit(s,{}),/engagement modifié/);assert(s.proposals.length);}

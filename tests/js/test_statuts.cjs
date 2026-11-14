@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const code=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);
-const C=ctx.window.CombatCore;assert(C);
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();assert(C);
 function setup(status,kind='PNJ'){const s=C.createCombat();const a=C.addFighter(s,'A',kind),b=C.addFighter(s,'B','PJ');C.fighter(s,a).statuses=[status];return {s,a,b,f:C.fighter(s,a)}}
 let n=0;function test(name,fn){fn();n++;console.log('OK',name)}
 test('Gêné PNJ réduit quota',()=>{let {s,a,b,f}=setup('gene');C.declare(s,a,'attaquer');C.declare(s,b,'defendre');C.reveal(s);assert.equal(C.allowance(f),0)});

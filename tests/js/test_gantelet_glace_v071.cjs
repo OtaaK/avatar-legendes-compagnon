@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8'),code=html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Eau','PNJ'),b=C.addFighter(s,'Cible','PNJ');C.declare(s,a,'defendre');C.declare(s,b,'defendre');C.reveal(s);return {s,a,b}}
 function cast(s,a){const act=C.queueTechnique(s,a,'Gantelet de glace','defendre',a,{});return C.propose(s,act)}
 function attack(s,a,b){const act=C.queueTechnique(s,a,'Frapper','attaquer',b,{choice:'fatigue'});return C.propose(s,act)}

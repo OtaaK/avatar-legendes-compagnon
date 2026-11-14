@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Ennemi');s.phase='esquiver';C.fighter(s,a).approach='esquiver';return {s,a,b};}
 function metal(s,a,b,n){const act={id:'metal-'+n,round:s.round,sourceId:a,targetId:b,name:'Entraves de métal',approach:'esquiver',options:{earthMetalConfirmed:true}};s.actions.push(act);C.propose(s,act);C.commit(s,{});return s.temporaryEffects.find(e=>e.originActionId===act.id);}
 // Gêné préexistant doit survivre à la libération.

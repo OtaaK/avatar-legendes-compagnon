@@ -1,8 +1,6 @@
 'use strict';
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 let count=0;function test(name,run){try{run();count++;}catch(e){e.message=name+' : '+e.message;throw e;}}
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'PNJ'),b=C.addFighter(s,'Autre');C.renameScene(s,'Avant modification');return {s,a,b};}
 function unchanged(s,run,pattern){const before=JSON.stringify(s);assert.throws(run,pattern);assert.equal(JSON.stringify(s),before);}

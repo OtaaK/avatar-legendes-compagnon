@@ -1,8 +1,5 @@
-const assert=require('assert');const fs=require('fs'),vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
-const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),id=C.addFighter(s,'Terre');
 s.phase='fin';s.proposals=[{id:'pending',kind:'fatigue',targetId:id,amount:1}];
 const before=JSON.stringify(s);assert.throws(()=>C.nextRound(s),/propositions en attente/);

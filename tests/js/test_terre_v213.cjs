@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat();const earth=C.addFighter(s,'Terre','PJ');const ally=C.addFighter(s,'Allié','PJ');const foe=C.addFighter(s,'Adversaire','PNJ');return {s,earth,ally,foe};}
 // Cycle complet sur trois passes, avec statuts temporels, fatigue et retours arrière.
 {const {s,earth,ally,foe}=setup();

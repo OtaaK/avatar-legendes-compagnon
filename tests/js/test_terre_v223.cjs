@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Adversaire');s.phase='esquiver';C.fighter(s,a).approach='esquiver';return {s,a,b};}
 function temporary(s,a,b,status){C.manual(s,a,b,'status_round',0,status,'Mouvements tectoniques : statut pour la passe');C.commit(s,{});}
 function metal(s,a,b){const action={id:'m'+s.seq++,round:s.round,sourceId:a,targetId:b,name:'Entraves de métal',approach:'esquiver',options:{earthMetalConfirmed:true}};s.actions.push(action);C.propose(s,action);C.commit(s,{});return s.temporaryEffects.find(e=>e.originLabel==='Entraves de métal');}

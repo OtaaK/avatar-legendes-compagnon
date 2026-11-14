@@ -118,3 +118,8 @@ Service de persistance injectable sans DOM, pont navigateur compatible, tests de
 ## 14 novembre 2026 — architecture 3D, non fusionnée
 
 Commandes synchrones et préférences injectables, événements/exports/démarrage distincts. Données, règles, sauvegardes et interface conservées. Branche dépendante de PR 22 ; aucune fusion ni déploiement.
+
+
+## 14 novembre 2026 — architecture 3E.1, non fusionnée
+
+Migration des seuls préambules de 145 scripts moteur vers l’import des sources ; scénarios et assertions conservés. 237 scripts avant/après réussis. Aucun fichier de l’application ni sauvegarde modifié, aucune fusion ou publication.

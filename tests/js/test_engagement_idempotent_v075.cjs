@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8'),code=html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'A','PNJ'),b=C.addFighter(s,'B','PNJ');return {s,a,b}}
 function test(name,fn){fn();console.log('OK',name)}
 test('Désengager un couple déjà libre ne produit pas de transaction',()=>{const{s,a,b}=setup();assert.equal(C.setEngagement(s,a,b,false),false);assert.equal(s.history.length,0);assert.equal(s.snapshots.length,0)});

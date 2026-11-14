@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),id=C.addFighter(s,'Terre');const f=C.fighter(s,id);f.statuses=['avantage'];f.activeStatuses=['avantage'];s.phase='esquiver';return {s,id,f};}
 // L'étoile conserve son avantage en fin de passe et après expiration d'une autre source.
 {const {s,id,f}=setup();s.temporaryEffects.push({id:'lava',targetId:id,originLabel:'Étoile de lave',lavaMaintainedRound:1,lavaExternalAdvantage:true});f.roundStatuses=[{status:'avantage',expiresAfterRound:1}];C.endRound(s);assert(f.statuses.includes('avantage'));C.nextRound(s);assert(f.statuses.includes('avantage'));assert.equal(s.temporaryEffects[0].lavaExternalAdvantage,false);s.phase='fin';C.resolveEarthLava(s,'lava','extinguish',true);assert(!f.statuses.includes('avantage'));}

@@ -1,7 +1,5 @@
-const assert=require('assert');const fs=require('fs');const vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Cible'),c=C.addFighter(s,'Autre');
 const mk=(id,target)=>({id,originLabel:'Entraves de métal',originSourceId:a,targetId:target,metalGrantedAdvantage:true,metalExternalAdvantage:false,label:'Entraves',duration:'manual'});
 s.temporaryEffects=[mk('m1',b),mk('m2',b),mk('m3',c)];C.fighter(s,b).statuses.push('gene');C.fighter(s,c).statuses.push('gene');C.fighter(s,a).statuses.push('avantage');

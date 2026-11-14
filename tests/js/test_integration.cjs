@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);
-const C=ctx.window.CombatCore;let count=0;function check(name,fn){fn();console.log('OK',name);count++}
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();let count=0;function check(name,fn){fn();console.log('OK',name);count++}
 check('Étourdi ne bloque plus la révélation',()=>{const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');C.fighter(s,a).statuses.push('etourdi');C.declare(s,b,'attaquer');C.reveal(s);assert.equal(s.phase,'defendre')});
 check('Piégé ne bloque plus la révélation',()=>{const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');C.fighter(s,a).statuses.push('piege');C.declare(s,b,'attaquer');C.reveal(s);assert.equal(s.phase,'defendre')});
 check('Fatigue au maximum exige choix des états',()=>{const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');const f=C.fighter(s,a);f.fatigue=5;C.declare(s,a,'attaquer');C.declare(s,b,'defendre');C.reveal(s);C.advance(s);C.manual(s,a,a,'fatigue',1);assert.throws(()=>C.commit(s),/état\(s\) à choisir/);assert.equal(f.fatigue,5);assert.equal(f.conditions.length,0)});

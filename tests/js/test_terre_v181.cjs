@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 // La transition doit pouvoir être annulée sans effacer une opération antérieure.
 {const s=C.createCombat(),id=C.addFighter(s,'Terre');const f=C.fighter(s,id);
  s.phase='fin';f.statuses=['avantage','en_danger'];f.fatigue=5;

@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function fixture(){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');s.phase='defendre';C.fighter(s,a).approach='defendre';C.fighter(s,b).approach='attaquer';C.setEngagement(s,a,b,true);return {s,a,b};}
 function action(s,a,b,choice='fatigue',extra={}){return {id:'v143',sourceId:a,targetId:b,name:'Contre-attaque',round:s.round,options:{weaponCounterConfirmed:true,choice,condition:'Confus',...extra}};}
 {

@@ -107,3 +107,11 @@ Le service de commandes est indépendant de l’écran ; les ponts, événements
 et démarrage sont identifiés dans les sources. L’interface et les règles restent
 inchangées. [Bilan 3D et défaut préexistant](docs/architecture/BILAN_3D.md).
 Cette étape dépend de la PR 22 (3C), encore non fusionnée.
+
+
+## Tests depuis les sources — premier lot 3E
+
+145 scripts du moteur chargent maintenant `src/domain/index.cjs`, sans découper le HTML.
+Leurs scénarios et assertions sont inchangés ; le HTML distribué ne change pas.
+[Inventaire, preuves et suite](docs/architecture/BILAN_3E1.md).
+Cette étape dépend de la PR 23 ; les PR 22 et 23 restent non fusionnées.

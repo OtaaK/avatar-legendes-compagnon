@@ -1,5 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function start(){let s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');for(const id of [a,b])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);return {s,a,b}}
 function test(name,fn){fn();console.log('OK',name)}
 test('Sans garde, statut négatif appliqué',()=>{const {s,a,b}=start();C.manual(s,a,b,'status_add',0,'gene');C.commit(s,{});assert(C.fighter(s,b).statuses.includes('gene'))});

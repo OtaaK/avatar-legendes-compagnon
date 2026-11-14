@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Attaquant'),b=C.addFighter(s,'Allié'),p=C.addFighter(s,'Protecteur A'),q=C.addFighter(s,'Protecteur B');for(const id of [a,b,p,q])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);for(const id of [p,q])C.fighter(s,id).reactions.push({type:'protection',allyId:b,round:s.round,used:false,targeted:false});return {s,a,b,p,q};}
 function check(label,fn){fn();console.log('OK',label)}
 check('Choix du second protecteur',()=>{const {s,a,b,p,q}=setup();const e=C.manual(s,a,b,'fatigue',2);C.commit(s,{['intercept:'+e.id]:true,['protector:'+e.id]:q});assert.equal(C.fighter(s,b).fatigue,0);assert.equal(C.fighter(s,p).fatigue,0);assert.equal(C.fighter(s,q).fatigue,1);assert.equal(C.fighter(s,q).reactions[0].used,true)});
