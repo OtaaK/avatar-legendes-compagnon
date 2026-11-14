@@ -2,7 +2,23 @@
 
 Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2.33**.
 
-## Orientation : interface v0 et métier Codex
+
+## Orientation active — phase B, domaine métier
+
+La phase A est validée. La cible est désormais **une seule application React/TypeScript
+Next.js dans `avatar-legendes-ui`**, avec l'interface v0 et les services Codex.
+Les anciens chapitres Vite/HTML ci-dessous restent des repères historiques.
+
+Cette branche prépare uniquement les données, les protections d'import et les services
+métier. Aucun écran ni fichier du dépôt v0 n'est modifié. Voir le
+[bilan de phase B](docs/migration/PHASE_B_DOMAINE.md) : contrats, formats conservés,
+preuves de tests, limites et consignes pour le futur raccordement. Aucune fusion,
+aucun déploiement et aucun nettoyage GitHub ne sont autorisés à cette étape.
+
+Contrôles supplémentaires : `npm run test:business-types` et
+`npm run test:business-browser`. Ils complètent les suites existantes, sans les remplacer.
+
+## Orientation historique : interface v0 et métier Codex
 
 La nouvelle interface de référence est [avatar-legendes-ui](https://github.com/OtaaK/avatar-legendes-ui).
 Le [rapport de faisabilité et les sept lots](docs/migration/FAISABILITE_CONVERGENCE_V0.md)

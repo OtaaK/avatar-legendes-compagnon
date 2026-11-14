@@ -1,12 +1,18 @@
 {
   "sourceCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
   "htmlSha256": "69f8ddb8e86f01bcc7138c3c2cb9645742aaff2f7b3d6081267b612b11c491bb",
+  "securityOverlay": {
+    "id": "phase-b-import-safety-v1",
+    "transferredFrom": "a8cbd38cdc73bfe93ee4d0106da38e9760b309cb",
+    "supportSha256": "34453275daf23aa8e3c03dc19ac8b8bcacac9f0a2cfac6ccef577d5d1300b9d9"
+  },
   "segments": [
     {
       "file": "resources.js",
       "start": "// Profils PNJ explicites.",
       "end": "\nconst APPROACHES=",
       "sha256": "e48c7f7c152607a09621861209179672a53e4ef3e6b3f241fb424e696a2135d2",
+      "outputSha256": "a9f302e6d0267c69fbfbb13a589542528d719e6ae9ec528bf79ebb510169c356",
       "exports": [
         "ResourceRules",
         "npcResourceProfile",
@@ -22,6 +28,7 @@
       "start": "const APPROACHES=",
       "end": "\n\n\n'use strict';\nconst APPROACH_NAME",
       "sha256": "21714e6fb4c392e0cd782530328ce61e124bbab3ba12e6b501680d8ab1cd3eb9",
+      "outputSha256": "842236e7d36ec9c31dee1e86154fa882b037d986c57e5f98f28843e02b04e281",
       "exports": [
         "CombatCore"
       ]
@@ -31,6 +38,7 @@
       "start": "const APPROACH_NAME=",
       "end": "\n\n\nlet s;",
       "sha256": "9d10746de02b38fde9f2ceb58b94448386dfb4c060ce5b046f7a324420d65df2",
+      "outputSha256": "b1810f27de262f49a2c96bab533a1bc27def014ffb524b9504ee70a8448289d2",
       "exports": [
         "CombatRules"
       ]
@@ -40,6 +48,7 @@
       "start": "const BookState=(()=>{",
       "end": "\n\n// UI/UX lot 4",
       "sha256": "729fa1d2c3e3d304ef41ac9656eed7331d3806379cfda69fbfc5be6c04eaf72e",
+      "outputSha256": "ddda5ec7c8055fda536d42c073863ef45682d18dabfe123fc226e43111af9845",
       "exports": [
         "BookState"
       ]
@@ -49,6 +58,7 @@
       "start": "const PlaceRules=(()=>{",
       "end": "\n\nconst rosterClone=",
       "sha256": "baf5be342cb4fea863c461c7b72dfb25c5d8921c1c441855e8249d9a100b1cd7",
+      "outputSha256": "a3b7dbdebc371755e0dfdf53742f59764b097a6ebd0565b1550f0a02c8ca0a74",
       "exports": [
         "PlaceRules"
       ]
@@ -58,6 +68,7 @@
       "start": "const rosterClone=",
       "end": "\n\n\n'use strict';\n// Sources",
       "sha256": "63d810d77008599e598200ac0c5f6dcf36be57b0d2ba66a91084652a22394403",
+      "outputSha256": "a8579d8d374d4e89f2d64f425787ef8aa7d5266b6794a7a57f4fce0c6941bc75",
       "exports": [
         "Roster"
       ]
@@ -67,6 +78,7 @@
       "start": "const PLAYBOOKS=",
       "end": "\n\n\n\nconst TECH_CATALOG",
       "sha256": "f5d35e7f0b0c5b9c2809b3221df673a5940529d9fd33e7f503762ddab6199a37",
+      "outputSha256": "4952d20d94c6ec3bd238915884f600f1f307aa1ec0ba4dee4b90f21337b07f88",
       "exports": [
         "Playbooks"
       ]
@@ -76,6 +88,7 @@
       "start": "const TECH_CATALOG=",
       "end": "\nlet lib=",
       "sha256": "5bc4d4fd6eee7b8885b0712ef4163b020947677e751a66c36e7ec2ccf8fa2f31",
+      "outputSha256": "fd23b534530cd1c839775918f4e17308040be6e4e55f690d2f54517c965616ae",
       "exports": [
         "TECH_CATALOG",
         "TECH_AUDIT"
@@ -86,6 +99,7 @@
       "start": "function validateCombat(raw){",
       "end": "\nlet storageWarningShown=",
       "sha256": "3983bbed9dc56b07afdd80e0db1486ae2e196591afde41ba5092db33632adba3",
+      "outputSha256": "05dcbe3744ead9c9c1847e0714140435037758db7f50f61a4fa7599afccc8ddd",
       "exports": [
         "validateCombat",
         "validateBackupLinks"
@@ -96,6 +110,7 @@
       "start": "function profileStorageRequired(",
       "end": "\n\nfunction restoreStorageValue",
       "sha256": "cac97f95d3baa9dd0d4232374dcadbf47869ecc44b2adf50555c9cc31fdeac08",
+      "outputSha256": "aea676dec96ac704bb95bb806f7c8f5e669979e68ced5979357ad9bdbafa0493",
       "exports": [
         "profileStorageRequired"
       ]
@@ -105,6 +120,7 @@
       "start": "function publicCombatReport(combat){",
       "end": "\nfunction downloadPublicCombat",
       "sha256": "e7f7e6f2c5734999e971aca0e1e6ec1e5b216d89ce4ccd8fe8bc8701d48bdc22",
+      "outputSha256": "6336e3e7cfccf6ff092b46c952ab9ab350a9298a1ff71df33d66def8a4f4cb0f",
       "exports": [
         "publicCombatReport"
       ]
@@ -114,6 +130,7 @@
       "start": "function safeSheetPortrait(value){",
       "end": "\nfunction sheetResourcePreview",
       "sha256": "5d3dd53a68f1886d5ff173f520a06d1b841aab5777cc6eabf3afb109fd286139",
+      "outputSha256": "fa9af3ce67e1c6751b7be7cd82392cd846836c1b1257486341e10e41427a6f40",
       "exports": [
         "safeSheetPortrait",
         "sheetPatchFromFields",
@@ -125,6 +142,7 @@
       "start": "const NPC_PROFILE_PRESETS=",
       "end": "\nfunction npcImportanceChanged",
       "sha256": "b4284ca8c90a4d990ae4851bb277174c58f5faf0809dda8f0cd352b46aebf2d9",
+      "outputSha256": "466c9ca73c65f3578ffef8be9271b3d36a4f82052cde32ac3e2ac1d565707c4f",
       "exports": [
         "NPC_PROFILE_PRESETS"
       ]

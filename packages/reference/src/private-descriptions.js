@@ -1,9 +1,10 @@
+import { assertSafeJson, parseSafeJson } from "../../domain/src/import-safety.js";
 import { TECHNIQUE_LIBRARY } from "./technique-library.js";
 export const PRIVATE_TEXT_KEY = "avatar-compagnon-private-technique-texts-v1";
 const ids = new Set(TECHNIQUE_LIBRARY.map((t) => t.id));
 /** Texte fourni par l'utilisateur, jamais issu d'un résumé du moteur. */
 export function parsePrivateDescriptions(text) {
-  const input = JSON.parse(text);
+  const input = parseSafeJson(text);
   if (
     !input ||
     input.format !== "avatar-technique-descriptions-privees" ||
@@ -42,6 +43,7 @@ export function parsePrivateDescriptions(text) {
 }
 /** Export privé réimportable ; aucune donnée de campagne ni métadonnée inconnue. */
 export function serializePrivateDescriptions(descriptions) {
+  assertSafeJson(descriptions);
   const raw = JSON.stringify(
     {
       format: "avatar-technique-descriptions-privees",

@@ -355,3 +355,28 @@ Avant l’intégration : trancher le seuil Communauté du Prodige (contradiction
 la procédure des références PJ encore non créés, la complétude progressive des formulaires
 et le traitement explicite des évolutions/historiques lors d’un changement de Livret.
 Ces réserves ne sont pas des règles nouvelles ; voir le [bilan](preparation-livrets/BILAN.md).
+
+
+## 2026-11-14 — Phase A validée ; phase B seule autorisée
+
+- Une application cible unique : React/TypeScript + Next.js dans `avatar-legendes-ui`.
+  Aucun fichier de ce dépôt n'est modifié pendant B ; attendre la recette du lot 2 v0.
+- Base métier : `convergence/preparation-livrets` à `84f39e4`, sans revenir au modèle
+  simplifié de `main`. Branche de B : `convergence/phase-b-domaine`.
+- Porter les contrôles d'identifiants de `main` (`a8cbd38`) dans le domaine enrichi,
+  pas ses contraintes historiques de ressources. Refuser les identifiants dangereux,
+  sans les renuméroter ni prétendre restaurer automatiquement un fichier refusé.
+- Préserver les extensions JSON compatibles ; refuser explicitement pollution de
+  prototype et objets exécutables à la frontière. Les textes restent des textes,
+  sans réécriture ni interprétation HTML. Les IDs de lieux conservent leur format libre
+  historique : ils ne deviennent jamais des fragments de code.
+- Garder les formats v1/v2 et la version 2 explicite d'une enveloppe complète réexportée.
+  Les descriptions privées v1/v2 restent dans leur clé et export séparés.
+- L'oracle HTML reste inchangé ; les écarts de sécurité sont déclarés, rejouables,
+  hachés et contrôlés. Les anciennes assertions sont conservées.
+- Contrats persistants distincts des DTO d'affichage ; commandes canoniques sans clés
+  de formulaire, store et repository existants réutilisés. Aucun nouveau framework.
+- Les évolutions préparées restent `applied:false`. Aucun changement de règle ni
+  développement visuel. Les textes PDF ne sont pas versionnés ni inclus aux tests.
+- Aucun nettoyage de GitHub, fermeture, suppression, réécriture, fusion ou déploiement.
+  Livraison et arrêt pour validation. Voir [le bilan](migration/PHASE_B_DOMAINE.md).

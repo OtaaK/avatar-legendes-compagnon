@@ -1,3 +1,4 @@
+import { assertSafeJson, parseSafeJson } from "../../domain/src/import-safety.js";
 import { Roster } from "../../domain/src/roster.js";
 import { CombatCore } from "../../domain/src/combat.js";
 import {
@@ -5,7 +6,7 @@ import {
   validateBackupLinks,
 } from "../../domain/src/validation.js";
 import { profileStorageRequired } from "../../domain/src/storage-version.js";
-export const copy = (value) => JSON.parse(JSON.stringify(value));
+export const copy = (value) => JSON.parse(JSON.stringify(assertSafeJson(value)));
 export function emptySession() {
   return {
     library: Roster.createLibrary(),
@@ -22,7 +23,7 @@ export function validateSession(input) {
 }
 /** Lecture seule. La normalisation est celle du client historique, sur une copie. */
 export function inspectImport(text, current = emptySession()) {
-  const data = JSON.parse(text);
+  const data = parseSafeJson(text);
   if (!data || typeof data !== "object" || Array.isArray(data))
     throw Error("Document JSON invalide.");
   if (data.format === "avatar-compagnon-compte-rendu-public")
@@ -77,7 +78,7 @@ export function exportBackup(session) {
     {
       ...valid.backupMetadata,
       format: "avatar-compagnon-backup",
-      version: profileStorageRequired(valid.library, valid.combat) ? 2 : 1,
+      version: valid.backupMetadata?.version === 2 || profileStorageRequired(valid.library, valid.combat) ? 2 : 1,
       createdAt: new Date().toISOString(),
       library: valid.library,
       combat: valid.combat,

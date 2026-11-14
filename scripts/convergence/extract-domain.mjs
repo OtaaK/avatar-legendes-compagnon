@@ -1,4 +1,5 @@
-/** Extraction contrôlée depuis l'oracle HTML figé. Aucun corps de fonction réécrit. */
+/** Oracle figé + écarts de sécurité phase B explicites et reproductibles. */
+import { applySecurityOverlay, SECURITY_OVERLAY } from './security-overlays.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -17,12 +18,12 @@ function extract(file, start, end, imports = '', named = []) {
     return value === name ? '' : `const ${name}=${value};`;
   });
   if (/\b(window|document|localStorage)\s*[.[]|\b(alert|confirm|prompt)\s*\(/.test(body)) throw Error('Couplage navigateur : ' + file);
-  const output = `// Extrait de a9079fa, app/simulateur.html. Voir extraction.json.\n${imports}\n${body}\nexport { ${[...globals, ...named].join(', ')} };\n`;
+  const output = applySecurityOverlay(file, `// Extrait de a9079fa, app/simulateur.html. Voir extraction.json.\n${imports}\n${body}\nexport { ${[...globals, ...named].join(', ')} };\n`);
   const target = root + 'packages/domain/src/' + file;
   if (process.argv.includes('--check')) {
     if (readFileSync(target, 'utf8') !== output) throw Error('Écart extraction : ' + file);
   } else writeFileSync(target, output);
-  segments.push({file, start, end, sha256: createHash('sha256').update(original).digest('hex'), exports:[...globals, ...named]});
+  segments.push({file, start, end, sha256: createHash('sha256').update(original).digest('hex'), outputSha256:createHash('sha256').update(output).digest('hex'), exports:[...globals, ...named]});
 }
 const resources = "import { npcResourceProfile, resourceLimits, validateResourceValues, fatigueLimit, resourceConditionNames, balanceValue } from './resources.js';";
 extract('resources.js', '// Profils PNJ explicites.', "\nconst APPROACHES=", '', ['npcResourceProfile','resourceLimits','validateResourceValues','fatigueLimit','resourceConditionNames','balanceValue']);
@@ -38,8 +39,8 @@ extract('storage-version.js', 'function profileStorageRequired(', '\n\nfunction 
 extract('public-report.js', 'function publicCombatReport(combat){', '\nfunction downloadPublicCombat', '', ['publicCombatReport']);
 extract('character-fields.js', 'function safeSheetPortrait(value){', '\nfunction sheetResourcePreview', resources + "\nimport { Roster } from './roster.js';\nimport { BookState } from './books.js';", ['safeSheetPortrait','sheetPatchFromFields','npcProfileFromFields']);
 extract('npc-presets.js', 'const NPC_PROFILE_PRESETS=', '\nfunction npcImportanceChanged', '', ['NPC_PROFILE_PRESETS']);
-const manifest = JSON.stringify({sourceCommit:'a9079fa5b1babc560ee11a8d28430504df8704fc',htmlSha256:sha,segments},null,2)+'\n';
+const manifest = JSON.stringify({sourceCommit:'a9079fa5b1babc560ee11a8d28430504df8704fc',htmlSha256:sha,securityOverlay:{id:SECURITY_OVERLAY,transferredFrom:'a8cbd38cdc73bfe93ee4d0106da38e9760b309cb',supportSha256:createHash('sha256').update(readFileSync(root+'packages/domain/src/import-safety.js')).digest('hex')},segments},null,2)+'\n';
 if(process.argv.includes('--check')) {
  if(readFileSync(root+'packages/domain/extraction.json','utf8')!==manifest)throw Error('Manifest divergent');
 } else writeFileSync(root+'packages/domain/extraction.json',manifest);
-console.log(`Extraction ${process.argv.includes('--check')?'vérifiée':'produite'} : ${segments.length} modules, corps inchangés.`);
+console.log(`Extraction ${process.argv.includes('--check')?'vérifiée':'produite'} : ${segments.length} modules, oracle inchangé et écarts sécurité contrôlés.`);
