@@ -78,3 +78,7 @@ reste distinct ; aucune mission 3 ni refonte UI commencée.
 ## Mission 3 — architecture sans changement de fonctionnement
 
 Missions 0/1/2 fusionnées ; mission 3 autorisée. [Plan en cinq PR](docs/architecture/PLAN_MISSION_3.md). 3A préparée : contrats et contrôles, HTML et anciens tests inchangés. 3B : extraction et HTML généré déterministe ; 3C : persistance ; 3D : affichage/commandes ; 3E : migration progressive des tests vers des imports. Aucun nouveau paquet/framework, aucune refonte UI. Les étapes sont livrées et examinées séparément, sans fusion automatique.
+
+## Étape 3B — sources et HTML généré
+
+3A fusionnée (PR 20), 3B autorisée. Sources déplacées sans réécriture ; assemblage déterministe et contrôle de divergence ; façade Node et parité sources/HTML/Chromium. L’HTML reste autonome et identique à la référence. [Guide](docs/architecture/SOURCES_ET_BUILD.md), [bilan](docs/architecture/BILAN_3B.md). Prochaines étapes distinctes : isoler persistance, puis affichage/commandes, puis migrer les anciens tests. Aucun framework ou refonte UI.

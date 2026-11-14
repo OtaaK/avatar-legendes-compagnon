@@ -7,7 +7,8 @@ AGENTS.md                    Instructions de travail
 README.md                    Démarrage et commandes essentielles
 ROADMAP.md                   Travaux réalisés et priorités
 app/
-  simulateur.html             Application autonome à ouvrir dans un navigateur
+  simulateur.html             Application autonome générée, à ouvrir dans un navigateur
+src/                          Sources éditables, assemblées selon assembly.json
 data/
   MATRICE_TECHNIQUES.csv       Matrice documentaire utilisée par les tests
 tests/
@@ -34,7 +35,9 @@ requirements-dev.txt          Dépendance de test navigateur uniquement
 Les tests historiques restent à plat dans deux dossiers : leur classement par version
 est déjà dans leurs noms et ils peuvent couvrir plusieurs fonctionnalités. Un découpage
 immédiat par élément du jeu rendrait leur classement arbitraire. Aucun dossier de code
-source vide, gestionnaire de paquets JavaScript ou système de compilation n'est ajouté.
+source vide ou gestionnaire de paquets JavaScript n’est ajouté. Depuis l’étape 3B,
+les sources réelles sont dans `src/` et le générateur sans dépendance
+`node scripts/build.cjs` produit le HTML. Voir [Sources et génération](architecture/SOURCES_ET_BUILD.md).
 
 ## Fonctionnement et dépendances
 
@@ -119,3 +122,7 @@ d’entrée conservés restent identiques. [Bilan et preuves](maintenance/nettoy
 ## Mission 3A — référence et frontières préparées
 
 Le main de départ `55d56f6` garde le HTML comme oracle. [Contrats](architecture/CONTRATS.md) et [plan](architecture/PLAN_MISSION_3.md). Un helper de test charge les corps existants en VM isolée : moteur/règles, modèles/références, validation puis persistance facultative. Les marqueurs sont vérifiés uniques et ordonnés ; pas d’édition ni de second moteur. REFERENCE.json observe 80 entrées publiques, 111 identifiants de techniques, dix Livrets et les clés de stockage. Cette étape ne réalise pas encore l’extraction ou la génération. La future séparation devra préserver les transactions UI et le journal multi-clés ; les propriétés supplémentaires des modèles ne sont pas un schéma fermé.
+
+## Étape 3B — source d’édition et artefact
+
+`src/assembly.json` fixe l’ordre des scripts classiques ; les corps ne changent pas. Les deux JSON de techniques sont sérialisés avec protection de leur contexte script. Gabarit et styles sont insérés en un passage. `node scripts/build.cjs` compile sans exécuter, puis écrit l’artefact de façon contrôlée ; `--check` compare seulement et échoue si divergence. Les fichiers source sont lus en UTF-8/LF, sans remplacement silencieux de caractères. `src/domain/index.cjs` fournit la façade Node et n’est pas embarqué dans le navigateur. Les modules de src/legacy restent couplés ; l’extraction physique n’est pas une isolation déjà terminée de la persistance. [Organisation et limites](architecture/SOURCES_ET_BUILD.md).

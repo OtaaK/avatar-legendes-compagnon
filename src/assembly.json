@@ -1,0 +1,73 @@
+{
+  "format": "avatar-source-assembly",
+  "version": 1,
+  "output": "app/simulateur.html",
+  "template": "src/interface/template.html",
+  "styles": "src/interface/styles.css",
+  "scripts": [
+    {
+      "kind": "classic",
+      "path": "src/domain/combat.js",
+      "group": "core"
+    },
+    {
+      "kind": "classic",
+      "path": "src/domain/combat-rules.js",
+      "group": "core"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/globals.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/domain/roster.js",
+      "group": "models"
+    },
+    {
+      "kind": "classic",
+      "path": "src/data/playbooks.js",
+      "group": "models"
+    },
+    {
+      "kind": "classic",
+      "path": "src/domain/playbooks.js",
+      "group": "models"
+    },
+    {
+      "kind": "json",
+      "path": "src/data/techniques.json",
+      "group": "models",
+      "binding": "TECH_CATALOG",
+      "shape": "array"
+    },
+    {
+      "kind": "json",
+      "path": "src/data/technique-audit.json",
+      "group": "models",
+      "binding": "TECH_AUDIT",
+      "shape": "object"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/application-before-validation.js",
+      "group": "ui"
+    },
+    {
+      "kind": "classic",
+      "path": "src/legacy/validation.js",
+      "group": "validators"
+    },
+    {
+      "kind": "classic",
+      "path": "src/legacy/persistence.js",
+      "group": "persistence"
+    },
+    {
+      "kind": "classic",
+      "path": "src/interface/application-after-validation.js",
+      "group": "ui"
+    }
+  ]
+}

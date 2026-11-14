@@ -13,8 +13,8 @@ pour réduire la taille et le risque des futurs changements.
 
 | Étape | Résultat attendu | Critères concrets avant livraison |
 |---|---|---|
-| **3A — contrats et contrôles, en cours** | Description des interfaces, référence main figée, préparation de tests centralisée et scénario commun Node/Chromium | HTML et 230 anciens scripts identiques ; mêmes refus, états, copies et reprises ; aucun accès DOM/stockage au chargement métier ; contrôles de référence reproductibles |
-| **3B — sources et génération du HTML** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
+| **3A — contrats et contrôles, fusionnée PR 20** | Description des interfaces, référence main figée, préparation de tests centralisée et scénario commun Node/Chromium | HTML et 230 anciens scripts identiques ; mêmes refus, états, copies et reprises ; aucun accès DOM/stockage au chargement métier ; contrôles de référence reproductibles |
+| **3B — sources et génération du HTML, préparée** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
 | **3C — persistance** | Isoler lecture/écriture et transactions derrière un adaptateur, sans changer clés ni formats | Importations historiques et champs inconnus conservés ; quota/lecture refusée, interruption, journal et reprise contrôlés ; refus/annulation sans perte ; aucune écriture au premier rendu |
 | **3D — affichage et commandes** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
 | **3E — imports des tests** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
@@ -79,3 +79,11 @@ faire échouer le chargement, sans sélection approximative d’un autre bloc.
 Chaque PR reste examinable sans intégrer la suivante. Fusion uniquement après accord
 explicite d’Alex. La refonte UI, y compris la maquette de passe d’armes et les fiches v0,
 reste hors mission 3 et ne démarre pas maintenant.
+
+## Réalisation 3B — 14 novembre 2026
+
+Alex autorise l’étape après la fusion de 3A. Les fichiers de `src/` deviennent la source
+d’édition et `app/simulateur.html` l’artefact généré. Le [guide](SOURCES_ET_BUILD.md)
+précise le packaging classique navigateur et la façade Node sans découpe HTML. La
+première génération est identique octet pour octet. 3C/3D restent à réaliser ; aucune
+API de persistance ou interface de jeu n’est changée par ce déplacement.

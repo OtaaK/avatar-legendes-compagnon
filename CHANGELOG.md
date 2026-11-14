@@ -100,3 +100,11 @@ Contrats de référence et préparation centralisée des nouveaux tests ; compar
 scénario métier entre Node et le vrai HTML dans Chromium. Les anciens tests et le HTML
 restent identiques ; aucun changement de règle, stockage, interface ou dépendance.
 Les étapes suivantes restent distinctes ; [bilan](docs/architecture/BILAN_3A.md).
+
+## V2.33 — étape 3B, sources et génération non fusionnées
+
+Code métier et données existantes organisés dans src ; HTML unique généré avec contrôle
+de divergence et façade Node pour les tests. Première génération identique à la version
+précédente ; mêmes règles, sauvegardes et interface, sans dépendance ajoutée.
+[Guide de développement](docs/architecture/SOURCES_ET_BUILD.md) et
+[bilan de conservation](docs/architecture/BILAN_3B.md).

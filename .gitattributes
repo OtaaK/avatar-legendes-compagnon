@@ -1,0 +1,5 @@
+# Une génération identique sur les postes et en CI.
+/src/** text eol=lf
+/app/simulateur.html text eol=lf
+/scripts/build.cjs text eol=lf
+/scripts/architecture/*.cjs text eol=lf

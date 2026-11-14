@@ -43,5 +43,6 @@ function exerciseContracts(app) {
 module.exports={exerciseContracts};
 if(require.main===module){
   const {loadLegacyApplication}=require('./legacy-application.cjs');
-  process.stdout.write(JSON.stringify({scenarioSource:exerciseContracts.toString(),expected:exerciseContracts(loadLegacyApplication())}));
+  const {loadDomain}=require('../../src/domain/index.cjs');
+  process.stdout.write(JSON.stringify({scenarioSource:exerciseContracts.toString(),expected:exerciseContracts(loadLegacyApplication()),sourceExpected:exerciseContracts(loadDomain())}));
 }
