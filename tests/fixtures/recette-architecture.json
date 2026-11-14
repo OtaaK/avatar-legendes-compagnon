@@ -1,0 +1,90 @@
+{
+  "format": "avatar-compagnon-backup",
+  "version": 1,
+  "createdAt": "2026-11-14T00:00:00.000Z",
+  "library": {
+    "version": 1,
+    "seq": 3,
+    "characters": [
+      {
+        "id": "char-1",
+        "name": "Recette – PJ",
+        "kind": "PJ",
+        "livret": "",
+        "stats": {
+          "creativite": 0,
+          "concentration": 0,
+          "harmonie": 0,
+          "enthousiasme": 0
+        },
+        "fatigue": 0,
+        "balance": 0,
+        "center": 0,
+        "principles": [
+          "",
+          ""
+        ],
+        "conditions": [],
+        "statuses": [],
+        "techniques": [],
+        "training": "",
+        "location": "",
+        "relationships": [],
+        "history": "",
+        "playbookMoves": [],
+        "notes": "Fiche fictive destinée à la recette technique.",
+        "updatedAt": null
+      },
+      {
+        "id": "char-2",
+        "name": "Recette – PNJ",
+        "kind": "PNJ",
+        "livret": "",
+        "stats": {
+          "creativite": 0,
+          "concentration": 0,
+          "harmonie": 0,
+          "enthousiasme": 0
+        },
+        "fatigue": 0,
+        "balance": 0,
+        "center": 0,
+        "principles": [
+          "",
+          ""
+        ],
+        "conditions": [],
+        "statuses": [],
+        "techniques": [],
+        "training": "",
+        "location": "Village de recette",
+        "relationships": [],
+        "history": "",
+        "playbookMoves": [],
+        "notes": "Fiche fictive destinée à la recette technique.",
+        "updatedAt": null
+      }
+    ],
+    "recetteArchitecture": {
+      "synthetic": true,
+      "marker": "a-conserver-au-reimport"
+    }
+  },
+  "combat": {
+    "round": 1,
+    "scene": 1,
+    "sceneTitle": "",
+    "sceneJournal": [],
+    "temporaryEffects": [],
+    "phase": "declaration",
+    "fighters": [],
+    "engagements": [],
+    "actions": [],
+    "proposals": [],
+    "history": [],
+    "snapshots": [],
+    "seq": 1,
+    "notes": [],
+    "traps": []
+  }
+}

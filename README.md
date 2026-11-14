@@ -132,3 +132,11 @@ Les contrôles utiles du HTML distribué et la parité navigateur sont conservé
 [Bilan 3E.3](docs/architecture/BILAN_3E3.md) ·
 [Synthèse de la mission 3 et ordre de revue](docs/architecture/BILAN_MISSION_3.md).
 Les étapes sont préparées sur branches : aucune fusion des PR 22 à 25 n’est implicite.
+
+
+## Recette sur Mac
+
+[Guide sans commande](docs/architecture/RECETTE_MAC.md) et
+[jeu fictif à restaurer](tests/fixtures/recette-architecture.json).
+La [revue finale](docs/architecture/REVUE_FINALE_MISSION_3.md) précède la validation Mac ;
+aucune fusion automatique.

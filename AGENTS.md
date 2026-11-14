@@ -160,3 +160,12 @@ l’oracle indépendant de parité, explicitement inventoriés. Les étapes de m
 préparées sur branches ; ne pas les annoncer fusionnées ou déjà dans main. La refonte UI
 et l’intégration des anciennes branches React restent distinctes, sans autorisation
 automatique. Voir `docs/architecture/BILAN_MISSION_3.md` et `docs/architecture/BILAN_3E3.md`.
+
+
+## Revue et handoff Mac — 14 novembre 2026
+
+« C’est parti » autorise la revue et la préparation de la recette proposées, sans fusion.
+Guide et jeu fictif : `docs/architecture/RECETTE_MAC.md`, `tests/fixtures/recette-architecture.json`.
+Paquet HTML exact, pas de déploiement ou de binaire versionné. Les parcours du guide
+sont vérifiés sur HTTP local ; `file://` Mac reste à confirmer par Alex. Attendre son
+retour de recette puis un accord explicite de fusion ; aucune reprise UI implicite.

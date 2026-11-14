@@ -76,3 +76,10 @@ La reprise UI/React reste distincte : comparer les anciennes branches de converg
 la référence v0 corrigée avant raccord, préserver leurs fonctionnalités récentes et ne
 pas leur substituer automatiquement le modèle plus ancien du main de maintenance.
 Ne pas commencer cette intégration ni déployer sans validation de la suite par Alex.
+
+
+## Revue finale et recette préparées
+
+La [revue finale](REVUE_FINALE_MISSION_3.md) confirme les contrôles de chaque PR et décrit
+les nouveaux parcours réalisés. Le [guide Mac](RECETTE_MAC.md) permet la recette sans
+commande, avec un jeu fictif fourni. Aucune PR fusionnée ; retour Mac encore attendu.

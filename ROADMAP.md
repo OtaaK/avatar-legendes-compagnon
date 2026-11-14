@@ -107,3 +107,8 @@ Huit scripts migrés, assertions HTML conservées, helper de source testé. Les 
 ## 3E.3 — préparation de la mission 3 achevée
 
 Derniers chargements moteur ordinaires migrés ; inventaire final des tests et exceptions intentionnelles de parité. 238 scripts avant/après réussis, application inchangée. Prochaine étape recommandée : revue de la chaîne PR 22 → 23 → 24 → 25 → lot 3E.3, puis intégration uniquement sur accord et recette Mac. La reprise UI nécessite une validation distincte et une comparaison des anciennes branches React/v0.
+
+
+## Revue de mission 3 — recette Mac attendue
+
+Revue finale préparée et parcours du guide vérifié sur ordinateur/téléphone. Guide sans commande et deux fiches fictives disponibles. Attendre les résultats Mac puis une autorisation explicite avant intégration de la chaîne 22 à 26. Aucun démarrage UI/React implicite.
