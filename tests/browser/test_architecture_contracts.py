@@ -24,6 +24,7 @@ try:
             # Aucun identifiant ou contenu importé n’est interpolé dans le code exécuté.
             result=page.evaluate('('+bundle['scenarioSource']+')({CombatCore,CombatRules,Roster,Playbooks,catalog:TECH_CATALOG,validators:{validateCombat,validateBackupLinks}})')
             assert result==bundle['expected'],'Divergence du scénario Node/HTML'
+            assert result==bundle['sourceExpected'],'Divergence du scénario sources/HTML'
             assert page.evaluate('({lib,s,storage:{...localStorage}})')==before
             assert page.evaluate('typeof window.__contractMarker')=='undefined'
             assert not errors,errors
