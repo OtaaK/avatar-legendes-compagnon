@@ -3369,6 +3369,58 @@ function validateBackupLinks(library,combat){
  const known=new Set(library.characters.map(c=>c.id));
  for(const f of combat.fighters)if(f.characterId&&!known.has(f.characterId))throw Error('Combat lié à une fiche absente : '+f.characterId);
 }
+// Service sans DOM : ports fournis explicitement, aucun accès au chargement.
+function createPersistence({storage,recoveryAllowed=()=>true,onError=()=>{},onRecovery=()=>{},onInvalid=()=>{},journalKey='avatar-complete-import-journal-v1'}){
+function persist(key,value){if(!recoveryAllowed()){onError(Error('Import incomplet non restauré'));return false}try{storage().setItem(key,JSON.stringify(value));return true}catch(e){onError(e);return false}}
+// Journal de restauration : un import complet écrit deux clés distinctes.
+// Tant que le journal existe, le démarrage restaure les deux valeurs antérieures.
+const JOURNAL_KEY=journalKey;
+function restoreStorageValue(key,raw){
+ if(raw===null)storage().removeItem(key);else storage().setItem(key,raw);
+}
+function recoverIncompleteImport(){
+ let raw;
+ try{raw=storage().getItem(JOURNAL_KEY)}catch(e){onError(e);return false}
+ if(raw===null)return true;
+ try{
+  const journal=JSON.parse(raw);
+  if(!journal||journal.version!==1||typeof journal.beforeLibrary!=='string'&&journal.beforeLibrary!==null||typeof journal.beforeCombat!=='string'&&journal.beforeCombat!==null)throw Error('Journal invalide');
+  restoreStorageValue('avatar-roster-v020',journal.beforeLibrary);
+  restoreStorageValue('avatar-v020',journal.beforeCombat);
+  storage().removeItem(JOURNAL_KEY);
+  onRecovery('Un import complet interrompu a été annulé. Les données antérieures ont été restaurées.');
+  return true;
+ }catch(e){onError(e);return false}
+}
+function persistCompleteBackup(library,combat){
+ if(!recoveryAllowed())return false;
+ let oldLibrary,oldCombat;
+ try{
+  oldLibrary=storage().getItem('avatar-roster-v020');
+  oldCombat=storage().getItem('avatar-v020');
+  storage().setItem(JOURNAL_KEY,JSON.stringify({version:1,beforeLibrary:oldLibrary,beforeCombat:oldCombat}));
+  storage().setItem('avatar-roster-v020',JSON.stringify(library));
+  storage().setItem('avatar-v020',JSON.stringify(combat));
+  storage().removeItem(JOURNAL_KEY);
+  return true;
+ }catch(e){
+  onError(e);
+  // Si la restauration échoue, conserver le journal pour le prochain démarrage.
+  recoverIncompleteImport();
+  return false;
+ }
+}
+function readSaved(keys,validate,fallback){
+ let invalid=[];
+ for(const key of keys){let raw;try{raw=storage().getItem(key)}catch(e){onError(e);break}
+  if(raw===null)continue;
+  try{return validate(JSON.parse(raw))}catch(e){invalid.push(key+' : '+e.message)}
+ }
+ if(invalid.length){const msg='Sauvegarde locale endommagée : '+invalid.join(' ; ')+'. Une version antérieure a été recherchée. Conserve tes exports JSON.';onInvalid(msg)}
+ return fallback();
+}
+return {persist,recoverIncompleteImport,persistCompleteBackup,loadSaved:readSaved};
+}
 let storageWarningShown=false;
 function warnStorage(err){
  console.error('Sauvegarde locale impossible',err);
@@ -3378,55 +3430,24 @@ function warnStorage(err){
  const node=document.getElementById('storageWarning');
  if(node){node.textContent=msg;node.hidden=false}else alert(msg);
 }
-function persist(key,value){if(typeof completeImportRecoveryOk!=='undefined'&&!completeImportRecoveryOk){warnStorage(Error('Import incomplet non restauré'));return false}try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){warnStorage(e);return false}}
-// Journal de restauration : un import complet écrit deux clés distinctes.
-// Tant que le journal existe, le démarrage restaure les deux valeurs antérieures.
+// Pont de compatibilité : signatures et messages historiques conservés.
 const COMPLETE_IMPORT_JOURNAL='avatar-complete-import-journal-v1';
-function restoreStorageValue(key,raw){
- if(raw===null)localStorage.removeItem(key);else localStorage.setItem(key,raw);
+let persistenceService;
+function getPersistenceService(){
+ if(!persistenceService)persistenceService=createPersistence({
+  storage:()=>localStorage,
+  recoveryAllowed:()=>typeof completeImportRecoveryOk==='undefined'||completeImportRecoveryOk,
+  journalKey:COMPLETE_IMPORT_JOURNAL,
+  onError:warnStorage,
+  onRecovery:msg=>{const node=document.getElementById('recoveryWarning');if(node){node.textContent=msg;node.hidden=false}},
+  onInvalid:msg=>{console.warn(msg);const node=document.getElementById('recoveryWarning');if(node){node.textContent=msg;node.hidden=false}else alert(msg)}
+ });
+ return persistenceService;
 }
-function recoverIncompleteImport(){
- let raw;
- try{raw=localStorage.getItem(COMPLETE_IMPORT_JOURNAL)}catch(e){warnStorage(e);return false}
- if(raw===null)return true;
- try{
-  const journal=JSON.parse(raw);
-  if(!journal||journal.version!==1||typeof journal.beforeLibrary!=='string'&&journal.beforeLibrary!==null||typeof journal.beforeCombat!=='string'&&journal.beforeCombat!==null)throw Error('Journal invalide');
-  restoreStorageValue('avatar-roster-v020',journal.beforeLibrary);
-  restoreStorageValue('avatar-v020',journal.beforeCombat);
-  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);
-  const node=document.getElementById('recoveryWarning');
-  if(node){node.textContent='Un import complet interrompu a été annulé. Les données antérieures ont été restaurées.';node.hidden=false}
-  return true;
- }catch(e){warnStorage(e);return false}
-}
-function persistCompleteBackup(library,combat){
- if(!completeImportRecoveryOk)return false;
- let oldLibrary,oldCombat;
- try{
-  oldLibrary=localStorage.getItem('avatar-roster-v020');
-  oldCombat=localStorage.getItem('avatar-v020');
-  localStorage.setItem(COMPLETE_IMPORT_JOURNAL,JSON.stringify({version:1,beforeLibrary:oldLibrary,beforeCombat:oldCombat}));
-  localStorage.setItem('avatar-roster-v020',JSON.stringify(library));
-  localStorage.setItem('avatar-v020',JSON.stringify(combat));
-  localStorage.removeItem(COMPLETE_IMPORT_JOURNAL);
-  return true;
- }catch(e){
-  warnStorage(e);
-  // Si la restauration échoue, conserver le journal pour le prochain démarrage.
-  recoverIncompleteImport();
-  return false;
- }
-}
-function loadSaved(keys,validate,fallback){
- let invalid=[];
- for(const key of keys){let raw;try{raw=localStorage.getItem(key)}catch(e){warnStorage(e);break}
-  if(raw===null)continue;
-  try{return validate(JSON.parse(raw))}catch(e){invalid.push(key+' : '+e.message)}
- }
- if(invalid.length){const msg='Sauvegarde locale endommagée : '+invalid.join(' ; ')+'. Une version antérieure a été recherchée. Conserve tes exports JSON.';console.warn(msg);const node=document.getElementById('recoveryWarning');if(node){node.textContent=msg;node.hidden=false}else alert(msg)}
- return fallback();
-}
+function persist(key,value){return getPersistenceService().persist(key,value)}
+function recoverIncompleteImport(){return getPersistenceService().recoverIncompleteImport()}
+function persistCompleteBackup(library,combat){return getPersistenceService().persistCompleteBackup(library,combat)}
+function loadSaved(keys,validate,fallback){return getPersistenceService().loadSaved(keys,validate,fallback)}
 const ROSTER_KEYS=['avatar-roster-v020','avatar-roster-v019','avatar-roster-v018','avatar-roster-v017','avatar-roster-v016','avatar-roster-v015','avatar-roster-v013','avatar-roster-v012','avatar-roster-v011','avatar-roster-v010','avatar-roster-v09','avatar-roster-v08'];
 const COMBAT_KEYS=['avatar-v020','avatar-v019','avatar-v018','avatar-v017','avatar-v016','avatar-v015','avatar-v013','avatar-v012','avatar-v011','avatar-v010','avatar-v09','avatar-v08'];
 function importCombat(ev){const file=ev.target.files?.[0];if(!file)return;file.text().then(txt=>{try{const x=JSON.parse(txt);validateCombat(x);validateBackupLinks(lib,x);commitCombatMutation(()=>{s=x;render()})}catch(err){alert(err.message)}}).catch(err=>alert('Lecture impossible : '+err.message)).finally(()=>{ev.target.value=''})}

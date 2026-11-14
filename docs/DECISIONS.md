@@ -112,3 +112,8 @@ Après fusion des PR 17, 18 et 19, Alex autorise la suite (« En avant »). Dép
 ## 14 novembre 2026 — sources et génération, étape 3B
 
 Alex autorise 3B après fusion de la PR 20. Référence main `3059eff`, HTML conservé à l’octet. Corps JS classiques déplacés tels quels, deux JSON existants rendus lisibles, manifeste d’ordre, gabarit/style et générateur Node standard. Les exports window restent pour éviter une réécriture ; façade Node importable avec VM, sans lecture HTML ni second moteur. Code de test VM partagé avec le chargeur historique, parité réelle Chromium. Sources dans src, artefact app généré ; CI --check échoue sans réparer. Aucune règle, clé, format, dépendance ou description ajoutée. Les fragments legacy de persistance gardent leurs couplages ; 3C/3D et les anciennes branches React ne sont pas modifiés. [Guide](architecture/SOURCES_ET_BUILD.md).
+
+
+## 3C — service de persistance
+
+Après accord explicite, PR 21 fusionnée à `a8cbd38`. 3C sépare les opérations de stockage de leurs notifications, sans modifier les clés, formats ou ordre de restauration. Les préférences UI restent pour 3D. Pas de migration, dépendance, règle ou refonte. PR 3C distincte, sans autorisation de fusion.

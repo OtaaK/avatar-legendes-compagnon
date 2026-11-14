@@ -126,3 +126,8 @@ Le main de départ `55d56f6` garde le HTML comme oracle. [Contrats](architecture
 ## Étape 3B — source d’édition et artefact
 
 `src/assembly.json` fixe l’ordre des scripts classiques ; les corps ne changent pas. Les deux JSON de techniques sont sérialisés avec protection de leur contexte script. Gabarit et styles sont insérés en un passage. `node scripts/build.cjs` compile sans exécuter, puis écrit l’artefact de façon contrôlée ; `--check` compare seulement et échoue si divergence. Les fichiers source sont lus en UTF-8/LF, sans remplacement silencieux de caractères. `src/domain/index.cjs` fournit la façade Node et n’est pas embarqué dans le navigateur. Les modules de src/legacy restent couplés ; l’extraction physique n’est pas une isolation déjà terminée de la persistance. [Organisation et limites](architecture/SOURCES_ET_BUILD.md).
+
+
+## 3C — stockage séparé des notifications
+
+Le service `src/persistence/storage.js` ignore le DOM et reçoit ses ports explicitement. Le pont `src/legacy/persistence.js` conserve les fonctions publiques, avertissements et accès tardif au navigateur. Aucun accès à la création. Les clés, journal et ordre des opérations restent inchangés ; les préférences UI restent à traiter en 3D. [Bilan](architecture/BILAN_3C.md).

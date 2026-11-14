@@ -1,0 +1,6 @@
+{
+  "stage": "3C",
+  "baseCommit": "a8cbd38cdc73bfe93ee4d0106da38e9760b309cb",
+  "htmlSha256": "317e491c1f2d37f3b1f5ce1f2b4d900ae9c15b20d728a4e5c8a8a8c94c1b3ec6",
+  "reason": "Extraction de la persistance derrière des ports ; contrats 3A inchangés, corps HTML modifié explicitement."
+}

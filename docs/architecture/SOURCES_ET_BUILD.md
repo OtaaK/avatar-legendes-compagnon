@@ -19,7 +19,9 @@ connexion ou serveur. Sa première génération est identique à la version pré
 | `src/interface/template.html` | Balisage existant avec deux emplacements d’insertion |
 | `src/interface/styles.css` | CSS existant, sans remise en forme |
 | `src/interface/globals.js`, `application-before-validation.js`, `application-after-validation.js` | Fragments UI provisoires gardant leur ordre et portée d’origine |
-| `src/legacy/validation.js`, `persistence.js` | Corps existants encore couplés aux variables globales/notifications ; isolation future en 3C |
+| `src/legacy/validation.js` | Validation historique |
+| `src/persistence/storage.js`, `index.cjs` | Service injectable sans DOM ; entrée Node séparée |
+| `src/legacy/persistence.js` | Pont navigateur : signatures historiques, avertissements et accès tardif au stockage |
 | `src/domain/index.cjs` | Façade Node de chargement des sources pour les tests et outils |
 | `scripts/build.cjs`, `scripts/architecture/assemble.cjs` | Génération/contrôle par bibliothèques standard Node |
 | `scripts/architecture/domain-context.cjs` | Adaptateur Node partagé d’exécution en VM des corps métier |
@@ -109,3 +111,20 @@ Les anciens tests continuent pour la plupart de découper le HTML. Ils restent c
 avec toutes leurs assertions. 3E les migrera progressivement vers la façade de sources.
 Avant cela, 3C isolera réellement la persistance et 3D l’affichage/démarrage, dans des PR
 séparées. Aucun de ces changements n’est annoncé comme déjà réalisé ici.
+
+
+## Évolution 3C
+
+Le service de stockage reçoit `storage` (fonction donnant accès au stockage),
+`recoveryAllowed`, `onError`, `onRecovery` et `onInvalid`. Sa création ne lit et n’écrit
+rien. Les fonctions injectées sont de confiance ; elles doivent conserver leur contexte
+et les notifications ne doivent pas lever d’exception. `src/persistence/index.cjs`
+expose `createPersistence` sous Node, sans charger le pont navigateur.
+Le pont conserve les variables globales historiques et les messages, sans migration.
+Les préférences d’affichage (`avatar-ui-view`, `avatar-combat-tab`, `avatar-session-location`)
+restent dans l’interface et feront l’objet de 3D. Le service ne promet ni transactions
+multi-onglets ni verrouillage : ce sont les garanties existantes du journal, conservées.
+
+L’identité initiale des octets reste prouvée pour 3B, mais n’est plus attendue en 3C.
+`BUILD_REFERENCE.json` garde l’empreinte de génération actuelle ; `REFERENCE.json`
+reste l’oracle historique des contrats. Voir [le bilan 3C](BILAN_3C.md).
