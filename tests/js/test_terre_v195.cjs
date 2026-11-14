@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Métal'),b=C.addFighter(s,'Cible');s.engagements=[[a,b]];s.temporaryEffects.push({id:'m',originLabel:'Entraves de métal',originSourceId:a,targetId:b,metalGrantedAdvantage:true,metalExternalAdvantage:false});C.fighter(s,a).statuses.push('avantage');C.fighter(s,b).statuses.push('gene');return {s,a,b};}
 {
  const {s,b}=setup();const before=JSON.stringify(s);assert.throws(()=>C.releaseEarthMetal(s,'m','metal_mastery',true,false),/maîtrise/);assert.equal(JSON.stringify(s),before);

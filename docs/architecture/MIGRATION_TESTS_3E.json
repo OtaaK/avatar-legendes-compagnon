@@ -1,0 +1,1141 @@
+{
+  "format": "avatar-test-migration-proof",
+  "version": 1,
+  "baseCommit": "b337017c23c5fb52604ba6a612763337753bc093",
+  "scope": "3E.1 — tests homogènes du moteur ; scénarios après chargement conservés octet pour octet",
+  "migrated": [
+    {
+      "path": "tests/js/test_abri_cumul_v061.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "38a09950b12789014fa45cf5095d9939db7b43a0a54fe6c0ce5170769170e924"
+    },
+    {
+      "path": "tests/js/test_abri_v054.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "72a6643bf006daa0089875e7532ea2c586ff0380ae58e8a3d5374c54ad0506af"
+    },
+    {
+      "path": "tests/js/test_abri_v060.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "0bb9feac6e26ed931a7bfbd6c39e47ae93f6777ba37b7e9f7f9cea44db55b7a4"
+    },
+    {
+      "path": "tests/js/test_air_v120.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "14675cc57cf906637d03e9afd29d8fbea2a2a1e420688e8119ec4221aa9e3df4"
+    },
+    {
+      "path": "tests/js/test_air_v121.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "3e1072832f016b574b28a90e2b5d311c78faa0f45c0f8a9ae351d996e6b8c160"
+    },
+    {
+      "path": "tests/js/test_air_v122.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "b8160f07973ebc7c88a82f5066e4a74a91110905b87df5b03f5ddabd5b3b9d1e"
+    },
+    {
+      "path": "tests/js/test_air_v123.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "ca7be888cc5a1e206a60c7e0042dd925b021732df18b32d7be227dd9c7c95df4"
+    },
+    {
+      "path": "tests/js/test_air_v124.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "9c9686b4b53aafdfe30891c73588ec5da4662efe64620a01858e3c932e838c59"
+    },
+    {
+      "path": "tests/js/test_air_v126.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "07977aaf2e8be02d8cd749729acb6cf18edce090a15b19509d7afa10f89f4b68"
+    },
+    {
+      "path": "tests/js/test_air_v127.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6f9cb97007139dd3fa397f33b59edbdb988e8b49f3ebe8c9398ae946571640cd"
+    },
+    {
+      "path": "tests/js/test_air_v128.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "ce41d73c67f830809041a690e1e1e90383ae24939f4c2ff4fab143d0e11d034f"
+    },
+    {
+      "path": "tests/js/test_air_v129.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "654c1c9eac1d8d8976ced3e2d81f97034978a05c646f6aba3f602ddf97945e71"
+    },
+    {
+      "path": "tests/js/test_air_v131.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "b7ca53169468fc6ad50d247ba0cd68d18bc7f5a8bf3b33b98938bac4a684c227"
+    },
+    {
+      "path": "tests/js/test_air_v132.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "d0c7b9131e2e0880efbae0b57d704663bf8ade82c8830c0b2a5ce78c9325786a"
+    },
+    {
+      "path": "tests/js/test_air_v133.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "049eb3d59514d8d8c6c807cbb0b2c455ed5ace7bf1aa7b061b4bb848ea16b323"
+    },
+    {
+      "path": "tests/js/test_armes_v136.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "0747b5e126d23f0698761d1e970cb85e48f7da6484b0efa65a796e113e012cdc"
+    },
+    {
+      "path": "tests/js/test_armes_v137.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "e858f7fa72ac3fa9d25ac38680f73500a56cca09c4fc1c32ea8326406ba84b74"
+    },
+    {
+      "path": "tests/js/test_armes_v138.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "b85fa6398caf9cdc7b9000411107930cbb39f3c9bb1d188798bd5898e17fb2bd"
+    },
+    {
+      "path": "tests/js/test_armes_v139.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "d2ffc3c8d6f3b192e6593cd43148fefbe82944241aa9d0405e1af818738461de"
+    },
+    {
+      "path": "tests/js/test_armes_v140.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "c5d27ed838d11b3a7d42072788c59f2ad67b73efd900c4ecf5fc9fd611ad38e5"
+    },
+    {
+      "path": "tests/js/test_armes_v141.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "7590cc623c270654cc83499c83b9e17d5d5344021b0fca20b82a6f68e5e1ee1a"
+    },
+    {
+      "path": "tests/js/test_armes_v143.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "a0a0d9c065efe28403cbedf1f186e731049e0ed1df859fbd80a10c185e94c76e"
+    },
+    {
+      "path": "tests/js/test_armes_v144.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "1f296832c2083ea21fdb7897bd4b11d834e88187caa6c4f46c8cbb3475f653a4"
+    },
+    {
+      "path": "tests/js/test_armes_v145.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "a520f3cff77c3fbab075fb579f5f0a26978a716f5145056706c141fe36f518ae"
+    },
+    {
+      "path": "tests/js/test_armes_v146.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "9e9e9558db89c16f70893fba44b474f3587ffdaee451d17404c098ead080e0a2"
+    },
+    {
+      "path": "tests/js/test_boundaries_v111.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "7152358e8f48edd4006d443d8ef44a5d7e68be2f9e354b2f52198621ec06d6b8"
+    },
+    {
+      "path": "tests/js/test_colonne_pierre_v116.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "39b137ff615873b10bfd972a47fee0f04a7ab536628e930549c491172909036e"
+    },
+    {
+      "path": "tests/js/test_desengager_combattant_v077.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "fce8fbe10673942f694fb407abc0076c841d9369858aef93f1d7e47c6c4bf95f"
+    },
+    {
+      "path": "tests/js/test_effect_integrity_v110.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "d2bf5b604c397f081286df55c9e5634e22fd841ea02e170d4f46d55955f85538"
+    },
+    {
+      "path": "tests/js/test_effect_midround_v108.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "5520cfe9dc4ef8e2749787caa7595f7b893e23270e94794ebb458866549e813a"
+    },
+    {
+      "path": "tests/js/test_electrochoc_v082.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "44b28113dff1298979c953db0cc38060cd96f0c671e8195c45d91fd3a3a2792c"
+    },
+    {
+      "path": "tests/js/test_engagement_idempotent_v075.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "0f4b8048dec63b7001e9f7b3032f0d791ebef3bd32a4a1908d3a69e903b72dd8"
+    },
+    {
+      "path": "tests/js/test_engagement_prerequis_v074.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6c00613c89d587602137d5a3d0d2f103f8deda347856a6c8214dc5e244ad1671"
+    },
+    {
+      "path": "tests/js/test_engagements_v073.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "417acef853b0741ac997a800f123138d5b51a26661283b7847d398a31023745f"
+    },
+    {
+      "path": "tests/js/test_entrelacement_v062.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "35b2353b85927538d829b4ee2f8dc00df1847fee58989ad75b8ce0cc0e0b1b6f"
+    },
+    {
+      "path": "tests/js/test_fort_chene_v053.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "a8c581823d18092f3737c021c41f379a7408285893c579af7c73731cf6662f65"
+    },
+    {
+      "path": "tests/js/test_fouet_eau_v069.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6652148a9be5bc3de3ec077755b83832bf9fa756f7e5bdaf96700cc2ac527e73"
+    },
+    {
+      "path": "tests/js/test_four_techniques_v117.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "e9095e72eac6a578194ecb1f95da55b1c4faa8fef95bba937deb61b512fb8037"
+    },
+    {
+      "path": "tests/js/test_gantelet_glace_v071.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "66d61b126f7df4fbe1a607725472ac7ef1265774ee5224d266b149456a5c8d9b"
+    },
+    {
+      "path": "tests/js/test_glissade_atomic_v081.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6f49433f3ef0504670363ad4c3715f1c7210699151d81825bf72d324f4d47de1"
+    },
+    {
+      "path": "tests/js/test_glissade_engagements_v078.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "a418aad6976dc7ce5c72c3dd055be08f956f646e0b03040727ced5bd8b8fc1f9"
+    },
+    {
+      "path": "tests/js/test_glissade_v072.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "61a3a0dd26f80b52d166789b62282adc23ff8c66f76ee1f72ed002f29368e3f0"
+    },
+    {
+      "path": "tests/js/test_integration.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "4f019dbff8a3ecaacac66c6f73483bb46a341fc93183b7999cf27c21219bf0f6"
+    },
+    {
+      "path": "tests/js/test_maintenance_v094.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "f004de89c94cf080632b9aa75a0269b7e6f9be193f0e57aff971231ce9187762"
+    },
+    {
+      "path": "tests/js/test_materiel_v093.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "3af26fd278e16823c729cc0bca0835021d09618a3d4df5c3b0509cdbdec57a03"
+    },
+    {
+      "path": "tests/js/test_pieges_v091.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "f7f4f77703a1a502c286b9ab7ce34ce5a1d844987f4b983629882d3876590382"
+    },
+    {
+      "path": "tests/js/test_plaque_givre_v070.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "9a40795fbf7608dc084c6a2049936faafe7fd06a0b8c3060aaff25562dc16950"
+    },
+    {
+      "path": "tests/js/test_position_v085.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "1a51698f237fc53049ff3077948f607712479336cf7ad424da609aac99b9dfed"
+    },
+    {
+      "path": "tests/js/test_priorites_v056.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "3087e9c6b21798bb5d5626ea523e4b9bc2a211cb90a51a4270f4372b2fed02d8"
+    },
+    {
+      "path": "tests/js/test_projection_v115.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "3692e8dc23a252e20c0a97cad8f3e101e591c7ab5c113a13d862493b6c630937"
+    },
+    {
+      "path": "tests/js/test_protecteurs_v066.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "4abf9713b271c40e692851ff89547dc35480aaa662f47451bd470f899c8fca77"
+    },
+    {
+      "path": "tests/js/test_protection_groupes_v067.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "25ed66d390880a858bbd551878fd96fbf98c676ae2301de27a797da01ac9a282"
+    },
+    {
+      "path": "tests/js/test_protection_statuts_v068.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "ea9fa1dc462909c33e40725ea4e72c9139d6499374a52c6071280bfa116925b3"
+    },
+    {
+      "path": "tests/js/test_protection_v052.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "b0df25482812a9cd3dff8d00084d37ce1a3cdc7370c113ae0e66c49fa0b419ea"
+    },
+    {
+      "path": "tests/js/test_protection_v055.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "71679d1345eaf2a3af13bcf7771edecb4c332536d5d099cbd1faf296864dc2d3"
+    },
+    {
+      "path": "tests/js/test_protection_v065.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6fd8c580059a714335da1c2c850d0f751f941c72038d54cf3dbfe07f3537b4d6"
+    },
+    {
+      "path": "tests/js/test_puissance_v096.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "c42cf95a755caccf6c425569368512ccc211ac4bc22ec88d1a35b5cc98e43306"
+    },
+    {
+      "path": "tests/js/test_reactions.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "61599749fe5f5fb8d908c0d422968755ed28de20383729f2061ccc307a30c0a3"
+    },
+    {
+      "path": "tests/js/test_regles.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "8f28eb83d8c7909e9fa8457d3888b1087bfcf5445b61a1e15af35571e3912046"
+    },
+    {
+      "path": "tests/js/test_retours_recette_v233.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "c7ebc2154408b42b5453ca50e263e4f328b5d5684d1b737b4e2831f2d298ce86"
+    },
+    {
+      "path": "tests/js/test_riposte_v057.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "73d361e8a2013c5343304f44e0d3c6035fdb6d12bc4ed8948e677fc273c62785"
+    },
+    {
+      "path": "tests/js/test_riposte_v058.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "dcf106bde866e717f2105e43e399680e971f9c0b99ebc6d1ddc88fce52dbe727"
+    },
+    {
+      "path": "tests/js/test_riposte_v059.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "97f7ebffdb442549d7b8141df90af5efc88d428e847a14ed00927c750e32639f"
+    },
+    {
+      "path": "tests/js/test_scene_journal_v100.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "bd092d7ad737f99bd013baf9a48a3b09af91cb1e8f12bb9274a1d2a6bfac69b2"
+    },
+    {
+      "path": "tests/js/test_scene_title_v099.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "e5241f698c61dd31a7aab4394a7ecac8fe53a3e42aa4c6a691d5003233e40be6"
+    },
+    {
+      "path": "tests/js/test_scene_v097.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "2ce99c4ab3cf008127977c04fd2ce4bd7a2add8f010e0d2c3d163753659d2f7c"
+    },
+    {
+      "path": "tests/js/test_science_v084.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6a5272d4395ec601da20305383c8607a92b34a9f3ffb64abd2f651454bdbc931"
+    },
+    {
+      "path": "tests/js/test_serrer_dents_v063.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "6cca519505a45ef7664fd3fa0b83d821a85ea0999701ee0a395d55cc9198e5f7"
+    },
+    {
+      "path": "tests/js/test_simultanes.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "ee6bdb8bf24ac68fe15b066a026d266fa91fc6999df386302cddf73aae9b73ae"
+    },
+    {
+      "path": "tests/js/test_statuts.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "b41b50bcf553ab4033f3c417293c3eecc797b5e10b7233de8304347dad0f7bc3"
+    },
+    {
+      "path": "tests/js/test_substitution_v095.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "1a3d60f389a854a84ccd5c714e2e1a26dc6cb6894619b8946baf0d66d2557834"
+    },
+    {
+      "path": "tests/js/test_technique_effect_v107.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "cdd1400dc76f46e74c00849405842a76992b525f44d64af07560b019966972d2"
+    },
+    {
+      "path": "tests/js/test_tectonique_v119.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "690319388ab4c49b3e8d4e12d926456c0a61410b259b52d7bd1d6b05c26faa59"
+    },
+    {
+      "path": "tests/js/test_terrain_reset_v076.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "cba640bcfb5687f439117bf64b54f72f1b98cb852bd765eed6ca8a5e44d9e6fb"
+    },
+    {
+      "path": "tests/js/test_terre_v150.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "beb2aa24cf54b822a32f3639416a7497b7ac136e937860821ac061a909e20504"
+    },
+    {
+      "path": "tests/js/test_terre_v156.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "c9b343844efa7fb5d1d73c5f711c30e991a4cdbf856f54b37ad18c91d9c35cab"
+    },
+    {
+      "path": "tests/js/test_terre_v158.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "9e3d07f4e6c5ab9c274ca4b56566851eb05b95d98b9cd6d8457b551919506fd9"
+    },
+    {
+      "path": "tests/js/test_terre_v159.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "aa5d70c1dc233e9eda21c045bae828ffd6b4fccfe2a9951ec56255bc2d5426f0"
+    },
+    {
+      "path": "tests/js/test_terre_v160.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "e3b6dbc0a072ab9307e1125f41e996c21d7402f922e25c2e52ad40347930300f"
+    },
+    {
+      "path": "tests/js/test_terre_v162.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "b152588c2607f8c82ac18ca521a92631c5c34894ada5a77ed947cc945b1abcc8"
+    },
+    {
+      "path": "tests/js/test_terre_v163.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "15f44da375dd788c6a8e44565ab06c943c582036251906d1963f5f61662aafa6"
+    },
+    {
+      "path": "tests/js/test_terre_v166.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "21dcc8f63e43645b20ef2fc6ed0ed827049e3dab622233f5c45c949b682ae272"
+    },
+    {
+      "path": "tests/js/test_terre_v167.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "1109cc5bd12f71e20bdfce44179866708386e5da255c963f68e28ddc080d4fcd"
+    },
+    {
+      "path": "tests/js/test_terre_v168.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "8d0d344dc3664bd51e787c883e7532f1de5b402400c5445143e384f7bb65d8c9"
+    },
+    {
+      "path": "tests/js/test_terre_v169.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "ae10a973c392a844e32b5f477a0f3f13e04b4516a42165473aecf2afe35beadc"
+    },
+    {
+      "path": "tests/js/test_terre_v170.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "b2df691fa72c562b5bef084345b830344ef9d875820da9b74865491ef88e9a8b"
+    },
+    {
+      "path": "tests/js/test_terre_v170_shield.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "3f4af03d5df5ad1c4d9348ca8def23293b5de1987827ba93d1afaefd852d3d89"
+    },
+    {
+      "path": "tests/js/test_terre_v171.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "989f94ff4bf55ff6262761dfd0bfb0196b0cad3f8f6a514f35d48c0ef23aaef7"
+    },
+    {
+      "path": "tests/js/test_terre_v172.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "bfd885c1b87dbb20e9917230c011fefca7a905f7c3011c52834269528f914017"
+    },
+    {
+      "path": "tests/js/test_terre_v173.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "590cb16220ec58295b8e440972284715442a3aa107855d0b5f91db2b28d73216"
+    },
+    {
+      "path": "tests/js/test_terre_v174.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "62889370b78d7503172783fa016a9807045d8b1634507731d974f5b5284f85ea"
+    },
+    {
+      "path": "tests/js/test_terre_v175.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "3a6292ec5566a0d15976f41d4e3b76c2e8ee628aab5d2151e73f67e1d24c25d3"
+    },
+    {
+      "path": "tests/js/test_terre_v176.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "d4ce048ad369f99e5ee4c2dcc5ef13bb70b4564e45158ff7709ec3e944b576b6"
+    },
+    {
+      "path": "tests/js/test_terre_v177.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "a3a327dd2f823a540b7744d264abb4b883e94ad42bf976c0a31ee490b16735ee"
+    },
+    {
+      "path": "tests/js/test_terre_v178.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "85556d1c89ade85454b3e1e5c83c21a04d6f6cc3d7e32e246a1c273e16063c25"
+    },
+    {
+      "path": "tests/js/test_terre_v179.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "f1321d49632e3ac4c0c5e24f381208afceb0483f4140327e203d08bfa7ae4393"
+    },
+    {
+      "path": "tests/js/test_terre_v180.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "1db770ce2c8afae1f7d179e94935cba42d8bc95a5118e93ce90a8dae1d894ad4"
+    },
+    {
+      "path": "tests/js/test_terre_v181.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "6ba5928dfa1c563b4bf408c54c1a24ede1f946be29054414ae87dc13c5890289"
+    },
+    {
+      "path": "tests/js/test_terre_v182.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "7aa23201cacdefe239583f909bd8a451e9afb533263916ac379e41c75349698f"
+    },
+    {
+      "path": "tests/js/test_terre_v183.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "ffef88853a8ac32e2440758377e1cdbc51427a5ba345f1040d2e906697ea2b25"
+    },
+    {
+      "path": "tests/js/test_terre_v184.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "cbb1706f57a3c919139498b1036084e15de810316e0aec0cb6bdc43f804f84a9"
+    },
+    {
+      "path": "tests/js/test_terre_v185.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "7595cae440b605fe82f66523d93bfdbcc585b98855e2a9f2af5068d013a38865"
+    },
+    {
+      "path": "tests/js/test_terre_v186.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "db1e9633c186a4093388a6548ab8adf861eb82e25117e6f60cd7cb7ac12b47ff"
+    },
+    {
+      "path": "tests/js/test_terre_v188.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "acd775cb388a66ab9293f9380b22a48c688b9b8310491cf26a33cabd793294b8"
+    },
+    {
+      "path": "tests/js/test_terre_v189.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "298ec8a902fe2ac29267882b83e7892c145e4a8372ceeebd90f208273959a327"
+    },
+    {
+      "path": "tests/js/test_terre_v190.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "be2866370d40d5644f2c7fd7332c4d495fb3518ed3b6b58b7e623d3a39b574c2"
+    },
+    {
+      "path": "tests/js/test_terre_v191.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "247d0ceb4425fb6855f849bc682f472b1ea9440cd60ba96e2d1aa6fe8ae4b470"
+    },
+    {
+      "path": "tests/js/test_terre_v193.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "ad81a79cc83976e40b9009f2b2e8fafb7f00b282bb260d86976ff7cda93b2e68"
+    },
+    {
+      "path": "tests/js/test_terre_v194.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "736814ac47953ba31d124d2fe0323fac9cbb495aa21eef9cb7fe47f9ceafed9d"
+    },
+    {
+      "path": "tests/js/test_terre_v195.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "d0987a098f61f19f8d34630dc652450639cfbd6075a7491926c6c7a87b92aa03"
+    },
+    {
+      "path": "tests/js/test_terre_v196.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "f1d087b2bba35ed099bb15161043b624e78d2ea18834bc99adae51c3480f5b2f"
+    },
+    {
+      "path": "tests/js/test_terre_v198.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "50144bd772daa806e0b9b19757b53a7771556b1f1795cd537ae5d20e7a0c5755"
+    },
+    {
+      "path": "tests/js/test_terre_v199.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "33bc428a7b09ef2261546403c75a0bffdef7491bb7d695e262ab3a437caac627"
+    },
+    {
+      "path": "tests/js/test_terre_v200.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "73c3ae2ecceb15a35801011b7e86d7d7b3f53770b1ec6631b5a414fc394eb7ae"
+    },
+    {
+      "path": "tests/js/test_terre_v201.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "e318d0a900c644e7b1ad49d82c69293b4c7c05f45b016e88ce9420d0a78835c4"
+    },
+    {
+      "path": "tests/js/test_terre_v202.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "492948d4d63a66740f97e2ee8fd885d5dedc6ba3f38b29d887746757ba62e6ba"
+    },
+    {
+      "path": "tests/js/test_terre_v203.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "4cccf1e6300751007333b1e1b311d116aca1e5769b88efad7177920aa47ce913"
+    },
+    {
+      "path": "tests/js/test_terre_v204.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "d82b8ec192718a6e1d5a6c2cb29274e103b7e57a792731fe8d2f25664dfa7084"
+    },
+    {
+      "path": "tests/js/test_terre_v205.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "b7560fe7bd0aeb6c9a1d7b2940dedb38afe6955e87c43d03cd24bfcf2afcccae"
+    },
+    {
+      "path": "tests/js/test_terre_v206.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "897692fa3264ac205566bebccaebda1a42337194819149a06dfccb5250f4c019"
+    },
+    {
+      "path": "tests/js/test_terre_v207.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "43bedc12b86e4712f5d5760738ced1f8813e8043ce8604f003f85ad9e4edeea0"
+    },
+    {
+      "path": "tests/js/test_terre_v208.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "3d88a9f50f1898ea09c43f8900e7f7917a111f6b5f08da63d0c92ded057ac937"
+    },
+    {
+      "path": "tests/js/test_terre_v209.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "35995b8e399e05976e06aeb6908d543588a799d54a9b1e3b68e45f85932c40b0"
+    },
+    {
+      "path": "tests/js/test_terre_v210.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "65abe49347195ed88dc740694d0c04e6b526f15d85d6aa242c89392613a9f6a8"
+    },
+    {
+      "path": "tests/js/test_terre_v211.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "f9f26443c166b6501c50c3121b4944240e53a93734f781f422248ab920c280a8"
+    },
+    {
+      "path": "tests/js/test_terre_v212.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "e882f7c0a59d3927b4582538202a68b5c39785e4536e77cb672d6700bb49e7af"
+    },
+    {
+      "path": "tests/js/test_terre_v213.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "c050d09f1eb2d6d8ff5488a0fe7501eef175d0ac8ad287f2da2760697f1fb3e5"
+    },
+    {
+      "path": "tests/js/test_terre_v214.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "72ba163469c0d09e13262460f7b09a9cc9718d5c83d2bb1b71b1b2311cbea343"
+    },
+    {
+      "path": "tests/js/test_terre_v215.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "6ab8045ea62be3b5870d9ffab85f178b74376597279b09a25e5ba9059b2187bc"
+    },
+    {
+      "path": "tests/js/test_terre_v216.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "8253a1eb15a137ca4fae714ac54a163dd02eaae75181cbf69d6d1dfcd44f905d"
+    },
+    {
+      "path": "tests/js/test_terre_v217.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "073446aa7dbba9bff2fe5f0ddab677cfe370282a7ee0af8e7f7afc4c8fe85b42"
+    },
+    {
+      "path": "tests/js/test_terre_v218.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "71e8c5e5ce76ca5fa25d42831ecd8fb48d42263d15618af496b15e477d0ee041"
+    },
+    {
+      "path": "tests/js/test_terre_v220.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "bf3dfa784e2f2673b2f9a68ab4eb24e575100184dd2ee7bc9bcd700a36940ece"
+    },
+    {
+      "path": "tests/js/test_terre_v221.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "c36e1716771d274c461653b816823cf9db1c44036282c5e90e8d6e7726b99bad"
+    },
+    {
+      "path": "tests/js/test_terre_v222.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "29cff52e8f2e75470941814b0567b138bcc5737a17577f2b246745df09882e73"
+    },
+    {
+      "path": "tests/js/test_terre_v223.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "2fec3f56c62f3169faf9e876a756bdc4f16f8f0f51594c6c6b4d0e0acac001fb"
+    },
+    {
+      "path": "tests/js/test_terre_v226.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "7058d3e35b9595e8b8d99cfa874c8474e8c78f98c69e0c2d4203080077aa4d9a"
+    },
+    {
+      "path": "tests/js/test_terre_v228.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "a1f71e38963f7657170507976cbc1e9ce18f8e23939cfc3753a7715eb81ee451"
+    },
+    {
+      "path": "tests/js/test_terre_v229.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "6227260a1d487e081f93af927fe9f559cce1d9a24b3b82eaaa67a0232f3f3425"
+    },
+    {
+      "path": "tests/js/test_terre_v230.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "6e0b2a0f355634516c32448a06c6c07e36d6f0d37373674e75cd692b54c6a9c2"
+    },
+    {
+      "path": "tests/js/test_terre_v231.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "3b2b8a8437d28da0add55270708f308a4de3f75f51716455ae8188e545b9cbed"
+    },
+    {
+      "path": "tests/js/test_terre_v232.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "29b17d0e1094c49b385dd2ff7a24c41d205259dcbe2c97938945fb47fbd57fde"
+    },
+    {
+      "path": "tests/js/test_terre_v233.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "3c7f752dfd87dd363d5100f7ca624f6f477962b411292499fe4765a2310eb419"
+    },
+    {
+      "path": "tests/js/test_trouver_faille_v064.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "1bcdb89794645332ce81832eb1205be4c33d80aeb884e565a21a82b831908fe5"
+    },
+    {
+      "path": "tests/js/test_two_techniques_v118.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "fad0bf0a50e747d2e2a200d7d96f15bc697b7717ba38d583997c92381daee6f8"
+    }
+  ],
+  "retained": [
+    {
+      "path": "tests/js/test_architecture_contracts.cjs",
+      "sha256": "ddc8bafa72fa7ac55c5ed696a2963e8e17a0d88169bf1df72a683f0e8f13c59f",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_armes_v147.cjs",
+      "sha256": "3f569028ecdd1bb2cb6e85221cae5f2042121ce9369f3189bf51de52a51ff92e",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_air.cjs",
+      "sha256": "18eda4a7d86db8f9d64ffc48429e548ca721c6eac7687bc7f3c73fde5f022094",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_armes.cjs",
+      "sha256": "2d84522b2f79ad35b3be2cc72dff17026a4653619018908af5b63a7b80366683",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_eau.cjs",
+      "sha256": "60c4ec53a856e203f791c79f59297fa63c5b543a1fde53b7ae98b419fec14c1c",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_feu.cjs",
+      "sha256": "fa9feb8abd25f5a9d88af4369b5987e0f1f7aa6288b3f4731a79b4daf59fa9e4",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_groupes.cjs",
+      "sha256": "56bd74fcce90d4c105449eff3b06bc6fd0fed8c27ce6e684f3347e07017b4a06",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_techniques.cjs",
+      "sha256": "fcdd994fc9d88a3e487b6b3041376fb4ebd1564a21ecce62d94489f8fa842cd7",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_technologie.cjs",
+      "sha256": "2327cebacce2ed36981c8ccf248a94882bf390d323b3fb29e2ea5497c59989a1",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_audit_terre.cjs",
+      "sha256": "99bcbeb68abcf7d13da6b90ba4db7e4ba495cac5ef32fff995ef61fb0a6a8cee",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_automatisation_v049.cjs",
+      "sha256": "39402cfcd8a812a638f533e88fb03f8ef2fdb1ba5072e5e068626059d8ef0271",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_automatisation_v050.cjs",
+      "sha256": "2c39ba29b163fde6f4ba6bf4448bbf2d89474e4582a90d115d966fc7bb9215fc",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_automatisation_v051.cjs",
+      "sha256": "980f7bbc724ee5f23ba6763a52163186ccc068d59343efcbba2d99874a10851d",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_catalogue_integrite.cjs",
+      "sha256": "a10310f59dc196c1f4a3498a9670a0794cfa37c5617b35fa69548d990cd47208",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_combat_transactions.cjs",
+      "sha256": "4d57466ce6064153d64897293d99fa2532102fead6e13258c7b98ca34a11e577",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_command_ports.cjs",
+      "sha256": "2cf085748d8fc8771450c7ee1364933fea510f4d216ae126bd967c7db02c2cc6",
+      "reason": "Test source/outillage déjà autonome ; aucune préparation moteur éligible"
+    },
+    {
+      "path": "tests/js/test_complete_import.cjs",
+      "sha256": "2c064555880de008b95696a1ada4b6c17fd6fa5bd313330116552e5fbf5daf16",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_effect_edit_v105.cjs",
+      "sha256": "cc597c0f6f489c0d8d3968a2d2e0cc660607a221199ad4294ab9b48c2c66a9f1",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_effect_limit_v109.cjs",
+      "sha256": "b9e9ce3e6ca78d6d88b52058cd834872216745c354e9db76befa6594ab1c98d1",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_effect_origin_edit_v106.cjs",
+      "sha256": "0fe6f88f6b094a124bd36c6ae9fe83c4d28d5c7c442af3f36184ce73d18c0635",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_effect_origin_v104.cjs",
+      "sha256": "8f3f952453a746454381cfd52802c60a1ef58aaacf8ad004f238f6b2ded859ad",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_electrochoc_objet_v083.cjs",
+      "sha256": "fc671f02aae85c119cf72a9521c18eabdf17798ec926588fb55646663e5eac2e",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_exports_v130.cjs",
+      "sha256": "105c0cd1de23acfef3fcbc26514a58f28097337a18f583d9a65ac04c2e8ada8a",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_generated_html.cjs",
+      "sha256": "ff57fc605730af6f8891482b8354a977d0a2309994cfdfa88b063c9dc24cf79f",
+      "reason": "Test source/outillage déjà autonome ; aucune préparation moteur éligible"
+    },
+    {
+      "path": "tests/js/test_journal_filters_v101.cjs",
+      "sha256": "83bd132b184be1c42d2cccbc08607fb68f79382b0d9fb955f337fe7e616d6ea9",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_persistance.cjs",
+      "sha256": "1f324d0b60225e160208ea9a9222017d471784da84ebf2d5eb4dcd75a01eeae1",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_roster_links.cjs",
+      "sha256": "b86b0bd13f0a234bc6a9d9822758ff0b95c5ff1c310f960ff101263c90aa16eb",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_scene_export_v114.cjs",
+      "sha256": "5a6344a7938beebcad22a83138c70b34a75a7e36526991c489749abb239fb3d7",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_scene_guard_v098.cjs",
+      "sha256": "5dda78aa40923d8a9a09bea90b8072fc0ba9c102bda7791586261c81ca33669f",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_scene_note_edit_v112.cjs",
+      "sha256": "80e9e35159c60e4c3b53b4f1141000e507565300ec74641282c013f024d374e0",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_scene_note_limit_v113.cjs",
+      "sha256": "3e50a030a6cd839a5c97c7506e386af669f9106110969a700d1234a21ecc2516",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_security_import_ids.cjs",
+      "sha256": "bca3f3b76f86750095354d736c3497a89cbe4a5e387aed311b342d198f5536c7",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_source_domain.cjs",
+      "sha256": "b27dde17d0a97a3c9d24933ae8e51251be5d22728fe4f189676ff01f7ab746b4",
+      "reason": "Test source/outillage déjà autonome ; aucune préparation moteur éligible"
+    },
+    {
+      "path": "tests/js/test_storage_adapter.cjs",
+      "sha256": "7a44c0247c8d1bb27e9c7ed4eaddf33af7d4a9a6d9499743e674bd99bce3e214",
+      "reason": "Test source/outillage déjà autonome ; aucune préparation moteur éligible"
+    },
+    {
+      "path": "tests/js/test_sync_sheet_transaction.cjs",
+      "sha256": "2e5feb6a913b13031c5abf2301c2c5353d1700f1cddf3329c93953b459b4e50c",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_temporary_effects_v102.cjs",
+      "sha256": "716dc4e8a9ff3e9298dc426c2012c56dd9e9f0b2dc8ede8e3fdc2ba15dae749d",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v148.cjs",
+      "sha256": "bed2f5cb1d4345c4af89dbd9a4db99f06a6884b3604fb7d2a6500981a2d07f03",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v149.cjs",
+      "sha256": "ded409cfe04d9ac10f621e638eca781c1eb5d34cd137614aca5afb5c99cba09e",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v151.cjs",
+      "sha256": "2172dc32efdaedee5370f51ccf63036ceeee72afa22cca297ad41c6fba12005b",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v152.cjs",
+      "sha256": "c0967b60534e04538412c41a39e89e37d12e8e1f7f16895831a894e59898c652",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v153.cjs",
+      "sha256": "b6704aa189198036a2b9271298f31d831218bce2b58c86303f14ad7b05ff238b",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v154.cjs",
+      "sha256": "bea8bd0699c175ed6fdd079a45e52445edd1fefee82f2442c7bcc38836c5f11a",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v155.cjs",
+      "sha256": "9b0c96e0d5ca02840828c7b5daa6cbf4bfd6d345ce7192840b90a0299ba7511f",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v157.cjs",
+      "sha256": "5d1749bba1e25fba1cfb68a410394cd797b05121bbf2f041e346a1ec3024640f",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v161.cjs",
+      "sha256": "6acfc6f3bd610de3a1bed1f87ff1d9b079a1ac225044a685488ed389d57ddaf9",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v164.cjs",
+      "sha256": "0aac4b9b950d721ef989016374d220b0ac1d0e52ec8cc015afb0f03e8e905284",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v165.cjs",
+      "sha256": "54ede1c157a9f704ae2dec480c1194f0cab0ac00e883fb07c75e5fa872e7ef45",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v197.cjs",
+      "sha256": "7fd9915a2ac21023325568515f415d669c6c6e10c0e399149c6d10472589b637",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v225.cjs",
+      "sha256": "d4873fb4d679905b23882073447173cc5b8c5c1be35efdc529f7bb8ae8c958f8",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_terre_v227.cjs",
+      "sha256": "da5948d4af492ea6b914d68b2bb55dc53a604a8b0f6fbe03a14618579cabb1a8",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_transactions.cjs",
+      "sha256": "10636a19233fa0b1307326d9e9dbb963ec5a228b48a862efaebf9d56d3dac8b0",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    },
+    {
+      "path": "tests/js/test_validite_sauvegardes.cjs",
+      "sha256": "ddfda21c26e3dab3114822f28934c19e9506ae20101c18e31d3104519863d538",
+      "reason": "Intégration HTML ou scénario mixte, à traiter séparément"
+    }
+  ],
+  "browserRetained": 40
+}

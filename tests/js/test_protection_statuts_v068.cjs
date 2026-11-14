@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8'),code=html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Attaquant'),b=C.addFighter(s,'Allié'),p=C.addFighter(s,'Protecteur');for(const id of [a,b,p])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);C.fighter(s,p).reactions.push({type:'protection',allyId:b,round:s.round,used:false});return {s,a,b,p};}
 function test(name,fn){fn();console.log('OK',name)}
 test('Statut négatif seul intercepté',()=>{const {s,a,b,p}=setup(),e=C.manual(s,a,b,'status_add',0,'gene');C.commit(s,{['intercept:'+e.id]:true});assert(!C.fighter(s,b).statuses.includes('gene'));assert.equal(C.fighter(s,p).fatigue,1)});

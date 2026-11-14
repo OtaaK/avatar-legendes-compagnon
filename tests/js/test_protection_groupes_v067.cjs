@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8'),code=html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Attaquant'),b=C.addFighter(s,'Allié'),p=C.addFighter(s,'P1'),q=C.addFighter(s,'P2');for(const id of [a,b,p,q])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);for(const id of [p,q])C.fighter(s,id).reactions.push({type:'protection',allyId:b,round:s.round,used:false});return {s,a,b,p,q};}
 function test(name,fn){fn();console.log('OK',name)}
 test('Interception portée par le second effet',()=>{const {s,a,b,p,q}=setup(),e=C.manual(s,a,b,'condition',0,'Fragile'),f=C.manual(s,a,b,'fatigue',2);f.actionId=e.actionId;C.commit(s,{['intercept:'+f.id]:true,['protector:'+f.id]:q});assert.equal(C.fighter(s,b).fatigue,0);assert.equal(C.fighter(s,b).conditions.length,0);assert.equal(C.fighter(s,q).fatigue,1)});

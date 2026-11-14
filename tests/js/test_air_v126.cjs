@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(name,options){const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'B'),c=C.addFighter(s,'C');const act={id:'v126',round:s.round,sourceId:a,targetId:b,name,approach:'defendre',options};s.actions.push(act);return {s,a,b,c,act}}
 {
  const {s,a,b,c,act}=setup('Vague d’air',{airWaveConfirmed:true,airWaveMode:'blast',airWaveTargets:[]});act.options.airWaveTargets=[b,c];const e=C.propose(s,act);assert.equal(e.filter(x=>x.kind==='fatigue').length,2);assert.throws(()=>C.commit(s,{[e[0].id]:false}),/ensemble/);C.commit(s);assert.equal(C.fighter(s,b).fatigue,2);C.undo(s);assert.equal(C.fighter(s,b).fatigue,0);act.options.airWaveTargets=[b,b];assert.throws(()=>C.propose(s,act),/distincts/);

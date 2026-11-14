@@ -136,3 +136,8 @@ Le service `src/persistence/storage.js` ignore le DOM et reçoit ses ports expli
 ## 3D — commandes et cycle de démarrage
 
 `src/commands/mutation.js` isole la transaction synchrone ; les ponts UI donnent accès à l’état, à la sauvegarde et au rafraîchissement. Les préférences passent par un service séparé. Les fragments exports, reprise/chargement, protection des actions, dispatcher et premier affichage sont nommés explicitement dans le manifeste. Les gestionnaires DOM restent des adaptateurs historiques ; ce n’est pas une refonte des écrans. [Bilan et limites](architecture/BILAN_3D.md).
+
+
+## 3E.1 — tests du moteur depuis les sources
+
+145 tests homogènes utilisent la façade `src/domain/index.cjs` au lieu d’extraire le moteur du HTML. Aucun moteur, adaptateur, manifeste de build ou HTML modifié. Les contrôles d’intégration de la distribution restent actifs. Les tests mixtes ne sont pas convertis automatiquement. [Bilan et inventaire](architecture/BILAN_3E1.md).

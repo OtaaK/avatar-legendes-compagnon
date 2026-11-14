@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Maître de Terre'),b=C.addFighter(s,'Adversaire');C.renameScene(s,'Historique antérieur');return {s,a,b};}
 function atomic(s,run){const before=JSON.stringify(s),snapshots=s.snapshots.length;assert(snapshots>0);assert.throws(run);assert.equal(JSON.stringify(s),before,'échec atomique : historique et snapshots conservés');assert.equal(s.snapshots.length,snapshots);assert(C.undo(s),'undo précédent conservé');assert.equal(s.sceneTitle,'');}
 // L'entretien de l'étoile déborde de fatigue : refus après création de l'événement.

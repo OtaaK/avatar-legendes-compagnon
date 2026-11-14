@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Ennemi'),c=C.addFighter(s,'Allié');s.phase='defendre';C.fighter(s,a).approach='defendre';const act={id:'seismic-init',round:1,sourceId:a,targetId:b,name:'Détection du pas lourd',approach:'defendre',options:{earthSeismicConfirmed:true}};s.actions.push(act);C.propose(s,act);C.commit(s,{});return {s,a,b,c};}
 {
  const {s,a,b,c}=setup();const enemy={id:'enemy-attack',round:1,sourceId:b,targetId:a,name:'Frapper',approach:'attaquer',options:{choice:'fatigue'}};s.actions.push(enemy);C.propose(s,enemy);

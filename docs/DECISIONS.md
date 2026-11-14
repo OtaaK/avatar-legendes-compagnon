@@ -122,3 +122,8 @@ Après accord explicite, PR 21 fusionnée à `a8cbd38`. 3C sépare les opératio
 ## 3D — continuer sans fusion implicite
 
 Alex demande « Continue » après livraison de PR 22. 3D démarre depuis `ae4c86a`, sur branche dépendante ; PR 22 reste non fusionnée. Isoler commandes synchrones, préférences, événements et démarrage sans refonte ni règle modifiée. Conserver le défaut préexistant de retour à Combattants au rechargement pour une correction distincte.
+
+
+## 3E.1 — migration des tests sans fusion implicite
+
+Après « Continue », branche depuis `b337017` (PR 23), sans fusion de 22 ou 23. Lot homogène de 145 tests moteur : import du domaine existant, seuls préambules changés ; corps, assertions, module assert et mode strict préservés. Tests mixtes/structurels conservés pour un lot suivant, aucune modification de l’application.

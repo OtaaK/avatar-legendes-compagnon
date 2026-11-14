@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function start(cover=false,riposte=false){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B'),c=C.addFighter(s,'C');for(const id of [a,b,c])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);if(cover)C.fighter(s,b).reactions.push({type:'cover',round:s.round,used:false});if(riposte)C.fighter(s,b).reactions.push({type:'riposte',round:s.round});return {s,a,b,c}}
 function check(name,fn){fn();console.log('OK',name)}
 function interleave(s,a,b,c){const a1=C.manual(s,a,b,'condition',0,'Fragile');const b1=C.manual(s,c,b,'condition',0,'Fragile');const a2=C.manual(s,a,b,'fatigue',2);a2.actionId=a1.actionId;return {a1,b1,a2}}

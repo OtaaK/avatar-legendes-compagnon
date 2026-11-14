@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function scene(name,options){const s=C.createCombat(),a=C.addFighter(s,'Armes'),b=C.addFighter(s,'Ennemi');const act={id:'arme',round:s.round,sourceId:a,targetId:b,name,approach:'attaquer',options};s.actions.push(act);return {s,a,b,act}}
 function check(name,options,expect){const {s,a,b,act}=scene(name,options);const events=C.propose(s,act);assert.equal(events.length,expect);C.commit(s);return {s,a,b}}
 {

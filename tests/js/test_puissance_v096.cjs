@@ -1,7 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 for(const count of [0,1,2,3,5]){
  const s=C.createCombat(),a=C.addFighter(s,'Technicien','PNJ'),b=C.addFighter(s,'Adversaire','PNJ');
  C.fighter(s,a).materials=count;

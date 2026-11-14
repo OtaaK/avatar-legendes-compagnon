@@ -17,7 +17,7 @@ pour réduire la taille et le risque des futurs changements.
 | **3B — sources et génération du HTML, fusionnée PR 21** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
 | **3C — persistance, préparée** | Isoler lecture/écriture et transactions derrière un adaptateur, sans changer clés ni formats | Importations historiques et champs inconnus conservés ; quota/lecture refusée, interruption, journal et reprise contrôlés ; refus/annulation sans perte ; aucune écriture au premier rendu |
 | **3D — affichage et commandes, préparée** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
-| **3E — imports des tests** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
+| **3E — imports des tests, premier lot préparé** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
 
 L’étape 3B doit livrer extraction et génération **ensemble**, pour éviter une période où
 le développeur doit maintenir à la main deux copies divergentes. Si son diff dépasse
@@ -101,3 +101,12 @@ PR dépendante de 3C ; PR 22 non fusionnée. Les ports de commandes synchrones s
 isolés sans réécriture métier ; exports, reprise, protection des actions, dispatcher et
 démarrage ont leurs fragments explicites. Préférences isolées, même traitement des
 refus. Limites et défaut préexistant : [bilan](BILAN_3D.md). 3E reste à réaliser.
+
+
+## Réalisation 3E.1 — 14 novembre 2026
+
+Après « Continue », branche dépendante de 3D, base `b337017`. 145 préambules homogènes
+migrés, corps inchangés. Inventaire de tous les scripts et comparaison Git ; exécution
+sans HTML ni interface. Aucune fusion de 22/23 autorisée. Les tests mixtes et structurels
+restent hors de ce premier lot, pour conserver une revue progressive. 3E n’est pas
+entièrement terminée. Voir [bilan](BILAN_3E1.md).

@@ -1,7 +1,5 @@
-const assert=require('assert'),fs=require('fs'),vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),a=C.addFighter(s,'Maître de terre');
 // Une activation déjà active est bloquée à la proposition, sans mutation.
 s.temporaryEffects.push({id:'armor-existing',targetId:a,originLabel:'Armure de terre',armorPoints:2});

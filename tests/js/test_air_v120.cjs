@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(name,options={}){const s=C.createCombat(),src=C.addFighter(s,'Air'),dst=C.addFighter(s,'Cible');const a={id:'air-test',round:s.round,sourceId:src,targetId:dst,name,approach:'attaquer',options};s.actions.push(a);return {s,src,dst,a};}
 {
  const {s,src,dst,a}=setup('Tourbillon miniature');const e=C.propose(s,a);

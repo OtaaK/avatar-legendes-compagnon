@@ -1,8 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
-const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),id=C.addFighter(s,'Toph');
 assert.throws(()=>C.addTemporaryEffect(s,id,'Lien','scene',{type:'personnage'}),/Personnage d’origine requis/);
 assert.equal(s.temporaryEffects.length,0);

@@ -1,8 +1,5 @@
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
-const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),a=C.addFighter(s,'Technologue'),b=C.addFighter(s,'Adversaire','PNJ');
 assert.equal(s.scene,1);C.fighter(s,a).equipmentDisabled=true;C.fighter(s,a).materials=2;C.fighter(s,a).fatigue=3;
 s.traps.push({id:'trap-1',ownerId:a,zone:'Passerelle',round:1});

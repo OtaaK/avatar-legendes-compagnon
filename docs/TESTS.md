@@ -200,3 +200,31 @@ données synthétiques identiques. Tolérance des arrondis Chromium : 1/255 par 
 sur au plus 0,1 % des pixels (plancher 100). Les captures restent en mémoire, pas publiées.
 Ces outils ne font pas partie de la suite CI à clone superficiel ; les nouveaux tests
 JS et navigateur ordinaires y sont découverts automatiquement.
+
+
+## Étape 3E.1 — migration des tests homogènes du moteur
+
+Les commandes ordinaires ne changent pas : 197 scripts JS et 40 scripts navigateur.
+145 scripts importent `loadDomain()` depuis les sources ; seuls leurs préambules sont
+remplacés. Leur module d’assertion (`assert` ou `node:assert/strict`) et leur mode strict
+sont conservés. Les corps sont identiques octet pour octet. Les 52 autres scripts JS
+et 40 scripts navigateur restent intacts. Aucun test n’est déplacé ou désactivé.
+
+Deux preuves ponctuelles sont disponibles depuis la racine :
+
+```bash
+node scripts/architecture/verify-test-migration.cjs
+node scripts/architecture/verify-test-migration.cjs --compare-base
+python scripts/architecture/check-source-only-tests.py
+```
+
+La première compare les fichiers livrés à l’inventaire du lot ; la seconde compare aussi
+les corps au commit Git `b337017` (historique local requis). La dernière exécute les
+145 scripts dans un dossier temporaire ne contenant ni `app/`, ni interface, ni anciens
+helpers. Elle retire uniquement son propre dossier temporaire en fin de contrôle.
+
+Ces outils documentent ce lot figé ; ils ne sont pas ajoutés comme verrou CI sur les
+futures modifications légitimes des scénarios. La CI ordinaire continue de découvrir
+et exécuter tous les scripts. Les contrôles du HTML, du générateur et les parcours
+Chromium restent actifs : tester les sources ne remplace pas tester la distribution.
+L’inventaire et le [bilan](architecture/BILAN_3E1.md) précisent les tests conservés et la suite.

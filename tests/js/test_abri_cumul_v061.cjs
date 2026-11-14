@@ -1,6 +1,6 @@
 'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function start(){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B'),c=C.addFighter(s,'C');for(const id of [a,b,c])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);C.fighter(s,b).reactions.push({type:'cover',round:s.round,used:false});return {s,a,b,c}}
 function check(name,fn){fn();console.log('OK',name)}
 check('deux attaques même état : la seconde reste efficace après absorption',()=>{const {s,a,b}=start();C.manual(s,a,b,'condition',0,'Fragile');C.manual(s,a,b,'condition',0,'Fragile');const ev=C.commit(s);assert.equal(C.fighter(s,b).conditions.join(','),'Fragile');assert.equal(ev.filter(x=>x.kind==='cover_used').length,1)});

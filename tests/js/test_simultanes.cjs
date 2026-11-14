@@ -1,8 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);
-const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B');C.declare(s,a,'attaquer');C.declare(s,b,'defendre');C.reveal(s);C.advance(s);return {s,a,b}}
 let count=0;function test(label,fn){fn();console.log('OK',label);count++}
 test('Deux événements excédentaires avec états distincts',()=>{const {s,a}=setup();const f=C.fighter(s,a);f.fatigue=5;const x=C.manual(s,a,a,'fatigue',1),y=C.manual(s,a,a,'fatigue',1);x.overflowConditions=['Fragile'];y.overflowConditions=['Confus'];C.commit(s);assert.deepEqual([...f.conditions],['Fragile','Confus']);assert.equal(f.fatigue,5)});

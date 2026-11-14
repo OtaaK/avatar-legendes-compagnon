@@ -1,7 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function scenario(name,options={}){const s=C.createCombat(),src=C.addFighter(s,'Maître'),dst=C.addFighter(s,'Cible');const a={id:'a-117',round:s.round,sourceId:src,targetId:dst,name,approach:'attaquer',options};s.actions.push(a);return {s,src,dst,a};}
 const cases=[
  ['Enfouissement',{},[['fatigue',2],['status_add','piege']]],

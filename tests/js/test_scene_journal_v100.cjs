@@ -1,7 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat();const id=C.addSceneNote(s,'  Une lettre mystérieuse  ');
 assert.equal(id,'scene-note-1');assert.equal(s.sceneJournal[0].text,'Une lettre mystérieuse');assert.equal(s.history.at(-1).events[0].kind,'scene_note');
 for(const bad of ['', '  ', 'x'.repeat(1001),null])assert.throws(()=>C.addSceneNote(s,bad));

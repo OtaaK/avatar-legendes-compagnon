@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'Maître terre'),b=C.addFighter(s,'Cible');C.fighter(s,b).statuses.push('gene');s.temporaryEffects.push({id:'shield',targetId:b,originSourceId:a,originLabel:'Bouclier de roche',duration:'manual',shieldGrantedGene:true,shieldExternalGene:false,shieldBlockedRound:0});return {s,a,b};}
 function metal(s,a,b){s.actions.push({id:'metalAction',name:'Entraves de métal',sourceId:a,targetId:b,options:{earthMetalConfirmed:true}});s.proposals.push({id:'metalGene',actionId:'metalAction',sourceId:a,targetId:b,kind:'status_add',amount:0,detail:'gene',reason:'Entraves de métal : cible Gênée',round:s.round});}
 function addCost(s,a,b){s.actions.push({id:'buryAction',name:'Enfouissement',sourceId:a,targetId:b,options:{earthShieldDiscountId:'shield'}});s.proposals.push({id:'buryCost',actionId:'buryAction',sourceId:a,targetId:a,kind:'fatigue',amount:2,detail:'',reason:'Enfouissement : coût',round:s.round});s.proposals.push({id:'buryTrap',actionId:'buryAction',sourceId:a,targetId:b,kind:'status_add',amount:0,detail:'piege',reason:'Enfouissement : cible Piégée',round:s.round});}

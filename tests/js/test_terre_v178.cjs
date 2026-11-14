@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(fatigue=5,conditions=[]){const s=C.createCombat(),id=C.addFighter(s,'Terre');s.phase='fin';s.fighters[0].fatigue=fatigue;s.fighters[0].conditions=[...conditions];s.fighters[0].statuses=['avantage'];s.temporaryEffects.push({id:'lava',originLabel:'Étoile de lave',targetId:id,lavaMaintainedRound:0,lavaExternalAdvantage:false,label:'Étoile de lave'});return {s,id};}
 // V2.33 / p.100 : l'entretien est un coût volontaire, pas une fatigue subie.
 for(const conditions of [[],['Confus']]){

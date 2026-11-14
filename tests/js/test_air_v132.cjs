@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(prediction){const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Adversaire');const act={id:'reed132',round:s.round,sourceId:a,targetId:b,name:'Souple comme un roseau',approach:'esquiver',options:{airReedConfirmed:true,airReedPrediction:prediction}};s.actions.push(act);C.propose(s,act);C.commit(s);assert(!s.temporaryEffects[0].label.includes(prediction));s.phase='fin';C.nextRound(s);return {s,a,b,id:s.temporaryEffects[0].id};}
 {
  const {s,a,b,id}=setup('attaquer');

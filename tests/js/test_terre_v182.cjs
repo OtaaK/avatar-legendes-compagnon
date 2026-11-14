@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(name,options={}){const s=C.createCombat(),a=C.addFighter(s,'Terre','PNJ'),b=C.addFighter(s,'Cible','PNJ');const action={id:'test182',name,sourceId:a,targetId:b,options};return {s,a,b,action};}
 function prep(o){o.s.actions.push(o.action);o.s.proposals=C.propose(o.s,o.action);}
 for(const name of ['Colonne de pierre','Mouvements tectoniques']){

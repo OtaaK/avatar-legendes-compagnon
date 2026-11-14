@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 for(const [name,status] of [['Bouclier de roche','gene'],['Armure de terre','avantage']]){
  const s=C.createCombat(),caster=C.addFighter(s,'Terre'),id=C.addFighter(s,'Cible'),f=C.fighter(s,id);
  f.statuses.push(status);f.roundStatuses=[{status,expiresAfterRound:1},{status,expiresAfterRound:2}];

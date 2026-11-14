@@ -1,8 +1,6 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 const s=C.createCombat(),a=C.addFighter(s,'Air'),b=C.addFighter(s,'Ennemi');
 C.setEngagement(s,a,b,true);C.fighter(s,a).fatigue=3;C.fighter(s,b).approach='attaquer';
 let act={id:'osc',round:s.round,sourceId:a,targetId:b,name:'Oscillations du vent',approach:'defendre',options:{airOscConfirmed:true}};s.actions.push(act);

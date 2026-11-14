@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(points=2){const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Adversaire');s.temporaryEffects.push({id:'arm',originLabel:'Armure de terre',targetId:a,armorPoints:points});return {s,a,b};}
 function hit(s,b,a,attack,detail){const id='e'+s.seq++;s.proposals.push({id,actionId:attack,sourceId:b,targetId:a,kind:'condition',amount:0,detail,reason:'Attaque',round:s.round});return id;}
 // Le même état, absorbé à l'attaque A, DOIT rester applicable à l'attaque B.

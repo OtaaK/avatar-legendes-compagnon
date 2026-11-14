@@ -1,5 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(code.slice(0,code.indexOf("'use strict';",10)),ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function start(){const s=C.createCombat(),a=C.addFighter(s,'A'),b=C.addFighter(s,'B'),c=C.addFighter(s,'C'),d=C.addFighter(s,'D');for(const id of [a,b,c,d])C.declare(s,id,'attaquer');C.reveal(s);C.advance(s);C.fighter(s,b).reactions.push({type:'cover',round:s.round,used:false});C.fighter(s,c).reactions.push({type:'protection',allyId:b,round:s.round,used:false,targeted:false});return {s,a,b,c,d}}
 function test(name,fn){fn();console.log('OK',name)}
 test('Interception prioritaire conserve l’abri',()=>{const {s,a,b,c}=start();const e=C.manual(s,a,b,'fatigue',1);C.commit(s,{['intercept:'+e.id]:true});assert.equal(C.fighter(s,b).fatigue,0);assert.equal(C.fighter(s,b).reactions[0].used,false);assert.equal(C.fighter(s,c).fatigue,1)});

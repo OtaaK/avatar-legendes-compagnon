@@ -129,3 +129,13 @@ Préférences séparées ; exports, reprise, événements et démarrage sont dan
 nommés du manifeste. Conserver les assertions historiques et les règles ; aucune refonte.
 Le retour à Combattants au rechargement est préexistant : le signaler, ne pas le corriger
 implicitement dans la séparation d’architecture. Voir `docs/architecture/BILAN_3D.md`.
+
+
+## Autorisation active — mission 3E.1 (14 novembre 2026)
+
+Après PR 23, Alex demande « Continue ». Branche dépendante de 3D, base `b337017` ;
+aucune fusion de 22/23 ou 3E implicite. Migrer les préambules homogènes des tests moteur
+vers la façade existante ; préserver tous les corps, assertions, module assert et mode
+strict. Application et sauvegardes inchangées. Les preuves de migration sont ponctuelles,
+pas un verrou CI sur les futurs scénarios. Les tests mixtes/structurels ont leur lot
+suivant ; ne pas annoncer toute 3E terminée. Voir `docs/architecture/BILAN_3E1.md`.

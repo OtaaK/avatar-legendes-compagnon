@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function setup(){let s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Cible');return {s,a,b};}
 function effect(s,props){s.temporaryEffects.push({id:'scene'+s.seq++,duration:'scene',label:'Test',...props});}
 // Bouclier + armure + étoile : la nouvelle scène supprime les effets ET leurs statuts.

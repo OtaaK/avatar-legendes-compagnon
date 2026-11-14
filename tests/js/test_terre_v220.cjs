@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const assert=require('assert');
+const {CombatCore:C}=require('../../src/domain/index.cjs').loadDomain();
 function scene(){const s=C.createCombat(),a=C.addFighter(s,'Terre 1'),b=C.addFighter(s,'Terre 2'),c=C.addFighter(s,'Ennemi');for(const id of [a,b,c])C.fighter(s,id).approach='defendre';return {s,a,b,c};}
 // Le dernier combattant invalide ne doit PAS laisser payer les deux premiers.
 {const {s,a,b,c}=scene();for(const id of [a,b,c]){const f=C.fighter(s,id);f.statuses.push('gene');f.geneChoice='fatigue';}C.fighter(s,c).fatigue=5;const before=JSON.stringify(s);assert.throws(()=>C.reveal(s),/impossible de payer Gêné/);assert.equal(JSON.stringify(s),before,'révélation entièrement atomique');C.fighter(s,c).geneChoice='malus';C.reveal(s);assert.equal(s.phase,'defendre');assert.equal(C.fighter(s,a).fatigue,1);assert.equal(C.fighter(s,b).fatigue,1);assert.equal(C.fighter(s,c).fatigue,5);assert.equal(C.fighter(s,c).geneChoice,'malus');}
