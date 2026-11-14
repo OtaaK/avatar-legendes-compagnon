@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const code=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
-const segment=code.slice(code.indexOf('function commitCombatMutation('),code.indexOf('function saveLibrary()',code.indexOf('function commitCombatMutation(')));
+const segment=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/commands/mutation.js'),'utf8')+'\n'+code.slice(code.indexOf('function commitCombatMutation('),code.indexOf('function saveLibrary()',code.indexOf('function commitCombatMutation(')));
 let stored,fail=false,redraw=0;
 const ctx={s:{round:1,fighters:[]},persist:(_k,value)=>{if(fail)return false;stored=JSON.stringify(value);return true},originalRender:()=>redraw++,console};
 vm.createContext(ctx);vm.runInContext(segment,ctx);

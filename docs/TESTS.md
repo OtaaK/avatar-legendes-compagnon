@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 196 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 197 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -172,3 +172,31 @@ compare son résultat à `BUILD_REFERENCE.json`, référence courante distincte 
 Deux anciens tests reçoivent seulement le service extrait en préambule de leur fixture ;
 leurs assertions restent intégralement conservées. Les deux contrôles d’empreinte/parité
 sont actualisés explicitement, sans prétendre que le HTML est encore celui de 3A.
+
+
+## Étape 3D — commandes, événements et démarrage
+
+197 scripts JS et 40 scripts navigateur. `test_command_ports.cjs` couvre 16 scénarios
+sans DOM (retours, restauration, commandes imbriquées, absence d’écriture au chargement,
+préférences refusées). Les quatre tests historiques de transactions chargent le service
+extrait en préparation ; toutes leurs assertions sont conservées.
+
+`test_architecture_commands.py` teste 390×844, 768×1024, 1280×900 et 1920×1080 :
+navigation, clavier, annulation d’invite et de fenêtre, copie indépendante, historique,
+rendu sans écriture métier, rechargement et interactions sans réseau. Il teste aussi
+le refus du stockage des préférences. Le retour à l’onglet Combattants après rechargement
+est un défaut préexistant reproduit sur la base, documenté plutôt que modifié ici.
+
+Contrôles ponctuels exécutés, nécessitant le commit `ae4c86a` dans l’historique :
+
+```bash
+node scripts/architecture/compare-commands.cjs
+python scripts/architecture/compare-visual.py
+```
+
+Le premier compare 36 scénarios au code précédent (états, retours, erreurs, écritures,
+rendus). Le second compare 16 captures (quatre rubriques × quatre tailles), avec des
+données synthétiques identiques. Tolérance des arrondis Chromium : 1/255 par composante
+sur au plus 0,1 % des pixels (plancher 100). Les captures restent en mémoire, pas publiées.
+Ces outils ne font pas partie de la suite CI à clone superficiel ; les nouveaux tests
+JS et navigateur ordinaires y sont découverts automatiquement.

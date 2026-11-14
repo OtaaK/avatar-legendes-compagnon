@@ -118,3 +118,14 @@ conserve le pont navigateur et les messages. Aucune modification des clés ou fo
 Les préférences UI et l’affichage restent pour 3D. Référence historique 3A conservée,
 empreinte de build courante distincte dans `BUILD_REFERENCE.json`. Aucune fusion de
 3C, refonte UI, dépendance ou migration implicite autorisée.
+
+
+## Autorisation active — mission 3D (14 novembre 2026)
+
+Après la PR 22, Alex demande « Continue ». Travailler sur une branche dépendante de
+`architecture/persistance-adaptateur`, base `ae4c86a`, sans fusion de 22 ou 3D implicite.
+Commandes synchrones dans `src/commands/`, pont UI dans `src/interface/commands.js`.
+Préférences séparées ; exports, reprise, événements et démarrage sont dans les fragments
+nommés du manifeste. Conserver les assertions historiques et les règles ; aucune refonte.
+Le retour à Combattants au rechargement est préexistant : le signaler, ne pas le corriger
+implicitement dans la séparation d’architecture. Voir `docs/architecture/BILAN_3D.md`.

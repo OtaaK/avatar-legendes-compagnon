@@ -22,6 +22,13 @@ connexion ou serveur. Sa première génération est identique à la version pré
 | `src/legacy/validation.js` | Validation historique |
 | `src/persistence/storage.js`, `index.cjs` | Service injectable sans DOM ; entrée Node séparée |
 | `src/legacy/persistence.js` | Pont navigateur : signatures historiques, avertissements et accès tardif au stockage |
+| `src/commands/mutation.js`, `index.cjs` | Commande synchrone injectable, entrée Node séparée |
+| `src/interface/commands.js` | Pont entre état courant, commandes et stockage |
+| `src/persistence/preferences.js`, `src/interface/preferences.js` | Préférences silencieuses, séparées des sauvegardes métier |
+| `src/interface/exports.js` | Exports privés/publics et import de fiches existants |
+| `src/interface/startup-state.js` | Reprise, chargement et façade de rendu sans sauvegarde métier |
+| `src/interface/combat-command-bindings.js` | Protection des actions de combat existantes |
+| `src/interface/events.js`, `bootstrap.js` | Distribution des événements et installation/premier affichage |
 | `src/domain/index.cjs` | Façade Node de chargement des sources pour les tests et outils |
 | `scripts/build.cjs`, `scripts/architecture/assemble.cjs` | Génération/contrôle par bibliothèques standard Node |
 | `scripts/architecture/domain-context.cjs` | Adaptateur Node partagé d’exécution en VM des corps métier |
@@ -128,3 +135,24 @@ multi-onglets ni verrouillage : ce sont les garanties existantes du journal, con
 L’identité initiale des octets reste prouvée pour 3B, mais n’est plus attendue en 3C.
 `BUILD_REFERENCE.json` garde l’empreinte de génération actuelle ; `REFERENCE.json`
 reste l’oracle historique des contrats. Voir [le bilan 3C](BILAN_3C.md).
+
+
+## Évolution 3D
+
+`createMutationCommand` reçoit `read`, `restore`, `save`, `onRollback` et le message
+historique de refus. `nested` garde une seule transaction de combat externe ;
+`saveUnchanged` conserve la différence existante entre bibliothèque (écriture même sans
+changement) et combat (écriture si changement). L’enveloppe reste **synchrone** : ne
+pas lui fournir une fonction asynchrone. Elle n’ajoute ni file d’attente ni transaction
+atomique entre bibliothèque et combat. La création et l’import Node ne consultent
+ni état, ni stockage, ni DOM. L’adaptateur UI fournit les variables globales actuelles.
+
+`createPreferences` reçoit un accès tardif au stockage ; erreurs silencieuses et replis
+restent identiques. Le rendu peut écrire des préférences visuelles comme auparavant,
+mais n’écrit pas les sauvegardes métier. Toutes les inscriptions de listeners délégués
+sont regroupées au démarrage, dans le même ordre relatif. Le dispatcher garde sa liste
+fixe : les données importées restent des valeurs inertes, jamais du code interprété.
+
+Les fonctions d’écran historiques continuent à lire le DOM et appeler les ponts ;
+cette étape ne transforme pas chaque gestionnaire en composant pur. Le moteur, modèles,
+catalogue, styles et balisage restent inchangés. [Bilan](BILAN_3D.md).

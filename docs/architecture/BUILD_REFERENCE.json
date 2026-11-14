@@ -1,6 +1,6 @@
 {
-  "stage": "3C",
-  "baseCommit": "a8cbd38cdc73bfe93ee4d0106da38e9760b309cb",
-  "htmlSha256": "317e491c1f2d37f3b1f5ce1f2b4d900ae9c15b20d728a4e5c8a8a8c94c1b3ec6",
-  "reason": "Extraction de la persistance derrière des ports ; contrats 3A inchangés, corps HTML modifié explicitement."
+  "stage": "3D",
+  "baseCommit": "ae4c86a94335c11e2f4b79a708d03990939572c5",
+  "htmlSha256": "41a5e5fe1a226bb5c621c753411e70ef3145d2dfbee61e9d613a9b267622609e",
+  "reason": "Commandes injectables, préférences et démarrage distincts ; contrats historiques inchangés."
 }

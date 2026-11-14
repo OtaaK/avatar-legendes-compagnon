@@ -20,8 +20,8 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 | `app/` | HTML autonome généré, à ouvrir directement |
 | `src/` | Sources éditables, données, styles et manifeste d’assemblage |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 196 scripts de régression JavaScript |
-| `tests/browser/` | 39 scripts navigateur, dont un contrôle hors connexion |
+| `tests/js/` | 197 scripts de régression JavaScript |
+| `tests/browser/` | 40 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
 | `CHANGELOG.md` | Historique synthétique ; originaux archivés sous une étiquette Git |
@@ -97,5 +97,13 @@ avec `node scripts/build.cjs --check`. Pour utiliser le compagnon, ouvrir seulem
 `app/simulateur.html` : aucune commande ni installation supplémentaire.
 
 Le [bilan 3B](docs/architecture/BILAN_3B.md) détaille la conservation des corps métier,
-les parités et les limites. Le service de persistance est isolé en 3C ; l’affichage reste à découpler en 3D.
+les parités et les limites. Le service de persistance est isolé en 3C ; les commandes et le démarrage sont séparés en 3D.
 Voir le [bilan 3C](docs/architecture/BILAN_3C.md).
+
+
+## Commandes et démarrage — étape 3D
+
+Le service de commandes est indépendant de l’écran ; les ponts, événements, exports
+et démarrage sont identifiés dans les sources. L’interface et les règles restent
+inchangées. [Bilan 3D et défaut préexistant](docs/architecture/BILAN_3D.md).
+Cette étape dépend de la PR 22 (3C), encore non fusionnée.

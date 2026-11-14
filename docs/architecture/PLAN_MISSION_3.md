@@ -16,7 +16,7 @@ pour réduire la taille et le risque des futurs changements.
 | **3A — contrats et contrôles, fusionnée PR 20** | Description des interfaces, référence main figée, préparation de tests centralisée et scénario commun Node/Chromium | HTML et 230 anciens scripts identiques ; mêmes refus, états, copies et reprises ; aucun accès DOM/stockage au chargement métier ; contrôles de référence reproductibles |
 | **3B — sources et génération du HTML, fusionnée PR 21** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
 | **3C — persistance, préparée** | Isoler lecture/écriture et transactions derrière un adaptateur, sans changer clés ni formats | Importations historiques et champs inconnus conservés ; quota/lecture refusée, interruption, journal et reprise contrôlés ; refus/annulation sans perte ; aucune écriture au premier rendu |
-| **3D — affichage et commandes** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
+| **3D — affichage et commandes, préparée** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
 | **3E — imports des tests** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
 
 L’étape 3B doit livrer extraction et génération **ensemble**, pour éviter une période où
@@ -92,3 +92,12 @@ API de persistance ou interface de jeu n’est changée par ce déplacement.
 ## Réalisation 3C — 14 novembre 2026
 
 Autorisation explicite d’Alex après revue de 3B : fusion PR 21 puis branche 3C depuis `a8cbd38`. Service sans DOM, pont compatible, clés et formats inchangés. Les préférences UI restent dans 3D. Voir [bilan](BILAN_3C.md). Pas de fusion automatique de 3C.
+
+
+## Réalisation 3D — 14 novembre 2026
+
+Après « Continue », branche `architecture/commandes-affichage` depuis `ae4c86a`.
+PR dépendante de 3C ; PR 22 non fusionnée. Les ports de commandes synchrones sont
+isolés sans réécriture métier ; exports, reprise, protection des actions, dispatcher et
+démarrage ont leurs fragments explicites. Préférences isolées, même traitement des
+refus. Limites et défaut préexistant : [bilan](BILAN_3D.md). 3E reste à réaliser.
