@@ -61,6 +61,11 @@
     },
     {
       "kind": "classic",
+      "path": "src/persistence/storage.js",
+      "group": "persistence"
+    },
+    {
+      "kind": "classic",
       "path": "src/legacy/persistence.js",
       "group": "persistence"
     },

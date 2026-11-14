@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const segment=code.slice(code.indexOf('const COMPLETE_IMPORT_JOURNAL='),code.indexOf('function loadSaved('));
+const segment=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/persistence/storage.js'),'utf8')+'\n'+code.slice(code.indexOf('const COMPLETE_IMPORT_JOURNAL='),code.indexOf('function loadSaved('));
 const J='avatar-complete-import-journal-v1', L='avatar-roster-v020', C='avatar-v020';
 function setup(failKey){const values=new Map([[L,'{"old":"library"}'],[C,'{"old":"combat"}']]);let fail=failKey,warning='';const localStorage={getItem:k=>values.has(k)?values.get(k):null,setItem:(k,v)=>{if(k===fail)throw Error('quota');values.set(k,v)},removeItem:k=>{if(k===fail)throw Error('quota');values.delete(k)}};const node={hidden:true,textContent:''};const ctx={localStorage,document:{getElementById:()=>node},warnStorage:e=>warning=e.message,console};vm.createContext(ctx);vm.runInContext('const completeImportRecoveryOk=true;'+segment,ctx);return {ctx,values,node,setFail:k=>fail=k,warning:()=>warning}}
 let count=0;function test(name,fn){fn();console.log('OK '+name);count++}

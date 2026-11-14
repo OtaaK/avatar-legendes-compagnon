@@ -14,7 +14,7 @@ plus récent pour la commande commune, puis depuis la racine :
 python scripts/test.py --suite js
 ```
 
-Les 195 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
+Les 196 scripts sont lancés séparément. Le runner utilise la bibliothèque standard de
 Python, sans Playwright pour cette suite. Pour un test isolé :
 
 ```bash
@@ -154,3 +154,21 @@ Node et vrai document Chromium, en desktop/mobile. La préparation VM est partag
 outil, les corps JS ne sont ni recopiés ni remplacés par des simulations métier.
 Les 193 anciens scripts JS sont inchangés ; une assertion navigateur est ajoutée, aucune
 supprimée. Aucun test n’est déplacé ni ignoré. Voir [le bilan](architecture/BILAN_3B.md).
+
+
+## Étape 3C — stockage injectable
+
+`test_storage_adapter.cjs` ajoute 17 scénarios sans DOM : création sans accès,
+ordre des écritures, refus à chaque opération de l’import complet, quota persistant,
+reprise, valeurs absentes, journal invalide, anciennes versions, validation et sérialisation.
+Total : 196 scripts JS et 39 scripts navigateur. Les 58 comparaisons ponctuelles
+`node scripts/architecture/compare-persistence.cjs` confrontent directement l’ancien
+code au nouveau (valeurs, opérations, erreurs, notifications). Cette commande nécessite
+le commit `a8cbd38` dans l’historique local et ne fait pas partie de la CI à clone superficiel.
+
+La référence `REFERENCE.json` de 3A reste inchangée : les contrats restent comparés,
+mais l’identité de ses octets HTML est désormais explicitement fausse. Le générateur
+compare son résultat à `BUILD_REFERENCE.json`, référence courante distincte et revue.
+Deux anciens tests reçoivent seulement le service extrait en préambule de leur fixture ;
+leurs assertions restent intégralement conservées. Les deux contrôles d’empreinte/parité
+sont actualisés explicitement, sans prétendre que le HTML est encore celui de 3A.

@@ -82,3 +82,8 @@ Missions 0/1/2 fusionnées ; mission 3 autorisée. [Plan en cinq PR](docs/archit
 ## Étape 3B — sources et HTML généré
 
 3A fusionnée (PR 20), 3B autorisée. Sources déplacées sans réécriture ; assemblage déterministe et contrôle de divergence ; façade Node et parité sources/HTML/Chromium. L’HTML reste autonome et identique à la référence. [Guide](docs/architecture/SOURCES_ET_BUILD.md), [bilan](docs/architecture/BILAN_3B.md). Prochaines étapes distinctes : isoler persistance, puis affichage/commandes, puis migrer les anciens tests. Aucun framework ou refonte UI.
+
+
+## 3C — persistance, préparée
+
+3B fusionnée PR 21. 3C : service injectable, pont compatible et tests de refus/reprise ; attendre revue de sa PR avant fusion. Puis 3D affichage/commandes et 3E migration progressive des tests, UI ensuite.

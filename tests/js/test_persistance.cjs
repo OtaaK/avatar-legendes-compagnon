@@ -1,7 +1,7 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const segment=script.slice(script.indexOf('function validateBackupLinks('),script.indexOf('const ROSTER_KEYS='));
+const segment=fs.readFileSync(require('node:path').join(require('../support/paths.cjs').ROOT,'src/persistence/storage.js'),'utf8')+'\n'+script.slice(script.indexOf('function validateBackupLinks('),script.indexOf('const ROSTER_KEYS='));
 const warnings=[];let data=new Map();const localStorage={setItem(k,v){data.set(k,v)},getItem(k){return data.has(k)?data.get(k):null}};
 const document={getElementById(){return {hidden:true,textContent:''}}};
 const ctx={localStorage,document,console:{error(){},warn(x){warnings.push(x)}},alert(){}};

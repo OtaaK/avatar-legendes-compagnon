@@ -15,7 +15,7 @@ function memory(){
  removeItem(k){calls.push(['remove',k]);if(this.fail==='remove:'+k)throw Error('Retrait refusé');data.delete(k);}};
 }
 test('contrats observés : 80 entrées publiques, 111 techniques et dix Livrets',()=>{
- assert.deepEqual(checkContracts(),{referenceCommit:'55d56f6f0e49e6cb480099fd06282f85d889f0db',htmlIdenticalToReference:true,exportedEntries:80,catalogEntries:111,playbooks:10});
+ assert.deepEqual(checkContracts(),{referenceCommit:'55d56f6f0e49e6cb480099fd06282f85d889f0db',htmlIdenticalToReference:false,exportedEntries:80,catalogEntries:111,playbooks:10});
 });
 test('chargement métier sans DOM, stockage, démarrage UI ou persistance implicite',()=>{
  const a=loadLegacyApplication();assert.equal(a.persistence,null);assert.equal(a.warnings.length,0);

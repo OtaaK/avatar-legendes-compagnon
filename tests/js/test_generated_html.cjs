@@ -15,9 +15,9 @@ function read(root,name){return fs.readFileSync(path.join(root,name),'utf8');}
 function write(root,name,text){fs.writeFileSync(path.join(root,name),text);}
 function manifest(root,change){const m=JSON.parse(read(root,'src/assembly.json'));change(m);write(root,'src/assembly.json',JSON.stringify(m));}
 function generated(root){return read(root,'app/simulateur.html');}
-test('sources assemblées identiques au HTML distribué et à la référence 3A',()=>{
+test('sources assemblées identiques au HTML distribué et à la référence de génération courante',()=>{
  const a=assemble(),b=assemble();assert.ok(a.bytes.equals(b.bytes));assert.ok(a.bytes.equals(fs.readFileSync(path.join(ROOT,'app/simulateur.html'))));
- assert.equal(a.sha256,require('../../docs/architecture/REFERENCE.json').htmlSha256);assert.equal(build({check:true}).matches,true);
+ assert.equal(a.sha256,require('../../docs/architecture/BUILD_REFERENCE.json').htmlSha256);assert.equal(build({check:true}).matches,true);
 });
 test('check sur sortie absente : aucun fichier ou dossier créé',()=>fixture(root=>{
  const result=build({root,check:true});assert.equal(result.matches,false);assert.equal(result.changed,false);assert.equal(fs.existsSync(path.join(root,'app')),false);

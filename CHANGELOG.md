@@ -108,3 +108,8 @@ de divergence et façade Node pour les tests. Première génération identique �
 précédente ; mêmes règles, sauvegardes et interface, sans dépendance ajoutée.
 [Guide de développement](docs/architecture/SOURCES_ET_BUILD.md) et
 [bilan de conservation](docs/architecture/BILAN_3B.md).
+
+
+## 14 novembre 2026 — architecture 3C, non fusionnée
+
+Service de persistance injectable sans DOM, pont navigateur compatible, tests de refus et restauration. Aucun format ni règle changé. 3B intégrée par PR 21 avec accord du propriétaire.

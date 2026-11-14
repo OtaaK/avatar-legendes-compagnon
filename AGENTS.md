@@ -108,3 +108,13 @@ Conserver les corps, ordre, exports et données ; aucune règle ou interface cha
 Avant les suites, exécuter `node scripts/build.cjs --check` ; ne pas régénérer en CI
 pour masquer un écart. Les clés/formats et les tests historiques restent conservés.
 Aucune nouvelle dépendance, fusion, refonte UI, ni changement implicite des branches React.
+
+
+## Autorisation active — mission 3C (14 novembre 2026)
+
+Alex autorise explicitement la fusion de PR 21 et le démarrage de 3C ; main `a8cbd38`.
+Le service `src/persistence/storage.js` reste sans DOM ; `src/legacy/persistence.js`
+conserve le pont navigateur et les messages. Aucune modification des clés ou formats.
+Les préférences UI et l’affichage restent pour 3D. Référence historique 3A conservée,
+empreinte de build courante distincte dans `BUILD_REFERENCE.json`. Aucune fusion de
+3C, refonte UI, dépendance ou migration implicite autorisée.
