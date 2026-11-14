@@ -1,5 +1,25 @@
 # Feuille de route
 
+## Priorité active — convergence vers le dépôt v0 (14 novembre 2026)
+
+Cette séquence remplace les objectifs de produit HTML/Vite des sections historiques.
+
+- [x] Phase A : audit de convergence examiné et validé par le propriétaire.
+- [x] Phase B préparée sur `convergence/phase-b-domaine`, base Livrets `84f39e4` :
+  sécurité du domaine enrichi, contrats TypeScript, services sans DOM, conservation v1/v2,
+  extensions, sauvegardes et descriptions privées séparées. Voir le
+  [bilan et les vérifications](docs/migration/PHASE_B_DOMAINE.md).
+- [ ] Validation propriétaire de la phase B ; aucune fusion automatique.
+- [ ] Recette du lot 2 PJ/PNJ de v0, puis gel d'un commit d'intégration explicite.
+- [ ] Après autorisation distincte : raccorder progressivement les services dans **le seul
+  projet Next.js `avatar-legendes-ui`**, avec critères de parité par écran et retour arrière.
+- [ ] Qualifier ensuite le démarrage hors ligne Next.js et la distribution ; une sortie
+  HTML unique n'est pas acquise pour Next.js et doit être étudiée séparément.
+
+Aucune ancienne PR d'architecture HTML à fusionner dans cette phase. Aucun nettoyage,
+aucune suppression ni aucun nouveau lot visuel. Arrêt à la livraison de B.
+
+
 ## Orientation active — convergence vers l’interface v0
 
 La référence visuelle devient `OtaaK/avatar-legendes-ui`. Le métier et la compatibilité

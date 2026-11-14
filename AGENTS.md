@@ -1,5 +1,29 @@
 # AGENTS.md — Avatar Légendes : Compagnon
 
+
+## Autorisation prioritaire — phase B domaine (14 novembre 2026)
+
+La phase A est validée. La cible définitive est **une seule application React + TypeScript
+avec Next.js dans `OtaaK/avatar-legendes-ui`**. Les anciens paragraphes Vite/HTML décrivent
+l'historique, pas la cible actuelle. Ne pas développer un deuxième produit React.
+
+Seule la phase B est autorisée ici : branche `convergence/phase-b-domaine`, issue de
+`convergence/preparation-livrets` au commit `84f39e4cb3fa2a187bcaaa82a983bab89206106d`.
+Sécuriser le domaine enrichi et ses imports, documenter ses contrats et préparer des
+services sans DOM ; aucun fichier du dépôt v0, aucun raccordement d'écran, aucune
+nouvelle mécanique. Garder les formats v1/v2, les extensions compatibles et les textes
+privés dans leur espace séparé. Les anciens formats ne sont pas remplacés par v0.
+
+L'oracle HTML reste figé. Les seules exceptions aux corps extraits sont les protections
+explicites `scripts/convergence/security-overlays.mjs`, reproduites et contrôlées par
+`test:extraction`. Ne pas désactiver ce contrôle. Lire
+`docs/migration/PHASE_B_DOMAINE.md` pour les limites et procédures de vérification.
+
+Ne supprimer, fermer, archiver ou réécrire aucune branche/PR, ni aucun ancien fichier.
+Commits et push de la branche autorisés ; aucune fusion ni aucun déploiement.
+S'arrêter à la fin de B pour validation. Attendre la recette du lot 2 v0 avant de
+figer une référence et de proposer l'intégration Next.js.
+
 ## Rôle et collaboration
 
 Tu es l'agent de développement principal du projet **Avatar Légendes : Compagnon**. Le propriétaire du projet est novice en programmation : prends en charge les choix techniques courants, explique tes actions en **français clair** et limite les manipulations à lui demander. Ne multiplie pas les questions lorsqu'une décision technique raisonnable peut être prise et vérifiée par des tests. En revanche, fais valider les choix touchant aux règles, au comportement attendu, à l'ergonomie importante, aux données des utilisateurs ou aux fonctionnalités.

@@ -1,7 +1,48 @@
 {
   "businessCommit": "a9079fa5b1babc560ee11a8d28430504df8704fc",
+  "securityOverlay": "phase-b-import-safety-v1",
   "note": "Complément technique à MATRICE_FONCTIONNELLE.md ; aucune API listée ne prouve une intégration UI. Les handlers dynamiquement construits sont couverts par la matrice et les tests historiques.",
   "publicFunctions": [
+    {
+      "api": "assertCharacterId",
+      "module": "packages/domain/src/import-safety.js",
+      "target": "Domaine → frontières JSON et identifiants",
+      "lot": 6,
+      "status": "phase B ; service sans DOM",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "assertCombatIdentifiers",
+      "module": "packages/domain/src/import-safety.js",
+      "target": "Domaine → frontières JSON et identifiants",
+      "lot": 6,
+      "status": "phase B ; service sans DOM",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "assertSafeJson",
+      "module": "packages/domain/src/import-safety.js",
+      "target": "Domaine → frontières JSON et identifiants",
+      "lot": 6,
+      "status": "phase B ; service sans DOM",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "isSafeId",
+      "module": "packages/domain/src/import-safety.js",
+      "target": "Domaine → frontières JSON et identifiants",
+      "lot": 6,
+      "status": "phase B ; service sans DOM",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
+    {
+      "api": "parseSafeJson",
+      "module": "packages/domain/src/import-safety.js",
+      "target": "Domaine → frontières JSON et identifiants",
+      "lot": 6,
+      "status": "phase B ; service sans DOM",
+      "scenario": "Contrats de sauvegarde et parité"
+    },
     {
       "api": "npcProfileFromFields",
       "module": "packages/domain/src/character-fields.js",

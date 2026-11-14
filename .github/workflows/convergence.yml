@@ -1,4 +1,4 @@
-name: Convergence React — Préparation Livrets
+name: Convergence — Domaine phase B
 on:
   pull_request:
   workflow_dispatch:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   lot1:
-    name: Livrets et non-régression
+    name: Domaine et non-régression
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,11 +25,13 @@ jobs:
       - run: npm run test:extraction
       - run: npm run test:inventory
       - run: npm run test:contracts
+      - run: npm run test:business-types
       - run: npm run test:playbooks
       - run: npm run test:parity
       - run: npm run build
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m playwright install --with-deps chromium
+      - run: npm run test:business-browser
       - run: npm run test:react
       - run: npm run test:characters
       - run: npm run test:library
@@ -50,6 +52,7 @@ jobs:
         with:
           name: convergence-rapports-et-captures
           path: |
+            work/phase-b/browser-results.json
             work/parity/results.json
             work/lot1-browser/
             work/lot2-browser/

@@ -1,3 +1,4 @@
+import { parseSafeJson } from "../../domain/src/import-safety.js";
 import { validateSession } from "./codecs.js";
 export const SESSION_KEY = "avatar-compagnon-react-session-v1";
 export const LAB_KEY = "avatar-compagnon-react-lab-v1";
@@ -22,7 +23,7 @@ export function createRepository({ storage, key = SESSION_KEY, locks } = {}) {
     load() {
       const token = storage.getItem(key);
       if (token === null) return { token, session: null, revision: 0 };
-      const data = JSON.parse(token);
+      const data = parseSafeJson(token);
       if (
         data.format !== "avatar-compagnon-react-session" ||
         data.version !== 1 ||

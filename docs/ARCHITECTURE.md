@@ -1,5 +1,38 @@
 # Architecture et organisation
 
+## Cible active — phase B du 14 novembre 2026
+
+Le seul futur produit est React/TypeScript + Next.js dans `avatar-legendes-ui`.
+Le HTML oracle et `apps/companion` sont conservés pour référence et non-régression ;
+aucun développement visuel ni raccordement n'est entrepris ici.
+
+```text
+packages/domain/src/contracts.ts       Modèles métier persistants et extensions
+packages/domain/src/*.js               Moteur extrait + protections autorisées
+packages/application/src/business-ports.ts
+                                      Ports typés, snapshots et DTO d'affichage distincts
+packages/application/src/companion-services.js
+                                      Fabrique explicite ; un store transactionnel existant
+packages/application/src/character-service.js
+                                      Création/édition avec champs canoniques, sans sheet*
+packages/persistence/src/business-repository.js
+                                      Même repository atomique, port typé sans DOM
+packages/reference/src/                Catalogues de lecture et banque privée séparée
+scripts/convergence/security-overlays.mjs
+                                      Écarts de sécurité reproductibles par rapport à l'oracle
+```
+
+Aucun accès à `window`, `document`, `navigator`, `localStorage` ou `fetch` lors de
+l'import des modules métier/application/persistance. Injecter le stockage et les verrous
+lors de la création des services. La création charge explicitement, sans écrire.
+Ne pas partager une instance entre requêtes SSR. Les anciens contrats larges du
+prototype restent un adaptateur de compatibilité, pas le schéma des futures sauvegardes.
+
+Les détails de formats, extensions opaques, annulation, limites de concurrence et
+préparation des Livrets sont dans [PHASE_B_DOMAINE.md](migration/PHASE_B_DOMAINE.md).
+La structure ci-dessous décrit les éléments historiques conservés.
+
+
 ## Structure actuelle
 
 ```text

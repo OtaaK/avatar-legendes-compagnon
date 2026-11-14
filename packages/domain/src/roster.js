@@ -1,8 +1,9 @@
+import { assertSafeJson, assertCharacterId, parseSafeJson } from './import-safety.js';
 // Extrait de a9079fa, app/simulateur.html. Voir extraction.json.
 import { npcResourceProfile, resourceLimits, validateResourceValues, fatigueLimit, resourceConditionNames, balanceValue } from './resources.js';
 import { BookState } from './books.js';
 import { PlaceRules } from './places.js';
-const rosterClone=x=>JSON.parse(JSON.stringify(x));
+const rosterClone=x=>JSON.parse(JSON.stringify(assertSafeJson(x)));
 const STATS=['creativite','concentration','harmonie','enthousiasme'];
 const CONDITIONS=['Terrifié','En colère','Coupable','Fragile','Confus'];
 const STATUSES=['En danger','Renforcé','Avantagé','Gêné','Confiant','Prêt','Piégé','Étourdi'];
@@ -14,6 +15,7 @@ const NPC_IMPORTANCE=['Mineur','Majeur','Champion','Légendaire'];
 function npcImportance(c){return NPC_IMPORTANCE.includes(c.importance)?c.importance:'';}
 function createLibrary(){return {version:1,seq:1,characters:[]}}
 function validateCharacter(c){
+ assertSafeJson(c);assertCharacterId(c?.id);
  if(!c||typeof c!=='object'||!['PJ','PNJ'].includes(c.kind))throw Error('Type PJ/PNJ requis');
  if(typeof c.name!=='string'||!c.name.trim()||c.name.length>100)throw Error('Nom invalide');
  if(!c.stats||STATS.some(k=>!Number.isInteger(c.stats[k])||c.stats[k]<-3||c.stats[k]>3))throw Error('Caractéristiques invalides');
@@ -70,6 +72,7 @@ function syncCombatToLibrary(lib,combat,id){
  return updateCharacter(lib,c.id,{fatigue:f.fatigue,balance:f.balance,conditions:rosterClone(f.conditions),statuses:rosterClone(f.statuses.map(x=>FROM_ENGINE[x]||x))});
 }
 function normalizeCharacter(c){
+ assertSafeJson(c);assertCharacterId(c?.id);
  // Migration des fiches V0.7–V0.9 sans changement des ressources existantes.
  if(c.center===undefined)c.center=0;
  if(c.location===undefined)c.location='';
@@ -114,7 +117,7 @@ function listNpcs(lib,{location='',search='',training='',role='',importance='',s
 }
 function npcLocations(lib){return [...new Set(lib.characters.filter(c=>c.kind==='PNJ').map(c=>PlaceRules.currentName(lib,c)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
 function importLibrary(raw){
- const lib=typeof raw==='string'?JSON.parse(raw):rosterClone(raw);
+ const lib=typeof raw==='string'?parseSafeJson(raw):rosterClone(raw);
  if(![1,2].includes(lib?.version)||!Array.isArray(lib.characters)||!Number.isInteger(lib.seq))throw Error('Format bibliothèque incompatible');
  const ids=new Set();
  for(const c of lib.characters){normalizeCharacter(c);validateCharacter(c);if(ids.has(c.id))throw Error('Identifiant dupliqué');ids.add(c.id)}

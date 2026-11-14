@@ -1,4 +1,6 @@
-/** Frontières du lot 1 ; les champs supplémentaires des sauvegardes restent conservés. */
+/** Compatibilité du prototype Lot 1, conservée sans raccord UI.
+ * Nouveaux adaptateurs : domain/src/contracts.ts et application/src/business-ports.ts.
+ * Ces anciennes signatures larges ne sont PAS la spécification canonique phase B. */
 export type JsonValue =
   | null
   | boolean

@@ -25,7 +25,7 @@ export function createSessionStore(repository) {
     token = loaded.token;
     revision = loaded.revision;
     snapshot = {
-      session: loaded.session ?? emptySession(),
+      session: loaded.session === null ? emptySession() : validateSession(loaded.session),
       revision,
       error: null,
     };
