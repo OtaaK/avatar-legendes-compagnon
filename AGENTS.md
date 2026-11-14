@@ -139,3 +139,13 @@ vers la façade existante ; préserver tous les corps, assertions, module assert
 strict. Application et sauvegardes inchangées. Les preuves de migration sont ponctuelles,
 pas un verrou CI sur les futurs scénarios. Les tests mixtes/structurels ont leur lot
 suivant ; ne pas annoncer toute 3E terminée. Voir `docs/architecture/BILAN_3E1.md`.
+
+
+## Autorisation active — mission 3E.2 (14 novembre 2026)
+
+Après PR 24, Alex demande « Continue ». Branche dépendante de 3E.1, base `3bfd3f3` ;
+aucune fusion implicite de 22 à 24. Préparations de services depuis les sources complètes,
+assertions et contrôles HTML conservés. Doubles de test restaurés explicitement ; ne
+jamais charger les événements ou le bootstrap dans ces fixtures. Application inchangée.
+Les preuves de 3E.1 restent historiques ; utiliser la preuve 3E.2 pour ce lot. La migration
+3E n’est pas entièrement terminée. Voir `docs/architecture/BILAN_3E2.md`.

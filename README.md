@@ -20,7 +20,7 @@ le fichier de la PR et vérifier les fonctions essentielles dans son navigateur,
 | `app/` | HTML autonome généré, à ouvrir directement |
 | `src/` | Sources éditables, données, styles et manifeste d’assemblage |
 | `data/` | Matrice documentaire des techniques |
-| `tests/js/` | 197 scripts de régression JavaScript |
+| `tests/js/` | 198 scripts de régression JavaScript |
 | `tests/browser/` | 40 scripts navigateur, dont un contrôle hors connexion |
 | `scripts/` | Commandes communes de test, d'inventaire et de vérification |
 | `docs/` | Architecture, tests, décisions, audits et rapports |
@@ -115,3 +115,11 @@ Cette étape dépend de la PR 22 (3C), encore non fusionnée.
 Leurs scénarios et assertions sont inchangés ; le HTML distribué ne change pas.
 [Inventaire, preuves et suite](docs/architecture/BILAN_3E1.md).
 Cette étape dépend de la PR 23 ; les PR 22 et 23 restent non fusionnées.
+
+
+## Tests des services — lot 3E.2
+
+Huit préparations supplémentaires utilisent les sources pour exécuter les commandes,
+la persistance et les validations. Les assertions HTML sont conservées ; aucun code
+de l’application ne change. [Bilan et preuves](docs/architecture/BILAN_3E2.md).
+Branche dépendante de la PR 24 ; aucune fusion implicite des PR précédentes.

@@ -97,3 +97,8 @@ PR 22 (3C) reste en attente. 3D est préparée sur branche dépendante, sans fus
 ## 3E.1 — premier lot de tests préparé
 
 145 tests moteur migrés vers les sources, 52 autres scripts JS conservés pour analyse distincte ou déjà autonomes. PR dépendante de 3D ; 22 et 23 non fusionnées. Prochain lot 3E.2 proposé : préparations des tests de persistance/commandes/validation, puis tests mixtes avec contrôles HTML maintenus. La refonte UI reste en attente de la mission 3.
+
+
+## 3E.2 — services et validation, préparée
+
+Huit scripts migrés, assertions HTML conservées, helper de source testé. Les PR 22 à 24 restent non fusionnées ; cette étape dépend de 24. Suite 3E.3 proposée : derniers préambules moteur/mélangés et inventaire final des contrôles HTML volontairement conservés. La migration 3E complète et la refonte UI ne sont pas déclarées terminées.

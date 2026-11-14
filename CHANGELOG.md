@@ -123,3 +123,8 @@ Commandes synchrones et préférences injectables, événements/exports/démarra
 ## 14 novembre 2026 — architecture 3E.1, non fusionnée
 
 Migration des seuls préambules de 145 scripts moteur vers l’import des sources ; scénarios et assertions conservés. 237 scripts avant/après réussis. Aucun fichier de l’application ni sauvegarde modifié, aucune fusion ou publication.
+
+
+## 14 novembre 2026 — architecture 3E.2, non fusionnée
+
+Migration de huit préparations de tests vers les sources, maintien des assertions HTML et ajout de neuf scénarios de contrôle du helper. 238 scripts réussis après (237 avant). Aucun code d’application, format, règle ou sauvegarde modifié ; aucune fusion ou publication.

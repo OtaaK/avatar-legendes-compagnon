@@ -17,7 +17,7 @@ pour réduire la taille et le risque des futurs changements.
 | **3B — sources et génération du HTML, fusionnée PR 21** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
 | **3C — persistance, préparée** | Isoler lecture/écriture et transactions derrière un adaptateur, sans changer clés ni formats | Importations historiques et champs inconnus conservés ; quota/lecture refusée, interruption, journal et reprise contrôlés ; refus/annulation sans perte ; aucune écriture au premier rendu |
 | **3D — affichage et commandes, préparée** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
-| **3E — imports des tests, premier lot préparé** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
+| **3E — imports des tests, lots 3E.1/3E.2 préparés** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
 
 L’étape 3B doit livrer extraction et génération **ensemble**, pour éviter une période où
 le développeur doit maintenir à la main deux copies divergentes. Si son diff dépasse
@@ -110,3 +110,12 @@ migrés, corps inchangés. Inventaire de tous les scripts et comparaison Git ; e
 sans HTML ni interface. Aucune fusion de 22/23 autorisée. Les tests mixtes et structurels
 restent hors de ce premier lot, pour conserver une revue progressive. 3E n’est pas
 entièrement terminée. Voir [bilan](BILAN_3E1.md).
+
+
+## Réalisation 3E.2 — 14 novembre 2026
+
+Après « Continue », branche `architecture/tests-imports-services` depuis `3bfd3f3`,
+dépendante de PR 24. Huit préparations chargent les sources complètes ; neuf scénarios
+vérifient le helper. Assertions et contrôles HTML maintenus. Aucun fichier de l’application
+modifié et aucune fusion de PR 22/23/24 autorisée. Suite ciblée : derniers tests mixtes,
+puis inventaire final des découpes structurelles légitimes. Voir [bilan](BILAN_3E2.md).

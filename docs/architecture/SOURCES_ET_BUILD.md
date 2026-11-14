@@ -173,3 +173,21 @@ l’interface ou consulter le stockage. Le moteur lui-même reste inchangé.
 Le corps des scripts, leur choix du module d’assertion et le mode strict sont conservés.
 Les contrôles structurels et les tests mixtes restent à migrer séparément ; les contrôles
 de parité sources/HTML et navigateur sont maintenus. [Bilan 3E.1](BILAN_3E1.md).
+
+
+## Évolution 3E.2 — fixtures source des services
+
+Le helper de tests `tests/support/source-fixtures.cjs` lit des fichiers source complets
+sur une liste fixe : commandes et ponts, persistance et pont, validateurs, exports et
+fonctions d’écran. Il n’extrait pas de fonctions par repères textuels et ne remplace
+aucun code métier. Il ne charge ni les événements ni le démarrage du navigateur.
+`readFixture` fournit le texte aux contextes existants ; `runFixture` peut charger un
+ensemble et conserver explicitement certains doubles de test (`saveLibrary`, rendu,
+notifications). Les appels et assertions des scénarios restent ceux des tests historiques.
+
+Ce helper est réservé aux sources de confiance du dépôt, pas un bac de sécurité pour
+code importé. Un échec de chargement doit faire abandonner le contexte : seules les
+fonctions de simulation explicitement demandées sont restaurées, pas toutes les
+propriétés éventuellement définies avant une exception. Aucune incidence sur le build.
+Les contrôles structurels du HTML continuent à lire le document distribué.
+[Bilan et limites](BILAN_3E2.md).
