@@ -128,3 +128,8 @@ Migration des seuls préambules de 145 scripts moteur vers l’import des source
 ## 14 novembre 2026 — architecture 3E.2, non fusionnée
 
 Migration de huit préparations de tests vers les sources, maintien des assertions HTML et ajout de neuf scénarios de contrôle du helper. 238 scripts réussis après (237 avant). Aucun code d’application, format, règle ou sauvegarde modifié ; aucune fusion ou publication.
+
+
+## 14 novembre 2026 — architecture 3E.3, non fusionnée
+
+Migration des 28 derniers chargements moteur ordinaires, toutes assertions conservées. Inventaire final des frontières de test et synthèse de mission 3. 238 scripts réussis avant/après, aucun fichier de l’application modifié. Pas de fusion, déploiement ou refonte UI.

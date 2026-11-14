@@ -1,7 +1,5 @@
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const assert=require('node:assert/strict');
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};
 const C=ctx.window.CombatCore,s=C.createCombat();
 const id=C.addSceneNote(s,'  Première note  ');
 const before=JSON.stringify(s);

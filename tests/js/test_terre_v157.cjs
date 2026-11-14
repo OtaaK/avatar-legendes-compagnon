@@ -1,7 +1,5 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const assert=require('assert');
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};
 const C=ctx.window.CombatCore,s=C.createCombat();
 const a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Allié');
 s.temporaryEffects.push({id:'shield-test',targetId:b,originSourceId:a,originLabel:'Bouclier de roche',shieldBlockedRound:0,shieldGrantedGene:true});

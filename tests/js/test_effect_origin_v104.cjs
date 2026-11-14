@@ -1,7 +1,5 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const assert=require('node:assert/strict');
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};
 const C=ctx.window.CombatCore,s=C.createCombat(),a=C.addFighter(s,'Aang'),b=C.addFighter(s,'Katara');
 const id=C.addTemporaryEffect(s,a,'Glace','scene',{type:'technique',label:'Gantelet de glace'});
 assert.equal(s.temporaryEffects[0].originLabel,'Gantelet de glace');

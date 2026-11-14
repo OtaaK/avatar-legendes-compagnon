@@ -1,5 +1,7 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');const script=html.split('<script>')[1].split('</script>')[0];const core=script.slice(script.indexOf("'use strict';"),script.indexOf('window.CombatCore=')+script.slice(script.indexOf('window.CombatCore=')).indexOf(';')+1);const ctx={window:{}};vm.runInNewContext(core,ctx);const C=ctx.window.CombatCore;
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};const C=ctx.window.CombatCore;
 function setup(){const s=C.createCombat(),a=C.addFighter(s,'A','PNJ'),b=C.addFighter(s,'B','PNJ');C.declare(s,a,'attaquer');C.declare(s,b,'attaquer');C.reveal(s);C.advance(s);return{s,a,b}}
 let n=0;function test(name,fn){fn();console.log('✓ '+name);n++}
 test('Point faible : 1 fatigue coût et 2 fatigues cible avec 2 états',()=>{const{s,a,b}=setup();const v=C.fighter(s,b);v.statuses.push('gene');v.conditions.push('Fragile','Confus');C.setEngagement(s,a,b,true);const x=C.queueTechnique(s,a,'Frapper un point faible','attaquer',b,{engagedConfirmed:true});C.propose(s,x);C.commit(s);assert.equal(C.fighter(s,a).fatigue,1);assert.equal(v.fatigue,2)});

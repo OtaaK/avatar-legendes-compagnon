@@ -1,7 +1,8 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const assert=require('assert');
+const fs=require('fs');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};
 assert(source.includes("action.name==='Armure de terre'"));
 assert(source.includes('earthArmorConfirmed!==true'));
 assert(source.includes("'status_add',action.sourceId,0,'avantage'"));

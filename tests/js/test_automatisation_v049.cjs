@@ -1,8 +1,7 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
-const script=html.split('<script>')[1].split('</script>')[0];
-const core=script.slice(script.indexOf("'use strict';"),script.indexOf('window.CombatCore=')+script.slice(script.indexOf('window.CombatCore=')).indexOf(';')+1);
-const ctx={window:{}};vm.runInNewContext(core,ctx);const C=ctx.window.CombatCore;
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};const C=ctx.window.CombatCore;
 function setup(approach){const s=C.createCombat(),a=C.addFighter(s,'Attaquant','PNJ'),b=C.addFighter(s,'Cible','PNJ');C.declare(s,a,approach);C.declare(s,b,approach);C.reveal(s);if(approach==='attaquer')C.advance(s);if(approach==='esquiver'){C.advance(s);C.advance(s)}return {s,a,b}}
 let n=0;function test(name,fn){fn();n++;console.log('✓ '+name)}
 test('Acharnement : cible normale devient Gênée et coût 1',()=>{const {s,a,b}=setup('attaquer');const x=C.queueTechnique(s,a,'Acharnement','attaquer',b);C.propose(s,x);C.commit(s);assert.equal(C.fighter(s,a).fatigue,1);assert.ok(C.fighter(s,b).statuses.includes('gene'))});

@@ -132,3 +132,13 @@ Après « Continue », branche depuis `b337017` (PR 23), sans fusion de 22 ou 23
 ## 3E.2 — tests de services depuis les sources
 
 Après « Continue », branche dépendante de PR 24, base `3bfd3f3`, sans fusion des PR 22 à 24. Migrer huit préparations vers les fichiers sources complets avec doubles explicitement conservés. Préserver les assertions HTML et tous les scénarios. Ajouter neuf vérifications du helper ; application inchangée.
+
+
+## 3E.3 — terminer les chargements ordinaires et garder la parité
+
+Après « Continue », branche dépendante de PR 25, base `49ed8a2`. Migrer 28 chargements moteur, préserver leurs corps et assertions (y compris avant chargement), garder les lectures HTML structurelles et l’oracle de parité explicite. Aucun code d’application modifié. Les étapes de mission 3 sont préparées, pas fusionnées ni déclarées intégrées dans main.
+
+
+## Revue et recette Mac — sans fusion
+
+Alex répond « C’est parti » après proposition de revue puis recette Mac. Préparer le guide et un jeu fictif, vérifier les PR et leurs contrôles, sans fusion. Le paquet utilise l’HTML exact et ne modifie pas l’application. Le retour humain sur Mac reste attendu.

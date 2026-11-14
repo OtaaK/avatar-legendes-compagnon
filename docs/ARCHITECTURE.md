@@ -146,3 +146,13 @@ Le service `src/persistence/storage.js` ignore le DOM et reçoit ses ports expli
 ## 3E.2 — préparation des tests de services
 
 `tests/support/source-fixtures.cjs` charge des ensembles fixes de sources complètes dans les contextes de test. Les doubles nécessaires sont conservés explicitement ; aucun démarrage ou rendu réel n’est déclenché au chargement. Le helper n’est pas distribué et aucune source d’application n’est modifiée. Les assertions structurelles du HTML restent actives. [Bilan](architecture/BILAN_3E2.md).
+
+
+## 3E.3 — tests sources et oracle HTML explicite
+
+Les scénarios métier ordinaires chargent les sources. Les tests structurels/données du HTML, le générateur et les deux tests de parité gardent leurs responsabilités distinctes. Le chargeur HTML transitoire reste un oracle volontaire, pas le point d’entrée usuel du moteur. Les sources restent classiques et la façade fs/vm est réservée à Node : ce n’est pas encore un paquet React. [Synthèse et limites](architecture/BILAN_MISSION_3.md).
+
+
+## Paquet de recette — même distribution
+
+Le paquet de recette rassemble une copie exacte du HTML généré, un guide et un JSON fictif validé par le domaine. Aucun binaire de recette n’est versionné, aucun changement au build ou aux dépendances. Les fichiers supplémentaires ne sont pas requis à l’usage de l’application. [Revue](architecture/REVUE_FINALE_MISSION_3.md).

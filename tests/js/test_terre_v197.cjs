@@ -1,10 +1,10 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const assert=require('assert');
+const fs=require('fs');
 const html=fs.readFileSync(require('../support/paths.cjs').APP_HTML,'utf8');
 assert(html.includes('const armorAttacks=new Map();'));
 assert(html.includes('Math.ceil(g.fatigue/2)'));
 assert(html.includes('Points pour la fatigue')); 
-const source=html.split('<script>')[1].split('window.CombatCore=')[0]+html.match(/window\.CombatCore=\{[^;]+;/)[0];
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(source,ctx);const C=ctx.window.CombatCore;
+const ctx={window:require('../../src/domain/index.cjs').loadDomain()};const C=ctx.window.CombatCore;
 const s=C.createCombat(),a=C.addFighter(s,'Terre'),b=C.addFighter(s,'Ennemi');
 s.temporaryEffects.push({id:'arm',originLabel:'Armure de terre',targetId:a,armorPoints:3,armorExternalAdvantage:false});C.fighter(s,a).statuses.push('avantage');
 for(const amount of [2,2])s.proposals.push({id:'e'+s.seq++,actionId:'impact',sourceId:b,targetId:a,kind:'fatigue',amount,detail:'',reason:'Attaque',round:s.round});

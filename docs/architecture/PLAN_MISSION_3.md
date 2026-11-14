@@ -17,7 +17,7 @@ pour réduire la taille et le risque des futurs changements.
 | **3B — sources et génération du HTML, fusionnée PR 21** | Extraire données et corps métier sans réécrire leurs règles ; assembleur déterministe avec bibliothèque standard | `build --check` refuse une divergence ; deux builds donnent le même HTML ; comportement et ordre d’initialisation conservés ; HTML unique autonome sans imports réseau ; parité des 111 identifiants/10 Livrets et suite complète |
 | **3C — persistance, préparée** | Isoler lecture/écriture et transactions derrière un adaptateur, sans changer clés ni formats | Importations historiques et champs inconnus conservés ; quota/lecture refusée, interruption, journal et reprise contrôlés ; refus/annulation sans perte ; aucune écriture au premier rendu |
 | **3D — affichage et commandes, préparée** | Séparer les décisions utilisateur, mutations, affichage et démarrage | Même rendu/navigation/clavier ; données inertes dans les événements ; copie de combat indépendante ; confirmations, annulations et sauvegardes conservées ; parcours Chromium desktop/mobile et hors réseau |
-| **3E — imports des tests, lots 3E.1/3E.2 préparés** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
+| **3E — imports des tests, préparation achevée en trois lots** | Remplacer progressivement les découpes HTML par des imports de sources derrière les contrats | Inventaire de tous les scénarios avant/après ; aucune assertion perdue ou affaiblie ; commandes de test stables ; fichiers/batches comparables ; parité source/HTML conservée |
 
 L’étape 3B doit livrer extraction et génération **ensemble**, pour éviter une période où
 le développeur doit maintenir à la main deux copies divergentes. Si son diff dépasse
@@ -119,3 +119,12 @@ dépendante de PR 24. Huit préparations chargent les sources complètes ; neuf 
 vérifient le helper. Assertions et contrôles HTML maintenus. Aucun fichier de l’application
 modifié et aucune fusion de PR 22/23/24 autorisée. Suite ciblée : derniers tests mixtes,
 puis inventaire final des découpes structurelles légitimes. Voir [bilan](BILAN_3E2.md).
+
+
+## Réalisation 3E.3 — 14 novembre 2026
+
+Après « Continue », branche dépendante de 3E.2, base `49ed8a2`. Derniers 28 chargements
+moteur ordinaires migrés, contrôles HTML et oracle de parité conservés. Inventaire des
+198 scripts JS et 40 navigateur. La préparation des étapes de mission 3 est achevée sur
+branches, sans fusion des PR 22 à 25. Revue et recette à effectuer avant intégration ;
+aucun démarrage implicite de la refonte UI. [Synthèse](BILAN_MISSION_3.md).

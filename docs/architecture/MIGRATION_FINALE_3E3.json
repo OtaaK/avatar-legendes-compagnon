@@ -1,0 +1,296 @@
+{
+  "format": "avatar-final-test-migration-proof",
+  "version": 1,
+  "baseCommit": "49ed8a2b0a72aa1fed707d0af7144afba641e11b",
+  "migrated": [
+    {
+      "path": "tests/js/test_automatisation_v049.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "5af1f7ad798e2473287d2776c44e8fc1201e09873b3d4c6b091fd6202faa09c9",
+      "assertionLinesSha256": "7beab5012c77c395af11f1868611d2e43ff95bdd185cc0e1728fcfd9a9432eb1",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_automatisation_v050.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "da36b760e34a85bb9e43694b39774190d5173d069bb300369a703c7a42cfc689",
+      "assertionLinesSha256": "8dfa45277259ebe70b1981b01f9dec0f802550cbf38b576bbca73caae85bb6f6",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_automatisation_v051.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "02585433e0756956aea62f0d43b0ba9e0a7cfd634eb9ffb235260a29878cac76",
+      "assertionLinesSha256": "303ac2bf7abc5cdb4994df58f5eac332bf583c9aa474052c3b74942d45e595bf",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_effect_edit_v105.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "9bdf830dae8db74e68279fdab5d87ef63607fd7635161952ab31b1281a17d3db",
+      "assertionLinesSha256": "5318eab7019798ba4e8507fadfa444ecd94620a59e56d4316a8bd8698ee1ee2a",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_effect_limit_v109.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "e860d4e960e448f9664bf4714d72d1e169401c1930a7594ad6db0c0d5059457b",
+      "assertionLinesSha256": "a8951f0e9e936c3e5d7ba214a9b74819a0972cc28355f3ed81d757b8336c74b3",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_effect_origin_edit_v106.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "f82a7352b2b69fb819939de5b48476cee94269aaaf117e2a2b62bdcd39a98932",
+      "assertionLinesSha256": "a8f9e389fc90b6b5aa262d40e782cddaae328682f786937d73bf03e0f5d7219a",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_effect_origin_v104.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "1e5d60c6b71befca753d2364a26b87e2f7a7d78d3158230170a0770df339b282",
+      "assertionLinesSha256": "bcf174e6e22b7f7b92f72b09c59a59d18464cca6caf992bbc0b4d2e5a87f43b2",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_electrochoc_objet_v083.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": true,
+      "bodySha256": "1b59a8eb9087edd337a9318a1a45cf16d2eed9acf41dd435e3c59f12949741c8",
+      "assertionLinesSha256": "2740babe04e0777c5d699c82127a5d64be1dd60f3c71b1e0686509da0c2955ef",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_journal_filters_v101.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "7af2b5d419fa98c73317efffa7f7783e1ff204b112bf4f18cb6d6dfafeef3fc9",
+      "assertionLinesSha256": "1492cd3bddafc8aee9cbd288b69159394bb2332e7a76606b03169786645561f2",
+      "prefixAssertionLines": [
+        "assert.match(html,/function renderSceneJournal\\(/);",
+        "assert.match(html,/journalSceneFilter/);assert.match(html,/journalSearch/);assert.match(html,/journalLimit/);"
+      ],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_scene_export_v114.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "8633af42130e6f3d9e4ced32936b3e30c6fb49d95e98b8579a41f51f0a5d11ea",
+      "assertionLinesSha256": "b59438dc52ac85cfaed09b6b65ffe632f9ad02a6fdff71ab2247b3d055a0493d",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_scene_guard_v098.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "81cb7d45fa2a04e1d4ebfd542ad2d56470e44fbd839e12377d9b54be4a23ec5a",
+      "assertionLinesSha256": "5c3cc87110014c04423ebe2c72a3825e41642c3a39d4156f889e65bc4402c31d",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_scene_note_edit_v112.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "5c3cbe8d781f3dfaea0f0439acf53086e7d2d4e22c78e044615c1a7154f2defb",
+      "assertionLinesSha256": "efda021ba5144f228b830ac888aa97950f4a870512e39547f2bd911649818b26",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_scene_note_limit_v113.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "7cc246ecde3d4dbfe8e4a3b41663a45641f9a94536aa29d412f58076e3218355",
+      "assertionLinesSha256": "23cc1269aef447240feb3dc5b07439eccdaeeea1e1c168808b7fdd7643e06d11",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_temporary_effects_v102.cjs",
+      "assertModule": "node:assert/strict",
+      "strict": false,
+      "bodySha256": "980aca8aed6a3033cd9e3915dbb24827fb7e60664cb1d4076fee2d63c14e5a0d",
+      "assertionLinesSha256": "d895f721cb587fa02498f52a9efe79a46cc3398f12bc0cd3066e656698b3a3b3",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v148.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "9ab735489f662b56a9003465c72d8621d693a639bbf1c92c3ce17bcc0eb53698",
+      "assertionLinesSha256": "b8b996ed67b87fe9aa575d2bbb737a51325c1d703d8ac68c1b06271765285e46",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": true
+    },
+    {
+      "path": "tests/js/test_terre_v149.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "610582ce6d8cfc63c2e7ebd1402153d16414b1b41dbfd1c87911a13945f3032b",
+      "assertionLinesSha256": "e8550267de49d0ede1932cd43576b3ff92bee85995699d8cc8a127428e0ed854",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v151.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "982eaf1c8b41de32c86ec29663e17ce3e9b542116ea7bcb5f43404ccb9def164",
+      "assertionLinesSha256": "6c2cb629a3bbc972e0bd62ecbd9375e91d10d65a230fcf0c83cacbdc5e1d9df3",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": true
+    },
+    {
+      "path": "tests/js/test_terre_v152.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "5fb93c40832d5675a5b76169f9664c32fec391a9921a7ab70ea763fbf21a5630",
+      "assertionLinesSha256": "d17d734bab140742ffa43fa69dcb59a32fda971eda29f25a46e5e0a5ab74dfca",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": true
+    },
+    {
+      "path": "tests/js/test_terre_v153.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "0bea5033029bdea3b00452e1845ee7eced66eb9309d2acde41b055729b568ebc",
+      "assertionLinesSha256": "df2bedae084d4415ef676068ac0d630a2cd52e35dd273512bda3ce438b4f2f6e",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": true
+    },
+    {
+      "path": "tests/js/test_terre_v154.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "9968862116d11b709385c0b6b64bef2279085587d8bf13091fcf33bb31712cca",
+      "assertionLinesSha256": "ce279f015d28b681b5ae8615de8650318ed73f882418715eed70c35d62e4a560",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v155.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "d49bf6d309f64fb1911367c706f0412057708609514a9f3bbf6a7cd7ec5d3e35",
+      "assertionLinesSha256": "0b23a9affc41d69c1df64fb0356ef21cf7e41982cf6262aecc9137d1827f8a78",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v157.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "17c323718a7477b0c5486b577bc4f5ed3591c1767b5569c0f152fc619750a725",
+      "assertionLinesSha256": "81c1054e1f05517f7eabb4876188c7afab21c1fa3c479fb8ae4d4ef4a3739345",
+      "prefixAssertionLines": [],
+      "requiresHtml": false,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v161.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "515cce927aa25db762d5ae0fe03e750b684526b498620de6e3b1eea77a165046",
+      "assertionLinesSha256": "8a6188ce31dfdf17c58e08ca80a4d6d486446f80f767e13bc153178ed64c09f3",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v164.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "0be709b7e84f046218ef4b677119f04e4979280b184f8e8fc15ff58c6a0bc0b5",
+      "assertionLinesSha256": "11d72a5df8b6e3a76410fe7c1738a575126134b5711a49f400e33a79554d06ba",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v165.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "3af4feada63485cd34e25e16f3fd35e8ed2039fcda68df90e92e45d58793cb1c",
+      "assertionLinesSha256": "6d277a394d0877686b6762b4996280643909edec283902eb9f569e758d93cd87",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v197.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "f1559aed3679a266bc3997771e672b622dabd8924b9ecf5b501ba48d9a9291ec",
+      "assertionLinesSha256": "908d828c65e21c2cb57c99fe54fbe4940e147b50f02ef0785df77b527779c3f5",
+      "prefixAssertionLines": [
+        "assert(html.includes('const armorAttacks=new Map();'));",
+        "assert(html.includes('Math.ceil(g.fatigue/2)'));",
+        "assert(html.includes('Points pour la fatigue')); "
+      ],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v225.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "f09d99a037167dfbca3144a6c311044732c3604a6901a0c65514322bac1a7cdc",
+      "assertionLinesSha256": "c91aef30a8fefa7a512947212801c4058b054d4a7a5f4dd1d1ecb06a58e697b7",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    },
+    {
+      "path": "tests/js/test_terre_v227.cjs",
+      "assertModule": "assert",
+      "strict": false,
+      "bodySha256": "e35a036587be7cc717b3824a20cdc21863cc93d7172cd65969d0a0c2820ed904",
+      "assertionLinesSha256": "28824574105e153b97bbfb31d0e4f351f0a1f65833bfe02d90375b9ae588eca0",
+      "prefixAssertionLines": [],
+      "requiresHtml": true,
+      "structuralCoreString": false
+    }
+  ],
+  "retainedJs": 170,
+  "retainedBrowser": 40
+}
