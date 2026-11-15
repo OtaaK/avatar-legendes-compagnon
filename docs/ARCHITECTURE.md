@@ -1,5 +1,24 @@
 # Architecture et organisation
 
+## C0 — couches préparées, aucune connexion UI (15 novembre 2026)
+
+Le moteur B et ses contrats restent inchangés. Un seul module pur indépendant est ajouté :
+`packages/application/src/external-field-preview.js` et sa déclaration TypeScript.
+Il transporte des champs externes en distinguant absent/null/valeur et prépare des
+intentions keep/set/remove, sans écriture, calcul de profil ni transition de jeu.
+L'aperçu est explicitement non canonique et refusé par l'import de session.
+
+L'[architecture d'adaptation](convergence-c0/ADAPTATEURS.md) définit les futures
+projections, commandes, confirmations, transactions, notifications et précautions
+SSR/hydratation. Elle réutilise le store B via useSyncExternalStore, sans second store.
+Les [options de partage](convergence-c0/PARTAGE_MOTEUR.md) visent une source unique du
+moteur ; aucun package ou choix de déploiement n'est mis en œuvre ici.
+
+Références et limites : [SOURCES.json](convergence-c0/SOURCES.json),
+[matrice](convergence-c0/MATRICE.md), [bilan](convergence-c0/BILAN.md).
+Le dépôt UI n'est ni modifié ni raccordé. C1–C7 nécessitent de nouvelles autorisations.
+
+
 ## Cible active — phase B du 14 novembre 2026
 
 Le seul futur produit est React/TypeScript + Next.js dans `avatar-legendes-ui`.

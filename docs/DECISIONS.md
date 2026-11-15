@@ -380,3 +380,26 @@ Ces réserves ne sont pas des règles nouvelles ; voir le [bilan](preparation-li
   développement visuel. Les textes PDF ne sont pas versionnés ni inclus aux tests.
 - Aucun nettoyage de GitHub, fermeture, suppression, réécriture, fusion ou déploiement.
   Livraison et arrêt pour validation. Voir [le bilan](migration/PHASE_B_DOMAINE.md).
+
+
+## 2026-11-15 — C0 autorisée, références et invariants
+
+- Le propriétaire valide la matrice provisoire et B sans autoriser fusion/migration.
+  La nouvelle demande autorise C0 uniquement, issue du commit B 62c523c.
+- Source UI exclusive du diagnostic : 804381ca2ae7ee9f7e9ce960591faffd534cb2e7.
+  Work a validé le lot 2 avec réserves selon la demande ; son rapport complet n'est
+  pas joint. Le lot 3 groupes PNJ n'est ni étudié comme référence finale ni reproduit.
+- Formats Codex v1/v2, toutes les plages autorisées, trois maîtrises, principes structurés,
+  états/statuts séparés et relations/historiques complets restent des invariants acquis.
+- Absence/null/zéro/valeur explicite sont distincts. Le modèle B impose encore des
+  ressources numériques ; ne pas masquer cette incompatibilité en migrant par défaut.
+  Le module d'aperçu C0 conserve l'externe sans créer de fiche canonique ni écrire.
+- Les historiques d'évolution v0 corrigés/annulés et leurs dépendances sont des données
+  à conserver, pas des commandes à rejouer. Une source regulatory n'atteste pas d'un
+  effet de règle appliqué. Le futur schéma et la portée des annulations restent ouverts.
+- Recommandation de partage : package versionné à source unique ; canal et propriété
+  de la source à arbitrer avant C1. Aucun paquet publié ni modification de Vercel/v0.
+- [Arbitrages A01–A09](convergence-c0/ARBITRAGES.md) : propositions non appliquées.
+  [Plan C1–C7](convergence-c0/PLAN_C1_C7.md) soumis à autorisation distincte.
+- PR 27 en brouillon et branche B intactes. Aucun nettoyage, fusion, déploiement ou
+  développement de l'ancien HTML. Arrêt en fin de C0 pour validation du propriétaire.

@@ -1,0 +1,243 @@
+{
+  "date": "2026-11-15",
+  "codex": {
+    "commit": "62c523c1540f01b3f331c4d980d129307f560af0",
+    "files": [
+      {
+        "path": "packages/domain/src/contracts.ts",
+        "sha256": "4cec02509d620a2ffa1d7b20bafd59d10ede11bccc55aceed29ce3dcd401e919"
+      },
+      {
+        "path": "packages/domain/src/resources.js",
+        "sha256": "a9f302e6d0267c69fbfbb13a589542528d719e6ae9ec528bf79ebb510169c356"
+      },
+      {
+        "path": "packages/domain/src/roster.js",
+        "sha256": "a8579d8d374d4e89f2d64f425787ef8aa7d5266b6794a7a57f4fce0c6941bc75"
+      },
+      {
+        "path": "packages/domain/src/books.js",
+        "sha256": "ddda5ec7c8055fda536d42c073863ef45682d18dabfe123fc226e43111af9845"
+      },
+      {
+        "path": "packages/domain/src/places.js",
+        "sha256": "a3b7dbdebc371755e0dfdf53742f59764b097a6ebd0565b1550f0a02c8ca0a74"
+      },
+      {
+        "path": "packages/application/src/business-ports.ts",
+        "sha256": "28b992dacddb6be8da3b32aba6cf6e454580b22e83b5124414dc7ed89b3fac1d"
+      },
+      {
+        "path": "packages/application/src/session-store.js",
+        "sha256": "16862d9271d530810ca56f1b7fa75f3b32d91d1d9eb1d10b35a128bcf9cf90a4"
+      },
+      {
+        "path": "packages/application/src/playbook-commands.js",
+        "sha256": "f655672494dbe8d4de7edb4048b7bc0b57e95eec47eeeabab5620a1885ffe6b2"
+      },
+      {
+        "path": "packages/persistence/src/codecs.js",
+        "sha256": "901a0742b34971503de5a5088917692b73cb10c7c22500a2d6af5feac9cfec86"
+      },
+      {
+        "path": "packages/persistence/src/local-session-repository.js",
+        "sha256": "622ca42280a112043eb6a3572c2b0b5ccfbee70fecd31fa67bd172cbe1234114"
+      },
+      {
+        "path": "packages/reference/src/private-descriptions.js",
+        "sha256": "7756e1f09c6126a2a42b3fd3c47cdb233ed6512877101e966d59984b9dae30f8"
+      },
+      {
+        "path": "packages/domain/src/character-fields.js",
+        "sha256": "fa9af3ce67e1c6751b7be7cd82392cd846836c1b1257486341e10e41427a6f40"
+      },
+      {
+        "path": "packages/domain/src/npc-presets.js",
+        "sha256": "466c9ca73c65f3578ffef8be9271b3d36a4f82052cde32ac3e2ac1d565707c4f"
+      },
+      {
+        "path": "packages/domain/src/combat.js",
+        "sha256": "842236e7d36ec9c31dee1e86154fa882b037d986c57e5f98f28843e02b04e281"
+      },
+      {
+        "path": "packages/domain/src/validation.js",
+        "sha256": "05dcbe3744ead9c9c1847e0714140435037758db7f50f61a4fa7599afccc8ddd"
+      },
+      {
+        "path": "packages/application/src/character-service.js",
+        "sha256": "244569f0f8c6aabfa84a3e0ca3bcd1cf439c11c39995be9f3980e236dbe14ea5"
+      },
+      {
+        "path": "packages/application/src/playbook-preparation.js",
+        "sha256": "bfca607dcfec4f63d20e27336e00924998dcfa901b0dd34a826ec926b0d86b26"
+      },
+      {
+        "path": "packages/reference/src/technique-library.js",
+        "sha256": "900773d5ae2df45e3ade916a4a52296d1f68486d538a886f3c22f3efe66e654d"
+      },
+      {
+        "path": "packages/reference/src/playbooks.js",
+        "sha256": "c2f25feedf391a487d69d3667df6742ef84d2cc9b450f2f758fe6bca79de5205"
+      },
+      {
+        "path": "packages/reference/src/playbooks-data.json",
+        "sha256": "b3c2cde590d3c46248ed6c0425ec9195699e62049e5d02f9e38c988f6622fb83"
+      },
+      {
+        "path": "packages/domain/src/catalog.js",
+        "sha256": "fd23b534530cd1c839775918f4e17308040be6e4e55f690d2f54517c965616ae"
+      }
+    ]
+  },
+  "v0": {
+    "commit": "804381ca2ae7ee9f7e9ce960591faffd534cb2e7",
+    "acquisition": "git fetch du SHA exact dans un cache isolé ; archive de ce seul commit, aucun checkout du dépôt de travail UI",
+    "files": [
+      {
+        "path": "lib/demo-data.ts",
+        "sha256": "b60ec3862aebbae1a9a59021d2c261f487eb23665cd76c0a596c79bb71ad19ee"
+      },
+      {
+        "path": "lib/npc-edit.ts",
+        "sha256": "e65f0abde7cdd1a907e7b8721471564e22582948b13c8d3249bc3ee22c380dfd"
+      },
+      {
+        "path": "lib/evolution-history.ts",
+        "sha256": "9fc5e10e70a62ea245a7e7e58901e9bb61652c412ac3931278eae17f7b03ec1b"
+      },
+      {
+        "path": "lib/demo-storage.ts",
+        "sha256": "6379d11f39a0ad7f85a41c6910d016b9a8d6a89bf17ddc2141ef4f249ddaee21"
+      },
+      {
+        "path": "lib/playbook-creation-data.ts",
+        "sha256": "e6d5b23658f89dc839fa7c789f6b156e4c8aeed490ddfb993b53495f52c2dd6c"
+      },
+      {
+        "path": "components/character-editors.tsx",
+        "sha256": "307eb98fa16890fd52591e042c4209e0b67d00cc943b673728e240378f5a6ae2"
+      },
+      {
+        "path": "components/character-detail-redesign.tsx",
+        "sha256": "f8f5b806e7c16842f4883cf7f410816736ca6c12eaf9b8f693b348df672f34de"
+      },
+      {
+        "path": "components/companion-app.tsx",
+        "sha256": "d64fcc9df1ae6edc291f201d64f7f9d04cbb1c9da08b164569fc7f183319ee52"
+      },
+      {
+        "path": "components/npc-creation-form.tsx",
+        "sha256": "cd8bd23b556bc7663ac1d27f692fa320af57badabd6a397548b177a2f9fa0475"
+      },
+      {
+        "path": "package.json",
+        "sha256": "790072d54ec5108a20325891a0ca474db04b1c0d2a61c89d99b09de8d42c5126"
+      },
+      {
+        "path": "lib/npc-edit.test.mjs",
+        "sha256": "4591cbf1657ada265b8205d389d6906c4a42eeaca70dbba573e1c008ff860ceb"
+      },
+      {
+        "path": "lib/evolution-history.test.mjs",
+        "sha256": "0f8620985dda06e61803141a47b8c890722a328a09e47e11ef6bff081a326af5"
+      },
+      {
+        "path": "lib/demo-storage.test.mjs",
+        "sha256": "b7d763ce361b1b46edf27ddb36510bbe35164eeb8983fd5b2cff73e7706ee673"
+      },
+      {
+        "path": "app/layout.tsx",
+        "sha256": "bd086be63c8966ff8bd8b4a4ffb6f876e08154998e5aa204b9ec63f1d7ad48ff"
+      }
+    ]
+  },
+  "workVerdict": "Lot 2 validé avec réserves selon le propriétaire ; rapport complet Work non fourni ici",
+  "playbooks": [
+    {
+      "id": "audacieux",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "fripouille",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "gardien",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "heritier",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "icone",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "idealiste",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "inflexible",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "marteau",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "pilier",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    },
+    {
+      "id": "prodige",
+      "found": true,
+      "stats": true,
+      "principles": true,
+      "moves": true,
+      "moveCount": 5
+    }
+  ],
+  "uiUnitTests": {
+    "command": "node --experimental-strip-types --test lib/demo-storage.test.mjs lib/evolution-history.test.mjs lib/npc-edit.test.mjs",
+    "passed": 19,
+    "failed": 0,
+    "scope": "Copie isolée de 804381ca ; pas de nouvelle recette navigateur v0"
+  }
+}

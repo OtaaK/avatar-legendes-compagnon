@@ -1,5 +1,22 @@
 # Feuille de route
 
+## C0 — préparation autorisée, intégration en attente (15 novembre 2026)
+
+- [x] Phase B validée par le propriétaire, workflows du commit 62c523c réussis.
+- [x] Référence lot 2 v0 figée à 804381ca pour le diagnostic ; verdict Work transmis :
+  validé avec réserves (portrait PJ, mobiles et compteurs de spécificités).
+- [x] C0 préparé : matrice actualisée, invariants/contrats, aperçu pur, arbitrages,
+  partage du moteur et [plan détaillé C1–C7](docs/convergence-c0/PLAN_C1_C7.md).
+- [ ] Validation C0 et décisions nécessaires aux premiers raccordements.
+- [ ] Autorisation distincte de C1 : rien de cette phase d'intégration n'est commencé.
+- [ ] Lot 3 groupes PNJ : attendre sa référence validée, puis diagnostic différentiel ;
+  aucun modèle de groupe supposé dans C0.
+
+PR 27 conservée en brouillon et branche B intacte. Aucun changement dans le dépôt UI,
+aucun paquet publié, aucun nettoyage ni fusion des PR 22–27. Voir le
+[bilan C0](docs/convergence-c0/BILAN.md). Les sections suivantes sont historiques.
+
+
 ## Priorité active — convergence vers le dépôt v0 (14 novembre 2026)
 
 Cette séquence remplace les objectifs de produit HTML/Vite des sections historiques.

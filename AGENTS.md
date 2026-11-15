@@ -1,6 +1,30 @@
 # AGENTS.md — Avatar Légendes : Compagnon
 
 
+## Autorisation active — C0 seulement (15 novembre 2026)
+
+Le propriétaire valide B comme socle préparatoire ; PR 27 et branche B restent intactes,
+en brouillon, sans fusion. Seule C0 est autorisée sur une branche issue de
+`62c523c1540f01b3f331c4d980d129307f560af0` : diagnostic, contrats et adaptateurs purs
+non raccordés. Référence v0 exclusive : `804381ca2ae7ee9f7e9ce960591faffd534cb2e7`.
+Ne pas utiliser les développements du lot 3 en cours. Lire `docs/convergence-c0/BILAN.md`.
+
+Ne modifier aucun fichier de `avatar-legendes-ui`, aucun écran, shell Vite ou HTML
+historique. Ne pas créer un deuxième store ou une application concurrente. Ne pas démarrer
+C1, migrer une sauvegarde réelle, publier un paquet ou déployer. Ne fusionner aucune PR
+22–27, ni fermer/supprimer/réécrire branches, PR ou ancien code. Commits et push de la
+branche C0 autorisés. Arrêt à la fin de C0 pour validation distincte.
+
+Conserver les formats v1/v2, trois maîtrises, valeurs négatives autorisées, deux principes
+structurés, états/statuts explicitement rapprochés et toutes les relations/historiques.
+Absence, null, zéro et valeur explicite doivent rester distincts. Une donnée externe
+incompatible reste conservée et non convertie : ne pas lui appliquer les défauts de
+création pour la rendre importable. Aucun choix fictif ni archive ne devient une règle
+ou un gain. Les réserves Work ne sont pas déclarées résolues par ces seuls tests.
+
+Les autorisations B ci-dessous décrivent le lot livré ; les consignes C0 présentes et
+les dernières décisions du propriétaire priment pour la mission en cours.
+
 ## Autorisation prioritaire — phase B domaine (14 novembre 2026)
 
 La phase A est validée. La cible définitive est **une seule application React + TypeScript
