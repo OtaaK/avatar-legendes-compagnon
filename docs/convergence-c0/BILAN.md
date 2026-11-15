@@ -153,7 +153,13 @@ C1, avec les arbitrages qui le conditionnent. Aucune fusion ne résulte de cette
 ## Branche, réversibilité et état conservé
 
 Branche : `convergence/phase-c0-preparation`, issue exactement du commit B 62c523c.
-Le commit final est indiqué dans le message de livraison et dans la PR C0 en brouillon.
+Le commit final est indiqué dans le message de livraison ; la branche est poussée.
+La tentative de création d'une PR C0 en brouillon a été refusée par le contrôle
+automatique d'approbation, qui a invoqué l'ancienne consigne d'attendre avant la phase C.
+Aucune PR C0 n'a été créée et aucune tentative de contournement n'a été faite.
+Une autorisation explicite sera demandée pour cette seule action. Les contrôles locaux
+restent disponibles ; le workflow sur événement pull_request n'a pas été déclenché
+par une PR C0 inexistante.
 La PR 27 est restée ouverte en brouillon au commit 62c523c, contrôle GitHub en lecture
 seule effectué pendant C0. Aucune ancienne PR n'a été fusionnée, fermée ou modifiée.
 Le dépôt UI de travail est resté propre à son ancien HEAD 8b8924d, sans checkout du
