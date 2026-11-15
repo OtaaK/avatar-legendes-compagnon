@@ -1,5 +1,15 @@
 # Partage et versionnement du moteur — étude C0
 
+## Recommandation actualisée après les lots 1–3
+
+Le [choix final proposé](DISTRIBUTION_FINALE.md) est désormais un **package workspace
+après transfert unique vers le dépôt React**, sans publication, avec ancien moteur
+conservé en référence. Repli : archive versionnée avec intégrité, source active Codex.
+Le registre privé reste comparé mais n'est plus privilégié pour cet unique produit.
+Cette recommandation remplace la préférence provisoire ci-dessous ; A08 et C1 restent
+à autoriser. Aucun transfert ni paramétrage de plateforme n'est effectué ici.
+
+
 Objectif : une application dans `avatar-legendes-ui`, une seule source maintenue du
 moteur. Une dépendance installée ou une archive générée n'est pas une deuxième source
 éditable. Aucun package n'est préparé à publication, publié ou installé dans v0 en C0.

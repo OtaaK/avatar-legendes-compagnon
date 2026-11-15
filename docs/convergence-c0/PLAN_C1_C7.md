@@ -1,5 +1,15 @@
 # Proposition de lots C1 à C7 — aucune exécution autorisée par C0
 
+## Référence finale et C1 limité
+
+La référence lot 3 est maintenant **39fd4781**, validée avec réserves selon le propriétaire.
+[C1_FINAL.md](C1_FINAL.md) remplace le C1 provisoire ci-dessous ; les différences de
+groupes pour C2/C3/C4/C7 sont dans [GROUPES_PNJ.md](GROUPES_PNJ.md). Les neuf décisions
+sont actualisées dans [ARBITRAGES.md](ARBITRAGES.md). Il ne faut plus attendre un SHA
+pour connaître le modèle ; il faut encore approuver son contrat métier avant activation.
+Aucun de ces lots n'est démarré ou autorisé par la présente préparation.
+
+
 Chaque lot doit avoir une autorisation, une référence v0 figée, une branche dédiée et
 une PR examinable. Ne pas fusionner les PR 22–27 pour démarrer. La PR 27 reste en brouillon.
 Les chemins UI ci-dessous sont des points de contact du commit 804381ca, pas une demande
@@ -169,11 +179,10 @@ Aucun lot n'autorise implicitement un déploiement ou une fusion dans main.
 - **Retour** : revenir au paquet/UI précédents avec sauvegarde privée du combat ; conserver
   snapshots et extensions, ne pas convertir un combat complet en simple liste v0.
 
-## Place réservée au lot 3 v0 — groupes de PNJ
+## Groupes lot 3 — référence connue, contrat métier non encore approuvé
 
-Aucun schéma de groupe n'est défini ou reproduit en C0. À réception de son commit
-validé : analyser impact sur identité, ressources, relations et combat, actualiser
-matrice et tests, puis proposer un lot complémentaire autorisé. L'intersection sera
-probablement C2/C3/C7, mais c'est une hypothèse de planification, pas un contrat acquis.
-Si le lot 3 change des props ou types de C1/C2, réévaluer la référence avant raccordement.
-Ne pas assimiler la famille de techniques « Groupe » à un futur modèle de groupe PNJ.
+Le commit 39fd4781 est examiné, pas une branche mouvante. La [compatibilité détaillée](GROUPES_PNJ.md)
+précise l'impact sur C1/C2/C3/C4/C7. A09 devient une décision de périmètre/contrat, plus
+une attente de référence. Les groupes ne sont pas convertis ou activés dans le C1 limité.
+Après accord, une seule logique métier doit faire autorité ; aucune deuxième formule
+de groupes n'est développée dans Codex. La conformité officielle reste une réserve.

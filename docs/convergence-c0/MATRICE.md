@@ -1,5 +1,21 @@
 # Matrice de convergence C0 — références figées
 
+## Mise à jour prioritaire — référence finale des lots 1–3
+
+La comparaison courante est désormais **39fd4781 ↔ 804381ca**, avec le domaine B/C0
+inchangé. Lire d'abord la [matrice différentielle finale](DIFFERENTIEL_FINAL.md) et
+l'[analyse des groupes](GROUPES_PNJ.md), puis les [fiches A01–A09](ARBITRAGES.md).
+Elles actualisent les domaines collectifs, entraînements, ressources, références et
+conversions. Le [périmètre C1 final](C1_FINAL.md) remplace le C1 provisoire.
+
+Les dix axes par domaine ci-dessous restent la trace du diagnostic C0 sur 804381ca,
+pas une affirmation que le lot 3 est toujours inconnu. Les éléments non changés par le
+différentiel restent valables ; toute mention d'attendre le lot 3 est historique. Les
+nouvelles conclusions et réserves sont dans les documents prioritaires ci-dessus.
+
+## Diagnostic historique conservé de C0 — 804381ca
+
+
 Codex **62c523c1540f01b3f331c4d980d129307f560af0** ; v0 **804381ca2ae7ee9f7e9ce960591faffd534cb2e7**.
 Comparaison du 15 novembre 2026, pas du lot 3 en cours. Empreintes et comparaison des Livrets : [SOURCES.json](SOURCES.json).
 « Confirmé » décrit du code inspecté, pas une certification des règles. Une transformation proposée reste non raccordée. Les arbitrages A01–A09 sont détaillés dans [ARBITRAGES.md](ARBITRAGES.md).

@@ -1,6 +1,26 @@
 # AGENTS.md — Avatar Légendes : Compagnon
 
 
+## Mission active — préparation finale après lots 1–3
+
+Le propriétaire valide B et C0. Pour cette mission, référence UI exclusive :
+`39fd4781ebf9ef0e3575b1f14926e63050c7b687`, comparaison avec 804381ca.
+Lire `docs/convergence-c0/BILAN_FINAL.md`, DIFFERENTIEL_FINAL, GROUPES_PNJ,
+les fiches ARBITRAGES, DISTRIBUTION_FINALE et C1_FINAL.
+
+Seule une analyse/préparation documentaire sur branche issue de C0 24df462 est autorisée.
+Aucun raccord, changement du moteur ou persistance active, migration, publication,
+déploiement ou démarrage de C1. Ne pas modifier avatar-legendes-ui, main ou PR 27/28,
+ni supprimer branches/PR/ancien code. Ne pas ouvrir de nouvelle PR sans autorisation.
+Un commit préparatoire peut être poussé dans le dépôt Codex, puis arrêt pour validation.
+
+Réserver la distinction absent/null/vide/zéro aux groupes comme aux individus ; garder
+les ressources individuelles/collectives et entraînements archivés séparés. Tolérance
+d'import ou métadonnée conservée ne vaut pas prise en charge métier. Les formules UI
+ne sont pas réputées officielles ; aucun deuxième moteur de groupes à créer.
+La référence lot 3 est connue mais son contrat actif reste à décider. Les instructions
+C0 anciennes ci-dessous restent historiques et sont remplacées sur ces points.
+
 ## Autorisation active — C0 seulement (15 novembre 2026)
 
 Le propriétaire valide B comme socle préparatoire ; PR 27 et branche B restent intactes,

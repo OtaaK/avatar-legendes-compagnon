@@ -1,5 +1,20 @@
 # Feuille de route
 
+## Préparation finale — avant autorisation C1
+
+- [x] B et C0 validés ; PR 27 et 28 conservées en brouillon, non fusionnées.
+- [x] Référence UI finale examinée : 39fd4781, fusion de la PR UI 14, différentiel avec 804381ca.
+- [x] Groupes, entraînements multiples, ressources et conversions analysés sans nouveau moteur.
+- [x] A01–A09 transformés en fiches ; priorité avant C1 : A01, A08 et verrou A09.
+- [x] Recommandation de distribution actualisée : workspace après transfert unique ; repli archive versionnée.
+- [ ] Décision propriétaire sur ces options et le [périmètre C1 limité](docs/convergence-c0/C1_FINAL.md).
+- [ ] Autorisation distincte C1 ; aucun raccord entrepris.
+
+Les [réserves et preuves](docs/convergence-c0/BILAN_FINAL.md) distinguent code observé,
+tests exécutés et règles non vérifiées. Ni préparation ni validation ne déclenchent
+fusion, publication ou déploiement. Les sections plus anciennes sont historiques.
+
+
 ## C0 — préparation autorisée, intégration en attente (15 novembre 2026)
 
 - [x] Phase B validée par le propriétaire, workflows du commit 62c523c réussis.

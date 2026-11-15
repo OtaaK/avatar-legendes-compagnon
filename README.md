@@ -1,5 +1,19 @@
 # Avatar Légendes : Compagnon
 
+## Préparation finale de convergence — référence UI 39fd4781
+
+Les lots d'interface 1–3 et B/C0 sont validés avec les réserves connues. La présente
+branche actualise le diagnostic et les décisions : [bilan final](docs/convergence-c0/BILAN_FINAL.md),
+[différentiel](docs/convergence-c0/DIFFERENTIEL_FINAL.md),
+[groupes PNJ](docs/convergence-c0/GROUPES_PNJ.md),
+[neuf fiches de décision](docs/convergence-c0/ARBITRAGES.md),
+[distribution proposée](docs/convergence-c0/DISTRIBUTION_FINALE.md) et
+[C1 limité proposé](docs/convergence-c0/C1_FINAL.md).
+
+Analyse documentaire uniquement : moteur/persistance et dépôt UI inchangés, C1 non
+autorisé, aucune nouvelle PR automatique. Les sections suivantes retracent les lots précédents.
+
+
 Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2.33**.
 
 

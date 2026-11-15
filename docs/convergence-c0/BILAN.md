@@ -1,5 +1,18 @@
 # C0 — Préparation de la convergence React
 
+## Préparation finale ultérieure — lots 1 à 3
+
+Le bilan ci-dessous décrit la livraison historique 24df462. Depuis, la PR C0 nº 28 a
+été créée en brouillon sur autorisation explicite et ses deux workflows ont réussi,
+comme contrôlé lors de cette création et confirmé par le propriétaire. Elle n'est pas
+fusionnée ou modifiée par la nouvelle préparation.
+
+Le [bilan de référence finale](BILAN_FINAL.md) décrit maintenant l'analyse documentaire
+de **39fd4781**, ses tests et décisions avant C1. L'ancien blocage de création de PR
+relaté ci-dessous est donc historique, pas un blocage actuel ni une nouvelle demande
+d'autorisation. Aucune nouvelle PR n'est ouverte automatiquement.
+
+
 15 novembre 2026. **C0 préparée pour validation, sans démarrage de C1.**
 
 Le diagnostic repose exclusivement sur Codex B `62c523c1540f01b3f331c4d980d129307f560af0`

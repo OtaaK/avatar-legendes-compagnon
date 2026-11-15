@@ -403,3 +403,26 @@ Ces réserves ne sont pas des règles nouvelles ; voir le [bilan](preparation-li
   [Plan C1–C7](convergence-c0/PLAN_C1_C7.md) soumis à autorisation distincte.
 - PR 27 en brouillon et branche B intactes. Aucun nettoyage, fusion, déploiement ou
   développement de l'ancien HTML. Arrêt en fin de C0 pour validation du propriétaire.
+
+
+## Préparation finale après validation lots 1–3 — décisions encore à prendre
+
+- Le propriétaire confirme les lots UI 1–3 validés avec réserves, fusionnés/déployés ;
+  référence imposée 39fd4781, comparée à 804381ca. L'historique Git confirme la fusion
+  UI 14 ; la production n'est pas recettée à nouveau dans cette mission.
+- La mission autorise analyse et documents seulement, sur branche issue de C0 24df462.
+  Moteur, persistance, données réelles et dépôt UI restent inchangés. Aucun C1, aucune PR
+  automatique ni fusion/nettoyage/publication/déploiement.
+- Le modèle collectif sépare resources de la racine individuelle ; sa conservation
+  opaque dans Codex n'est pas son activation. L'ajout au combat perd ce contexte dans
+  le code actuel : ne pas activer un groupe par simple import ou tolérance d'extension.
+- Les 13 noms de techniques de groupe concordent, mais quatre IDs diffèrent au-delà
+  d'un préfixe. La conformité des effets reste ouverte, sans nouvelle lecture PDF ici.
+- Recommandations, non décisions appliquées : A01 démo intacte/imports Codex seulement
+  en C1 ; A08 workspace après transfert unique, archive versionnée en repli ; A09 aucun
+  groupe actif/conversion en C1 avant contrat approuvé. Les neuf fiches exposent options,
+  conséquences et décision attendue dans [ARBITRAGES](convergence-c0/ARBITRAGES.md).
+- Les réserves Work/mobile/compteurs/techniques restent des réserves quand non testées,
+  pas des anomalies démontrées. Les limites de validation observées sont documentées
+  séparément des risques de formulaire non reproduits en navigateur.
+- Les PR 27/28 restent intactes ; à la livraison, arrêt et attente de validation.

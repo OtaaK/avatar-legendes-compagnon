@@ -1,5 +1,19 @@
 # Architecture et organisation
 
+## État après analyse finale 39fd4781 — aucun changement d'exécution
+
+Les ports B et le prévisualiseur C0 restent inchangés. Le groupe UI possède son propre
+bloc de ressources et archives ; Codex peut conserver ce bloc mais ne le rend pas actif.
+La copie de combat actuelle ne transporte pas ce contexte collectif. Les conclusions
+sont dans [GROUPES_PNJ](convergence-c0/GROUPES_PNJ.md).
+
+La proposition [C1_FINAL](convergence-c0/C1_FINAL.md) définit un pilote de sauvegarde
+par mode actif, un store canonique unique et aucune conversion v0/groupe. La préférence
+[distribution finale](convergence-c0/DISTRIBUTION_FINALE.md) est un package workspace
+après transfert unique, à autoriser ; aucun package ni code n'est transféré ici.
+Les validations et formats existants ne sont pas modifiés par ces documents.
+
+
 ## C0 — couches préparées, aucune connexion UI (15 novembre 2026)
 
 Le moteur B et ses contrats restent inchangés. Un seul module pur indépendant est ajouté :

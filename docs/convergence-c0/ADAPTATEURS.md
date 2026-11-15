@@ -1,5 +1,15 @@
 # Architecture des adaptateurs proposée pour C1–C7
 
+## Complément final sur 39fd4781
+
+Les ports B et le module pur C0 sont inchangés. Les nouveaux groupes ont un container
+resources facultatif/null/vide et deux ensembles individuels/collectifs ; le prévisualiseur
+plat n'est pas un adaptateur de groupe. Voir [GROUPES_PNJ.md](GROUPES_PNJ.md).
+Le [périmètre C1 final](C1_FINAL.md) précise éligibilité, modes exclusifs, conservation
+de la démo et contrôle des groupes actifs ; il prime sur les propositions C1 générales
+ci-dessous. Aucun raccord ou changement de persistance n'est réalisé.
+
+
 Cette architecture est un plan C0, non raccordé. La cible reste un seul produit
 Next.js/React/TypeScript dans `avatar-legendes-ui`. Le moteur phase B, ses protections
 et ses formats ne sont pas modifiés. Aucun composant v0 n'est copié ou branché ici.
