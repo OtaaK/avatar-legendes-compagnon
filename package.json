@@ -18,7 +18,8 @@
     "test:places": "python tests/convergence/places_browser.py",
     "test:playbooks": "node --test tests/convergence/playbooks-preparation.test.mjs && tsc --noEmit --strict --module esnext --moduleResolution bundler --target es2022 packages/application/src/playbook-preparation.d.ts packages/application/src/playbook-commands.d.ts",
     "test:business-types": "tsc -p tests/convergence/tsconfig.phase-b.json",
-    "test:business-browser": "python tests/convergence/phase_b_browser.py"
+    "test:business-browser": "python tests/convergence/phase_b_browser.py",
+    "test:c0": "node --test tests/convergence/c0-preview.test.mjs && tsc -p tests/convergence/tsconfig.phase-b.json"
   },
   "dependencies": {
     "lucide-react": "1.16.0",

@@ -1,4 +1,4 @@
-name: Convergence — Domaine phase B
+name: Convergence — Préparation C0
 on:
   pull_request:
   workflow_dispatch:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   lot1:
-    name: Domaine et non-régression
+    name: Préparation C0 et non-régression
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,7 @@ jobs:
       - run: npm run test:inventory
       - run: npm run test:contracts
       - run: npm run test:business-types
+      - run: npm run test:c0
       - run: npm run test:playbooks
       - run: npm run test:parity
       - run: npm run build

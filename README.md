@@ -3,6 +3,21 @@
 Application compagnon non officielle pour le jeu de rôle Avatar Légendes, **V2.33**.
 
 
+## Préparation active — C0, sans raccordement React
+
+La phase B est validée et reste inchangée sur sa branche. C0 prépare la convergence
+sur la seule référence v0 `804381ca`, pendant que v0 poursuit son lot 3.
+Voir le [bilan C0](docs/convergence-c0/BILAN.md), la
+[matrice actualisée](docs/convergence-c0/MATRICE.md), les
+[arbitrages](docs/convergence-c0/ARBITRAGES.md), les
+[adaptateurs proposés](docs/convergence-c0/ADAPTATEURS.md), le
+[partage du moteur](docs/convergence-c0/PARTAGE_MOTEUR.md) et le
+[plan C1–C7](docs/convergence-c0/PLAN_C1_C7.md).
+
+Le seul module ajouté est un aperçu pur des champs externes, non raccordé au store ou
+à un composant. Il ne convertit pas les sauvegardes v0 en campagne Codex. Aucune
+intégration, fusion, suppression ou publication n'est autorisée par cette préparation.
+
 ## Orientation active — phase B, domaine métier
 
 La phase A est validée. La cible est désormais **une seule application React/TypeScript
